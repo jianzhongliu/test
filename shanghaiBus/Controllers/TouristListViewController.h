@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface BusStationDetailViewController : BaseViewController
+@interface TouristListViewController : BaseViewController
 
 @end

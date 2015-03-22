@@ -6,18 +6,20 @@
 //  Copyright (c) 2015年 liujianzhong. All rights reserved.
 //
 
-#import "BusStationListViewController.h"
-#import "BusStationDetailViewController.h"
+#import "TouristDetailViewController.h"
+#import "TouristListViewController.h"
+#import "WebImageView.h"
 
-@interface BusStationListViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface TouristDetailViewController () <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *arraySiteLine;
 @property (nonatomic, strong) UIView *viewHeader;
+@property (nonatomic, strong) UIScrollView *scrollView;
 
 @end
 
-@implementation BusStationListViewController
+@implementation TouristDetailViewController
 
 - (id)init{
     if (self == [super init]) {
@@ -40,9 +42,12 @@
     self.table.dataSource = self;
     [self.view addSubview:self.table];
 
-    self.viewHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
-    self.viewHeader.backgroundColor = [UIColor whiteColor];
-    self.table.tableHeaderView = self.viewHeader;
+    self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 150)];
+    self.scrollView.delegate = self;
+    self.scrollView.contentSize = CGSizeMake(SCREENWIDTH * 5, 150);
+    self.scrollView.pagingEnabled = YES;
+    self.table.tableHeaderView = self.scrollView;
+
 }
 
 - (void)initData {
@@ -52,24 +57,11 @@
 }
 
 - (void)requestData {
-    NSString *url = [NSString stringWithFormat:@"http://61.129.57.96:8014/Project/Ver1/getLine.ashx?lineid=001400&my=AE33B4AD0E571A40B60A8429E5925F16&t=2015-03-2200:18"];
-    [self requestBusData:url];
-    __weak __typeof(self) blockSelf = self;
-    self.busData = ^(AFHTTPRequestOperation *operation, BOOL status) {
-        NSLog(@"%@",operation.responseString);
-        if (YES == status) {
-            NSArray *station = [operation.responseString componentsSeparatedByString:@"<zdmc>"];
-            for (NSString *stationString in station) {
-                NSArray *tempArray = [stationString componentsSeparatedByString:@"</zdmc>"];
-                if (tempArray.count > 0) {
-                    [blockSelf.arraySiteLine addObject:[tempArray objectAtIndex:0]];
-                }
-            }
-            [blockSelf.table reloadData];
-        } else {
-            
-        }
-    };
+    for (int i = 0; i < 5; i ++) {
+        WebImageView *image = [[WebImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH*i, 0, SCREENWIDTH, 150)];
+        image.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/3812b31bb051f819dbde9882dab44aed2f73e77b.jpg";
+        [self.scrollView addSubview:image];
+    }
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -104,8 +96,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    BusStationDetailViewController *controller = [[BusStationDetailViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+
     //
 }
 

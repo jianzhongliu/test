@@ -173,7 +173,7 @@
 }
 
 -(void) printPositionInfo{
-    CGRect myFrame = self.frame;
+//    CGRect myFrame = self.frame;
 }
 
 + (instancetype)extractFromXib

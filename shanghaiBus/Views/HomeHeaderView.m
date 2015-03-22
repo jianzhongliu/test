@@ -17,7 +17,7 @@
 @property (nonatomic, strong) WebImageView *imageBanner;
 
 //headerSearch
-@property (nonatomic, strong) UIView *viewSearch;
+@property (nonatomic, strong) UIButton *viewSearch;
 @property (nonatomic, strong) UILabel *labelNumberOftourist;
 
 @end
@@ -35,10 +35,11 @@
     return _labelNumberOftourist;
 }
 
-- (UIView *)viewSearch {
+- (UIButton *)viewSearch {
     if (_viewSearch == nil) {
-        _viewSearch = [[UIView alloc] init];
+        _viewSearch = [[UIButton alloc] init];
         _viewSearch.backgroundColor = [UIColor whiteColor];
+        [_viewSearch addTarget:self action:@selector(didClickSearch) forControlEvents:UIControlEventTouchUpInside];
     }
     return _viewSearch;
 }
@@ -105,4 +106,9 @@
     
 }
 
+- (void)didClickSearch {
+    if (_delegate && [_delegate respondsToSelector:@selector(didClickHeaderSearch)]) {
+        [_delegate didClickHeaderSearch];
+    }
+}
 @end

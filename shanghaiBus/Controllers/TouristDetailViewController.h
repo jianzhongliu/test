@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface BusStationListViewController : BaseViewController
+@interface TouristDetailViewController : BaseViewController
 
 @property (nonatomic, copy) NSString *busLine;
 

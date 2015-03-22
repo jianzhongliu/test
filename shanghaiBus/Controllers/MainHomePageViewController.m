@@ -7,11 +7,11 @@
 //
 
 #import "MainHomePageViewController.h"
-#import "BusStationListViewController.h"
+#import "TouristDetailViewController.h"
 #import "HomeHeaderView.h"
 #import "HomePageSepratorCell.h"
 #import "HomePageSingleCell.h"
-
+#import "TouristListViewController.h"
 #import "Sites.h"
 
 @interface MainHomePageViewController () <UITableViewDataSource, UITableViewDelegate, HomePageSepratorCellDelegate, HomeHeaderViewDelegate>
@@ -89,27 +89,27 @@
     site4.siteName = @"北京";
     site4.touristNumber = @"40";
     [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site1];
+    [self.arraySiteLine addObject:site2];
+    [self.arraySiteLine addObject:site3];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site1];
+    [self.arraySiteLine addObject:site3];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site1];
+    [self.arraySiteLine addObject:site2];
+    [self.arraySiteLine addObject:site3];
     [self.arraySiteLine addObject:site4];
     [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site3];
+    [self.arraySiteLine addObject:site2];
+    [self.arraySiteLine addObject:site2];
+    [self.arraySiteLine addObject:site3];
     [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site1];
     [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site3];
+    [self.arraySiteLine addObject:site1];
     [self.table reloadData];
     
     NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/1f178a82b9014a90b8a9c50aa9773912b21beef6.jpg"];
@@ -126,9 +126,9 @@
     }
     
     if ((self.arraySiteLine.count - 1)/ 2  < (self.arraySiteLine.count - 1) / 2.0f) {
-        return (self.arraySiteLine.count - 1) / 2 +1;
+        return (self.arraySiteLine.count - 1) / 2 +1 +1;
     } else {
-        return (self.arraySiteLine.count - 1) / 2;
+        return (self.arraySiteLine.count - 1) / 2 + 1;
     }
 }
 
@@ -182,10 +182,10 @@
             cell.delegate = self;
         }
         NSMutableArray *arrayCell = [NSMutableArray array];
-        if (self.arraySiteLine.count > indexPath.row * 2 + 1) {
-            [arrayCell addObject:[self.arraySiteLine objectAtIndex:indexPath.row * 2 +1]];
-            if (self.arraySiteLine.count > indexPath.row * 2 + 1 +1) {
-                [arrayCell addObject:[self.arraySiteLine objectAtIndex:(indexPath.row *2 +1 +1)]];
+        if (self.arraySiteLine.count - 1 > (indexPath.row - 1)* 2) {
+            [arrayCell addObject:[self.arraySiteLine objectAtIndex:(indexPath.row - 1)* 2]];
+            if (self.arraySiteLine.count- 1 > (indexPath.row - 1) * 2 +1) {
+                [arrayCell addObject:[self.arraySiteLine objectAtIndex:(indexPath.row - 1) * 2 +1]];
             }
         }
         
@@ -196,18 +196,25 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    BusStationListViewController *controller = [[BusStationListViewController alloc] init];
+    TouristDetailViewController *controller = [[TouristDetailViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 //
 }
 
 - (void)didClickImageAtCell:(HomePageSepratorCell *)cell withIndex:(NSInteger)index {
-
+    TouristListViewController *controller = [[TouristListViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 
 }
 
 - (void)didClickHeaderImageBannerAtIndex:(NSInteger )index withUrl:(NSString *) url {
+    TouristListViewController *controller = [[TouristListViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
+}
 
+- (void)didClickHeaderSearch {
+    TouristListViewController *controller = [[TouristListViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

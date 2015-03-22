@@ -12,7 +12,7 @@
 @protocol HomeHeaderViewDelegate <NSObject>
 
 - (void)didClickHeaderImageBannerAtIndex:(NSInteger )index withUrl:(NSString *) url;
-
+- (void)didClickHeaderSearch;
 @end
 
 @interface HomeHeaderView : UIView
