@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  BusStationDetailViewController.h
 //  shanghaiBus
 //
 //  Created by liujianzhong on 15/3/21.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ViewController : UIViewController
-
+@interface BusStationDetailViewController : BaseViewController
 
 @end
-
