@@ -22,7 +22,6 @@
 
 @end
 
-
 @implementation HomeHeaderView
 
 #pragma mark - lifeCycleMethods

@@ -41,6 +41,7 @@
 		24CEE8351ABEBA7100DBE500 /* WebImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE8341ABEBA7100DBE500 /* WebImageView.m */; };
 		24CEE8381ABEBF8300DBE500 /* HomePageSepratorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE8371ABEBF8300DBE500 /* HomePageSepratorCell.m */; };
 		24CEE83B1ABEC89700DBE500 /* Sites.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE83A1ABEC89700DBE500 /* Sites.m */; };
+		24CEE83E1ABEE30900DBE500 /* HomePageSingleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE83D1ABEE30900DBE500 /* HomePageSingleCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,8 @@
 		24CEE8371ABEBF8300DBE500 /* HomePageSepratorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageSepratorCell.m; sourceTree = "<group>"; };
 		24CEE8391ABEC89700DBE500 /* Sites.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sites.h; sourceTree = "<group>"; };
 		24CEE83A1ABEC89700DBE500 /* Sites.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Sites.m; sourceTree = "<group>"; };
+		24CEE83C1ABEE30900DBE500 /* HomePageSingleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageSingleCell.h; sourceTree = "<group>"; };
+		24CEE83D1ABEE30900DBE500 /* HomePageSingleCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageSingleCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -353,6 +356,8 @@
 			children = (
 				24CEE8361ABEBF8300DBE500 /* HomePageSepratorCell.h */,
 				24CEE8371ABEBF8300DBE500 /* HomePageSepratorCell.m */,
+				24CEE83C1ABEE30900DBE500 /* HomePageSingleCell.h */,
+				24CEE83D1ABEE30900DBE500 /* HomePageSingleCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -512,6 +517,7 @@
 				24CEE83B1ABEC89700DBE500 /* Sites.m in Sources */,
 				24B29DE81ABD1C6E007F84E5 /* AFURLConnectionOperation.m in Sources */,
 				24B29DEF1ABD1C6E007F84E5 /* AFNetworkActivityIndicatorManager.m in Sources */,
+				24CEE83E1ABEE30900DBE500 /* HomePageSingleCell.m in Sources */,
 				24B29DE91ABD1C6E007F84E5 /* AFHTTPSessionManager.m in Sources */,
 				24B29DEE1ABD1C6E007F84E5 /* AFURLResponseSerialization.m in Sources */,
 				24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */,

@@ -10,10 +10,11 @@
 #import "BusStationListViewController.h"
 #import "HomeHeaderView.h"
 #import "HomePageSepratorCell.h"
+#import "HomePageSingleCell.h"
 
 #import "Sites.h"
 
-@interface MainHomePageViewController () <UITableViewDataSource, UITableViewDelegate, HomePageSepratorCellDelegate>
+@interface MainHomePageViewController () <UITableViewDataSource, UITableViewDelegate, HomePageSepratorCellDelegate, HomeHeaderViewDelegate>
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *arraySiteLine;
@@ -47,7 +48,7 @@
     self.table.backgroundColor = BYColorFromHex(0x999999);
     [self.view addSubview:self.table];
     self.viewHeader = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 85)];
-//    self.viewHeader.delegate = self;
+    self.viewHeader.delegate = self;
     self.table.tableHeaderView = self.viewHeader;
 }
 
@@ -88,10 +89,30 @@
     site4.siteName = @"北京";
     site4.touristNumber = @"40";
     [self.arraySiteLine addObject:site4];
-    
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
+    [self.arraySiteLine addObject:site4];
     [self.table reloadData];
     
-    NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg"];
+    NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/1f178a82b9014a90b8a9c50aa9773912b21beef6.jpg"];
     NSMutableDictionary *dicParam = [NSMutableDictionary dictionary];
     [dicParam setValue:arrayImg forKey:@"img"];
     [self.viewHeader resetDataToView:dicParam];
@@ -100,10 +121,14 @@
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (self.arraySiteLine.count / 2  < self.arraySiteLine.count / 2.0f) {
-        return self.arraySiteLine.count / 2 +1;
+    if (self.arraySiteLine.count == 0) {
+        return 0;
+    }
+    
+    if ((self.arraySiteLine.count - 1)/ 2  < (self.arraySiteLine.count - 1) / 2.0f) {
+        return (self.arraySiteLine.count - 1) / 2 +1;
     } else {
-        return self.arraySiteLine.count / 2;
+        return (self.arraySiteLine.count - 1) / 2;
     }
 }
 
@@ -112,10 +137,10 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row >= 0) {
+    if (indexPath.row > 0) {
         return [HomePageSepratorCell fetchCellHeight];
     } else {
-        return 44;
+        return [HomePageSingleCell fetchCellHeight] +10;
     }
 }
 
@@ -136,23 +161,37 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *cellIdentify = @"cell";
-    HomePageSepratorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
-    if (cell == nil) {
-        cell = [[HomePageSepratorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.delegate = self;
-    }
-    NSMutableArray *arrayCell = [NSMutableArray array];
-    if (self.arraySiteLine.count > indexPath.row * 2) {
-        [arrayCell addObject:[self.arraySiteLine objectAtIndex:indexPath.row * 2]];
-        if (self.arraySiteLine.count > indexPath.row * 2 + 1) {
-           [arrayCell addObject:[self.arraySiteLine objectAtIndex:(indexPath.row *2 +1)]];
-        }
-    }
 
-    [cell resetDataWith:arrayCell];
-    return cell;
+   
+    if (indexPath.row == 0) {
+        static NSString *cellIdentifySingle = @"HomePageSingleCell";
+        HomePageSingleCell *cellSingle = [tableView dequeueReusableCellWithIdentifier:cellIdentifySingle];
+        if (cellSingle == nil) {
+            cellSingle = [[HomePageSingleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifySingle];
+        }
+        if (self.arraySiteLine.count > indexPath.row) {
+            [cellSingle resetDataWith:[self.arraySiteLine objectAtIndex:indexPath.row]];
+        }
+        return cellSingle;
+    } else {
+        static NSString *cellIdentify = @"cell";
+        HomePageSepratorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
+        if (cell == nil) {
+            cell = [[HomePageSepratorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
+            //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.delegate = self;
+        }
+        NSMutableArray *arrayCell = [NSMutableArray array];
+        if (self.arraySiteLine.count > indexPath.row * 2 + 1) {
+            [arrayCell addObject:[self.arraySiteLine objectAtIndex:indexPath.row * 2 +1]];
+            if (self.arraySiteLine.count > indexPath.row * 2 + 1 +1) {
+                [arrayCell addObject:[self.arraySiteLine objectAtIndex:(indexPath.row *2 +1 +1)]];
+            }
+        }
+        
+        [cell resetDataWith:arrayCell];
+        return cell;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -166,4 +205,9 @@
 
 
 }
+
+- (void)didClickHeaderImageBannerAtIndex:(NSInteger )index withUrl:(NSString *) url {
+
+}
+
 @end

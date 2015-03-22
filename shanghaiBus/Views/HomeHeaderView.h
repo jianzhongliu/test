@@ -18,6 +18,7 @@
 @interface HomeHeaderView : UIView
 
 @property (nonatomic, weak) id<HomeHeaderViewDelegate> delegate;
+
 - (void)resetDataToView:(NSDictionary *)dicData;
 
 @end
