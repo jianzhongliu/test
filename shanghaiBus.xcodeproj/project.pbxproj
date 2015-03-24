@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24252A0B1AC1AB8300BB264A /* TouristDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0A1AC1AB8300BB264A /* TouristDetailViewController.m */; };
+		24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */; };
+		24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */; };
 		24B29D971ABD1B32007F84E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D961ABD1B32007F84E5 /* main.m */; };
 		24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D991ABD1B32007F84E5 /* AppDelegate.m */; };
 		24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24B29DA11ABD1B32007F84E5 /* Images.xcassets */; };
@@ -32,7 +35,6 @@
 		24CEE7601ABE9CEC00DBE500 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE75F1ABE9CEC00DBE500 /* HomeHeaderView.m */; };
 		24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7641ABE9D8000DBE500 /* BaseViewController.m */; };
 		24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */; };
-		24CEE76D1ABE9D8000DBE500 /* TouristDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7681ABE9D8000DBE500 /* TouristDetailViewController.m */; };
 		24CEE76E1ABE9D8000DBE500 /* MainHomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE76A1ABE9D8000DBE500 /* MainHomePageViewController.m */; };
 		24CEE7711ABE9D9200DBE500 /* com_back_window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24CEE76F1ABE9D9200DBE500 /* com_back_window@2x.png */; };
 		24CEE7721ABE9D9200DBE500 /* com_back_window@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24CEE7701ABE9D9200DBE500 /* com_back_window@3x.png */; };
@@ -75,6 +77,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24252A091AC1AB8300BB264A /* TouristDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristDetailViewController.h; sourceTree = "<group>"; };
+		24252A0A1AC1AB8300BB264A /* TouristDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristDetailViewController.m; sourceTree = "<group>"; };
+		24252A0D1AC1ABC400BB264A /* TouristServiceInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristServiceInfoView.h; sourceTree = "<group>"; };
+		24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristServiceInfoView.m; sourceTree = "<group>"; };
+		24252A101AC1BB3500BB264A /* TouristServiceDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristServiceDetailView.h; sourceTree = "<group>"; };
+		24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristServiceDetailView.m; sourceTree = "<group>"; };
 		24B29D911ABD1B32007F84E5 /* shanghaiBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shanghaiBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B29D951ABD1B32007F84E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24B29D961ABD1B32007F84E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -127,8 +135,6 @@
 		24CEE7641ABE9D8000DBE500 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		24CEE7651ABE9D8000DBE500 /* TouristListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristListViewController.h; sourceTree = "<group>"; };
 		24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristListViewController.m; sourceTree = "<group>"; };
-		24CEE7671ABE9D8000DBE500 /* TouristDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristDetailViewController.h; sourceTree = "<group>"; };
-		24CEE7681ABE9D8000DBE500 /* TouristDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristDetailViewController.m; sourceTree = "<group>"; };
 		24CEE7691ABE9D8000DBE500 /* MainHomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainHomePageViewController.h; sourceTree = "<group>"; };
 		24CEE76A1ABE9D8000DBE500 /* MainHomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainHomePageViewController.m; sourceTree = "<group>"; };
 		24CEE76F1ABE9D9200DBE500 /* com_back_window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "com_back_window@2x.png"; path = "Images/com_back_window@2x.png"; sourceTree = "<group>"; };
@@ -188,6 +194,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		24252A081AC1AB8300BB264A /* TouristDetail */ = {
+			isa = PBXGroup;
+			children = (
+				24252A0C1AC1AB9800BB264A /* Views */,
+				24252A091AC1AB8300BB264A /* TouristDetailViewController.h */,
+				24252A0A1AC1AB8300BB264A /* TouristDetailViewController.m */,
+			);
+			path = TouristDetail;
+			sourceTree = "<group>";
+		};
+		24252A0C1AC1AB9800BB264A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				24252A0D1AC1ABC400BB264A /* TouristServiceInfoView.h */,
+				24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */,
+				24252A101AC1BB3500BB264A /* TouristServiceDetailView.h */,
+				24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		24B29D881ABD1B32007F84E5 = {
 			isa = PBXGroup;
 			children = (
@@ -386,14 +413,13 @@
 		24CEE7621ABE9D1200DBE500 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				24252A081AC1AB8300BB264A /* TouristDetail */,
 				24CEE7631ABE9D8000DBE500 /* BaseViewController.h */,
 				24CEE7641ABE9D8000DBE500 /* BaseViewController.m */,
 				24CEE7691ABE9D8000DBE500 /* MainHomePageViewController.h */,
 				24CEE76A1ABE9D8000DBE500 /* MainHomePageViewController.m */,
 				24CEE7651ABE9D8000DBE500 /* TouristListViewController.h */,
 				24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */,
-				24CEE7671ABE9D8000DBE500 /* TouristDetailViewController.h */,
-				24CEE7681ABE9D8000DBE500 /* TouristDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -587,12 +613,13 @@
 				24CEE76E1ABE9D8000DBE500 /* MainHomePageViewController.m in Sources */,
 				24B29DF31ABD1C6E007F84E5 /* UIImageView+AFNetworking.m in Sources */,
 				24B29DEB1ABD1C6E007F84E5 /* AFNetworkReachabilityManager.m in Sources */,
+				24252A0B1AC1AB8300BB264A /* TouristDetailViewController.m in Sources */,
 				24CEE8351ABEBA7100DBE500 /* WebImageView.m in Sources */,
+				24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */,
 				24B29DEA1ABD1C6E007F84E5 /* AFURLSessionManager.m in Sources */,
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,
 				24CEE8621ABEF4C200DBE500 /* TouristListCell.m in Sources */,
 				24CEE8381ABEBF8300DBE500 /* HomePageSepratorCell.m in Sources */,
-				24CEE76D1ABE9D8000DBE500 /* TouristDetailViewController.m in Sources */,
 				24CEE7601ABE9CEC00DBE500 /* HomeHeaderView.m in Sources */,
 				24B29DE71ABD1C6E007F84E5 /* AFHTTPRequestOperationManager.m in Sources */,
 				24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */,
@@ -600,6 +627,7 @@
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				24B29DEC1ABD1C6E007F84E5 /* AFSecurityPolicy.m in Sources */,
+				24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */,
 				24B29DF51ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m in Sources */,
 				24B29DF61ABD1C6E007F84E5 /* UIWebView+AFNetworking.m in Sources */,
 				24B29DED1ABD1C6E007F84E5 /* AFURLRequestSerialization.m in Sources */,
