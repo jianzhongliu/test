@@ -10,6 +10,8 @@
 		24252A0B1AC1AB8300BB264A /* TouristDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0A1AC1AB8300BB264A /* TouristDetailViewController.m */; };
 		24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */; };
 		24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */; };
+		24350EBD1AC31A350066A9E8 /* TouristCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24350EBC1AC31A350066A9E8 /* TouristCommentView.m */; };
+		248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 248B5C911AC3294100E0B6A4 /* TouristContectView.m */; };
 		24B29D971ABD1B32007F84E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D961ABD1B32007F84E5 /* main.m */; };
 		24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D991ABD1B32007F84E5 /* AppDelegate.m */; };
 		24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24B29DA11ABD1B32007F84E5 /* Images.xcassets */; };
@@ -83,6 +85,10 @@
 		24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristServiceInfoView.m; sourceTree = "<group>"; };
 		24252A101AC1BB3500BB264A /* TouristServiceDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristServiceDetailView.h; sourceTree = "<group>"; };
 		24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristServiceDetailView.m; sourceTree = "<group>"; };
+		24350EBB1AC31A350066A9E8 /* TouristCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristCommentView.h; sourceTree = "<group>"; };
+		24350EBC1AC31A350066A9E8 /* TouristCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristCommentView.m; sourceTree = "<group>"; };
+		248B5C901AC3294100E0B6A4 /* TouristContectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristContectView.h; sourceTree = "<group>"; };
+		248B5C911AC3294100E0B6A4 /* TouristContectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristContectView.m; sourceTree = "<group>"; };
 		24B29D911ABD1B32007F84E5 /* shanghaiBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shanghaiBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B29D951ABD1B32007F84E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24B29D961ABD1B32007F84E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -211,6 +217,10 @@
 				24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */,
 				24252A101AC1BB3500BB264A /* TouristServiceDetailView.h */,
 				24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */,
+				24350EBB1AC31A350066A9E8 /* TouristCommentView.h */,
+				24350EBC1AC31A350066A9E8 /* TouristCommentView.m */,
+				248B5C901AC3294100E0B6A4 /* TouristContectView.h */,
+				248B5C911AC3294100E0B6A4 /* TouristContectView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -617,6 +627,7 @@
 				24CEE8351ABEBA7100DBE500 /* WebImageView.m in Sources */,
 				24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */,
 				24B29DEA1ABD1C6E007F84E5 /* AFURLSessionManager.m in Sources */,
+				248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */,
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,
 				24CEE8621ABEF4C200DBE500 /* TouristListCell.m in Sources */,
 				24CEE8381ABEBF8300DBE500 /* HomePageSepratorCell.m in Sources */,
@@ -629,6 +640,7 @@
 				24B29DEC1ABD1C6E007F84E5 /* AFSecurityPolicy.m in Sources */,
 				24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */,
 				24B29DF51ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m in Sources */,
+				24350EBD1AC31A350066A9E8 /* TouristCommentView.m in Sources */,
 				24B29DF61ABD1C6E007F84E5 /* UIWebView+AFNetworking.m in Sources */,
 				24B29DED1ABD1C6E007F84E5 /* AFURLRequestSerialization.m in Sources */,
 				24CEE77B1ABEA4E200DBE500 /* UIView+CTExtensions.m in Sources */,

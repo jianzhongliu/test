@@ -35,8 +35,8 @@
 - (UIButton *)buttonHeader {
     if (_buttonHeader == nil) {
         _buttonHeader = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonHeader setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];//隐藏
-        [_buttonHeader setImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];//展开
+        [_buttonHeader setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];//隐藏
+        [_buttonHeader setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];//展开
         [_buttonHeader addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
         _buttonHeader.selected = NO;//默认隐藏
     }
