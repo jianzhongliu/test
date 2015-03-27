@@ -66,6 +66,8 @@
 		24CEE8641ABEF60B00DBE500 /* IMG_0146.JPG in Resources */ = {isa = PBXBuildFile; fileRef = 24CEE8631ABEF60B00DBE500 /* IMG_0146.JPG */; };
 		24CEE8671ABEF92D00DBE500 /* TouristObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE8661ABEF92D00DBE500 /* TouristObject.m */; };
 		24CEE86B1ABF00B800DBE500 /* gender.png in Resources */ = {isa = PBXBuildFile; fileRef = 24CEE86A1ABF00B800DBE500 /* gender.png */; };
+		24D2E4C61AC45FD600347FA6 /* TouristCommentListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D2E4C51AC45FD600347FA6 /* TouristCommentListCell.m */; };
+		24D2E4C91AC4682E00347FA6 /* TouristCommentListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D2E4C81AC4682E00347FA6 /* TouristCommentListViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -180,6 +182,10 @@
 		24CEE8651ABEF92C00DBE500 /* TouristObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristObject.h; sourceTree = "<group>"; };
 		24CEE8661ABEF92D00DBE500 /* TouristObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristObject.m; sourceTree = "<group>"; };
 		24CEE86A1ABF00B800DBE500 /* gender.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gender.png; sourceTree = "<group>"; };
+		24D2E4C41AC45FD600347FA6 /* TouristCommentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristCommentListCell.h; sourceTree = "<group>"; };
+		24D2E4C51AC45FD600347FA6 /* TouristCommentListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristCommentListCell.m; sourceTree = "<group>"; };
+		24D2E4C71AC4682E00347FA6 /* TouristCommentListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristCommentListViewController.h; sourceTree = "<group>"; };
+		24D2E4C81AC4682E00347FA6 /* TouristCommentListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristCommentListViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -430,6 +436,8 @@
 				24CEE76A1ABE9D8000DBE500 /* MainHomePageViewController.m */,
 				24CEE7651ABE9D8000DBE500 /* TouristListViewController.h */,
 				24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */,
+				24D2E4C71AC4682E00347FA6 /* TouristCommentListViewController.h */,
+				24D2E4C81AC4682E00347FA6 /* TouristCommentListViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -443,6 +451,8 @@
 				24CEE83D1ABEE30900DBE500 /* HomePageSingleCell.m */,
 				24CEE8601ABEF4C200DBE500 /* TouristListCell.h */,
 				24CEE8611ABEF4C200DBE500 /* TouristListCell.m */,
+				24D2E4C41AC45FD600347FA6 /* TouristCommentListCell.h */,
+				24D2E4C51AC45FD600347FA6 /* TouristCommentListCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -645,8 +655,10 @@
 				24B29DED1ABD1C6E007F84E5 /* AFURLRequestSerialization.m in Sources */,
 				24CEE77B1ABEA4E200DBE500 /* UIView+CTExtensions.m in Sources */,
 				24CEE7781ABEA4AC00DBE500 /* UILabel+HightLight.m in Sources */,
+				24D2E4C61AC45FD600347FA6 /* TouristCommentListCell.m in Sources */,
 				24B29DF11ABD1C6E007F84E5 /* UIAlertView+AFNetworking.m in Sources */,
 				24CEE83B1ABEC89700DBE500 /* Sites.m in Sources */,
+				24D2E4C91AC4682E00347FA6 /* TouristCommentListViewController.m in Sources */,
 				24B29DE81ABD1C6E007F84E5 /* AFURLConnectionOperation.m in Sources */,
 				24B29DEF1ABD1C6E007F84E5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				24CEE83E1ABEE30900DBE500 /* HomePageSingleCell.m in Sources */,

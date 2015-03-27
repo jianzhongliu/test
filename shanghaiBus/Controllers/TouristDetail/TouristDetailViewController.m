@@ -8,6 +8,8 @@
 
 #import "TouristDetailViewController.h"
 #import "TouristListViewController.h"
+#import "TouristCommentListViewController.h"
+
 #import "WebImageView.h"
 #import "TouristServiceInfoView.h"
 #import "TouristServiceDetailView.h"
@@ -216,6 +218,11 @@
 
 - (void)didTouristServiceDetailClick:(TouristObject *) tourist {
 //取评论详情列表
+    TouristCommentListViewController *controller = [[TouristCommentListViewController alloc] init];
+    [self presentViewController:controller animated:YES completion:^{
+        
+    }];
+    
 }
 
 - (void)didClickMessage {

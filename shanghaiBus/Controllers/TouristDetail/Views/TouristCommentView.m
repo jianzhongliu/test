@@ -64,6 +64,7 @@
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
         _imageIcon.image = [UIImage imageNamed:@"icon"];
+        _imageIcon.clipsToBounds = YES;
         [self addSubview:_imageIcon];
     }
     return _imageIcon;

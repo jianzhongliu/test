@@ -22,6 +22,7 @@
 
 @implementation TouristListCell
 
+#pragma mark - getter&&setter
 - (WebImageView *)imageIcon {
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
