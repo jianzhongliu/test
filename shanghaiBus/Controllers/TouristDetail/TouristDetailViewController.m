@@ -9,6 +9,7 @@
 #import "TouristDetailViewController.h"
 #import "TouristListViewController.h"
 #import "TouristCommentListViewController.h"
+#import "TouristMessageViewController.h"
 
 #import "WebImageView.h"
 #import "TouristServiceInfoView.h"
@@ -222,14 +223,16 @@
     [self presentViewController:controller animated:YES completion:^{
         
     }];
-    
 }
 
 - (void)didClickMessage {
-
+    TouristMessageViewController *controller = [[TouristMessageViewController alloc] init];
+    [self presentViewController:controller animated:YES completion:nil];
 }
 
 - (void)didClickPhone {
-
+    NSURL *url = [NSURL URLWithString:@"telprompt://13916241357"];//这个方法可能会被拒
+    [[UIApplication sharedApplication] openURL:url];
 }
+
 @end

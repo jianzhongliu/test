@@ -7,7 +7,7 @@
 //
 
 #import "TouristCommentListViewController.h"
-
+#import "TouristAddCommentViewController.h"
 #import "TouristCommentListCell.h"
 #import "Config.h"
 
@@ -82,9 +82,9 @@
     [self.view addSubview:viewFooter];
     
     UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonCancel.frame = CGRectMake((SCREENWIDTH - 40) / 2, self.tableView.ctBottom + 10, 40, 40);
+    buttonCancel.frame = CGRectMake((SCREENWIDTH - 40) / 2, self.tableView.ctBottom + 10, 42, 42);
     [buttonCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [buttonCancel setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
+    [buttonCancel setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     [buttonCancel addTarget:self action:@selector(didClickDismissPage) forControlEvents:UIControlEventTouchUpInside];
 //    [buttonCancel setTitle:@"写点评" forState:UIControlStateNormal];
     [self.view addSubview:buttonCancel];
@@ -94,6 +94,12 @@
 - (void)didClickDismissPage {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+- (void)didClickAddComment {
+    TouristAddCommentViewController *controller = [[TouristAddCommentViewController alloc] init];
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 10;

@@ -34,6 +34,9 @@
 		24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DE11ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m */; };
 		24B29DF51ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DE31ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m */; };
 		24B29DF61ABD1C6E007F84E5 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DE51ABD1C6E007F84E5 /* UIWebView+AFNetworking.m */; };
+		24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */; };
+		24CD05FA1AC5BA98000E851F /* icon_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24CD05F91AC5BA98000E851F /* icon_close@2x.png */; };
+		24CD05FD1AC5BE70000E851F /* TouristAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */; };
 		24CEE7601ABE9CEC00DBE500 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE75F1ABE9CEC00DBE500 /* HomeHeaderView.m */; };
 		24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7641ABE9D8000DBE500 /* BaseViewController.m */; };
 		24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */; };
@@ -137,6 +140,11 @@
 		24B29DE31ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		24B29DE41ABD1C6E007F84E5 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		24B29DE51ABD1C6E007F84E5 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		24CD05F21AC5AEB9000E851F /* TouristMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristMessageViewController.h; sourceTree = "<group>"; };
+		24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristMessageViewController.m; sourceTree = "<group>"; };
+		24CD05F91AC5BA98000E851F /* icon_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_close@2x.png"; sourceTree = "<group>"; };
+		24CD05FB1AC5BE70000E851F /* TouristAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristAddCommentViewController.h; sourceTree = "<group>"; };
+		24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristAddCommentViewController.m; sourceTree = "<group>"; };
 		24CEE75E1ABE9CEC00DBE500 /* HomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
 		24CEE75F1ABE9CEC00DBE500 /* HomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
 		24CEE7631ABE9D8000DBE500 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -396,6 +404,7 @@
 		24B29E1E1ABD276C007F84E5 /* Image */ = {
 			isa = PBXGroup;
 			children = (
+				24CD05F91AC5BA98000E851F /* icon_close@2x.png */,
 				24CEE86A1ABF00B800DBE500 /* gender.png */,
 				24CEE8631ABEF60B00DBE500 /* IMG_0146.JPG */,
 				24CEE83F1ABEF15400DBE500 /* icon */,
@@ -438,6 +447,10 @@
 				24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */,
 				24D2E4C71AC4682E00347FA6 /* TouristCommentListViewController.h */,
 				24D2E4C81AC4682E00347FA6 /* TouristCommentListViewController.m */,
+				24CD05F21AC5AEB9000E851F /* TouristMessageViewController.h */,
+				24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */,
+				24CD05FB1AC5BE70000E851F /* TouristAddCommentViewController.h */,
+				24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -601,6 +614,7 @@
 				24CEE85B1ABEF15F00DBE500 /* tieyou_80.png in Resources */,
 				24CEE85F1ABEF15F00DBE500 /* tieyou_152.png in Resources */,
 				24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */,
+				24CD05FA1AC5BA98000E851F /* icon_close@2x.png in Resources */,
 				24CEE85E1ABEF15F00DBE500 /* tieyou_144.png in Resources */,
 				24CEE8561ABEF15F00DBE500 /* tieyou_29.png in Resources */,
 				24CEE7721ABE9D9200DBE500 /* com_back_window@3x.png in Resources */,
@@ -646,7 +660,9 @@
 				24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */,
 				24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */,
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,
+				24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				24CD05FD1AC5BE70000E851F /* TouristAddCommentViewController.m in Sources */,
 				24B29DEC1ABD1C6E007F84E5 /* AFSecurityPolicy.m in Sources */,
 				24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */,
 				24B29DF51ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m in Sources */,
