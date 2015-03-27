@@ -37,6 +37,7 @@
 		24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */; };
 		24CD05FA1AC5BA98000E851F /* icon_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24CD05F91AC5BA98000E851F /* icon_close@2x.png */; };
 		24CD05FD1AC5BE70000E851F /* TouristAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */; };
+		24CD06001AC5C1CD000E851F /* SearchObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05FF1AC5C1CD000E851F /* SearchObjectViewController.m */; };
 		24CEE7601ABE9CEC00DBE500 /* HomeHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE75F1ABE9CEC00DBE500 /* HomeHeaderView.m */; };
 		24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7641ABE9D8000DBE500 /* BaseViewController.m */; };
 		24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */; };
@@ -145,6 +146,8 @@
 		24CD05F91AC5BA98000E851F /* icon_close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_close@2x.png"; sourceTree = "<group>"; };
 		24CD05FB1AC5BE70000E851F /* TouristAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristAddCommentViewController.h; sourceTree = "<group>"; };
 		24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristAddCommentViewController.m; sourceTree = "<group>"; };
+		24CD05FE1AC5C1CD000E851F /* SearchObjectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchObjectViewController.h; sourceTree = "<group>"; };
+		24CD05FF1AC5C1CD000E851F /* SearchObjectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchObjectViewController.m; sourceTree = "<group>"; };
 		24CEE75E1ABE9CEC00DBE500 /* HomeHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeHeaderView.h; sourceTree = "<group>"; };
 		24CEE75F1ABE9CEC00DBE500 /* HomeHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeHeaderView.m; sourceTree = "<group>"; };
 		24CEE7631ABE9D8000DBE500 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -451,6 +454,8 @@
 				24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */,
 				24CD05FB1AC5BE70000E851F /* TouristAddCommentViewController.h */,
 				24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */,
+				24CD05FE1AC5C1CD000E851F /* SearchObjectViewController.h */,
+				24CD05FF1AC5C1CD000E851F /* SearchObjectViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -674,6 +679,7 @@
 				24D2E4C61AC45FD600347FA6 /* TouristCommentListCell.m in Sources */,
 				24B29DF11ABD1C6E007F84E5 /* UIAlertView+AFNetworking.m in Sources */,
 				24CEE83B1ABEC89700DBE500 /* Sites.m in Sources */,
+				24CD06001AC5C1CD000E851F /* SearchObjectViewController.m in Sources */,
 				24D2E4C91AC4682E00347FA6 /* TouristCommentListViewController.m in Sources */,
 				24B29DE81ABD1C6E007F84E5 /* AFURLConnectionOperation.m in Sources */,
 				24B29DEF1ABD1C6E007F84E5 /* AFNetworkActivityIndicatorManager.m in Sources */,

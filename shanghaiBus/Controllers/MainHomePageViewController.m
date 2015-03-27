@@ -8,6 +8,7 @@
 
 #import "MainHomePageViewController.h"
 #import "TouristDetailViewController.h"
+#import "SearchObjectViewController.h"
 #import "HomeHeaderView.h"
 #import "HomePageSepratorCell.h"
 #import "HomePageSingleCell.h"
@@ -213,7 +214,7 @@
 }
 
 - (void)didClickHeaderSearch {
-    TouristListViewController *controller = [[TouristListViewController alloc] init];
+    SearchObjectViewController *controller = [[SearchObjectViewController alloc] init];
     [self.navigationController pushViewController:controller animated:YES];
 }
 
