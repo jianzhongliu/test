@@ -10,6 +10,9 @@
 #import "AFNetworking.h"
 #import "Config.h"
 
+#import "UserLoginViewController.h"
+
+
 typedef void (^busDataBlock) (AFHTTPRequestOperation *operation, BOOL status);
 
 @interface BaseViewController : UIViewController
@@ -17,5 +20,7 @@ typedef void (^busDataBlock) (AFHTTPRequestOperation *operation, BOOL status);
 @property (nonatomic, copy) busDataBlock busData;
 
 - (void)requestBusData:(NSString *) url;
+
+- (void)doLoginWithBlock:(loginResultBlock) resultBlock;
 
 @end

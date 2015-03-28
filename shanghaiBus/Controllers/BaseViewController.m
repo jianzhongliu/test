@@ -7,6 +7,7 @@
 //
 
 #import "BaseViewController.h"
+#import "UserLoginViewController.h"
 
 @interface BaseViewController ()
 
@@ -19,7 +20,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackButton];
-
+    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
+    
+    }];
+    
 }
 
 - (void)showBackButton {
@@ -65,6 +69,15 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         blockSelf.busData(operation, NO);
     }];
+}
+
+- (void)doLoginWithBlock:(loginResultBlock) resultBlock {
+    
+    UserLoginViewController *controller = [[UserLoginViewController alloc] init];
+    controller.loginBlock = resultBlock;
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+    [self presentViewController:nav animated:YES completion:nil];
+    
 }
 
 @end
