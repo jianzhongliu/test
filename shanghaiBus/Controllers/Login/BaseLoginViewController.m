@@ -78,13 +78,13 @@
         UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
         visualEffectView.frame = self.imageBack.bounds;
         //    visualEffectView.backgroundColor = [UIColor greenColor];
-        visualEffectView.alpha = 1;//模糊程度
+        visualEffectView.alpha = 0.8;//模糊程度
         [self.imageBack addSubview:visualEffectView];
     } else {
         UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:self.view.bounds];
         toolBar.barStyle = UIBarStyleBlackTranslucent;
         [toolBar setBackgroundImage:self.imageBack.image forToolbarPosition:UIBarPositionBottom barMetrics:UIBarMetricsDefaultPrompt];
-        toolBar.alpha = 1;
+        toolBar.alpha = 0.8;
         [self.view addSubview:toolBar];
     }
     
@@ -94,6 +94,8 @@
     self.buttonDismiss.frame = CGRectMake(SCREENWIDTH - 36, 30, 21, 21);
     [self.view addSubview:self.buttonDismiss];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapViewController)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)goBackView {
@@ -104,4 +106,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)didTapViewController {
+    [self.view endEditing:YES];
+}
 @end

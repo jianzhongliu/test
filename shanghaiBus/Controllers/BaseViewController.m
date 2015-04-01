@@ -20,9 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self showBackButton];
-    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
-    
-    }];
+
     
 }
 

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2414A3101ACC489E00E05E80 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2414A30F1ACC489E00E05E80 /* ForgetPasswordViewController.m */; };
+		2414A3131ACC4B1E00E05E80 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2414A3121ACC4B1E00E05E80 /* RegisterViewController.m */; };
+		2414A3161ACC4BFF00E05E80 /* SettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2414A3151ACC4BFF00E05E80 /* SettingPasswordViewController.m */; };
 		24252A0B1AC1AB8300BB264A /* TouristDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0A1AC1AB8300BB264A /* TouristDetailViewController.m */; };
 		24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */; };
 		24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */; };
@@ -50,8 +53,8 @@
 		246539AA1AC702BE00C1908C /* image_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246539A91AC702BE00C1908C /* image_back@2x.png */; };
 		246539AC1AC7162200C1908C /* icon_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246539AB1AC7162200C1908C /* icon_phone@2x.png */; };
 		246539AF1AC7191A00C1908C /* PhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246539AE1AC7191A00C1908C /* PhoneLoginViewController.m */; };
-		246539B11AC719EC00C1908C /* icon_username_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246539B01AC719EC00C1908C /* icon_username_back@2x.png */; };
 		248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 248B5C911AC3294100E0B6A4 /* TouristContectView.m */; };
+		24A0C33C1ACC3D29003E9139 /* icon_name_pass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */; };
 		24B29D971ABD1B32007F84E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D961ABD1B32007F84E5 /* main.m */; };
 		24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D991ABD1B32007F84E5 /* AppDelegate.m */; };
 		24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24B29DA11ABD1B32007F84E5 /* Images.xcassets */; };
@@ -104,6 +107,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2414A30E1ACC489E00E05E80 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
+		2414A30F1ACC489E00E05E80 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
+		2414A3111ACC4B1E00E05E80 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		2414A3121ACC4B1E00E05E80 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		2414A3141ACC4BFF00E05E80 /* SettingPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingPasswordViewController.h; sourceTree = "<group>"; };
+		2414A3151ACC4BFF00E05E80 /* SettingPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingPasswordViewController.m; sourceTree = "<group>"; };
 		24252A091AC1AB8300BB264A /* TouristDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristDetailViewController.h; sourceTree = "<group>"; };
 		24252A0A1AC1AB8300BB264A /* TouristDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristDetailViewController.m; sourceTree = "<group>"; };
 		24252A0D1AC1ABC400BB264A /* TouristServiceInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristServiceInfoView.h; sourceTree = "<group>"; };
@@ -156,9 +165,9 @@
 		246539AB1AC7162200C1908C /* icon_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_phone@2x.png"; sourceTree = "<group>"; };
 		246539AD1AC7191A00C1908C /* PhoneLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneLoginViewController.h; sourceTree = "<group>"; };
 		246539AE1AC7191A00C1908C /* PhoneLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneLoginViewController.m; sourceTree = "<group>"; };
-		246539B01AC719EC00C1908C /* icon_username_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_username_back@2x.png"; sourceTree = "<group>"; };
 		248B5C901AC3294100E0B6A4 /* TouristContectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristContectView.h; sourceTree = "<group>"; };
 		248B5C911AC3294100E0B6A4 /* TouristContectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristContectView.m; sourceTree = "<group>"; };
+		24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_name_pass@2x.png"; sourceTree = "<group>"; };
 		24B29D911ABD1B32007F84E5 /* shanghaiBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shanghaiBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B29D951ABD1B32007F84E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24B29D961ABD1B32007F84E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -294,6 +303,12 @@
 				246539A71AC700B500C1908C /* BaseLoginViewController.m */,
 				246539AD1AC7191A00C1908C /* PhoneLoginViewController.h */,
 				246539AE1AC7191A00C1908C /* PhoneLoginViewController.m */,
+				2414A30E1ACC489E00E05E80 /* ForgetPasswordViewController.h */,
+				2414A30F1ACC489E00E05E80 /* ForgetPasswordViewController.m */,
+				2414A3111ACC4B1E00E05E80 /* RegisterViewController.h */,
+				2414A3121ACC4B1E00E05E80 /* RegisterViewController.m */,
+				2414A3141ACC4BFF00E05E80 /* SettingPasswordViewController.h */,
+				2414A3151ACC4BFF00E05E80 /* SettingPasswordViewController.m */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -312,6 +327,7 @@
 		2465395E1AC6BB6F00C1908C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */,
 				246539AB1AC7162200C1908C /* icon_phone@2x.png */,
 				246539A91AC702BE00C1908C /* image_back@2x.png */,
 				2465395F1AC6BB6F00C1908C /* com_back_window@2x.png */,
@@ -329,7 +345,6 @@
 				2465397C1AC6BB6F00C1908C /* icon_regist@2x.png */,
 				2465397D1AC6BB6F00C1908C /* icon_regist_success@2x.png */,
 				2465397E1AC6BB6F00C1908C /* icon_sina_login@2x.png */,
-				246539B01AC719EC00C1908C /* icon_username_back@2x.png */,
 				2465397F1AC6BB6F00C1908C /* IMG_0146.JPG */,
 				246539621AC6BB6F00C1908C /* icon */,
 			);
@@ -699,7 +714,6 @@
 				2465399B1AC6BB6F00C1908C /* icon_ok@2x.png in Resources */,
 				246539861AC6BB6F00C1908C /* Icon-72.png in Resources */,
 				2465399C1AC6BB6F00C1908C /* icon_regist@2x.png in Resources */,
-				246539B11AC719EC00C1908C /* icon_username_back@2x.png in Resources */,
 				246539951AC6BB6F00C1908C /* icon_close@2x.png in Resources */,
 				246539AA1AC702BE00C1908C /* image_back@2x.png in Resources */,
 				24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */,
@@ -711,6 +725,7 @@
 				246539941AC6BB6F00C1908C /* icon_checkcode_disable@2x.png in Resources */,
 				246539981AC6BB6F00C1908C /* icon_login@2x.png in Resources */,
 				2465399A1AC6BB6F00C1908C /* icon_login_selected@2x.png in Resources */,
+				24A0C33C1ACC3D29003E9139 /* icon_name_pass@2x.png in Resources */,
 				246539811AC6BB6F00C1908C /* com_back_window@3x.png in Resources */,
 				2465398D1AC6BB6F00C1908C /* tieyou_29.png in Resources */,
 				2465398A1AC6BB6F00C1908C /* tieyou_120.png in Resources */,
@@ -751,6 +766,7 @@
 				24252A0B1AC1AB8300BB264A /* TouristDetailViewController.m in Sources */,
 				24CEE8351ABEBA7100DBE500 /* WebImageView.m in Sources */,
 				24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */,
+				2414A3131ACC4B1E00E05E80 /* RegisterViewController.m in Sources */,
 				24B29DEA1ABD1C6E007F84E5 /* AFURLSessionManager.m in Sources */,
 				248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */,
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,
@@ -765,6 +781,7 @@
 				24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */,
 				246539A81AC700B500C1908C /* BaseLoginViewController.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
+				2414A3101ACC489E00E05E80 /* ForgetPasswordViewController.m in Sources */,
 				24CD05FD1AC5BE70000E851F /* TouristAddCommentViewController.m in Sources */,
 				24B29DEC1ABD1C6E007F84E5 /* AFSecurityPolicy.m in Sources */,
 				24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */,
@@ -789,6 +806,7 @@
 				24B29DEE1ABD1C6E007F84E5 /* AFURLResponseSerialization.m in Sources */,
 				2465395C1AC6B7F700C1908C /* UserLoginViewController.m in Sources */,
 				24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */,
+				2414A3161ACC4BFF00E05E80 /* SettingPasswordViewController.m in Sources */,
 				24B29D971ABD1B32007F84E5 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

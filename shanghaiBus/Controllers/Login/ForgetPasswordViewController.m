@@ -6,15 +6,14 @@
 //  Copyright (c) 2015年 liujianzhong. All rights reserved.
 //
 
-#import "PhoneLoginViewController.h"
 #import "ForgetPasswordViewController.h"
-#import "RegisterViewController.h"
+#import "SettingPasswordViewController.h"
 #import "WebImageView.h"
 
-@interface PhoneLoginViewController ()
+@interface ForgetPasswordViewController ()
 
-@property (nonatomic, strong) UIButton *buttonForgetPass;
-@property (nonatomic, strong) UIButton *buttonRegister;
+//@property (nonatomic, strong) UIButton *buttonForgetPass;
+//@property (nonatomic, strong) UIButton *buttonRegister;
 
 @property (nonatomic, strong) WebImageView *imageView;
 @property (nonatomic, strong) UILabel *labelName;
@@ -23,39 +22,15 @@
 @property (nonatomic, strong) UITextField *textName;
 @property (nonatomic, strong) UITextField *textPass;
 
+@property (nonatomic, strong) UIButton *buttonCheckcode;
+
 @property (nonatomic, strong) UIButton *buttonLogin;
 
 @end
 
 
-@implementation PhoneLoginViewController
+@implementation ForgetPasswordViewController
 #pragma mark - getter&&setter
-
-- (UIButton *)buttonForgetPass {
-    if (_buttonForgetPass == nil) {
-        _buttonForgetPass = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonForgetPass setTitle:@"忘记密码？" forState:UIControlStateNormal];
-//        [_buttonForgetPass setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-//        [_buttonForgetPass setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
-        [_buttonForgetPass addTarget:self action:@selector(didClickForgetPass) forControlEvents:UIControlEventTouchUpInside];
-        _buttonForgetPass.font = [UIFont systemFontOfSize:13];
-        _buttonForgetPass.selected = NO;
-    }
-    return _buttonForgetPass;
-}
-
-- (UIButton *)buttonRegister {
-    if (_buttonRegister == nil) {
-        _buttonRegister = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonRegister setTitle:@"注册" forState:UIControlStateNormal];
-//        [_buttonRegister setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-//        [_buttonRegister setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
-        [_buttonRegister addTarget:self action:@selector(didClickRegister) forControlEvents:UIControlEventTouchUpInside];
-        _buttonRegister.font = [UIFont systemFontOfSize:13];
-        _buttonRegister.selected = NO;
-    }
-    return _buttonRegister;
-}
 
 - (UILabel *)labelName {
     if (_labelName == nil) {
@@ -84,7 +59,7 @@
         _textName = [[UITextField alloc] init];
         _textName.clearsOnBeginEditing = YES;
         _textName.font = [UIFont systemFontOfSize:13];
-//        _textName.textColor = [UIColor whiteColor];
+        //        _textName.textColor = [UIColor whiteColor];
     }
     return _textName;
 }
@@ -98,6 +73,19 @@
     return _textPass;
 }
 
+- (UIButton *)buttonCheckcode {
+    if (_buttonCheckcode == nil) {
+        _buttonCheckcode = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_buttonCheckcode setBackgroundColor:BYColor];
+//        [_buttonCheckcode setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
+//        [_buttonCheckcode setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonCheckcode addTarget:self action:@selector(didClickCheckcode:) forControlEvents:UIControlEventTouchUpInside];
+        [_buttonCheckcode setTitle:@"获取验证码" forState:UIControlStateNormal];
+        [_buttonCheckcode setFont:[UIFont systemFontOfSize:12]];
+        _buttonCheckcode.selected = NO;
+    }
+    return _buttonCheckcode;
+}
 
 - (WebImageView *)imageView {
     if (_imageView == nil) {
@@ -113,8 +101,8 @@
     if (_buttonLogin == nil) {
         _buttonLogin = [UIButton buttonWithType:UIButtonTypeCustom];
         [_buttonLogin setBackgroundImage:[UIImage imageNamed:@"icon_login_nomal"] forState:UIControlStateNormal];
-        [_buttonLogin addTarget:self action:@selector(didClickLogin) forControlEvents:UIControlEventTouchUpInside];
-        [_buttonLogin setTitle:@"登陆" forState:UIControlStateNormal];
+        [_buttonLogin addTarget:self action:@selector(didClickNext) forControlEvents:UIControlEventTouchUpInside];
+        [_buttonLogin setTitle:@"下一步，设置新密码" forState:UIControlStateNormal];
         _buttonLogin.selected = NO;
     }
     return _buttonLogin;
@@ -143,14 +131,8 @@
 }
 
 - (void)initUI {
-    self.buttonForgetPass.frame = CGRectMake(10, 80, 80, 20);
-    [self.buttonForgetPass setTitle:@"忘记密码？" forState:UIControlStateNormal];
-    [self.view addSubview:self.buttonForgetPass];
     
-    self.buttonRegister.frame = CGRectMake(SCREENWIDTH - 70, 80, 60, 30);
-    [self.view addSubview:self.buttonRegister];
-    
-    self.imageView.frame = CGRectMake(10, self.buttonRegister.ctBottom + 10, SCREENWIDTH - 20, 86);
+    self.imageView.frame = CGRectMake(10, 80, SCREENWIDTH - 20, 86);
     self.imageView.userInteractionEnabled = YES;
     [self.view addSubview:self.imageView];
     
@@ -163,28 +145,30 @@
     [self.imageView addSubview:self.textName];
     
     self.labelPass.frame = CGRectMake(10, 55, 70, 20);
-    self.labelPass.text = @"密码：";
+    self.labelPass.text = @"验证码：";
     [self.imageView addSubview:self.labelPass];
     
     self.textPass.frame = CGRectMake(self.labelPass.ctRight + 10, 55, SCREENWIDTH - 110, 25);
     [self.imageView addSubview:self.textPass];
     
+    self.buttonCheckcode.frame = CGRectMake(self.imageView.viewWidth - 80, 55, 70, 25);
+    [self.imageView addSubview:self.buttonCheckcode];
+    
     self.buttonLogin.frame = CGRectMake(10, self.imageView.ctBottom + 20, SCREENWIDTH - 20, 44);
     [self.view addSubview:self.buttonLogin];
 }
 
-- (void)didClickForgetPass {
-    ForgetPasswordViewController *controller = [[ForgetPasswordViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+- (void)goBackView {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)didClickRegister {
-    RegisterViewController *controller = [[RegisterViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+- (void)didClickCheckcode:(id) sender {
+
 }
 
-- (void)didClickLogin {
-
+- (void)didClickNext {
+    SettingPasswordViewController *controller = [[SettingPasswordViewController alloc] init];
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 @end

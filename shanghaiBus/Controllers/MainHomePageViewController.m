@@ -38,7 +38,9 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initUI];
     [self requestData];
+    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
         
+    }];
 }
 
 #pragma mark - private Methods
