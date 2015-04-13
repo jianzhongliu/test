@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
 #import "Config.h"
+#import "UIViewController+Loading.h"
 
 #import "UserLoginViewController.h"
 

@@ -71,7 +71,7 @@
 }
 
 - (void)requestData {
-    
+    [self showLoadingActivity:YES];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -97,8 +97,9 @@
                 [self reloadData];
             }
         }
+        [self hideLoadWithAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [self hideLoadWithAnimated:YES];
     }];
     
     NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/1f178a82b9014a90b8a9c50aa9773912b21beef6.jpg"];

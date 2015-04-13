@@ -62,7 +62,7 @@
 }
 
 - (void)requestData {
-    
+    [self showLoadingActivity:YES];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -88,8 +88,9 @@
                 [self reloadData];
             }
         }
+        [self hideLoadWithAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [self hideLoadWithAnimated:YES];
     }];
 
 }
