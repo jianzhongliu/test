@@ -11,9 +11,11 @@
 #import "TouristDetailViewController.h"
 
 @interface TouristListViewController ()<UITableViewDelegate, UITableViewDataSource>
+
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *arrayTourist;
 @property (nonatomic, strong) UIView *viewHeader;
+
 @end
 
 @implementation TouristListViewController
@@ -51,48 +53,45 @@
     
 }
 
+- (void)reloadData {
+    if (self.arrayTourist.count > 0) {
+        [self.table reloadData];
+    } else {
+    //无数据
+    }
+}
+
 - (void)requestData {
-    TouristObject *tourist = [[TouristObject alloc] init];
-    tourist.icon = @"";
-    tourist.signature = @"万浪从中过, 落地滴水不沾身！";
-    tourist.nuckname = @"小鑫呱呱";
-    tourist.price = @"300";
-    [self.arrayTourist addObject:tourist];
     
-    TouristObject *tourist1 = [[TouristObject alloc] init];
-    tourist1.icon = @"http://hiphotos.baidu.com/lvpics/pic/item/4bed2e738bd4b31cdbab170c87d6277f9f2ff8f6.jpg";
-    tourist1.signature = @"服务周到，300包日！";
-    tourist1.nuckname = @"华子呱呱";
-    tourist1.price = @"300";
-    [self.arrayTourist addObject:tourist1];
-    
-    TouristObject *tourist2 = [[TouristObject alloc] init];
-    tourist2.icon = @"http://hiphotos.baidu.com/lvpics/pic/item/a71ea8d3fd1f413491cc9eb6251f95cad0c85e7a.jpg";
-    tourist2.signature = @"没人比这个更便宜了，没人比这个服务更周到了！";
-    tourist2.nuckname = @"小豪豪呱呱";
-    tourist2.price = @"50";
-    [self.arrayTourist addObject:tourist2];
-    
-    TouristObject *tourist3 = [[TouristObject alloc] init];
-    tourist3.icon = @"http://hiphotos.baidu.com/lvpics/pic/item/f703738da9773912e1b106d6f8198618377ae2f6.jpg";
-    tourist3.signature = @"只服务有缘人，再多钱哥都不要！";
-    tourist3.nuckname = @"佩佩";
-    tourist3.price = @"100";
-    [self.arrayTourist addObject:tourist3];
-    
-    TouristObject *tourist4 = [[TouristObject alloc] init];
-    tourist4.icon = @"http://hiphotos.baidu.com/lvpics/pic/item/8b82b9014a90f603244b078f3912b31bb151ed7b.jpg";
-    tourist4.signature = @"王子式的服务试过吗！";
-    tourist4.nuckname = @"王+的+子";
-    tourist4.price = @"1";
-    [self.arrayTourist addObject:tourist4];
-    
-    TouristObject *tourist5 = [[TouristObject alloc] init];
-    tourist5.icon = @"http://hiphotos.baidu.com/lvpics/pic/item/f703738da9773912e1b106d6f8198618377ae2f6.jpg";
-    tourist5.signature = @"没有服务就是最好的服务（我永远不懂）";
-    tourist5.nuckname = @"干哥";
-    tourist5.price = @"0.5";
-    [self.arrayTourist addObject:tourist5];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *site = [self.siteName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, site];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@scenary/searchScenaryByCityId",HOST];
+    NSDictionary *dic = @{@"date":currentTime,@"cityname":site,@"sign":sign};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            NSArray *dataArray = [dic objectForKey:@"touristArray"];
+            if (dataArray.count > 0) {
+                [self.arrayTourist removeAllObjects];
+                for (NSDictionary *dic in dataArray) {
+                    TouristObject *site = [[TouristObject alloc] init];
+                    [site configTouristWithDic:dic];
+                    [self.arrayTourist addObject:site];
+                }
+                [self reloadData];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -124,6 +123,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     TouristDetailViewController *controller = [[TouristDetailViewController alloc] init];
+    TouristObject *tourist = (TouristObject *)[self.arrayTourist objectAtIndex:indexPath.row];
+    controller.tourist = tourist;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

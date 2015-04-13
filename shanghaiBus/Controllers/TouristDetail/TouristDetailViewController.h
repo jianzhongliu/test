@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "TouristObject.h"
 
 @interface TouristDetailViewController : BaseViewController
 
 @property (nonatomic, copy) NSString *busLine;
+@property (nonatomic, strong) TouristObject *tourist;
 
 @end

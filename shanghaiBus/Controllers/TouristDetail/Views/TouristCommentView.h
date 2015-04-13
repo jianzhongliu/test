@@ -7,23 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
-@class TouristObject;
+@class CommentObject;
 @class TouristCommentView;
 
 @protocol TouristCommentViewDelegate <NSObject>
 
 - (void)didTouristServiceCommentInfoDisplayChanged:(TouristCommentView*) detailView status:(BOOL) status;
-- (void)didTouristServiceDetailClick:(TouristObject *) tourist;
+- (void)didTouristServiceDetailClick:(CommentObject *) tourist;
 
 @end
 
 
 @interface TouristCommentView : UIView
 
-@property (nonatomic, strong) TouristObject *cellData;
+@property (nonatomic, strong) CommentObject *cellData;
 @property (nonatomic, weak) id<TouristCommentViewDelegate> delegate;
 
-- (void)configViewWithData:(TouristObject *) tourist;
+- (void)configViewWithData:(CommentObject *) comment WithNumber:(NSInteger) number;
 
 - (CGFloat)fetchViewHeight;
 

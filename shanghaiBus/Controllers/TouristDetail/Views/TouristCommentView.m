@@ -9,7 +9,7 @@
 #import "TouristCommentView.h"
 #import "WebImageView.h"
 #import "Config.h"
-#import "TouristObject.h"
+#import "CommentObject.h"
 
 @interface TouristCommentView ()
 
@@ -143,7 +143,10 @@
     self.buttonDetail.frame = CGRectMake(0, self.labelCommon.ctBottom +10, SCREENWIDTH, 40);
 }
 
-- (void)configViewWithData:(TouristObject *) tourist {
+- (void)configViewWithData:(CommentObject *) comment WithNumber:(NSInteger) number{
+    NSString *commentNumber = [NSString stringWithFormat:@"%ld条评论", (long)number];
+    [self.buttonDetail setTitle:commentNumber forState:UIControlStateNormal];
+    
     
     
 }

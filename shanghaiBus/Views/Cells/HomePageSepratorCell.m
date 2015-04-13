@@ -141,22 +141,22 @@
     switch (numberOfobject) {
         case 1:{
             Sites *site = [arrayData objectAtIndex:0];
-            self.imageLeft.imageUrl = site.imageUrl;
-            self.labelName.text = site.siteName;
-            self.labelNumber.text = [NSString stringWithFormat:@"%@位导游", site.touristNumber];
+            self.imageLeft.imageUrl = site.mainImage;
+            self.labelName.text = site.cityname;
+            self.labelNumber.text = [NSString stringWithFormat:@"%ld位导游", (long)site.touristnumber];
 
         }
             break;
         case 2:{
             Sites *site = [arrayData objectAtIndex:0];
-            self.imageLeft.imageUrl = site.imageUrl;
-            self.labelName.text = site.siteName;
-            self.labelNumber.text = [NSString stringWithFormat:@"%@位导游", site.touristNumber];
+            self.imageLeft.imageUrl = site.mainImage;
+            self.labelName.text = site.cityname;
+            self.labelNumber.text = [NSString stringWithFormat:@"%ld位导游", (long)site.touristnumber];
             
             Sites *siteR = [arrayData objectAtIndex:1];
-            self.imageRight.imageUrl = siteR.imageUrl;
-            self.labelNameR.text = siteR.siteName;
-            self.labelNumberR.text = [NSString stringWithFormat:@"%@位导游", siteR.touristNumber];
+            self.imageRight.imageUrl = siteR.mainImage;
+            self.labelNameR.text = siteR.cityname;
+            self.labelNumberR.text = [NSString stringWithFormat:@"%ld位导游", (long)siteR.touristnumber];
             
         }
             break;

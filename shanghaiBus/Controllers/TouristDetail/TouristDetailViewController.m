@@ -16,6 +16,8 @@
 #import "TouristServiceDetailView.h"
 #import "TouristCommentView.h"
 #import "TouristContectView.h"
+#import "CommentObject.h"
+#import "MessageObject.h"
 
 @interface TouristDetailViewController () <UIScrollViewDelegate, TouristServiceDetailViewDelegate, TouristCommentViewDelegate, TouristContectViewDelegate>
 
@@ -33,6 +35,10 @@
 @property (nonatomic, strong) TouristCommentView *viewComment;
 
 @property (nonatomic, strong) TouristContectView *viewcontect;
+
+//data
+@property (nonatomic, strong) NSMutableArray *arrayMessage;
+@property (nonatomic, strong) NSMutableArray *arrayComment;
 
 @end
 
@@ -148,16 +154,21 @@
 - (void)initData {
     
     self.arraySiteLine = [NSMutableArray array];
+    self.arrayComment = [NSMutableArray array];
+    self.arrayMessage = [NSMutableArray array];
     
 }
 
 - (void)reDrawScrollView {
-    [self.viewServiceInfo configViewWithData:nil];
-    [self.viewServicePrice configViewWithTitle:@"价格说明" detail:@"没什么好描述的iewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetail"];//价格说明
-    [self.viewServiceOrder configViewWithTitle:@"预定须知" detail:@"没什么好说的viewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetail"];//预定须知
+    [self.viewServiceInfo configViewWithData:self.tourist];
+    [self.viewServicePrice configViewWithTitle:@"价格说明" detail:self.tourist.pricedetail];//价格说明
+    [self.viewServiceOrder configViewWithTitle:@"预定须知" detail:self.tourist.servicedetail];//预定须知
     
-    [self.viewServiceDetail configViewWithTitle:@"服务描述" detail:@"没什么好说的viewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetailviewServiceDetail"];//服务描述
-    [self.viewComment configViewWithData:nil];
+    [self.viewServiceDetail configViewWithTitle:@"服务描述" detail:self.tourist.servicedetail];//服务描述
+    
+    
+    
+    
     self.viewServiceInfo.frame = CGRectMake(0, 150, SCREENWIDTH, [self.viewServiceInfo fetchViewHight]);
     
     self.viewServicePrice.frame = CGRectMake(0, self.viewServiceInfo.ctBottom, SCREENWIDTH, [self.viewServicePrice fetchViewHeight]);
@@ -172,7 +183,57 @@
     self.viewcontect.frame = CGRectMake(0, self.scrollDetail.ctBottom - 40, SCREENWIDTH, 40);
 }
 
+- (void)reloadData {
+//刷新出评论
+    if (self.arrayComment.count > 0) {
+        
+        [self.viewComment configViewWithData:[self.arrayComment objectAtIndex:0] WithNumber:self.tourist.commentnumber];
+        
+    }
+    
+    if (self.arrayMessage.count > 0) {
+        //刷新留言
+    }
+}
+
 - (void)requestData {
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *userid = self.tourist.identify;
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@tourist/getCommentByUserId",HOST];
+    NSDictionary *dic = @{@"date":currentTime,@"userid":userid,@"sign":sign};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            NSArray *commentArray = [dic objectForKey:@"commentArray"];
+            if (commentArray.count > 0) {
+                [self.arraySiteLine removeAllObjects];
+                for (NSDictionary *dic in commentArray) {
+                    CommentObject *comment = [[CommentObject alloc] init];
+                    [comment configCommentWithDic:dic];
+                    [self.arrayComment addObject:comment];
+                }
+            }
+            NSArray *messageArray = [dic objectForKey:@"messageArray"];
+            if (messageArray.count > 0) {
+                [self.arraySiteLine removeAllObjects];
+                for (NSDictionary *dic in messageArray) {
+                    MessageObject *message = [[MessageObject alloc] init];
+                    [message configCommentWithDic:dic];
+                    [self.arrayMessage addObject:message];
+                }
+            }
+            [self reloadData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
     for (int i = 0; i < 5; i ++) {
         WebImageView *image = [[WebImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH*i, 0, SCREENWIDTH, 150)];
         image.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/3812b31bb051f819dbde9882dab44aed2f73e77b.jpg";
@@ -220,6 +281,8 @@
 - (void)didTouristServiceDetailClick:(TouristObject *) tourist {
 //取评论详情列表
     TouristCommentListViewController *controller = [[TouristCommentListViewController alloc] init];
+    controller.arrayComment = self.arrayComment;
+    controller.tourist = self.tourist;
     [self presentViewController:controller animated:YES completion:^{
         
     }];

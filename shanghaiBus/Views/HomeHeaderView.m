@@ -53,23 +53,23 @@
 
 #pragma mark - private Methods
 - (void)initUI {
-    self.scrollTop = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 45)];
+    self.scrollTop = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 55)];
     self.scrollTop.delegate = self;
     self.scrollTop.pagingEnabled = YES;
     [self addSubview:self.scrollTop];
     self.scrollTop.contentSize = CGSizeMake(SCREENWIDTH, 45);
     
-    self.viewSearch.frame = CGRectMake(0, self.scrollTop.ctBottom, SCREENWIDTH, 40);
+    self.viewSearch.frame = CGRectMake(0, self.scrollTop.ctBottom, SCREENWIDTH, 60);
     [self addSubview:self.viewSearch];
     
-    UILabel *labelSearchTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, 250, 20)];
+    UILabel *labelSearchTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 250, 20)];
     labelSearchTitle.backgroundColor = [UIColor whiteColor];
     labelSearchTitle.text = @"你想去哪里玩";
-    labelSearchTitle.font = [UIFont boldSystemFontOfSize:18];
+    labelSearchTitle.font = [UIFont boldSystemFontOfSize:15];
     labelSearchTitle.textColor = BYColorFromHex(0x000000);
     [self.viewSearch addSubview:labelSearchTitle];
     
-    self.labelNumberOftourist.frame = CGRectMake(20, 20, 250, 20);
+    self.labelNumberOftourist.frame = CGRectMake(20, 35, 250, 20);
     [self.viewSearch addSubview:self.labelNumberOftourist];
     
     UIView *viewLineBottom = [[UIView alloc] initWithFrame:CGRectMake(0, self.viewSearch.ctBottom - 1, SCREENWIDTH, 1)];

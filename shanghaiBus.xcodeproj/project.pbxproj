@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		240985961ADAB133009CC9F2 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 240985951ADAB133009CC9F2 /* Utils.m */; };
+		240985981ADAB7F7009CC9F2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 240985971ADAB7F7009CC9F2 /* UIKit.framework */; };
+		2409859A1ADAB804009CC9F2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 240985991ADAB804009CC9F2 /* Foundation.framework */; };
+		2409859C1ADAB80F009CC9F2 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2409859B1ADAB80F009CC9F2 /* QuartzCore.framework */; };
+		2409859F1ADAC5C3009CC9F2 /* CommentObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 2409859E1ADAC5C3009CC9F2 /* CommentObject.m */; };
+		240985A21ADAC739009CC9F2 /* MessageObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 240985A11ADAC739009CC9F2 /* MessageObject.m */; };
 		2414A3101ACC489E00E05E80 /* ForgetPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2414A30F1ACC489E00E05E80 /* ForgetPasswordViewController.m */; };
 		2414A3131ACC4B1E00E05E80 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2414A3121ACC4B1E00E05E80 /* RegisterViewController.m */; };
 		2414A3161ACC4BFF00E05E80 /* SettingPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2414A3151ACC4BFF00E05E80 /* SettingPasswordViewController.m */; };
@@ -77,6 +83,7 @@
 		24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DE11ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m */; };
 		24B29DF51ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DE31ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m */; };
 		24B29DF61ABD1C6E007F84E5 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DE51ABD1C6E007F84E5 /* UIWebView+AFNetworking.m */; };
+		24CBAA251ADC0E68007FD128 /* citydict.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24CBAA241ADC0E68007FD128 /* citydict.plist */; };
 		24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */; };
 		24CD05FD1AC5BE70000E851F /* TouristAddCommentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05FC1AC5BE70000E851F /* TouristAddCommentViewController.m */; };
 		24CD06001AC5C1CD000E851F /* SearchObjectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24CD05FF1AC5C1CD000E851F /* SearchObjectViewController.m */; };
@@ -107,6 +114,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		240985941ADAB133009CC9F2 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		240985951ADAB133009CC9F2 /* Utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		240985971ADAB7F7009CC9F2 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		240985991ADAB804009CC9F2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2409859B1ADAB80F009CC9F2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		2409859D1ADAC5C3009CC9F2 /* CommentObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentObject.h; sourceTree = "<group>"; };
+		2409859E1ADAC5C3009CC9F2 /* CommentObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentObject.m; sourceTree = "<group>"; };
+		240985A01ADAC739009CC9F2 /* MessageObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageObject.h; sourceTree = "<group>"; };
+		240985A11ADAC739009CC9F2 /* MessageObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageObject.m; sourceTree = "<group>"; };
 		2414A30E1ACC489E00E05E80 /* ForgetPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPasswordViewController.h; sourceTree = "<group>"; };
 		2414A30F1ACC489E00E05E80 /* ForgetPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPasswordViewController.m; sourceTree = "<group>"; };
 		2414A3111ACC4B1E00E05E80 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
@@ -214,6 +230,7 @@
 		24B29DE31ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		24B29DE41ABD1C6E007F84E5 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		24B29DE51ABD1C6E007F84E5 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		24CBAA241ADC0E68007FD128 /* citydict.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = citydict.plist; sourceTree = "<group>"; };
 		24CD05F21AC5AEB9000E851F /* TouristMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristMessageViewController.h; sourceTree = "<group>"; };
 		24CD05F31AC5AEB9000E851F /* TouristMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristMessageViewController.m; sourceTree = "<group>"; };
 		24CD05FB1AC5BE70000E851F /* TouristAddCommentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristAddCommentViewController.h; sourceTree = "<group>"; };
@@ -256,6 +273,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2409859C1ADAB80F009CC9F2 /* QuartzCore.framework in Frameworks */,
+				2409859A1ADAB804009CC9F2 /* Foundation.framework in Frameworks */,
+				240985981ADAB7F7009CC9F2 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,19 +415,20 @@
 		24B29D931ABD1B32007F84E5 /* shanghaiBus */ = {
 			isa = PBXGroup;
 			children = (
-				2465395E1AC6BB6F00C1908C /* Images */,
 				2465395D1AC6BAC100C1908C /* Device */,
 				24CEE7F31ABEB76E00DBE500 /* ViewHelper */,
 				24CEE7741ABEA3E600DBE500 /* Utils */,
 				24CEE7621ABE9D1200DBE500 /* Controllers */,
 				24CEE7611ABE9CFF00DBE500 /* Models */,
 				24CEE75D1ABE9CCA00DBE500 /* Views */,
+				2465395E1AC6BB6F00C1908C /* Images */,
 				24B29DBA1ABD1C6E007F84E5 /* AFNetworking */,
 				24B29D981ABD1B32007F84E5 /* AppDelegate.h */,
 				24B29D991ABD1B32007F84E5 /* AppDelegate.m */,
 				24B29DA11ABD1B32007F84E5 /* Images.xcassets */,
 				24B29DA31ABD1B32007F84E5 /* LaunchScreen.xib */,
 				24B29D941ABD1B32007F84E5 /* Supporting Files */,
+				24CBAA231ADC0E35007FD128 /* Resource */,
 			);
 			path = shanghaiBus;
 			sourceTree = "<group>";
@@ -415,6 +436,9 @@
 		24B29D941ABD1B32007F84E5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2409859B1ADAB80F009CC9F2 /* QuartzCore.framework */,
+				240985991ADAB804009CC9F2 /* Foundation.framework */,
+				240985971ADAB7F7009CC9F2 /* UIKit.framework */,
 				24B29D951ABD1B32007F84E5 /* Info.plist */,
 				24B29D961ABD1B32007F84E5 /* main.m */,
 			);
@@ -537,6 +561,14 @@
 			path = "UIKit+AFNetworking";
 			sourceTree = "<group>";
 		};
+		24CBAA231ADC0E35007FD128 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				24CBAA241ADC0E68007FD128 /* citydict.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		24CEE75D1ABE9CCA00DBE500 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +586,10 @@
 				24CEE83A1ABEC89700DBE500 /* Sites.m */,
 				24CEE8651ABEF92C00DBE500 /* TouristObject.h */,
 				24CEE8661ABEF92D00DBE500 /* TouristObject.m */,
+				2409859D1ADAC5C3009CC9F2 /* CommentObject.h */,
+				2409859E1ADAC5C3009CC9F2 /* CommentObject.m */,
+				240985A01ADAC739009CC9F2 /* MessageObject.h */,
+				240985A11ADAC739009CC9F2 /* MessageObject.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -599,6 +635,8 @@
 		24CEE7741ABEA3E600DBE500 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				240985941ADAB133009CC9F2 /* Utils.h */,
+				240985951ADAB133009CC9F2 /* Utils.m */,
 				24CEE7791ABEA4E200DBE500 /* UIView+CTExtensions.h */,
 				24CEE77A1ABEA4E200DBE500 /* UIView+CTExtensions.m */,
 				24CEE7761ABEA4AC00DBE500 /* UILabel+HightLight.h */,
@@ -710,6 +748,7 @@
 				246539971AC6BB6F00C1908C /* icon_corner@2x.png in Resources */,
 				24B29DA51ABD1B32007F84E5 /* LaunchScreen.xib in Resources */,
 				2465398B1AC6BB6F00C1908C /* tieyou_144.png in Resources */,
+				24CBAA251ADC0E68007FD128 /* citydict.plist in Resources */,
 				2465399D1AC6BB6F00C1908C /* icon_regist_success@2x.png in Resources */,
 				2465399B1AC6BB6F00C1908C /* icon_ok@2x.png in Resources */,
 				246539861AC6BB6F00C1908C /* Icon-72.png in Resources */,
@@ -772,9 +811,12 @@
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,
 				24CEE8621ABEF4C200DBE500 /* TouristListCell.m in Sources */,
 				24CEE8381ABEBF8300DBE500 /* HomePageSepratorCell.m in Sources */,
+				2409859F1ADAC5C3009CC9F2 /* CommentObject.m in Sources */,
+				240985961ADAB133009CC9F2 /* Utils.m in Sources */,
 				24CEE7601ABE9CEC00DBE500 /* HomeHeaderView.m in Sources */,
 				246539A21AC6BBFB00C1908C /* BYDevice.m in Sources */,
 				24B29DE71ABD1C6E007F84E5 /* AFHTTPRequestOperationManager.m in Sources */,
+				240985A21ADAC739009CC9F2 /* MessageObject.m in Sources */,
 				24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */,
 				24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */,
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,

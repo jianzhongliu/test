@@ -91,16 +91,19 @@
 }
 
 - (void)configCellWithData:(id) celldata {
-    self.labelComment.text = @"这是个好评论，给你5分又咋滴呢，明天还要给你5分，后天给你6分，大后天给你1分，明年再回来给你0.5分，好导游，要赞的飞起！";
-    [self.labelComment sizeThatFits:CGSizeMake(SCREENWIDTH - 20, SCREENHEIGHT)];
-    [self.labelComment sizeToFit];
-    
-    self.imageIcon.layer.cornerRadius = 15;
-    self.imageIcon.clipsToBounds = YES;
-    
-    self.labelName.text = @"会费的猪";
-    self.labelDate.text = @"2014-3-4";
-
+    if ([celldata isKindOfClass:[CommentObject class]]) {
+        CommentObject *comment = (CommentObject *)celldata;
+        self.labelComment.text = comment.content;
+        self.labelComment.viewWidth = SCREENWIDTH - 20;
+        [self.labelComment sizeThatFits:CGSizeMake(SCREENWIDTH - 20, SCREENHEIGHT)];
+        [self.labelComment sizeToFit];
+        
+        self.imageIcon.layer.cornerRadius = 15;
+        self.imageIcon.clipsToBounds = YES;
+        
+        self.labelName.text = @"会费的猪";
+        self.labelDate.text = @"2014-3-4";
+    }
 }
 
 - (CGFloat)fetchCellHightWithData:(id) cellData {

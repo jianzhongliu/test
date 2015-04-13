@@ -120,6 +120,42 @@
     
 }
 
+- (void)requestDate {
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *userid = self.tourist.identify;
+    NSString *contrnt = [self.textCotent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@tourist/addComment",HOST];
+    NSDictionary *dic = @{@"identify":currentTime,@"commentdate":currentTime,@"userid":userid,@"touristid":self.tourist.identify,@"content":contrnt,@"score":@"5",@"sign":sign};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            if ([[dic objectForKey:@"status"] integerValue] == 1) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+//            NSArray *dataArray = [dic objectForKey:@"dataArray"];
+//            if (dataArray.count > 0) {
+//                [self.arraySiteLine removeAllObjects];
+//                for (NSDictionary *dic in dataArray) {
+//                    Sites *site = [[Sites alloc] init];
+//                    [site configSiteWithDic:dic];
+//                    [self.arraySiteLine addObject:site];
+//                }
+//                [self reloadData];
+//            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
+}
+
 #pragma mark - UITextViewDelegate && UITextFieldViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     self.labelPlaceHolder.hidden = YES;
@@ -131,7 +167,7 @@
 
 #pragma mark - private Methods
 - (void)didclickSubmit {
-    
+    [self requestDate];
 }
 
 - (void)didTapView {

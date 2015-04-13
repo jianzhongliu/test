@@ -51,7 +51,7 @@
     self.table.separatorColor = [UIColor clearColor];
     self.table.backgroundColor = BYColorFromHex(0x999999);
     [self.view addSubview:self.table];
-    self.viewHeader = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 85)];
+    self.viewHeader = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 115)];
     self.viewHeader.delegate = self;
     self.table.tableHeaderView = self.viewHeader;
 }
@@ -62,59 +62,44 @@
     
 }
 
+- (void)reloadData {
+    if (self.arraySiteLine.count > 0) {
+        [self.table reloadData];
+    } else {
+    //无数据
+    }
+}
+
 - (void)requestData {
-    [self.arraySiteLine removeAllObjects];
-    Sites *site = [[Sites alloc] init];
-    site.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/0db2c9cae7029b2af31fe713.jpg";
-    site.siteName = @"西湖";
-    site.touristNumber = @"150";
-    [self.arraySiteLine addObject:site];
     
-    Sites *site1 = [[Sites alloc] init];
-    site1.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/0b3a1c08063d9bbd63d98613.jpg";
-    site1.siteName = @"西塘";
-    site1.touristNumber = @"250";
-    [self.arraySiteLine addObject:site1];
-    
-    Sites *site2 = [[Sites alloc] init];
-    site2.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/0824ab18972bd4071e50504a7b899e510eb309f5.jpg";
-    site2.siteName = @"张家界";
-    site2.touristNumber = @"170";
-    [self.arraySiteLine addObject:site2];
-    
-    Sites *site3 = [[Sites alloc] init];
-    site3.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/d157172492cf0647d50742e0.jpg";
-    site3.siteName = @"丽江";
-    site3.touristNumber = @"190";
-    [self.arraySiteLine addObject:site3];
-    
-    Sites *site4 = [[Sites alloc] init];
-    site4.imageUrl = @"http://hiphotos.baidu.com/lvpics/pic/item/54baacfbd2c1fc4e4e4aeae1.jpg";
-    site4.siteName = @"北京";
-    site4.touristNumber = @"40";
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site1];
-    [self.arraySiteLine addObject:site2];
-    [self.arraySiteLine addObject:site3];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site1];
-    [self.arraySiteLine addObject:site3];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site1];
-    [self.arraySiteLine addObject:site2];
-    [self.arraySiteLine addObject:site3];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site3];
-    [self.arraySiteLine addObject:site2];
-    [self.arraySiteLine addObject:site2];
-    [self.arraySiteLine addObject:site3];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site1];
-    [self.arraySiteLine addObject:site4];
-    [self.arraySiteLine addObject:site3];
-    [self.arraySiteLine addObject:site1];
-    [self.table reloadData];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *userid = @"0";
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@scenary/getHotScenary",HOST];
+    NSDictionary *dic = @{@"date":currentTime,@"userid":userid,@"sign":sign};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            NSArray *dataArray = [dic objectForKey:@"dataArray"];
+            if (dataArray.count > 0) {
+                [self.arraySiteLine removeAllObjects];
+                for (NSDictionary *dic in dataArray) {
+                    Sites *site = [[Sites alloc] init];
+                    [site configSiteWithDic:dic];
+                    [self.arraySiteLine addObject:site];
+                }
+                [self reloadData];
+            }
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
     
     NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/1f178a82b9014a90b8a9c50aa9773912b21beef6.jpg"];
     NSMutableDictionary *dicParam = [NSMutableDictionary dictionary];
@@ -200,13 +185,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    TouristDetailViewController *controller = [[TouristDetailViewController alloc] init];
+    TouristListViewController *controller = [[TouristListViewController alloc] init];
+    Sites *site = (Sites *)[self.arraySiteLine objectAtIndex:0];
+    controller.siteName = site.cityname;
     [self.navigationController pushViewController:controller animated:YES];
 //
 }
 
 - (void)didClickImageAtCell:(HomePageSepratorCell *)cell withIndex:(NSInteger)index {
     TouristListViewController *controller = [[TouristListViewController alloc] init];
+    Sites *site = (Sites *)[self.arraySiteLine objectAtIndex:index];
+    controller.siteName = site.cityname;
     [self.navigationController pushViewController:controller animated:YES];
 
 }

@@ -54,8 +54,8 @@
 }
 
 - (void)resetDataWith:(Sites *) site {
-    self.imageMain.imageUrl = site.imageUrl;
-    [self.buttonNumber setTitle:[NSString stringWithFormat:@"%@位导游", site.touristNumber] forState:UIControlStateNormal];
+    self.imageMain.imageUrl = site.mainImage;
+    [self.buttonNumber setTitle:[NSString stringWithFormat:@"%ld位导游", site.touristnumber] forState:UIControlStateNormal];
     
 }
 

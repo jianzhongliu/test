@@ -11,4 +11,6 @@
 
 @interface TouristListViewController : BaseViewController
 
+@property (nonatomic, copy) NSString *siteName;//通过景区名搜索导游
+
 @end

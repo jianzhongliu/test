@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentObject.h"
 
 @interface TouristCommentListCell : UITableViewCell
 

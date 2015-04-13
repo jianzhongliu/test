@@ -14,7 +14,6 @@
 @interface TouristCommentListViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *arrayComment;
 
 @end
 
@@ -97,12 +96,13 @@
 
 - (void)didClickAddComment {
     TouristAddCommentViewController *controller = [[TouristAddCommentViewController alloc] init];
+    controller.tourist = self.tourist;
     [self presentViewController:controller animated:YES completion:nil];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.arrayComment.count;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -121,7 +121,7 @@
     if (cell == nil) {
         cell = [[TouristCommentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    [cell configCellWithData:nil];
+    [cell configCellWithData:[self.arrayComment objectAtIndex:indexPath.row]];
     return cell;
 }
 

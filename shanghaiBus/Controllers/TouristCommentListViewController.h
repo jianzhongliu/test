@@ -7,7 +7,11 @@
 //
 
 #import "BaseViewController.h"
+#import "TouristObject.h"
 
 @interface TouristCommentListViewController : BaseViewController
+
+@property (nonatomic, strong) NSMutableArray *arrayComment;
+@property (nonatomic, strong) TouristObject *tourist;
 
 @end
