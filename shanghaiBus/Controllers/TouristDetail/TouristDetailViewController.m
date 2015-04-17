@@ -19,6 +19,8 @@
 #import "CommentObject.h"
 #import "MessageObject.h"
 #import "TouristHeaderView.h"
+#import "CWStarRateView.h"
+#import "Config.h"
 
 @interface TouristDetailViewController () <UIScrollViewDelegate, TouristServiceDetailViewDelegate, TouristCommentViewDelegate, TouristContectViewDelegate>
 
@@ -27,6 +29,9 @@
 @property (nonatomic, strong) TouristHeaderView *viewHeaderInfo;//头信息
 
 @property (nonatomic, strong) UIScrollView *scrollImg;
+@property (nonatomic, strong) UIPageControl *pageControl;
+
+@property (nonatomic, strong) UIImageView *imageIndecator;//图片滑动指示
 
 @property (nonatomic, strong) UIScrollView *scrollDetail;
 
@@ -41,9 +46,13 @@
 
 @property (nonatomic, strong) TouristContectView *viewcontect;
 
+@property (nonatomic, strong) CWStarRateView *starRateView;
+
 //data
 @property (nonatomic, strong) NSMutableArray *arrayMessage;
 @property (nonatomic, strong) NSMutableArray *arrayComment;
+
+
 
 @end
 
@@ -78,6 +87,23 @@
         [self.view addSubview:_scrollDetail];
     }
     return  _scrollDetail;
+}
+
+- (UIPageControl *)pageControl {
+    if (_pageControl == nil) {
+        _pageControl = [[UIPageControl alloc] init];
+    }
+    return _pageControl;
+}
+
+- (UIImageView *)imageIndecator {
+    if (_imageIndecator == nil) {
+        _imageIndecator = [[WebImageView alloc] init];
+        _imageIndecator.image = [UIImage imageNamed:@"icon"];
+        _imageIndecator.clipsToBounds = YES;
+        _imageIndecator.userInteractionEnabled = YES;
+    }
+    return _imageIndecator;
 }
 
 - (TouristServiceDetailView *)viewServicePrice {
@@ -115,9 +141,21 @@
         _viewComment = [[TouristCommentView alloc] init];
         _viewComment.backgroundColor = [UIColor whiteColor];
         _viewComment.delegate = self;
+        _viewComment.viewtype = VIEWTYPECOMMENT;
         _viewComment.clipsToBounds = YES;
     }
     return _viewComment;
+}
+
+- (TouristCommentView *)viewMessage {
+    if (_viewMessage == nil) {
+        _viewMessage = [[TouristCommentView alloc] init];
+        _viewMessage.backgroundColor = [UIColor whiteColor];
+        _viewMessage.delegate = self;
+        _viewMessage.viewtype = VIEWTYPEMESSAGE;
+        _viewMessage.clipsToBounds = YES;
+    }
+    return _viewMessage;
 }
 
 - (TouristContectView *)viewcontect {
@@ -140,22 +178,54 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setTitle:self.tourist.nuckname];
+    NSString *title = @"";
+    if (self.tourist.nuckname.length > 6) {
+        title = [NSString stringWithFormat:@"%@...", [self.tourist.nuckname substringToIndex:6]];
+    } else {
+        title = self.tourist.nuckname;
+    }
+    [self setTitle:title];
+    
     [self.view setBackgroundColor:[UIColor whiteColor]];
+//    UIBarButtonItem *rightMessage = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_message"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnAction)];
+//    rightMessage.imageInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    
+//    UIBarButtonItem *rightShare = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_share"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnAction)];
+    
+//    UIButton *buttonMessage = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [buttonMessage setImage:[UIImage imageNamed:@"icon_message"] forState:UIControlStateNormal];
+//    buttonMessage.frame = CGRectMake(20, 10, 23, 23);
+    
+    UIButton *buttonShare = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonShare setImage:[UIImage imageNamed:@"icon_share"] forState:UIControlStateNormal];
+    buttonShare.frame = CGRectMake(10, 0, 44, 44);
+    
+    UIView *viewAction = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
+//    [viewAction addSubview:buttonMessage];
+    
+    [viewAction addSubview:buttonShare];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:viewAction];
+    
+//    self.navigationItem.rightBarButtonItems = @[rightShare,rightMessage];
     [self initUI];
     [self requestData];
 }
 
-
 #pragma mark - private Methods
 - (void)initUI {
-    self.view.backgroundColor = [UIColor lightGrayColor];
-    self.scrollDetail.backgroundColor = self.view.backgroundColor;
+    self.view.backgroundColor = BYBackColor;
+    self.scrollDetail.backgroundColor = BYBackColor;
     self.scrollDetail.frame = self.view.bounds;
     self.scrollImg = [[UIScrollView alloc] init];
     self.scrollImg.contentSize = CGSizeMake(SCREENWIDTH, 150);
     self.scrollImg.delegate = self;
+    self.scrollImg.tag = 101;
     self.scrollImg.pagingEnabled = YES;
+    self.pageControl.frame = CGRectMake(0, 120, 100, 30);
+    self.pageControl.numberOfPages = 5;
+    self.pageControl.currentPage = 0;
+    [self.scrollImg addSubview:self.pageControl];
     [self.scrollDetail addSubview:self.viewHeaderInfo];
     [self.scrollDetail addSubview:self.scrollImg];
     [self.scrollDetail addSubview:self.viewServiceInfo];
@@ -163,6 +233,7 @@
     [self.scrollDetail addSubview:self.viewServiceOrder];
     [self.scrollDetail addSubview:self.viewServiceDetail];
     [self.scrollDetail addSubview:self.viewComment];
+    [self.scrollDetail addSubview:self.viewMessage];
     [self.view addSubview:self.viewcontect];
     [self reDrawScrollView];
 }
@@ -176,7 +247,7 @@
 }
 
 - (void)reDrawScrollView {
-
+    
     [self.viewServiceInfo configViewWithData:self.tourist];
     [self.viewHeaderInfo configViewWithData:self.tourist];
     
@@ -185,8 +256,8 @@
     if (arrayImage > 0 ) {
         imageNumber = arrayImage.count;
     }
-    self.viewHeaderInfo.frame = CGRectMake(0, 0, SCREENWIDTH, 60);
-    self.scrollImg.frame = CGRectMake(0, self.viewHeaderInfo.ctBottom + 5, SCREENWIDTH, 150);
+    self.viewHeaderInfo.frame = CGRectMake(0, 0, SCREENWIDTH, 55);
+    self.scrollImg.frame = CGRectMake(0, self.viewHeaderInfo.ctBottom, SCREENWIDTH, 150);
     self.scrollImg.contentSize = CGSizeMake(SCREENWIDTH * imageNumber, 150);
     [self setTouristImage];//加载导游图片
     
@@ -194,13 +265,14 @@
     [self.viewServiceOrder configViewWithTitle:@"预定须知" detail:self.tourist.servicedetail];//预定须知
     [self.viewServiceDetail configViewWithTitle:@"服务描述" detail:self.tourist.servicedetail];//服务描述
     
-    self.viewServiceInfo.frame = CGRectMake(0, self.scrollImg.ctBottom +5, SCREENWIDTH, [self.viewServiceInfo fetchViewHight]);
-    self.viewServicePrice.frame = CGRectMake(0, self.viewServiceInfo.ctBottom + 5, SCREENWIDTH, [self.viewServicePrice fetchViewHeight]);
-    self.viewServiceOrder.frame = CGRectMake(0, self.viewServicePrice.ctBottom + 5, SCREENWIDTH, [self.viewServiceOrder fetchViewHeight]);
-    self.viewServiceDetail.frame = CGRectMake(0, self.viewServiceOrder.ctBottom + 5, SCREENWIDTH, [self.viewServiceDetail fetchViewHeight]);
-    self.viewComment.frame = CGRectMake(0, self.viewServiceDetail.ctBottom + 5, SCREENHEIGHT, [self.viewComment fetchViewHeight]);
-    self.scrollDetail.contentSize = CGSizeMake(0, self.viewComment.ctBottom + 40);
-    self.viewcontect.frame = CGRectMake(0, self.scrollDetail.ctBottom - 40, SCREENWIDTH, 40);
+    self.viewServiceInfo.frame = CGRectMake(0, self.scrollImg.ctBottom, SCREENWIDTH, [self.viewServiceInfo fetchViewHight]);
+    self.viewServicePrice.frame = CGRectMake(0, self.viewServiceInfo.ctBottom + 10, SCREENWIDTH, [self.viewServicePrice fetchViewHeight]);
+    self.viewServiceOrder.frame = CGRectMake(0, self.viewServicePrice.ctBottom + 10, SCREENWIDTH, [self.viewServiceOrder fetchViewHeight]);
+    self.viewServiceDetail.frame = CGRectMake(0, self.viewServiceOrder.ctBottom + 10, SCREENWIDTH, [self.viewServiceDetail fetchViewHeight]);
+    self.viewComment.frame = CGRectMake(0, self.viewServiceDetail.ctBottom + 10, SCREENHEIGHT, [self.viewComment fetchViewHeight]);
+    self.viewMessage.frame = CGRectMake(0, self.viewComment.ctBottom + 10, SCREENHEIGHT, [self.viewMessage fetchViewHeight]);
+    self.scrollDetail.contentSize = CGSizeMake(0, self.viewMessage.ctBottom + 50);
+    self.viewcontect.frame = CGRectMake(0, self.scrollDetail.ctBottom - 50, SCREENWIDTH, 50);
 }
 
 - (void)setTouristImage {
@@ -212,6 +284,9 @@
         image.image = [UIImage imageNamed:@"icon"];
         image.imageUrl = [arrayImage objectAtIndex:i];
         [self.scrollImg addSubview:image];
+        self.pageControl.numberOfPages = 5;
+        
+        
     }
     if (arrayImage.count == 0) {
         WebImageView *image = [[WebImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 150)];
@@ -223,9 +298,11 @@
 - (void)reloadData {
 //刷新出评论
     if (self.arrayComment.count > 0) {
-        
         [self.viewComment configViewWithData:[self.arrayComment objectAtIndex:0] WithNumber:self.tourist.commentnumber];
-        
+    }
+//刷新出留言
+    if (self.arrayMessage.count > 0) {
+        [self.viewMessage configViewWithMessage:[self.arrayMessage objectAtIndex:0] WithNumber:self.tourist.commentnumber];
     }
     
     if (self.arrayMessage.count > 0) {
@@ -279,27 +356,32 @@
 #pragma mark - UISearchBarDelegate
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
-    [UIView animateWithDuration:0.1 animations:^{
-        self.viewcontect.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
+    
+    if (scrollView.tag == 101) {
+        CGPoint point = scrollView.contentOffset;
+        self.pageControl.currentPage = point.x / SCREENWIDTH;
+    } else {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.viewcontect.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    [UIView animateWithDuration:0.1 animations:^{
-        self.viewcontect.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
+    if (scrollView.tag == 101) {
+        CGPoint point = scrollView.contentOffset;
+        self.pageControl.currentPage = point.x / SCREENWIDTH;
+    } else {
+        [UIView animateWithDuration:0.1 animations:^{
+            self.viewcontect.alpha = 1;
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
 
-- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {
-    //
-}
-
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    //
 }
 
 - (void)didTouristServiceDetailInfoDisplayChanged:(TouristServiceDetailView *)detailView status:(BOOL)status{

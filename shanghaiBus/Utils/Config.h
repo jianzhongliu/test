@@ -24,6 +24,9 @@
 #define BYColorAlphaMake(r, g, b, a)    [UIColor colorWithRed:r/255.0 green:g/255.0 blue:b/255.0 alpha:a]
 #define BYColorFromHex(rgb)     [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0 green:((float)((rgb & 0xFF00) >> 8))/255.0 blue:((float)(rgb & 0xFF))/255.0 alpha:1.0]
 
-#define BYColor BYColorFromHex(0x14b9d6)
-#define BYBackColor BYColorFromHex(0x14b9d6)
+#define BYColor BYColorFromHex(0x22b9f7)
+#define BYBackColor BYColorFromHex(0xf5f5f5)
+#define BYLineSepratorColor BYColorFromHex(0xdddddd)
+#define BYBlackColor BYColorFromHex(0x333333);
+//title设置为18
 #endif

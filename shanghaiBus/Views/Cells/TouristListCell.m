@@ -35,7 +35,7 @@
 - (WebImageView *)imageGender {
     if (_imageGender == nil) {
         _imageGender = [[WebImageView alloc] init];
-        _imageGender.image = [UIImage imageNamed:@"gender"];
+        _imageGender.image = [UIImage imageNamed:@"icon_gender_man"];
         [self.contentView addSubview:_imageGender];
     }
     return _imageGender;

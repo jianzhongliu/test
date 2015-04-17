@@ -10,6 +10,7 @@
 #import "WebImageView.h"
 #import "Config.h"
 #import "CommentObject.h"
+#import "CWStarRateView.h"
 
 @interface TouristCommentView ()
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) UILabel *labelDate;
 @property (nonatomic, strong) UILabel *labelCommon;
 @property (nonatomic, strong) UIButton *buttonDetail;
+@property (nonatomic, strong) CWStarRateView *starRateView;
 
 @end
 
@@ -30,7 +32,7 @@
 - (UIView *)viewHeader {
     if (_viewHeader == nil) {
         _viewHeader = [[UIView alloc] init];
-        _viewHeader.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.1);
+//        _viewHeader.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.1);
         [self addSubview:_viewHeader];
     }
     return _viewHeader;
@@ -39,10 +41,10 @@
 - (UILabel *)labelHeaderTitle {
     if (_labelHeaderTitle == nil) {
         _labelHeaderTitle = [[UILabel alloc] init];
-        _labelHeaderTitle.backgroundColor = [UIColor clearColor];
-        _labelHeaderTitle.textColor = BYColor;
-        _labelHeaderTitle.font = [UIFont systemFontOfSize:14];
-        _labelHeaderTitle.text = @"评论";
+        _labelHeaderTitle.backgroundColor = [UIColor whiteColor];
+        _labelHeaderTitle.textColor = BYBlackColor;
+        _labelHeaderTitle.font = [UIFont systemFontOfSize:16];
+//        _labelHeaderTitle.text = @"评论";
         [self.viewHeader addSubview:_labelHeaderTitle];
     }
     return _labelHeaderTitle;
@@ -51,8 +53,8 @@
 - (UIButton *)buttonHeader {
     if (_buttonHeader == nil) {
         _buttonHeader = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonHeader setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonHeader setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonHeader setImage:[UIImage imageNamed:@"icon_detail_up"] forState:UIControlStateNormal];
+        [_buttonHeader setImage:[UIImage imageNamed:@"icon_detail_down"] forState:UIControlStateSelected];
         [_buttonHeader addTarget:self action:@selector(didHeaderClick:) forControlEvents:UIControlEventTouchUpInside];
         _buttonHeader.selected = NO;
         [self.viewHeader addSubview:_buttonHeader];
@@ -73,8 +75,8 @@
 - (UILabel *)labelName {
     if (_labelName == nil) {
         _labelName = [[UILabel alloc] init];
-        _labelName.backgroundColor = self.backgroundColor;
-        _labelName.textColor = BYColorAlphaMake(0, 0, 0, 0.8);
+        _labelName.backgroundColor = [UIColor whiteColor];
+        _labelName.textColor = BYBlackColor;
         _labelName.font = [UIFont systemFontOfSize:14];
         _labelName.text = @"会飞的猪";
         [self addSubview:_labelName];
@@ -85,9 +87,10 @@
 - (UILabel *)labelDate {
     if (_labelDate == nil) {
         _labelDate = [[UILabel alloc] init];
-        _labelDate.backgroundColor = [UIColor clearColor];
+        _labelDate.backgroundColor = [UIColor whiteColor];
         _labelDate.textColor = BYColorAlphaMake(0, 0, 0, 0.8);
         _labelDate.font = [UIFont systemFontOfSize:14];
+        _labelDate.textAlignment = NSTextAlignmentRight;
         _labelDate.text = @"1970-12-01";
         [self addSubview:_labelDate];
     }
@@ -97,7 +100,7 @@
 - (UILabel *)labelCommon {
     if (_labelCommon == nil) {
         _labelCommon = [[UILabel alloc] init];
-        _labelCommon.backgroundColor = self.backgroundColor;
+        _labelCommon.backgroundColor = [UIColor whiteColor];
         _labelCommon.textColor = BYColorAlphaMake(0, 0, 0, 0.8);
         _labelCommon.font = [UIFont systemFontOfSize:14];
         _labelCommon.text = @"不会平时说的是离开手机点击电视的";
@@ -109,12 +112,13 @@
 - (UIButton *)buttonDetail {
     if (_buttonDetail == nil) {
         _buttonDetail = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonDetail setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_buttonDetail setTitle:@"78条评论"forState:UIControlStateNormal];
+        [_buttonDetail setTitleColor:BYColor forState:UIControlStateNormal];
+        [_buttonDetail setTitle:@""forState:UIControlStateNormal];
         [_buttonDetail addTarget:self action:@selector(didClickCommentDetail) forControlEvents:UIControlEventTouchUpInside];
         _buttonDetail.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
-        _buttonDetail.backgroundColor = BYColor;
-        _buttonDetail.layer.cornerRadius = 6;
+        _buttonDetail.font = [UIFont systemFontOfSize:14];
+//        _buttonDetail.backgroundColor = BYColor;
+//        _buttonDetail.layer.cornerRadius = 6;
         [self addSubview:_buttonDetail];
     }
     return _buttonDetail;
@@ -129,26 +133,95 @@
 }
 
 - (void)initUI {
+    self.viewtype = VIEWTYPECOMMENT;
+    
     self.viewHeader.frame = CGRectMake(0, 0, SCREENWIDTH, 50);
     self.labelHeaderTitle.frame = CGRectMake(10, 10, 100, 30);
-    self.buttonHeader.frame = CGRectMake(SCREENWIDTH - 30, 15, 20, 20);
+    self.buttonHeader.frame = CGRectMake(0, 0, SCREENWIDTH, 40);
+    self.buttonHeader.imageEdgeInsets = UIEdgeInsetsMake(0, SCREENWIDTH - 40, 0, 0);
     
-    self.imageIcon.frame = CGRectMake(15, self.viewHeader.ctBottom + 5, 30, 30);
+    self.imageIcon.frame = CGRectMake(10, self.viewHeader.ctBottom + 5, 30, 30);
     self.imageIcon.layer.contentsScale = self.imageIcon.viewWidth / 2;
-    
-    self.labelName.frame = CGRectMake(self.imageIcon.ctRight + 10, self.imageIcon.ctTop, 180, 20);
-    self.labelDate.frame = CGRectMake( SCREENWIDTH - 100, self.imageIcon.ctTop, 85, 20);
+    self.imageIcon.layer.cornerRadius = self.imageIcon.viewWidth / 2;
+    self.imageIcon.clipsToBounds = YES;
+    self.labelName.frame = CGRectMake(self.imageIcon.ctRight + 10, self.imageIcon.ctTop - 5, 180, 20);
+    self.labelDate.frame = CGRectMake( SCREENWIDTH - 100, self.labelName.ctTop, 85, 20);
     
     self.labelCommon.frame = CGRectMake(10, self.imageIcon.ctBottom + 10, SCREENHEIGHT - 20, 20);
     self.buttonDetail.frame = CGRectMake(0, self.labelCommon.ctBottom +10, SCREENWIDTH, 40);
+    [self.buttonDetail setTitle:@"0条留言" forState:UIControlStateNormal];
+    UIView *viewLineTop = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonDetail.ctTop, SCREENWIDTH, 0.5)];
+    viewLineTop.backgroundColor = BYLineSepratorColor;
+    [self addSubview:viewLineTop];
+    
+#warning TODO 关于划线 写个retina的方法，当时非retina时宽度是1，retina时是0.5的宽度
+    UIView *viewLineBottom = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonDetail.ctBottom, SCREENWIDTH, 0.5)];
+    viewLineBottom.backgroundColor = BYLineSepratorColor;
+    [self addSubview:viewLineBottom];
+    
 }
 
 - (void)configViewWithData:(CommentObject *) comment WithNumber:(NSInteger) number{
-    NSString *commentNumber = [NSString stringWithFormat:@"%ld条评论", (long)number];
+    NSString *commentNumber = @"";
+    switch (self.viewtype) {
+        case VIEWTYPECOMMENT:
+        {
+            self.labelHeaderTitle.text = @"评论";
+            self.starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(self.imageIcon.ctRight + 10, self.labelName.ctBottom , 80, 15) numberOfStars:5];
+            self.starRateView.scorePercent = 1;
+            self.starRateView.allowIncompleteStar = NO;
+            self.starRateView.hasAnimation = YES;
+            self.starRateView.scorePercent = comment.score / 5;
+            [self addSubview:self.starRateView];
+            commentNumber = [NSString stringWithFormat:@"%ld条评论", (long)number];
+        }
+            break;
+        case VIEWTYPEMESSAGE:
+        {
+            self.labelHeaderTitle.text = @"留言";
+            commentNumber = [NSString stringWithFormat:@"%ld条留言", (long)number];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    [self.buttonDetail setTitle:commentNumber forState:UIControlStateNormal];
+
+//    self.imageIcon.imageUrl = comment.ico
+
+#warning TODO 设置图像的url
+    self.labelName.text = comment.userId;
+
+    self.labelDate.text = [NSString stringWithFormat:@"%ld", (long)comment.commentdate];
+    
+}
+- (void)configViewWithMessage:(MessageObject *) message WithNumber:(NSInteger) number{
+    NSString *commentNumber = @"";
+    switch (self.viewtype) {
+        case VIEWTYPECOMMENT:
+        {
+            
+        }
+            break;
+        case VIEWTYPEMESSAGE:
+        {
+            self.labelName.text = @"留言";
+            commentNumber = [NSString stringWithFormat:@"%ld条留言", (long)number];
+        }
+            break;
+        default:
+            break;
+    }
+    
     [self.buttonDetail setTitle:commentNumber forState:UIControlStateNormal];
     
-    
-    
+    //    self.imageIcon.imageUrl = comment.ico
+    self.imageIcon.layer.cornerRadius = self.imageIcon.viewWidth / 2;
+    self.imageIcon.clipsToBounds = YES;
+#warning TODO 设置图像的url
+    self.labelName.text = message.userId;
+    self.labelDate.text = [NSString stringWithFormat:@"%ld", (long)message.commentdate];
 }
 
 - (void)didHeaderClick:(UIButton *) sender {
@@ -175,7 +248,7 @@
     if (YES == self.buttonHeader.selected) {
         return self.viewHeader.ctBottom;
     } else {
-        return self.buttonDetail.ctBottom + 10;
+        return self.buttonDetail.ctBottom + 1;
     }
 }
 

@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MessageObject.h"
+
 @class CommentObject;
 @class TouristCommentView;
+
+typedef NS_ENUM(NSInteger, VIEWTYPE) {
+    VIEWTYPECOMMENT = 1,
+    VIEWTYPEMESSAGE =2
+};
 
 @protocol TouristCommentViewDelegate <NSObject>
 
@@ -22,9 +29,10 @@
 
 @property (nonatomic, strong) CommentObject *cellData;
 @property (nonatomic, weak) id<TouristCommentViewDelegate> delegate;
+@property (nonatomic) VIEWTYPE viewtype;
 
 - (void)configViewWithData:(CommentObject *) comment WithNumber:(NSInteger) number;
-
+- (void)configViewWithMessage:(MessageObject *) message WithNumber:(NSInteger) number;
 - (CGFloat)fetchViewHeight;
 
 @end

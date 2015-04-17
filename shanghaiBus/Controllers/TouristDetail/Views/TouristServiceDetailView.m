@@ -22,10 +22,10 @@
 - (UILabel *)labelDetail {
     if (_labelDetail == nil) {
         _labelDetail = [[UILabel alloc] init];
-        _labelDetail.backgroundColor = self.backgroundColor;
+        _labelDetail.backgroundColor = [UIColor whiteColor];
         _labelDetail.numberOfLines = 0;
         _labelDetail.lineBreakMode = NSLineBreakByCharWrapping;
-        _labelDetail.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
+        _labelDetail.textColor = BYColorFromHex(0x797979);
         _labelDetail.font = [UIFont systemFontOfSize:13];
         [self addSubview:_labelDetail];
     }
@@ -35,8 +35,8 @@
 - (UIButton *)buttonHeader {
     if (_buttonHeader == nil) {
         _buttonHeader = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonHeader setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];//隐藏
-        [_buttonHeader setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];//展开
+        [_buttonHeader setImage:[UIImage imageNamed:@"icon_detail_up"] forState:UIControlStateNormal];//隐藏
+        [_buttonHeader setImage:[UIImage imageNamed:@"icon_detail_down"] forState:UIControlStateSelected];//展开
         [_buttonHeader addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
         _buttonHeader.selected = NO;//默认隐藏
     }
@@ -65,17 +65,18 @@
 }
 
 - (void)initUI {
-    self.viewHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 30)];
+    self.viewHeader = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 45)];
     self.viewHeader.backgroundColor = self.backgroundColor;
     [self addSubview:self.viewHeader];
     
-    self.labelHeaderTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 70, 30)];
-    self.labelHeaderTitle.font = [UIFont systemFontOfSize:15];
-    self.labelHeaderTitle.textColor = BYColorAlphaMake(0, 0, 0, 0.5);
-    self.labelHeaderTitle.backgroundColor = self.viewHeader.backgroundColor;
+    self.labelHeaderTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, 8, 70, 30)];
+    self.labelHeaderTitle.font = [UIFont systemFontOfSize:16];
+    self.labelHeaderTitle.textColor = BYBlackColor;
+    self.labelHeaderTitle.backgroundColor = [UIColor whiteColor];
     [self.viewHeader addSubview:self.labelHeaderTitle];
     
-    self.buttonHeader.frame = CGRectMake(SCREENWIDTH - 30, 5, 20, 20);
+    self.buttonHeader.frame = CGRectMake(0, 0, SCREENWIDTH, 45);
+    [self.buttonHeader setImageEdgeInsets:UIEdgeInsetsMake(0, SCREENWIDTH - 30, 0, 0)];
     [self.viewHeader addSubview:self.buttonHeader];
     self.labelDetail.frame = CGRectMake(10, self.viewHeader.ctBottom, SCREENWIDTH - 20, 100);
 }
@@ -106,7 +107,7 @@
     if (YES == self.buttonHeader.selected) {
         return self.viewHeader.viewHeight;
     } else {
-        return self.viewHeader.viewHeight + self.labelDetail.viewHeight;
+        return self.viewHeader.viewHeight + self.labelDetail.viewHeight + 20;
     }
 }
 

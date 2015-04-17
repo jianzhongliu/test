@@ -37,8 +37,8 @@
         _labelName = [[UILabel alloc] init];
         _labelName.numberOfLines = 0;
         _labelName.lineBreakMode = NSLineBreakByCharWrapping;
-        _labelName.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
-        _labelName.font = [UIFont systemFontOfSize:13];
+//        _labelName.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
+        _labelName.font = [UIFont systemFontOfSize:14];
     }
     return _labelName;
 }
@@ -46,7 +46,7 @@
 - (UIImageView *)imageGender {
     if (_imageGender == nil) {
         _imageGender = [[UIImageView alloc] init];
-        _imageGender.image = [UIImage imageNamed:@"gender"];
+        _imageGender.image = [UIImage imageNamed:@"icon_gender_man"];
         _imageGender.clipsToBounds = YES;
         _imageGender.userInteractionEnabled = YES;
     }
@@ -56,11 +56,14 @@
 - (UIButton *)buttonNumber {
     if (_buttonNumber == nil) {
         _buttonNumber = [UIButton buttonWithType:UIButtonTypeCustom];
-        _buttonNumber.enabled = NO;
-        [_buttonNumber setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonNumber setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonNumber setBackgroundImage:[UIImage imageNamed:@"orderNumber"] forState:UIControlStateNormal];
+        [_buttonNumber setBackgroundImage:[UIImage imageNamed:@"orderNumber"] forState:UIControlStateSelected];
+        [_buttonNumber setBackgroundImage:[UIImage imageNamed:@"orderNumber"] forState:UIControlStateHighlighted];
+        [_buttonNumber setTitle:@"--人已预订" forState:UIControlStateNormal];
+        [_buttonNumber setFont:[UIFont systemFontOfSize:12]];
+        
 //        [_buttonNumber addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
-        _buttonNumber.selected = NO;
+//        _buttonNumber.selected = NO;
     }
     return _buttonNumber;
 }
@@ -74,18 +77,18 @@
 }
 
 - (void)initUI {
-    self.imageIcon.frame = CGRectMake(10, 10, 45, 45);
+    self.imageIcon.frame = CGRectMake(10, 10, 35, 35);
     self.imageIcon.layer.cornerRadius = self.imageIcon.viewHeight / 2;
     self.imageIcon.clipsToBounds = YES;
     [self addSubview:self.imageIcon];
     
-    self.labelName.frame = CGRectMake(self.imageIcon.ctRight + 10, 20, 100, 20);
+    self.labelName.frame = CGRectMake(self.imageIcon.ctRight + 10, 20, 100, 35);
     [self addSubview:self.labelName];
     
-    self.imageGender.frame = CGRectMake(self.labelName.ctRight +5, 20, 15, 15);
+    self.imageGender.frame = CGRectMake(self.labelName.ctRight +5, 20, 20, 20);
     [self addSubview:self.imageGender];
     
-    self.buttonNumber.frame = CGRectMake(SCREENWIDTH - 80, 10, 80, 30);
+    self.buttonNumber.frame = CGRectMake(SCREENWIDTH - 85, 13, 85, 30);
     [self addSubview:self.buttonNumber];
     
 }
@@ -97,11 +100,11 @@
     self.imageGender.viewX = self.labelName.ctRight + 5;
     NSString *number = [NSString stringWithFormat:@"%ld人已预约",(long)(tourist.commentnumber + tourist.messagenumber)];
     [self.buttonNumber setTitle:number forState:UIControlStateNormal];
-    [self addSubview:self.buttonNumber];
+    
 }
 
 - (CGFloat)fetchViewHeight {
-    return 65;
+    return 55;
 }
 
 @end

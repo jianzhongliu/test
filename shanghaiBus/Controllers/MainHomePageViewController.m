@@ -38,9 +38,11 @@
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initUI];
     [self requestData];
-    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
-        
-    }];
+
+    
+//    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
+//        
+//    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {

@@ -10,6 +10,7 @@
 #import "Config.h"
 #import "TouristObject.h"
 #import "UILabel+HightLight.h"
+#import "CWStarRateView.h"
 
 @interface TouristServiceInfoView ()
 
@@ -17,6 +18,7 @@
 @property (nonatomic, strong) UILabel *labelPrice;
 @property (nonatomic, strong) UILabel *labelServiceArea;
 @property (nonatomic, strong) UILabel *labelLanguage;
+@property (nonatomic, strong) CWStarRateView *starRateView;
 
 @end
 
@@ -26,9 +28,8 @@
 - (UILabel *)labelTitle {
     if (_labelTitle == nil) {
         _labelTitle = [[UILabel alloc] init];
-        _labelTitle.backgroundColor = self.backgroundColor;
-        _labelTitle.textColor = BYColorFromHex(0x999999);
-        _labelTitle.font = [UIFont boldSystemFontOfSize:15];
+        _labelTitle.backgroundColor = [UIColor whiteColor];
+        _labelTitle.font = [UIFont systemFontOfSize:17];
         _labelTitle.numberOfLines = 0;
         _labelTitle.lineBreakMode = NSLineBreakByCharWrapping;
         [self addSubview:_labelTitle];
@@ -39,9 +40,9 @@
 - (UILabel *)labelPrice {
     if (_labelPrice == nil) {
         _labelPrice = [[UILabel alloc] init];
-        _labelPrice.backgroundColor = self.backgroundColor;
-        _labelPrice.textColor = BYColorFromHex(0x999999);
-        _labelPrice.font = [UIFont boldSystemFontOfSize:15];
+        _labelPrice.backgroundColor = [UIColor whiteColor];
+        _labelPrice.textColor = BYColorFromHex(0xff5555);
+        _labelPrice.font = [UIFont boldSystemFontOfSize:20];
         _labelPrice.textAlignment = NSTextAlignmentRight;
         [self addSubview:_labelPrice];
     }
@@ -51,9 +52,9 @@
 - (UILabel *)labelServiceArea {
     if (_labelServiceArea == nil) {
         _labelServiceArea = [[UILabel alloc] init];
-        _labelServiceArea.backgroundColor = self.backgroundColor;
-        _labelServiceArea.textColor = BYColorFromHex(0x999999);
-        _labelServiceArea.font = [UIFont boldSystemFontOfSize:15];
+        _labelServiceArea.backgroundColor = [UIColor whiteColor];
+        _labelServiceArea.textColor = BYColorFromHex(0x797979);
+        _labelServiceArea.font = [UIFont boldSystemFontOfSize:13];
         _labelServiceArea.numberOfLines = 0;
         _labelServiceArea.lineBreakMode = NSLineBreakByCharWrapping;
         [self addSubview:_labelServiceArea];
@@ -64,9 +65,9 @@
 - (UILabel *)labelLanguage {
     if (_labelLanguage == nil) {
         _labelLanguage = [[UILabel alloc] init];
-        _labelLanguage.backgroundColor = self.backgroundColor;
-        _labelLanguage.textColor = BYColorFromHex(0x999999);
-        _labelLanguage.font = [UIFont boldSystemFontOfSize:15];
+        _labelLanguage.backgroundColor = [UIColor whiteColor];
+        _labelLanguage.textColor = BYColorFromHex(0x797979);
+        _labelLanguage.font = [UIFont boldSystemFontOfSize:13];
         _labelLanguage.numberOfLines = 0;
         _labelLanguage.lineBreakMode = NSLineBreakByCharWrapping;
         [self addSubview:_labelLanguage];
@@ -83,38 +84,57 @@
 }
 
 - (void)initUI {
-    self.labelTitle.frame = CGRectMake(10, 0, SCREENWIDTH - 20, 35);
+    self.labelTitle.frame = CGRectMake(10, 15, SCREENWIDTH - 20, 40);
+    self.labelPrice.frame = CGRectMake(SCREENWIDTH - 290, 40, 280, 20);
     
-    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(10, self.labelTitle.ctBottom + 3, SCREENWIDTH - 20, 1)];
-    viewLine.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.2);
-    [self addSubview:viewLine];
-    
-    self.labelPrice.frame = CGRectMake(SCREENWIDTH - 90, 40, 80, 20);
-    UILabel *labelAreaTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelPrice.ctBottom +3, 80, 20)];
-    labelAreaTitle.font = [UIFont systemFontOfSize:13];
-    labelAreaTitle.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
-    labelAreaTitle.backgroundColor = self.backgroundColor;
-    [self addSubview:labelAreaTitle];
-    self.labelServiceArea.frame = CGRectMake(100, self.labelPrice.ctBottom +3, SCREENWIDTH - 100, 20);
-    
-   UILabel *labelLanguageTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelServiceArea.ctBottom +3, 80, 20)];
-    labelLanguageTitle.font = [UIFont systemFontOfSize:13];
-    labelLanguageTitle.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
-    labelLanguageTitle.backgroundColor = self.backgroundColor;
-    [self addSubview:labelLanguageTitle];
-    
-    self.labelLanguage.frame = CGRectMake(100, self.labelServiceArea.ctBottom +3, SCREENWIDTH - 100, 20);
 }
 
 - (void)configViewWithData:(TouristObject *) tourist {
+//    @"收到了开发建设的路口附近了深刻的设计的开发卢卡斯剪短发了啊就是离开的房间了速度交罚款链接"
     self.labelTitle.text = tourist.signature;
+    [self.labelTitle sizeToFit];
+    
+    self.starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(10, self.labelTitle.ctBottom + 5, 100, 20) numberOfStars:5];
+    self.starRateView.scorePercent = 1;
+    self.starRateView.allowIncompleteStar = NO;
+    self.starRateView.hasAnimation = YES;
+    self.starRateView.scorePercent = tourist.star / 5;
+    [self addSubview:self.starRateView];
+    
+    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(10, self.starRateView.ctBottom + 15, SCREENWIDTH - 20, 1)];
+    viewLine.backgroundColor = BYLineSepratorColor;
+    [self addSubview:viewLine];
+    
     self.labelPrice.text = [NSString stringWithFormat:@"%@元/天", tourist.price];
+    self.labelPrice.ctTop = self.labelTitle.ctBottom + 5;
     [self.labelPrice highLightTextInRange:NSMakeRange(0, tourist.price.length) forColor:[UIColor redColor]];
+    
+    UILabel *labelAreaTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelPrice.ctBottom +30, 80, 20)];
+    labelAreaTitle.font = [UIFont systemFontOfSize:13];
+    labelAreaTitle.textColor = BYColorFromHex(0x333333);
+    labelAreaTitle.backgroundColor = self.backgroundColor;
+    labelAreaTitle.text = @"服务区域";
+    [labelAreaTitle sizeToFit];
+    [self addSubview:labelAreaTitle];
+    
+    self.labelServiceArea.frame = CGRectMake(labelAreaTitle.ctRight + 20, self.labelPrice.ctBottom + 30, SCREENWIDTH - 100, 20);
+
+    UILabel *labelLanguageTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelServiceArea.ctBottom + 5, 80, 20)];
+    labelLanguageTitle.font = [UIFont systemFontOfSize:13];
+    labelLanguageTitle.textColor = BYColorFromHex(0x333333);
+    labelLanguageTitle.backgroundColor = self.backgroundColor;
+    labelLanguageTitle.text = @"擅长语言";
+    [labelLanguageTitle sizeToFit];
+    [self addSubview:labelLanguageTitle];
+    
+    
+    self.labelLanguage.frame = CGRectMake(labelAreaTitle.ctRight + 20, self.labelServiceArea.ctBottom + 5, SCREENWIDTH - 100, 20);
+    
     self.labelServiceArea.text = tourist.servicearea;
     self.labelLanguage.text = tourist.language;
 }
 
 - (CGFloat)fetchViewHight {
-    return self.labelLanguage.ctBottom;
+    return self.labelLanguage.ctBottom + 20;
 }
 @end

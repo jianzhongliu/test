@@ -27,19 +27,22 @@
 }
 
 - (void)backBtnAction {
-
+    [self.navigationController popViewControllerAnimated:YES];
 }
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 }
+
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     self.navigationController.interactivePopGestureRecognizer.delegate = nil;
     self.navigationController.interactivePopGestureRecognizer.enabled = YES;
 //    self.navigationController.delegate = self;
 }
+
 -(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
 {
     if (navigationController.viewControllers.count == 1) {
@@ -49,9 +52,11 @@
         navigationController.interactivePopGestureRecognizer.enabled = YES;
     }
 }
+
 - (NSUInteger)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
     return 0;
 }
+
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
     return UIStatusBarStyleLightContent;
