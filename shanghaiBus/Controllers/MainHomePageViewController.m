@@ -43,8 +43,17 @@
     }];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
+
 #pragma mark - private Methods
 - (void)initUI {
+    [self setTitle:@"首页"];
+    UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(businessEnter)];
+    rightItem.title = @"商家入驻";
+    [self.navigationItem setRightBarButtonItem:rightItem];
+    
     self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     self.table.delegate = self;
     self.table.dataSource = self;
@@ -54,6 +63,10 @@
     self.viewHeader = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 115)];
     self.viewHeader.delegate = self;
     self.table.tableHeaderView = self.viewHeader;
+}
+
+- (void)businessEnter {
+
 }
 
 - (void)initData {

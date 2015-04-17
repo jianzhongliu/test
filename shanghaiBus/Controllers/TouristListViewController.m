@@ -29,11 +29,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self setTitle:self.siteName];
     [self.view setBackgroundColor:[UIColor whiteColor]];
     [self initUI];
     [self requestData];
 }
-
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+}
 #pragma mark - private Methods
 - (void)initUI {
     self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];

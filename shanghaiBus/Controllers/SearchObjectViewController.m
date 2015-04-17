@@ -164,7 +164,7 @@
     
     [bgView addSubview:titleLabel];
     
-    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(10, 39, SCREENWIDTH - 20 , 1)];
+    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, 39, SCREENWIDTH , 1)];
     viewLine.backgroundColor = [UIColor whiteColor];
     [bgView addSubview:viewLine];
     return bgView;

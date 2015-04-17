@@ -61,6 +61,8 @@
 		246539AF1AC7191A00C1908C /* PhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246539AE1AC7191A00C1908C /* PhoneLoginViewController.m */; };
 		248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 248B5C911AC3294100E0B6A4 /* TouristContectView.m */; };
 		24A0C33C1ACC3D29003E9139 /* icon_name_pass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */; };
+		24B0BA571ADFF3820073BED0 /* TouristHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B0BA561ADFF3820073BED0 /* TouristHeaderView.m */; };
+		24B0BA591AE007BF0073BED0 /* icon_navagation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24B0BA581AE007BF0073BED0 /* icon_navagation@2x.png */; };
 		24B29D971ABD1B32007F84E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D961ABD1B32007F84E5 /* main.m */; };
 		24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D991ABD1B32007F84E5 /* AppDelegate.m */; };
 		24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24B29DA11ABD1B32007F84E5 /* Images.xcassets */; };
@@ -186,6 +188,9 @@
 		248B5C901AC3294100E0B6A4 /* TouristContectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristContectView.h; sourceTree = "<group>"; };
 		248B5C911AC3294100E0B6A4 /* TouristContectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristContectView.m; sourceTree = "<group>"; };
 		24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_name_pass@2x.png"; sourceTree = "<group>"; };
+		24B0BA551ADFF3820073BED0 /* TouristHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristHeaderView.h; sourceTree = "<group>"; };
+		24B0BA561ADFF3820073BED0 /* TouristHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristHeaderView.m; sourceTree = "<group>"; };
+		24B0BA581AE007BF0073BED0 /* icon_navagation@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_navagation@2x.png"; sourceTree = "<group>"; };
 		24B29D911ABD1B32007F84E5 /* shanghaiBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = shanghaiBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B29D951ABD1B32007F84E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24B29D961ABD1B32007F84E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -308,6 +313,8 @@
 		24252A0C1AC1AB9800BB264A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				24B0BA551ADFF3820073BED0 /* TouristHeaderView.h */,
+				24B0BA561ADFF3820073BED0 /* TouristHeaderView.m */,
 				24252A0D1AC1ABC400BB264A /* TouristServiceInfoView.h */,
 				24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */,
 				24252A101AC1BB3500BB264A /* TouristServiceDetailView.h */,
@@ -353,6 +360,7 @@
 		2465395E1AC6BB6F00C1908C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				24B0BA581AE007BF0073BED0 /* icon_navagation@2x.png */,
 				24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */,
 				246539AB1AC7162200C1908C /* icon_phone@2x.png */,
 				246539A91AC702BE00C1908C /* image_back@2x.png */,
@@ -763,6 +771,7 @@
 				2465399B1AC6BB6F00C1908C /* icon_ok@2x.png in Resources */,
 				246539861AC6BB6F00C1908C /* Icon-72.png in Resources */,
 				2465399C1AC6BB6F00C1908C /* icon_regist@2x.png in Resources */,
+				24B0BA591AE007BF0073BED0 /* icon_navagation@2x.png in Resources */,
 				246539951AC6BB6F00C1908C /* icon_close@2x.png in Resources */,
 				246539AA1AC702BE00C1908C /* image_back@2x.png in Resources */,
 				24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */,
@@ -816,6 +825,7 @@
 				24CEE8351ABEBA7100DBE500 /* WebImageView.m in Sources */,
 				24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */,
 				2414A3131ACC4B1E00E05E80 /* RegisterViewController.m in Sources */,
+				24B0BA571ADFF3820073BED0 /* TouristHeaderView.m in Sources */,
 				24B29DEA1ABD1C6E007F84E5 /* AFURLSessionManager.m in Sources */,
 				248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */,
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,

@@ -10,15 +10,14 @@
 #import "AFNetworking.h"
 #import "Config.h"
 #import "UIViewController+Loading.h"
-
 #import "UserLoginViewController.h"
-
 
 typedef void (^busDataBlock) (AFHTTPRequestOperation *operation, BOOL status);
 
 @interface BaseViewController : UIViewController
 
 @property (nonatomic, copy) busDataBlock busData;
+
 
 - (void)requestBusData:(NSString *) url;
 

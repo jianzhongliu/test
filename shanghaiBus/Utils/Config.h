@@ -14,6 +14,9 @@
 #define shanghaiBus_Config_h
 
 #define HOST @"http://121.42.12.128/B-Y/REST/"
+//#define HOST @"http://localhost:8080/B-Y/REST/"
+//#define HOST @"http://192.168.1.102:8080/B-Y/"
+
 #define SCREENWIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREENHEIGHT [[UIScreen mainScreen] bounds].size.height
 
@@ -22,5 +25,5 @@
 #define BYColorFromHex(rgb)     [UIColor colorWithRed:((float)((rgb & 0xFF0000) >> 16))/255.0 green:((float)((rgb & 0xFF00) >> 8))/255.0 blue:((float)(rgb & 0xFF))/255.0 alpha:1.0]
 
 #define BYColor BYColorFromHex(0x14b9d6)
-
+#define BYBackColor BYColorFromHex(0x14b9d6)
 #endif

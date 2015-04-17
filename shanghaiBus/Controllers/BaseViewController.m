@@ -10,7 +10,7 @@
 #import "UserLoginViewController.h"
 #import "UIViewController+Loading.h"
 
-@interface BaseViewController ()
+@interface BaseViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) AFHTTPRequestOperationManager *manager;
 
@@ -20,43 +20,42 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self showBackButton];
-
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_back"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnAction)];
+    
+    [self.navigationItem setLeftBarButtonItem:leftItem];
+//    self.navigationController.delegate = self;
 }
 
-- (void)showBackButton {
-    UIImage *menuBarImage = [UIImage imageNamed:@""];
-    UIImage *backButtonImage = [UIImage imageNamed:@""];
-    [[UINavigationBar appearance] setBackgroundImage:menuBarImage forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setBackgroundColor:BYColor];
-    
-    backButtonImage = [backButtonImage
-                       resizableImageWithCapInsets:UIEdgeInsetsMake(0.0f, 9.0f, 0.0f, 5.0f)];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage
-                                                      forState:UIControlStateNormal
-                                                         barMetrics:UIBarMetricsCompact];
-    [[UIBarButtonItem appearance] setBackButtonBackgroundImage:backButtonImage
-                                                      forState:UIControlStateSelected
-                                                         barMetrics:UIBarMetricsCompact];
-    
-    [[UIBarButtonItem appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor whiteColor], NSForegroundColorAttributeName,
-      [UIFont boldSystemFontOfSize:10.0f], NSFontAttributeName,
-      nil] forState:UIControlStateNormal];
-    
-    [[UIBarButtonItem appearance] setTitleTextAttributes:
-     [NSDictionary dictionaryWithObjectsAndKeys:
-      [UIColor whiteColor], NSForegroundColorAttributeName,
-      [UIFont boldSystemFontOfSize:10.0f], NSFontAttributeName,
-      nil] forState:UIControlStateHighlighted];
-    
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                          [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                          [UIFont boldSystemFontOfSize:23.0f], NSFontAttributeName, [UIColor blackColor], NSShadowAttributeName,  [NSValue valueWithCGSize:CGSizeMake(0.0,1.0)], NSShadowAttributeName,
-                                                          nil]];
-}
+- (void)backBtnAction {
 
+}
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = self;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+}
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    self.navigationController.interactivePopGestureRecognizer.enabled = YES;
+//    self.navigationController.delegate = self;
+}
+-(void)navigationController:(UINavigationController *)navigationController didShowViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (navigationController.viewControllers.count == 1) {
+        return;
+    }
+    if ([navigationController respondsToSelector:@selector(interactivePopGestureRecognizer)]) {
+        navigationController.interactivePopGestureRecognizer.enabled = YES;
+    }
+}
+- (NSUInteger)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
+    return 0;
+}
+-(UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 - (void)requestBusData:(NSString *) url {
     __weak __typeof (self) blockSelf = self;

@@ -139,16 +139,7 @@
             if ([[dic objectForKey:@"status"] integerValue] == 1) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
-//            NSArray *dataArray = [dic objectForKey:@"dataArray"];
-//            if (dataArray.count > 0) {
-//                [self.arraySiteLine removeAllObjects];
-//                for (NSDictionary *dic in dataArray) {
-//                    Sites *site = [[Sites alloc] init];
-//                    [site configSiteWithDic:dic];
-//                    [self.arraySiteLine addObject:site];
-//                }
-//                [self reloadData];
-//            }
+
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

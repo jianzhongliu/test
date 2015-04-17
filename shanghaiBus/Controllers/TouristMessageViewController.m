@@ -145,7 +145,32 @@
 
 #pragma mark - private Methods
 - (void)didclickSubmit {
-
+    [self showLoadingActivity:YES];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *userid = self.tourist.identify;
+    NSString *content = [self.textCotent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@tourist/addMessage",HOST];
+    NSDictionary *dic = @{@"identify":currentTime,@"commentdate":currentTime,@"userid":userid,@"touristid":self.tourist.identify,@"content":content,@"phonenumber":self.textPhone.text ,@"sign":sign};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            if ([[dic objectForKey:@"status"] integerValue] == 1) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            
+        }
+        [self hideLoadWithAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+        [self showInfo:operation.responseString ];
+    }];
 }
 
 - (void)didTapView {
