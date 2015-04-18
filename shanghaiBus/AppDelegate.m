@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "MainHomePageViewController.h"
+#import "BYTabBarController.h"
 
 @interface AppDelegate ()
 
@@ -18,21 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MainHomePageViewController *controller = [[MainHomePageViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
-    [[UINavigationBar appearance] setBarTintColor:BYColor];
-    nav.navigationBar.translucent = YES;
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setBackIndicatorImage:[UIImage imageNamed:@"icon_back"]];
-    [[UINavigationBar appearance] setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"icon_back"]];
-    NSShadow *shadow = [[NSShadow alloc] init];
-//    shadow.shadowColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:0.8];
-//    shadow.shadowOffset = CGSizeMake(0, 1);
-    [[UINavigationBar appearance] setTitleTextAttributes: [NSDictionary dictionaryWithObjectsAndKeys:
-                                                           [UIColor whiteColor], NSForegroundColorAttributeName,
-                                                           shadow, NSShadowAttributeName,
-                                                           [UIFont systemFontOfSize:18], NSFontAttributeName, nil]];
-    self.window.rootViewController = nav;
+    BYTabBarController *controller = [[BYTabBarController alloc] init];
+//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+
+    self.window.rootViewController = controller;
     [self.window makeKeyAndVisible];
     
     return YES;

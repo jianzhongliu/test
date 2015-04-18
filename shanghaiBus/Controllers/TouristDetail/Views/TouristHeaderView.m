@@ -25,7 +25,7 @@
 - (WebImageView *)imageIcon {
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
-        _imageIcon.image = [UIImage imageNamed:@"icon"];
+        _imageIcon.image = [UIImage imageNamed:@"icon_default_header"];
         _imageIcon.clipsToBounds = YES;
         _imageIcon.userInteractionEnabled = YES;
     }

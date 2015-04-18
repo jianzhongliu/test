@@ -211,6 +211,7 @@
     TouristListViewController *controller = [[TouristListViewController alloc] init];
     Sites *site = (Sites *)[self.arraySiteLine objectAtIndex:0];
     controller.siteName = site.cityname;
+    controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 //
 }
@@ -219,17 +220,20 @@
     TouristListViewController *controller = [[TouristListViewController alloc] init];
     Sites *site = (Sites *)[self.arraySiteLine objectAtIndex:index];
     controller.siteName = site.cityname;
+    controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 
 }
 
 - (void)didClickHeaderImageBannerAtIndex:(NSInteger )index withUrl:(NSString *) url {
     TouristListViewController *controller = [[TouristListViewController alloc] init];
+    controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)didClickHeaderSearch {
     SearchObjectViewController *controller = [[SearchObjectViewController alloc] init];
+    controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
 

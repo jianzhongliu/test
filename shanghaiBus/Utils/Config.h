@@ -29,4 +29,9 @@
 #define BYLineSepratorColor BYColorFromHex(0xdddddd)
 #define BYBlackColor BYColorFromHex(0x333333);
 //title设置为18
+
+
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+
 #endif

@@ -26,7 +26,7 @@
 - (WebImageView *)imageIcon {
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
-        _imageIcon.image = [UIImage imageNamed:@"IMG_0146.JPG"];
+        _imageIcon.image = [UIImage imageNamed:@"icon_default_header"];
         [self.contentView addSubview:_imageIcon];
     }
     return _imageIcon;
