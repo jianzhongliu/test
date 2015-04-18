@@ -105,10 +105,11 @@
     self.textPhone.frame = CGRectMake(10, labelTagPhone.ctBottom + 10, SCREENWIDTH - 20, 35);
     self.textPhone.backgroundColor = self.view.backgroundColor;
     self.textPhone.placeholder = @"   可留QQ/微信/手机";
+    [self.textPhone setValue:BYColorFromHex(0x333333) forKeyPath:@"_placeholderLabel.textColor"];
     self.textPhone.layer.borderColor = [UIColor whiteColor].CGColor;
     self.textPhone.layer.cornerRadius = 3;
     self.textPhone.layer.borderWidth = 1;
-    [self.textPhone setTintColor:[UIColor greenColor]];
+//    [self.textPhone setTintColor:[UIColor greenColor]];
     [self.view addSubview:self.textPhone];
     [self.textPhone drawPlaceholderInRect:CGRectMake(5, 0, self.textPhone.viewWidth, self.textPhone.viewWidth)];
     

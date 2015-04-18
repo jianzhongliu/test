@@ -74,7 +74,6 @@
 		24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29D991ABD1B32007F84E5 /* AppDelegate.m */; };
 		24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 24B29DA11ABD1B32007F84E5 /* Images.xcassets */; };
 		24B29DA51ABD1B32007F84E5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24B29DA31ABD1B32007F84E5 /* LaunchScreen.xib */; };
-		24B29DB11ABD1B32007F84E5 /* shanghaiBusTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DB01ABD1B32007F84E5 /* shanghaiBusTests.m */; };
 		24B29DE61ABD1C6E007F84E5 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DBF1ABD1C6E007F84E5 /* AFHTTPRequestOperation.m */; };
 		24B29DE71ABD1C6E007F84E5 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DC11ABD1C6E007F84E5 /* AFHTTPRequestOperationManager.m */; };
 		24B29DE81ABD1C6E007F84E5 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 24B29DC31ABD1C6E007F84E5 /* AFURLConnectionOperation.m */; };
@@ -126,16 +125,6 @@
 		24D9E4DD1AE16CF700C2E978 /* icon_scroll_indecator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D9E4DB1AE16CF700C2E978 /* icon_scroll_indecator@2x.png */; };
 		24D9E4DF1AE1821600C2E978 /* icon_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D9E4DE1AE1821600C2E978 /* icon_share@2x.png */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		24B29DAB1ABD1B32007F84E5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 24B29D891ABD1B32007F84E5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 24B29D901ABD1B32007F84E5;
-			remoteInfo = shanghaiBus;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		240985941ADAB133009CC9F2 /* Utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
@@ -225,7 +214,6 @@
 		24B29D991ABD1B32007F84E5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		24B29DA11ABD1B32007F84E5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		24B29DA41ABD1B32007F84E5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		24B29DAA1ABD1B32007F84E5 /* shanghaiBusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = shanghaiBusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		24B29DAF1ABD1B32007F84E5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		24B29DB01ABD1B32007F84E5 /* shanghaiBusTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = shanghaiBusTests.m; sourceTree = "<group>"; };
 		24B29DBC1ABD1C6E007F84E5 /* AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworking.h; sourceTree = "<group>"; };
@@ -328,13 +316,6 @@
 				2409859C1ADAB80F009CC9F2 /* QuartzCore.framework in Frameworks */,
 				2409859A1ADAB804009CC9F2 /* Foundation.framework in Frameworks */,
 				240985981ADAB7F7009CC9F2 /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		24B29DA71ABD1B32007F84E5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -481,7 +462,6 @@
 			isa = PBXGroup;
 			children = (
 				24B29D911ABD1B32007F84E5 /* shanghaiBus.app */,
-				24B29DAA1ABD1B32007F84E5 /* shanghaiBusTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -763,24 +743,6 @@
 			productReference = 24B29D911ABD1B32007F84E5 /* shanghaiBus.app */;
 			productType = "com.apple.product-type.application";
 		};
-		24B29DA91ABD1B32007F84E5 /* shanghaiBusTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 24B29DB71ABD1B32007F84E5 /* Build configuration list for PBXNativeTarget "shanghaiBusTests" */;
-			buildPhases = (
-				24B29DA61ABD1B32007F84E5 /* Sources */,
-				24B29DA71ABD1B32007F84E5 /* Frameworks */,
-				24B29DA81ABD1B32007F84E5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				24B29DAC1ABD1B32007F84E5 /* PBXTargetDependency */,
-			);
-			name = shanghaiBusTests;
-			productName = shanghaiBusTests;
-			productReference = 24B29DAA1ABD1B32007F84E5 /* shanghaiBusTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -792,10 +754,6 @@
 				TargetAttributes = {
 					24B29D901ABD1B32007F84E5 = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					24B29DA91ABD1B32007F84E5 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 24B29D901ABD1B32007F84E5;
 					};
 				};
 			};
@@ -813,7 +771,6 @@
 			projectRoot = "";
 			targets = (
 				24B29D901ABD1B32007F84E5 /* shanghaiBus */,
-				24B29DA91ABD1B32007F84E5 /* shanghaiBusTests */,
 			);
 		};
 /* End PBXProject section */
@@ -884,13 +841,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24B29DA81ABD1B32007F84E5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -957,23 +907,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		24B29DA61ABD1B32007F84E5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				24B29DB11ABD1B32007F84E5 /* shanghaiBusTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		24B29DAC1ABD1B32007F84E5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 24B29D901ABD1B32007F84E5 /* shanghaiBus */;
-			targetProxy = 24B29DAB1ABD1B32007F84E5 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		24B29DA31ABD1B32007F84E5 /* LaunchScreen.xib */ = {
@@ -1089,40 +1023,6 @@
 			};
 			name = Release;
 		};
-		24B29DB81ABD1B32007F84E5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = shanghaiBusTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/shanghaiBus.app/shanghaiBus";
-			};
-			name = Debug;
-		};
-		24B29DB91ABD1B32007F84E5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = shanghaiBusTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/shanghaiBus.app/shanghaiBus";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1140,15 +1040,6 @@
 			buildConfigurations = (
 				24B29DB51ABD1B32007F84E5 /* Debug */,
 				24B29DB61ABD1B32007F84E5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		24B29DB71ABD1B32007F84E5 /* Build configuration list for PBXNativeTarget "shanghaiBusTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				24B29DB81ABD1B32007F84E5 /* Debug */,
-				24B29DB91ABD1B32007F84E5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
