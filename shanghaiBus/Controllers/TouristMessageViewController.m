@@ -13,7 +13,6 @@
 
 @property (nonatomic, strong) UITextView *textCotent;
 @property (nonatomic, strong) UITextField *textPhone;
-@property (nonatomic, strong) UILabel *labelContect;
 @property (nonatomic, strong) UILabel *labelPlaceHolder;
 
 @end
@@ -33,21 +32,12 @@
 - (UITextField *)textPhone {
     if (_textPhone == nil) {
         _textPhone = [[UITextField alloc] init];
+        _textPhone.borderStyle = UITextBorderStyleNone;
+        
         _textPhone.textColor = [UIColor whiteColor];
         _textPhone.font = [UIFont systemFontOfSize:13];
     }
     return _textPhone;
-}
-
-- (UILabel *)labelContect {
-    if (_labelContect == nil) {
-        _labelContect = [[UILabel alloc] init];
-        _labelContect.numberOfLines = 0;
-        _labelContect.lineBreakMode = NSLineBreakByCharWrapping;
-        _labelContect.textColor = [UIColor whiteColor];
-        _labelContect.font = [UIFont systemFontOfSize:13];
-    }
-    return _labelContect;
 }
 
 - (UILabel *)labelPlaceHolder {
@@ -84,53 +74,57 @@
 }
 
 - (void)initUI {
-    self.view.backgroundColor = BYColorAlphaMake(77, 77, 77, 1);
+    self.view.backgroundColor = BYColorFromHex(0x4c4c4c);
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapView)];
     [self.view addGestureRecognizer:tap];
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.frame = CGRectMake(SCREENWIDTH - 60, 30, 45, 40);
+    button.frame = CGRectMake(SCREENWIDTH - 60, 50, 50, 40);
     [button addTarget:self action:@selector(didclickSubmit) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"提交" forState:UIControlStateNormal];
+    button.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:button];
     
-    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, 80, SCREENWIDTH, 1)];
-    viewLine.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:viewLine];
+    self.textCotent.frame = CGRectMake(10, button.ctBottom + 20, SCREENWIDTH - 20, 120);
+    self.textCotent.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.textCotent.layer.cornerRadius = 3;
+    self.textCotent.layer.borderWidth = 1;
+    [self.view addSubview:self.textCotent];
     
-    self.labelPlaceHolder.frame = CGRectMake(13, 85, 200, 20);
+    self.labelPlaceHolder.frame = CGRectMake(23, self.textCotent.ctTop + 10, 200, 20);
     self.labelPlaceHolder.text = @"请输入留言内容，最多500个字...";
     [self.view addSubview:self.labelPlaceHolder];
     
-    self.textCotent.frame = CGRectMake(10, 85, SCREENWIDTH - 20, 140);
-    [self.view addSubview:self.textCotent];
-    
-    UIView *viewLine2 = [[UIView alloc] initWithFrame:CGRectMake(0, self.textCotent.ctBottom + 1, SCREENWIDTH, 1)];
-    viewLine2.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:viewLine2];
-    
-    UILabel *labelTagPhone = [[UILabel alloc] initWithFrame:CGRectMake(10, self.textCotent.ctBottom +10, 80, 25)];
-    labelTagPhone.text = @"联系方式";
+    UILabel *labelTagPhone = [[UILabel alloc] initWithFrame:CGRectMake(10, self.textCotent.ctBottom + 15, 180, 25)];
+    labelTagPhone.text = @"联系方式(仅商家可见)";
     labelTagPhone.textColor = [UIColor whiteColor];
     labelTagPhone.font = [UIFont systemFontOfSize:14];
     [self.view addSubview:labelTagPhone];
     
-    self.textPhone.frame = CGRectMake(95, self.textCotent.ctBottom + 10, SCREENWIDTH - 110, 25);
-    self.textPhone.placeholder = @"仅商家可见";
+    self.textPhone.frame = CGRectMake(10, labelTagPhone.ctBottom + 10, SCREENWIDTH - 20, 35);
+    self.textPhone.backgroundColor = self.view.backgroundColor;
+    self.textPhone.placeholder = @"   可留QQ/微信/手机";
+    self.textPhone.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.textPhone.layer.cornerRadius = 3;
+    self.textPhone.layer.borderWidth = 1;
+    [self.textPhone setTintColor:[UIColor greenColor]];
     [self.view addSubview:self.textPhone];
+    [self.textPhone drawPlaceholderInRect:CGRectMake(5, 0, self.textPhone.viewWidth, self.textPhone.viewWidth)];
     
-    self.labelContect.frame = CGRectMake(10, self.textPhone.ctBottom + 5, SCREENWIDTH - 20, 20);
-    self.labelContect.text = @"选填，可留QQ、微信、手机";
-    [self.view addSubview:self.labelContect];
+    UIImageView *viewFooter = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.view.ctBottom - 60, SCREENWIDTH, 60)];
+    //    viewFooter.backgroundColor = BYColorAlphaMake(104, 110, 114, 1);
+    viewFooter.image = [UIImage imageNamed:@"icon_close_back"];
+    viewFooter.userInteractionEnabled = YES;
+    [self.view addSubview:viewFooter];
     
     UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonCancel.frame = CGRectMake((SCREENWIDTH - 40) / 2, self.view.ctBottom - 60, 42, 42);
+    buttonCancel.frame = CGRectMake(0 , 0, SCREENWIDTH, 60);
     [buttonCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [buttonCancel setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     [buttonCancel addTarget:self action:@selector(didClickDismissPage) forControlEvents:UIControlEventTouchUpInside];
     //    [buttonCancel setTitle:@"写点评" forState:UIControlStateNormal];
-    [self.view addSubview:buttonCancel];
+    [viewFooter addSubview:buttonCancel];
 
 }
 
@@ -145,6 +139,25 @@
 
 #pragma mark - private Methods
 - (void)didclickSubmit {
+    [self.view endEditing:YES];
+    if (self.textCotent.text.length == 0) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"评论不能为空";
+        hud.yOffset = 185;
+        [hud hide:YES afterDelay:2];
+        return;
+    }
+    
+    if (self.textCotent.text.length > 200) {
+        MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        hud.mode = MBProgressHUDModeText;
+        hud.labelText = @"评论内容不能超过200字";
+        hud.yOffset = 185;
+        [hud hide:YES afterDelay:2];
+        return;
+    }
+    
     [self showLoadingActivity:YES];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

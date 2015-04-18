@@ -57,29 +57,38 @@
     self.scrollTop.delegate = self;
     self.scrollTop.pagingEnabled = YES;
     [self addSubview:self.scrollTop];
-    self.scrollTop.contentSize = CGSizeMake(SCREENWIDTH, 45);
+    self.scrollTop.contentSize = CGSizeMake(SCREENWIDTH, 55);
     
+    UIImageView *imageSearchBack = [[UIImageView alloc] initWithFrame:CGRectMake(0, 55, SCREENWIDTH, 82)];
+    imageSearchBack.image = [UIImage imageNamed:@"icon_searchBackground"];
+    [self addSubview:imageSearchBack];
+
     self.viewSearch.frame = CGRectMake(0, self.scrollTop.ctBottom, SCREENWIDTH, 60);
     [self addSubview:self.viewSearch];
+
+    UIImageView *imageSearchIcon = [[UIImageView alloc] initWithFrame:CGRectMake(10, 75, 17, 17)];
+    imageSearchIcon.image = [UIImage imageNamed:@"icon_search"];
+    [self addSubview:imageSearchIcon];
     
-    UILabel *labelSearchTitle = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 250, 20)];
+    UILabel *labelSearchTitle = [[UILabel alloc] initWithFrame:CGRectMake(imageSearchIcon.ctRight + 5, 17, 200, 20)];
     labelSearchTitle.backgroundColor = [UIColor whiteColor];
-    labelSearchTitle.text = @"你想去哪里玩";
+    labelSearchTitle.text = @"你想去哪里玩?";
     labelSearchTitle.font = [UIFont boldSystemFontOfSize:15];
     labelSearchTitle.textColor = BYColorFromHex(0x000000);
     [self.viewSearch addSubview:labelSearchTitle];
     
-    self.labelNumberOftourist.frame = CGRectMake(20, 35, 250, 20);
+    self.labelNumberOftourist.frame = CGRectMake(imageSearchIcon.ctRight + 5, 37, 250, 20);
     [self.viewSearch addSubview:self.labelNumberOftourist];
     
-    UIView *viewLineBottom = [[UIView alloc] initWithFrame:CGRectMake(0, self.viewSearch.ctBottom - 1, SCREENWIDTH, 1)];
-    viewLineBottom.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.2);
-    [self addSubview:viewLineBottom];
+    UIImageView *imageSearchIndecator = [[UIImageView alloc] initWithFrame:CGRectMake(SCREENWIDTH - 18, 85, 8, 13)];
+    imageSearchIndecator.image = [UIImage imageNamed:@"icon_search_indecator"];
+    [self addSubview:imageSearchIndecator];
+    
 }
 
 - (void)resetDataToView:(NSDictionary *)dicData {
     self.labelNumberOftourist.text = @"2000多名专业的向导，为您提供服务";
-    [self.labelNumberOftourist highLightTextInRange:NSMakeRange(0, 3) forColor:[UIColor redColor]];
+    [self.labelNumberOftourist highLightNumberTextforColor:BYColorFromHex(0xff5555)];
     [self.scrollTop removeAllSubView];
     NSArray *arrayIMG = [dicData objectForKey:@"img"];
     self.scrollTop.contentSize = CGSizeMake(SCREENWIDTH * arrayIMG.count, 45);

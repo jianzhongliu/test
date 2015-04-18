@@ -143,7 +143,7 @@
             Sites *site = [arrayData objectAtIndex:0];
             self.imageLeft.imageUrl = site.mainImage;
             self.labelName.text = site.cityname;
-            self.labelNumber.text = [NSString stringWithFormat:@"%ld位导游", (long)site.touristnumber];
+            self.labelNumber.text = [NSString stringWithFormat:@"%ld条服务", (long)site.touristnumber];
 
         }
             break;
@@ -151,12 +151,12 @@
             Sites *site = [arrayData objectAtIndex:0];
             self.imageLeft.imageUrl = site.mainImage;
             self.labelName.text = site.cityname;
-            self.labelNumber.text = [NSString stringWithFormat:@"%ld位导游", (long)site.touristnumber];
+            self.labelNumber.text = [NSString stringWithFormat:@"%ld条服务", (long)site.touristnumber];
             
             Sites *siteR = [arrayData objectAtIndex:1];
             self.imageRight.imageUrl = siteR.mainImage;
             self.labelNameR.text = siteR.cityname;
-            self.labelNumberR.text = [NSString stringWithFormat:@"%ld位导游", (long)siteR.touristnumber];
+            self.labelNumberR.text = [NSString stringWithFormat:@"%ld条服务", (long)siteR.touristnumber];
             
         }
             break;

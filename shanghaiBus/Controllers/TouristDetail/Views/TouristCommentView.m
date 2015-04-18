@@ -57,7 +57,7 @@
         [_buttonHeader setImage:[UIImage imageNamed:@"icon_detail_down"] forState:UIControlStateSelected];
         [_buttonHeader addTarget:self action:@selector(didHeaderClick:) forControlEvents:UIControlEventTouchUpInside];
         _buttonHeader.selected = NO;
-        [self.viewHeader addSubview:_buttonHeader];
+//        [self.viewHeader addSubview:_buttonHeader];
     }
     return _buttonHeader;
 }
@@ -65,7 +65,7 @@
 - (WebImageView *)imageIcon {
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
-        _imageIcon.image = [UIImage imageNamed:@"icon"];
+//        _imageIcon.image = [UIImage imageNamed:@"icon"];
         _imageIcon.clipsToBounds = YES;
         [self addSubview:_imageIcon];
     }
@@ -78,7 +78,7 @@
         _labelName.backgroundColor = [UIColor whiteColor];
         _labelName.textColor = BYBlackColor;
         _labelName.font = [UIFont systemFontOfSize:14];
-        _labelName.text = @"会飞的猪";
+        _labelName.text = @"";
         [self addSubview:_labelName];
     }
     return _labelName;
@@ -91,7 +91,7 @@
         _labelDate.textColor = BYColorAlphaMake(0, 0, 0, 0.8);
         _labelDate.font = [UIFont systemFontOfSize:14];
         _labelDate.textAlignment = NSTextAlignmentRight;
-        _labelDate.text = @"1970-12-01";
+        _labelDate.text = @"";
         [self addSubview:_labelDate];
     }
     return _labelDate;
@@ -101,9 +101,9 @@
     if (_labelCommon == nil) {
         _labelCommon = [[UILabel alloc] init];
         _labelCommon.backgroundColor = [UIColor whiteColor];
-        _labelCommon.textColor = BYColorAlphaMake(0, 0, 0, 0.8);
+        _labelCommon.textColor = BYColorFromHex(0x797979);
         _labelCommon.font = [UIFont systemFontOfSize:14];
-        _labelCommon.text = @"不会平时说的是离开手机点击电视的";
+        _labelCommon.text = @"暂无评论";
         [self addSubview:_labelCommon];
     }
     return _labelCommon;
@@ -150,6 +150,20 @@
     self.labelCommon.frame = CGRectMake(10, self.imageIcon.ctBottom + 10, SCREENHEIGHT - 20, 20);
     self.buttonDetail.frame = CGRectMake(0, self.labelCommon.ctBottom +10, SCREENWIDTH, 40);
     [self.buttonDetail setTitle:@"0条留言" forState:UIControlStateNormal];
+
+    
+}
+
+- (void)configViewWithData:(CommentObject *) comment WithNumber:(NSInteger) number{
+    if (comment == nil) {
+        [self.labelName removeFromSuperview];
+        [self.labelDate removeFromSuperview];
+        [self.labelCommon removeFromSuperview];
+        [self.imageIcon removeFromSuperview];
+        [self.starRateView removeFromSuperview];
+        self.buttonDetail.ctTop = self.viewHeader.ctBottom;
+        [self.buttonHeader removeFromSuperview];
+    }
     UIView *viewLineTop = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonDetail.ctTop, SCREENWIDTH, 0.5)];
     viewLineTop.backgroundColor = BYLineSepratorColor;
     [self addSubview:viewLineTop];
@@ -159,20 +173,20 @@
     viewLineBottom.backgroundColor = BYLineSepratorColor;
     [self addSubview:viewLineBottom];
     
-}
-
-- (void)configViewWithData:(CommentObject *) comment WithNumber:(NSInteger) number{
     NSString *commentNumber = @"";
     switch (self.viewtype) {
         case VIEWTYPECOMMENT:
         {
             self.labelHeaderTitle.text = @"评论";
             self.starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(self.imageIcon.ctRight + 10, self.labelName.ctBottom , 80, 15) numberOfStars:5];
-            self.starRateView.scorePercent = 1;
+//            self.starRateView.scorePercent = 1;
+            self.starRateView.enable = NO;
             self.starRateView.allowIncompleteStar = NO;
             self.starRateView.hasAnimation = YES;
             self.starRateView.scorePercent = comment.score / 5;
-            [self addSubview:self.starRateView];
+            if (comment != nil) {
+                [self addSubview:self.starRateView];
+            }
             commentNumber = [NSString stringWithFormat:@"%ld条评论", (long)number];
         }
             break;
@@ -185,7 +199,7 @@
         default:
             break;
     }
-    
+    self.labelCommon.text = comment.content;
     [self.buttonDetail setTitle:commentNumber forState:UIControlStateNormal];
 
 //    self.imageIcon.imageUrl = comment.ico
@@ -197,6 +211,23 @@
     
 }
 - (void)configViewWithMessage:(MessageObject *) message WithNumber:(NSInteger) number{
+    if (message == nil) {
+        [self.labelName removeFromSuperview];
+        [self.labelDate removeFromSuperview];
+        [self.labelCommon removeFromSuperview];
+        [self.imageIcon removeFromSuperview];
+        [self.starRateView removeFromSuperview];
+        self.buttonDetail.ctTop = self.viewHeader.ctBottom;
+        [self.buttonHeader removeFromSuperview];
+    }
+    UIView *viewLineTop = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonDetail.ctTop, SCREENWIDTH, 0.5)];
+    viewLineTop.backgroundColor = BYLineSepratorColor;
+    [self addSubview:viewLineTop];
+    
+#warning TODO 关于划线 写个retina的方法，当时非retina时宽度是1，retina时是0.5的宽度
+    UIView *viewLineBottom = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonDetail.ctBottom, SCREENWIDTH, 0.5)];
+    viewLineBottom.backgroundColor = BYLineSepratorColor;
+    [self addSubview:viewLineBottom];
     NSString *commentNumber = @"";
     switch (self.viewtype) {
         case VIEWTYPECOMMENT:
@@ -206,22 +237,25 @@
             break;
         case VIEWTYPEMESSAGE:
         {
-            self.labelName.text = @"留言";
+            self.labelHeaderTitle.text = @"留言";
+            
+            self.labelCommon.text = @"暂无留言";
             commentNumber = [NSString stringWithFormat:@"%ld条留言", (long)number];
         }
             break;
         default:
             break;
     }
-    
+    if (message == nil) {
+        return;
+    }
+    self.labelCommon.text = message.content;
     [self.buttonDetail setTitle:commentNumber forState:UIControlStateNormal];
-    
-    //    self.imageIcon.imageUrl = comment.ico
-    self.imageIcon.layer.cornerRadius = self.imageIcon.viewWidth / 2;
-    self.imageIcon.clipsToBounds = YES;
+
 #warning TODO 设置图像的url
     self.labelName.text = message.userId;
     self.labelDate.text = [NSString stringWithFormat:@"%ld", (long)message.commentdate];
+    
 }
 
 - (void)didHeaderClick:(UIButton *) sender {

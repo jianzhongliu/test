@@ -42,6 +42,16 @@
     [self addAttributions:@[attribute]];
 }
 
+-(void)highLightNumberTextforColor:(UIColor*)color{
+    if (color == nil) {
+        return;
+    }
+    NSString *string = [self caculateNumberString:self.text];
+    CTYouthAttribution* attribute = [[CTYouthAttribution alloc] initWithKey:NSForegroundColorAttributeName value:color range:NSMakeRange(0, string.length)];
+    
+    [self addAttributions:@[attribute]];
+}
+
 -(void)addAttributions:(NSArray*)attributes{
     if (attributes.count < 1) {
         return;
@@ -81,6 +91,16 @@
     }
 }
 
-
+- (NSString *)caculateNumberString:(NSString *) stringOrigin {
+    NSArray *arrayChar = @[@"0",@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9"];
+    NSString *stringResult = @"";
+    for (int i = 0; i < stringOrigin.length; i ++) {
+        NSString *subString = [stringOrigin substringWithRange:NSMakeRange(i, 1)];
+        if ([arrayChar containsObject:subString]) {
+            stringResult = [NSString stringWithFormat:@"%@%@", stringResult, subString];
+        }
+    }
+    return stringResult;
+}
 
 @end

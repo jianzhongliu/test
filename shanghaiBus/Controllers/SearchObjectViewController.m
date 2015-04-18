@@ -29,6 +29,7 @@
 @end
 
 @implementation SearchObjectViewController
+
 - (UISearchBar *)searchInput {
     if (_searchInput == nil) {
         _searchInput = [[UISearchBar alloc] init];

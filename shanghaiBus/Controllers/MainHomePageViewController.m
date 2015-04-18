@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:BYBackColor];
     [self initUI];
     [self requestData];
 
@@ -60,9 +60,9 @@
     self.table.delegate = self;
     self.table.dataSource = self;
     self.table.separatorColor = [UIColor clearColor];
-    self.table.backgroundColor = BYColorFromHex(0x999999);
+    self.table.backgroundColor = BYColorFromHex(0xf5f5f5);
     [self.view addSubview:self.table];
-    self.viewHeader = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 115)];
+    self.viewHeader = [[HomeHeaderView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 137)];
     self.viewHeader.delegate = self;
     self.table.tableHeaderView = self.viewHeader;
 }
@@ -145,7 +145,7 @@
     if (indexPath.row > 0) {
         return [HomePageSepratorCell fetchCellHeight];
     } else {
-        return [HomePageSingleCell fetchCellHeight] +10;
+        return [HomePageSingleCell fetchCellHeight] + 15;
     }
 }
 
@@ -155,13 +155,18 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *viewSection = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 40)];
-    viewSection.backgroundColor = [UIColor whiteColor];
-    UILabel *labelSection = [[UILabel alloc] initWithFrame:CGRectMake(10, 20, 70, 20)];
+    viewSection.backgroundColor = BYColorFromHex(0xf5f5f5);
+    UILabel *labelSection = [[UILabel alloc] initWithFrame:CGRectMake(18, 15, 70, 20)];
     labelSection.text = @"热门景区";
-    labelSection.font = [UIFont boldSystemFontOfSize:12];
+    labelSection.font = [UIFont boldSystemFontOfSize:14];
     labelSection.textColor = BYColorAlphaMake(0, 0, 0, 0.7);
     [viewSection addSubview:labelSection];
     viewSection.backgroundColor = viewSection.backgroundColor;
+    
+    UIImageView *imageSearchBack = [[UIImageView alloc] initWithFrame:CGRectMake(10, 18, 3, 12)];
+    imageSearchBack.image = [UIImage imageNamed:@"icon_hot_scenery"];
+    [viewSection addSubview:imageSearchBack];
+    
     return viewSection;
 }
 
@@ -173,6 +178,7 @@
         HomePageSingleCell *cellSingle = [tableView dequeueReusableCellWithIdentifier:cellIdentifySingle];
         if (cellSingle == nil) {
             cellSingle = [[HomePageSingleCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifySingle];
+            cellSingle.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         if (self.arraySiteLine.count > indexPath.row) {
             [cellSingle resetDataWith:[self.arraySiteLine objectAtIndex:indexPath.row]];
@@ -183,6 +189,7 @@
         HomePageSepratorCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentify];
         if (cell == nil) {
             cell = [[HomePageSepratorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentify];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
             //        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             cell.delegate = self;
         }

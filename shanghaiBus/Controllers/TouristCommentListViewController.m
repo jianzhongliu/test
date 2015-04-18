@@ -42,11 +42,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initUI];
+    self.view.alpha = 0.2;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
+    [UIView animateWithDuration:0.9 animations:^{
+        self.view.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (void)initData {
@@ -54,34 +59,47 @@
 }
 
 - (void)initUI {
-    self.view.backgroundColor = BYColorAlphaMake(77, 77, 77, 1);
+    self.view.backgroundColor = BYColorFromHex(0x4c4c4c);
 
     UILabel *labelCommentNumber = [[UILabel alloc] initWithFrame:CGRectMake(10, 50, 100, 40)];
-    labelCommentNumber.font = [UIFont systemFontOfSize:18];
-    labelCommentNumber.text = @"100条评论";
+    labelCommentNumber.font = [UIFont systemFontOfSize:16];
+    NSString *stringComment = [NSString stringWithFormat:@"%ld条点评", (long)self.tourist.commentnumber];
+    labelCommentNumber.text = stringComment;
     labelCommentNumber.textColor = [UIColor whiteColor];
     [self.view addSubview:labelCommentNumber];
     
     UIButton *buttonAddComment = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonAddComment.frame = CGRectMake(SCREENWIDTH - 100, 50, 80, 40);
+    buttonAddComment.frame = CGRectMake(SCREENWIDTH - 60, 50, 50, 40);
     [buttonAddComment setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [buttonAddComment setTitle:@"写点评" forState:UIControlStateNormal];
     [buttonAddComment addTarget:self action:@selector(didClickAddComment) forControlEvents:UIControlEventTouchUpInside];
+    
+    buttonAddComment.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:buttonAddComment];
     
-    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, 99, SCREENWIDTH, 1)];
-    viewLine.backgroundColor = [UIColor whiteColor];
+    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, buttonAddComment.ctBottom + 20, SCREENWIDTH, 1)];
+    viewLine.backgroundColor = BYColorFromHex(0xcccccc);
     [self.view addSubview:viewLine];
     
-    self.tableView.frame = CGRectMake(0, 100, SCREENWIDTH, SCREENHEIGHT - 100 - 60);
+    self.tableView.frame = CGRectMake(0, viewLine.ctBottom + 1, SCREENWIDTH, SCREENHEIGHT - viewLine.ctTop - 60);
     [self.view addSubview:self.tableView];
     
-    UIView *viewFooter = [[UIView alloc] initWithFrame:CGRectMake(0, self.tableView.ctBottom, SCREENWIDTH, 60)];
-    viewFooter.backgroundColor = BYColorAlphaMake(104, 110, 114, 1);
+    UIImageView *imageHeader = [[UIImageView alloc] initWithFrame:CGRectMake(0, viewLine.ctBottom, SCREENWIDTH, 10)];
+    imageHeader.image = [UIImage imageNamed:@"con_header_line"];
+    [self.view addSubview:imageHeader];
+    
+    UIImageView *viewFooter = [[UIImageView alloc] initWithFrame:CGRectMake(0, self.tableView.ctBottom, SCREENWIDTH, 60)];
+//    viewFooter.backgroundColor = BYColorAlphaMake(104, 110, 114, 1);
+    viewFooter.image = [UIImage imageNamed:@"icon_close_back"];
+    viewFooter.userInteractionEnabled = YES;
     [self.view addSubview:viewFooter];
     
+    UIImageView *imageFooter = [[UIImageView alloc] initWithFrame:CGRectMake(0, viewFooter.ctTop - 10, SCREENWIDTH, 10)];
+    imageFooter.image = [UIImage imageNamed:@"icon_footer_line"];
+    [self.view addSubview:imageFooter];
+    
     UIButton *buttonCancel = [UIButton buttonWithType:UIButtonTypeCustom];
-    buttonCancel.frame = CGRectMake((SCREENWIDTH - 40) / 2, self.tableView.ctBottom + 10, 42, 42);
+    buttonCancel.frame = CGRectMake(0 , self.tableView.ctBottom + 10, SCREENWIDTH, 42);
     [buttonCancel setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [buttonCancel setImage:[UIImage imageNamed:@"icon_close"] forState:UIControlStateNormal];
     [buttonCancel addTarget:self action:@selector(didClickDismissPage) forControlEvents:UIControlEventTouchUpInside];
@@ -91,13 +109,18 @@
 
 #pragma mark - privateMethods
 - (void)didClickDismissPage {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [UIView animateWithDuration:0.1 animations:^{
+        self.view.alpha = 0.2;
+    } completion:^(BOOL finished) {
+        [self dismissViewControllerAnimated:NO completion:nil];
+    }];
+    
 }
 
 - (void)didClickAddComment {
     TouristAddCommentViewController *controller = [[TouristAddCommentViewController alloc] init];
     controller.tourist = self.tourist;
-    [self presentViewController:controller animated:YES completion:nil];
+    [self presentViewController:controller animated:NO completion:nil];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -111,7 +134,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     TouristCommentListCell *cell = [[TouristCommentListCell alloc] init];
-    return [cell fetchCellHightWithData:nil];
+    
+    return [cell fetchCellHightWithData:[self.arrayComment objectAtIndex:indexPath.row]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -121,7 +145,7 @@
     if (cell == nil) {
         cell = [[TouristCommentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    [cell configCellWithData:[self.arrayComment objectAtIndex:indexPath.row]];
+    [cell configCellWithComment:[self.arrayComment objectAtIndex:indexPath.row]];
     return cell;
 }
 

@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "CommentObject.h"
+#import "MessageObject.h"
 
 @interface TouristCommentListCell : UITableViewCell
 
-- (void)configCellWithData:(id) celldata;
+- (void)configCellWithComment:(CommentObject * ) celldata;
+
+- (void)configCellWithMessage:(MessageObject *) celldata;
 
 - (CGFloat)fetchCellHightWithData:(id) cellData ;
 

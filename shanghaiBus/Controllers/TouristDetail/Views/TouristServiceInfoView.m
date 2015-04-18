@@ -16,6 +16,7 @@
 
 @property (nonatomic, strong) UILabel *labelTitle;
 @property (nonatomic, strong) UILabel *labelPrice;
+@property (nonatomic, strong) UILabel *labelPriceUnit;
 @property (nonatomic, strong) UILabel *labelServiceArea;
 @property (nonatomic, strong) UILabel *labelLanguage;
 @property (nonatomic, strong) CWStarRateView *starRateView;
@@ -42,13 +43,22 @@
         _labelPrice = [[UILabel alloc] init];
         _labelPrice.backgroundColor = [UIColor whiteColor];
         _labelPrice.textColor = BYColorFromHex(0xff5555);
-        _labelPrice.font = [UIFont boldSystemFontOfSize:20];
+        _labelPrice.font = [UIFont systemFontOfSize:20];
         _labelPrice.textAlignment = NSTextAlignmentRight;
         [self addSubview:_labelPrice];
     }
     return _labelPrice;
 }
-
+- (UILabel *)labelPriceUnit {
+    if (_labelPriceUnit == nil) {
+        _labelPriceUnit = [[UILabel alloc] init];
+        _labelPriceUnit.numberOfLines = 0;
+        _labelPriceUnit.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelPriceUnit.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
+        _labelPriceUnit.font = [UIFont systemFontOfSize:13];
+    }
+    return _labelPriceUnit;
+}
 - (UILabel *)labelServiceArea {
     if (_labelServiceArea == nil) {
         _labelServiceArea = [[UILabel alloc] init];
@@ -97,7 +107,8 @@
     self.starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(10, self.labelTitle.ctBottom + 5, 100, 20) numberOfStars:5];
     self.starRateView.scorePercent = 1;
     self.starRateView.allowIncompleteStar = NO;
-    self.starRateView.hasAnimation = YES;
+    self.starRateView.hasAnimation = NO;
+    self.starRateView.enable = NO;
     self.starRateView.scorePercent = tourist.star / 5;
     [self addSubview:self.starRateView];
     
@@ -105,11 +116,11 @@
     viewLine.backgroundColor = BYLineSepratorColor;
     [self addSubview:viewLine];
     
-    self.labelPrice.text = [NSString stringWithFormat:@"%@元/天", tourist.price];
+    self.labelPrice.text = [NSString stringWithFormat:@"%@", tourist.price];
     self.labelPrice.ctTop = self.labelTitle.ctBottom + 5;
-    [self.labelPrice highLightTextInRange:NSMakeRange(0, tourist.price.length) forColor:[UIColor redColor]];
+    [self.labelPrice highLightTextInRange:NSMakeRange(tourist.price.length - 3, 3) forColor:BYColorFromHex(0x797979)];
     
-    UILabel *labelAreaTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelPrice.ctBottom +30, 80, 20)];
+    UILabel *labelAreaTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelPrice.ctBottom + 32, 80, 20)];
     labelAreaTitle.font = [UIFont systemFontOfSize:13];
     labelAreaTitle.textColor = BYColorFromHex(0x333333);
     labelAreaTitle.backgroundColor = self.backgroundColor;
@@ -119,7 +130,7 @@
     
     self.labelServiceArea.frame = CGRectMake(labelAreaTitle.ctRight + 20, self.labelPrice.ctBottom + 30, SCREENWIDTH - 100, 20);
 
-    UILabel *labelLanguageTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelServiceArea.ctBottom + 5, 80, 20)];
+    UILabel *labelLanguageTitle = [[UILabel alloc] initWithFrame:CGRectMake(10, self.labelServiceArea.ctBottom + 7, 80, 20)];
     labelLanguageTitle.font = [UIFont systemFontOfSize:13];
     labelLanguageTitle.textColor = BYColorFromHex(0x333333);
     labelLanguageTitle.backgroundColor = self.backgroundColor;

@@ -45,6 +45,7 @@
 - (instancetype)initWithFrame:(CGRect)frame numberOfStars:(NSInteger)numberOfStars {
     if (self = [super initWithFrame:frame]) {
         _numberOfStars = numberOfStars;
+        _enable = YES;
         [self buildDataAndUI];
     }
     return self;
@@ -69,6 +70,9 @@
 }
 
 - (void)userTapRateView:(UITapGestureRecognizer *)gesture {
+    if (self.enable == NO) {
+        return;
+    }
     CGPoint tapPoint = [gesture locationInView:self];
     CGFloat offset = tapPoint.x;
     CGFloat realStarScore = offset / (self.bounds.size.width / self.numberOfStars);

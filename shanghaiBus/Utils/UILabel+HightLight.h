@@ -10,6 +10,7 @@
 @interface UILabel (HightLight)
 
 - (void)highLightTextInRange:(NSRange)range forColor:(UIColor*)color;
+-(void)highLightNumberTextforColor:(UIColor*)color;
 
 //设置下划线，必须先设置text
 - (void)setUnderline;

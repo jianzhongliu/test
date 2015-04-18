@@ -14,6 +14,7 @@
 
 @property (nonatomic, strong) WebImageView *imageMain;
 @property (nonatomic, strong) UIButton *buttonNumber;
+@property (nonatomic, strong) UILabel *labelName;
 
 @end
 
@@ -33,11 +34,26 @@
     if (_buttonNumber == nil) {
         _buttonNumber = [UIButton buttonWithType:UIButtonTypeCustom];
         [_buttonNumber addTarget:self action:@selector(didClickTouristNumber) forControlEvents:UIControlEventTouchUpInside];
-        _buttonNumber.backgroundColor = [UIColor redColor];
+        _buttonNumber.backgroundColor = BYColorFromHex(0xff5555);
         [_buttonNumber setFont:[UIFont systemFontOfSize:12]];
         [self.contentView addSubview:_buttonNumber];
     }
     return _buttonNumber;
+}
+
+- (UILabel *)labelName {
+    if (_labelName == nil) {
+        _labelName = [[UILabel alloc] init];
+        _labelName.numberOfLines = 0;
+//        _labelName.backgroundColor = [UIColor redColor];
+        _labelName.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelName.textColor = [UIColor whiteColor];
+        _labelName.font = [UIFont boldSystemFontOfSize:18];
+        _labelName.shadowColor = [UIColor blackColor];
+        _labelName.shadowOffset = CGSizeMake(0, 1);
+        [self.contentView addSubview:_labelName];
+    }
+    return _labelName;
 }
 
 #pragma mark - lifeycle
@@ -50,13 +66,20 @@
 
 - (void)initUI {
     self.imageMain.frame = CGRectMake(10, 10, SCREENWIDTH - 20, (SCREENWIDTH -20) * 9/16);
-    self.buttonNumber.frame = CGRectMake(SCREENWIDTH - 100, self.imageMain.ctBottom - 50, 80, 40);
+    
+    self.buttonNumber.frame = CGRectMake(SCREENWIDTH - 110, self.imageMain.ctBottom - 50, 90, 30);
+
+    self.buttonNumber.layer.cornerRadius = 2;
+    self.buttonNumber.clipsToBounds = YES;
+    self.labelName.frame = CGRectMake(20, self.imageMain.ctBottom - 50, 150, 30);
+    [self.contentView bringSubviewToFront:self.labelName];
 }
 
 - (void)resetDataWith:(Sites *) site {
+//    self.labelName.frame = CGRectMake(10, self.imageMain.ctBottom - 50, 150, 30);
     self.imageMain.imageUrl = site.mainImage;
-    [self.buttonNumber setTitle:[NSString stringWithFormat:@"%ld位导游", site.touristnumber] forState:UIControlStateNormal];
-    
+    [self.buttonNumber setTitle:[NSString stringWithFormat:@"%ld条服务", (long)site.touristnumber] forState:UIControlStateNormal];
+    self.labelName.text = site.cityname;
 }
 
 - (void)didClickTouristNumber {

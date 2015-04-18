@@ -250,7 +250,7 @@
     
     [self.viewServiceInfo configViewWithData:self.tourist];
     [self.viewHeaderInfo configViewWithData:self.tourist];
-    
+
     NSArray *arrayImage = [self.tourist.images componentsSeparatedByString:@"|"];
     NSInteger imageNumber = 1;
     if (arrayImage > 0 ) {
@@ -285,8 +285,6 @@
         image.imageUrl = [arrayImage objectAtIndex:i];
         [self.scrollImg addSubview:image];
         self.pageControl.numberOfPages = 5;
-        
-        
     }
     if (arrayImage.count == 0) {
         WebImageView *image = [[WebImageView alloc] initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 150)];
@@ -299,15 +297,16 @@
 //刷新出评论
     if (self.arrayComment.count > 0) {
         [self.viewComment configViewWithData:[self.arrayComment objectAtIndex:0] WithNumber:self.tourist.commentnumber];
+    } else {
+        [self.viewComment configViewWithData:nil WithNumber:0];
     }
 //刷新出留言
     if (self.arrayMessage.count > 0) {
         [self.viewMessage configViewWithMessage:[self.arrayMessage objectAtIndex:0] WithNumber:self.tourist.commentnumber];
+    } else {
+        [self.viewMessage configViewWithMessage:nil WithNumber:0];
     }
-    
-    if (self.arrayMessage.count > 0) {
-        //刷新留言
-    }
+
     [self reDrawScrollView];
 }
 
@@ -398,7 +397,7 @@
     TouristCommentListViewController *controller = [[TouristCommentListViewController alloc] init];
     controller.arrayComment = self.arrayComment;
     controller.tourist = self.tourist;
-    [self presentViewController:controller animated:YES completion:^{
+    [self presentViewController:controller animated:NO completion:^{
         
     }];
 }
@@ -406,7 +405,7 @@
 - (void)didClickMessage {
     TouristMessageViewController *controller = [[TouristMessageViewController alloc] init];
     controller.tourist = self.tourist;
-    [self presentViewController:controller animated:YES completion:nil];
+    [self presentViewController:controller animated:NO completion:nil];
 }
 
 - (void)didClickPhone {
