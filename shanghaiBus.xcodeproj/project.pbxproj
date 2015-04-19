@@ -38,6 +38,18 @@
 		2456D5901AE2A16400457A31 /* icon_home_message_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2456D58A1AE2A16400457A31 /* icon_home_message_selected@2x.png */; };
 		2456D5911AE2A16400457A31 /* icon_home_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2456D58B1AE2A16400457A31 /* icon_home_message@2x.png */; };
 		2456D5941AE2A79700457A31 /* BYTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2456D5931AE2A79700457A31 /* BYTabBarItem.m */; };
+		245FBEE41AE3B11000CCF36A /* MyHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEE31AE3B11000CCF36A /* MyHomeView.m */; };
+		245FBEE61AE3BE3500CCF36A /* icon_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245FBEE51AE3BE3500CCF36A /* icon_switch@2x.png */; };
+		245FBEE91AE3C66700CCF36A /* EditeUserInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEE81AE3C66700CCF36A /* EditeUserInfomationViewController.m */; };
+		245FBEEC1AE3D31C00CCF36A /* ContectUSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEEB1AE3D31C00CCF36A /* ContectUSViewController.m */; };
+		245FBEEF1AE3D38500CCF36A /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEEE1AE3D38500CCF36A /* SettingViewController.m */; };
+		245FBEF21AE3E3B400CCF36A /* MessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEF11AE3E3B400CCF36A /* MessageListViewController.m */; };
+		245FBEF61AE3E5D800CCF36A /* TouristPatternHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEF51AE3E5D800CCF36A /* TouristPatternHomeViewController.m */; };
+		245FBEFC1AE3E6C500CCF36A /* UINavigationController+Ext.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEFB1AE3E6C500CCF36A /* UINavigationController+Ext.m */; };
+		245FBEFE1AE404CB00CCF36A /* icon_tourist_head@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245FBEFD1AE404CB00CCF36A /* icon_tourist_head@2x.png */; };
+		245FBF011AE4196B00CCF36A /* TouristBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBF001AE4196B00CCF36A /* TouristBaseInfoViewController.m */; };
+		245FBF041AE41B2D00CCF36A /* UploadServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */; };
+		245FBF071AE41C7400CCF36A /* ServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBF061AE41C7400CCF36A /* ServiceListViewController.m */; };
 		2465395C1AC6B7F700C1908C /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2465395B1AC6B7F700C1908C /* UserLoginViewController.m */; };
 		246539801AC6BB6F00C1908C /* com_back_window@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2465395F1AC6BB6F00C1908C /* com_back_window@2x.png */; };
 		246539811AC6BB6F00C1908C /* com_back_window@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246539601AC6BB6F00C1908C /* com_back_window@3x.png */; };
@@ -183,6 +195,28 @@
 		2456D58B1AE2A16400457A31 /* icon_home_message@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_home_message@2x.png"; sourceTree = "<group>"; };
 		2456D5921AE2A79700457A31 /* BYTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BYTabBarItem.h; sourceTree = "<group>"; };
 		2456D5931AE2A79700457A31 /* BYTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYTabBarItem.m; sourceTree = "<group>"; };
+		245FBEE21AE3B11000CCF36A /* MyHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomeView.h; sourceTree = "<group>"; };
+		245FBEE31AE3B11000CCF36A /* MyHomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomeView.m; sourceTree = "<group>"; };
+		245FBEE51AE3BE3500CCF36A /* icon_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_switch@2x.png"; sourceTree = "<group>"; };
+		245FBEE71AE3C66700CCF36A /* EditeUserInfomationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditeUserInfomationViewController.h; sourceTree = "<group>"; };
+		245FBEE81AE3C66700CCF36A /* EditeUserInfomationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditeUserInfomationViewController.m; sourceTree = "<group>"; };
+		245FBEEA1AE3D31C00CCF36A /* ContectUSViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContectUSViewController.h; sourceTree = "<group>"; };
+		245FBEEB1AE3D31C00CCF36A /* ContectUSViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContectUSViewController.m; sourceTree = "<group>"; };
+		245FBEED1AE3D38500CCF36A /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		245FBEEE1AE3D38500CCF36A /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		245FBEF01AE3E3B400CCF36A /* MessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageListViewController.h; sourceTree = "<group>"; };
+		245FBEF11AE3E3B400CCF36A /* MessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageListViewController.m; sourceTree = "<group>"; };
+		245FBEF41AE3E5D800CCF36A /* TouristPatternHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristPatternHomeViewController.h; sourceTree = "<group>"; };
+		245FBEF51AE3E5D800CCF36A /* TouristPatternHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristPatternHomeViewController.m; sourceTree = "<group>"; };
+		245FBEFA1AE3E6C500CCF36A /* UINavigationController+Ext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Ext.h"; sourceTree = "<group>"; };
+		245FBEFB1AE3E6C500CCF36A /* UINavigationController+Ext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Ext.m"; sourceTree = "<group>"; };
+		245FBEFD1AE404CB00CCF36A /* icon_tourist_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tourist_head@2x.png"; sourceTree = "<group>"; };
+		245FBEFF1AE4196B00CCF36A /* TouristBaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristBaseInfoViewController.h; sourceTree = "<group>"; };
+		245FBF001AE4196B00CCF36A /* TouristBaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristBaseInfoViewController.m; sourceTree = "<group>"; };
+		245FBF021AE41B2D00CCF36A /* UploadServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadServiceViewController.h; sourceTree = "<group>"; };
+		245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadServiceViewController.m; sourceTree = "<group>"; };
+		245FBF051AE41C7400CCF36A /* ServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListViewController.h; sourceTree = "<group>"; };
+		245FBF061AE41C7400CCF36A /* ServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListViewController.m; sourceTree = "<group>"; };
 		2465395A1AC6B7F700C1908C /* UserLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginViewController.h; sourceTree = "<group>"; };
 		2465395B1AC6B7F700C1908C /* UserLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginViewController.m; sourceTree = "<group>"; };
 		2465395F1AC6BB6F00C1908C /* com_back_window@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "com_back_window@2x.png"; sourceTree = "<group>"; };
@@ -380,6 +414,16 @@
 			children = (
 				2456D57C1AE297EC00457A31 /* MyHomeViewController.h */,
 				2456D57D1AE297EC00457A31 /* MyHomeViewController.m */,
+				245FBEE21AE3B11000CCF36A /* MyHomeView.h */,
+				245FBEE31AE3B11000CCF36A /* MyHomeView.m */,
+				245FBEE71AE3C66700CCF36A /* EditeUserInfomationViewController.h */,
+				245FBEE81AE3C66700CCF36A /* EditeUserInfomationViewController.m */,
+				245FBEEA1AE3D31C00CCF36A /* ContectUSViewController.h */,
+				245FBEEB1AE3D31C00CCF36A /* ContectUSViewController.m */,
+				245FBEED1AE3D38500CCF36A /* SettingViewController.h */,
+				245FBEEE1AE3D38500CCF36A /* SettingViewController.m */,
+				245FBEF01AE3E3B400CCF36A /* MessageListViewController.h */,
+				245FBEF11AE3E3B400CCF36A /* MessageListViewController.m */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -391,6 +435,21 @@
 				2456D5811AE2982800457A31 /* MyMessageViewController.m */,
 			);
 			path = Message;
+			sourceTree = "<group>";
+		};
+		245FBEF31AE3E55E00CCF36A /* TouristPatarn */ = {
+			isa = PBXGroup;
+			children = (
+				245FBEF41AE3E5D800CCF36A /* TouristPatternHomeViewController.h */,
+				245FBEF51AE3E5D800CCF36A /* TouristPatternHomeViewController.m */,
+				245FBEFF1AE4196B00CCF36A /* TouristBaseInfoViewController.h */,
+				245FBF001AE4196B00CCF36A /* TouristBaseInfoViewController.m */,
+				245FBF021AE41B2D00CCF36A /* UploadServiceViewController.h */,
+				245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */,
+				245FBF051AE41C7400CCF36A /* ServiceListViewController.h */,
+				245FBF061AE41C7400CCF36A /* ServiceListViewController.m */,
+			);
+			path = TouristPatarn;
 			sourceTree = "<group>";
 		};
 		246539591AC6B24200C1908C /* Login */ = {
@@ -426,6 +485,8 @@
 		2465395E1AC6BB6F00C1908C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				245FBEFD1AE404CB00CCF36A /* icon_tourist_head@2x.png */,
+				245FBEE51AE3BE3500CCF36A /* icon_switch@2x.png */,
 				2456D5861AE2A16400457A31 /* icon_home_home_selected@2x.png */,
 				2456D5871AE2A16400457A31 /* icon_home_home@2x.png */,
 				2456D5881AE2A16400457A31 /* icon_home_me_selected@2x.png */,
@@ -704,6 +765,7 @@
 		24CEE7621ABE9D1200DBE500 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				245FBEF31AE3E55E00CCF36A /* TouristPatarn */,
 				2456D57F1AE2981000457A31 /* Message */,
 				2456D57B1AE297CB00457A31 /* MyPage */,
 				246539591AC6B24200C1908C /* Login */,
@@ -746,6 +808,8 @@
 		24CEE7741ABEA3E600DBE500 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				245FBEFA1AE3E6C500CCF36A /* UINavigationController+Ext.h */,
+				245FBEFB1AE3E6C500CCF36A /* UINavigationController+Ext.m */,
 				24CBAA2C1ADC2942007FD128 /* UIViewController+Loading.h */,
 				24CBAA2D1ADC2942007FD128 /* UIViewController+Loading.m */,
 				24CBAA291ADC28BB007FD128 /* MBProgressHUD.h */,
@@ -845,6 +909,7 @@
 				246539971AC6BB6F00C1908C /* icon_corner@2x.png in Resources */,
 				24B29DA51ABD1B32007F84E5 /* LaunchScreen.xib in Resources */,
 				24D9E4DC1AE16CF700C2E978 /* icon_scroll_indecator_gray@2x.png in Resources */,
+				245FBEE61AE3BE3500CCF36A /* icon_switch@2x.png in Resources */,
 				24D9E4CC1AE13D5600C2E978 /* icon_gender_man@2x.png in Resources */,
 				2456D5751AE250CF00457A31 /* icon_search_indecator@2x.png in Resources */,
 				2465398B1AC6BB6F00C1908C /* tieyou_144.png in Resources */,
@@ -892,6 +957,7 @@
 				2465399F1AC6BB6F00C1908C /* IMG_0146.JPG in Resources */,
 				246539801AC6BB6F00C1908C /* com_back_window@2x.png in Resources */,
 				246539831AC6BB6F00C1908C /* Default-568h@2x.png in Resources */,
+				245FBEFE1AE404CB00CCF36A /* icon_tourist_head@2x.png in Resources */,
 				246539881AC6BB6F00C1908C /* icon@2x.png in Resources */,
 				2465398F1AC6BB6F00C1908C /* tieyou_50.png in Resources */,
 				2465399E1AC6BB6F00C1908C /* icon_sina_login@2x.png in Resources */,
@@ -917,6 +983,8 @@
 				24CEE76E1ABE9D8000DBE500 /* MainHomePageViewController.m in Sources */,
 				24B29DF31ABD1C6E007F84E5 /* UIImageView+AFNetworking.m in Sources */,
 				24B29DEB1ABD1C6E007F84E5 /* AFNetworkReachabilityManager.m in Sources */,
+				245FBF071AE41C7400CCF36A /* ServiceListViewController.m in Sources */,
+				245FBEEC1AE3D31C00CCF36A /* ContectUSViewController.m in Sources */,
 				24252A0B1AC1AB8300BB264A /* TouristDetailViewController.m in Sources */,
 				24CEE8351ABEBA7100DBE500 /* WebImageView.m in Sources */,
 				24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */,
@@ -927,8 +995,10 @@
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,
 				24CEE8621ABEF4C200DBE500 /* TouristListCell.m in Sources */,
 				24CEE8381ABEBF8300DBE500 /* HomePageSepratorCell.m in Sources */,
+				245FBEEF1AE3D38500CCF36A /* SettingViewController.m in Sources */,
 				2409859F1ADAC5C3009CC9F2 /* CommentObject.m in Sources */,
 				240985961ADAB133009CC9F2 /* Utils.m in Sources */,
+				245FBF041AE41B2D00CCF36A /* UploadServiceViewController.m in Sources */,
 				24CEE7601ABE9CEC00DBE500 /* HomeHeaderView.m in Sources */,
 				246539A21AC6BBFB00C1908C /* BYDevice.m in Sources */,
 				24B29DE71ABD1C6E007F84E5 /* AFHTTPRequestOperationManager.m in Sources */,
@@ -941,11 +1011,15 @@
 				24CBAA2B1ADC28BB007FD128 /* MBProgressHUD.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				2456D57E1AE297EC00457A31 /* MyHomeViewController.m in Sources */,
+				245FBEE41AE3B11000CCF36A /* MyHomeView.m in Sources */,
 				2414A3101ACC489E00E05E80 /* ForgetPasswordViewController.m in Sources */,
+				245FBEFC1AE3E6C500CCF36A /* UINavigationController+Ext.m in Sources */,
 				24CD05FD1AC5BE70000E851F /* TouristAddCommentViewController.m in Sources */,
+				245FBEF61AE3E5D800CCF36A /* TouristPatternHomeViewController.m in Sources */,
 				2456D5821AE2982800457A31 /* MyMessageViewController.m in Sources */,
 				24B29DEC1ABD1C6E007F84E5 /* AFSecurityPolicy.m in Sources */,
 				24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */,
+				245FBEE91AE3C66700CCF36A /* EditeUserInfomationViewController.m in Sources */,
 				24B29DF51ABD1C6E007F84E5 /* UIRefreshControl+AFNetworking.m in Sources */,
 				24350EBD1AC31A350066A9E8 /* TouristCommentView.m in Sources */,
 				2456D5941AE2A79700457A31 /* BYTabBarItem.m in Sources */,
@@ -965,9 +1039,11 @@
 				24B29DE81ABD1C6E007F84E5 /* AFURLConnectionOperation.m in Sources */,
 				24B29DEF1ABD1C6E007F84E5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				24CEE83E1ABEE30900DBE500 /* HomePageSingleCell.m in Sources */,
+				245FBEF21AE3E3B400CCF36A /* MessageListViewController.m in Sources */,
 				24CEE8671ABEF92D00DBE500 /* TouristObject.m in Sources */,
 				24B29DE91ABD1C6E007F84E5 /* AFHTTPSessionManager.m in Sources */,
 				24B29DEE1ABD1C6E007F84E5 /* AFURLResponseSerialization.m in Sources */,
+				245FBF011AE4196B00CCF36A /* TouristBaseInfoViewController.m in Sources */,
 				2465395C1AC6B7F700C1908C /* UserLoginViewController.m in Sources */,
 				24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */,
 				2414A3161ACC4BFF00E05E80 /* SettingPasswordViewController.m in Sources */,

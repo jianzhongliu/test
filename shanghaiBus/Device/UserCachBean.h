@@ -7,9 +7,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TouristObject.h"
+
+typedef NS_ENUM(NSInteger, USERTYPE) {
+        USERTYPENOMAL = 1,
+        USERTYPEBUSSENESS = 2
+
+};
 
 @interface UserCachBean : NSObject
 
-- (instancetype)share;
+@property (nonatomic, strong) TouristObject *userInfo;
+@property (nonatomic, assign) USERTYPE userType;
+
++ (instancetype)share;
 
 @end

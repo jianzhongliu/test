@@ -9,6 +9,8 @@
 #import "MainHomePageViewController.h"
 #import "TouristDetailViewController.h"
 #import "SearchObjectViewController.h"
+#import "TouristBaseInfoViewController.h"
+
 #import "HomeHeaderView.h"
 #import "HomePageSepratorCell.h"
 #import "HomePageSingleCell.h"
@@ -39,7 +41,7 @@
     [self initUI];
     [self requestData];
 
-    
+    [self.navigationItem setLeftBarButtonItem:nil];
 //    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
 //        
 //    }];
@@ -67,8 +69,10 @@
     self.table.tableHeaderView = self.viewHeader;
 }
 
-- (void)businessEnter {
-
+- (void)businessEnter{
+    TouristBaseInfoViewController *controller = [[TouristBaseInfoViewController alloc] init];
+    self.tabBarController.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:controller animated:YES];
 }
 
 - (void)initData {

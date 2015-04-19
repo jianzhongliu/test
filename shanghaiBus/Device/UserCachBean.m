@@ -10,7 +10,7 @@
 
 @implementation UserCachBean
 
-- (instancetype)share {
++ (instancetype)share {
     static UserCachBean *userCachBean = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

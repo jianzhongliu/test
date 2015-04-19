@@ -7,16 +7,33 @@
 //
 
 #import "BYTabBarController.h"
-#import "BYTabBarItem.h"
+#import "EditeUserInfomationViewController.h"
+#import "ContectUSViewController.h"
+#import "SettingViewController.h"
+#import "MessageListViewController.h"
+#import "TouristBaseInfoViewController.h"
 
-@interface BYTabBarController () <UITabBarControllerDelegate>
+#import "AppDelegate.h"
+#import "BYTabBarItem.h"
+#import "MyHomeView.h"
+
+@interface BYTabBarController () <UITabBarControllerDelegate, MyHomeViewDelegate>
 
 @property (nonatomic, strong) UIControl *control;
-@property (nonatomic, strong) UIView *viewMy;
+@property (nonatomic, strong) MyHomeView *viewMy;
 
 @end
 
 @implementation BYTabBarController
+
+- (MyHomeView *)viewMy {
+    if (_viewMy == nil) {
+        _viewMy = [[MyHomeView alloc] init];
+        _viewMy.delegate = self;
+    }
+    return _viewMy;
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,6 +63,7 @@
                                                            shadow, NSShadowAttributeName,
                                                            [UIFont systemFontOfSize:18], NSFontAttributeName, nil]];
 }
+
 -(void) configureTabBarController
 {
     BYTabBarItem *homeItem;
@@ -93,6 +111,7 @@
     myItem.highlightedImage = [UIImage imageNamed:@"icon_home_me_selected"];
     myNavController.tabBarItem = myItem;
     [self adjustNavigationUI:myNavController];
+    self.viewMy.nav = myNavController;
     
     self.viewControllers = @[homeNavController, messageNavController, myNavController];
     [homeController view];
@@ -106,6 +125,7 @@
 }
 
 - (void)showMyInfo {
+    
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
     if (self.control == nil) {
         self.control = [[UIControl alloc] initWithFrame:window.bounds];
@@ -113,8 +133,7 @@
         [self.control addTarget:self action:@selector(didDismissMyInfoCenter) forControlEvents:UIControlEventTouchDown];
         [window addSubview:self.control];
         
-        self.viewMy = [[UIView alloc] initWithFrame:CGRectMake(SCREENWIDTH, 0, 230, SCREENHEIGHT)];
-        self.viewMy.backgroundColor = BYColor;
+        self.viewMy.frame = CGRectMake(SCREENWIDTH, 0, 230, SCREENHEIGHT);
         [self.control addSubview:self.viewMy];
     } else {
         self.control.alpha = 1;
@@ -126,6 +145,7 @@
 }
 
 - (void)didDismissMyInfoCenter {
+    
     [UIView animateWithDuration:0.2 animations:^{
         self.viewMy.viewX = SCREENWIDTH;
     } completion:^(BOOL finished) {
@@ -147,8 +167,6 @@
         return NO;
     }
     self.currentIndex = tabBarController.selectedIndex;
-    
-
 
     return YES;
 }
@@ -168,5 +186,60 @@
     }
 }
 
+#pragma  mark - MyHomeViewDelegate 
+- (void)didClickActionWithActionType:(ACTIONINDEX)index {
+    switch (index) {
+        case ACTIONINDEXUSERINFO:
+        {
+            EditeUserInfomationViewController *controller = [[EditeUserInfomationViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXSWITCH:
+        {
+            [[AppDelegate share] switchUserPattern];
+            self.control.alpha = 0;
+            self.control = nil;
+//            MessageListViewController *controller = [[MessageListViewController alloc] init];
+//            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+//            [self adjustNavigationUI:myNavController];
+//            [self presentViewController:myNavController animated:YES completion:nil];
+//            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXSETTING:
+        {
+            SettingViewController *controller = [[SettingViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXTOURISTENTER:
+        {
+            TouristBaseInfoViewController *controller = [[TouristBaseInfoViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXCONTECTUS:
+        {
+            ContectUSViewController *controller = [[ContectUSViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+            [self didDismissMyInfoCenter];
+        }
+            break;
+        default:
+            break;
+    }
 
+}
 @end

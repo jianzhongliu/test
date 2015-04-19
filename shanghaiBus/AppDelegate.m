@@ -9,23 +9,64 @@
 #import "AppDelegate.h"
 #import "MainHomePageViewController.h"
 #import "BYTabBarController.h"
+#import "TouristPatternHomeViewController.h"
+#import "UINavigationController+Ext.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) UINavigationController *navigationTouristPattern;
+@property (nonatomic, strong) BYTabBarController *viewUserPattern;
 
 @end
 
 @implementation AppDelegate
 
++ (AppDelegate *)share {
+    static AppDelegate *appDelegate;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        if (appDelegate == nil) {
+            appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        }
+    });
+    return appDelegate;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.switchPattern = SWITCHPATTERNUSER;
     BYTabBarController *controller = [[BYTabBarController alloc] init];
-//    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
-
     self.window.rootViewController = controller;
+    self.viewUserPattern = controller;
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)switchUserPattern {
+    if (self.switchPattern == SWITCHPATTERNUSER) {
+        
+        if (self.navigationTouristPattern == nil) {
+            TouristPatternHomeViewController *controller = [[TouristPatternHomeViewController alloc] init];
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+            [nav adjustNavigationUI];
+            self.window.rootViewController = nav;
+            self.navigationTouristPattern = nav;
+        } else {
+            self.window.rootViewController = self.navigationTouristPattern;
+        }
+        self.switchPattern = SWITCHPATTERNTOURIST;
+
+    } else {
+        if (self.viewUserPattern == nil) {
+            BYTabBarController *controller = [[BYTabBarController alloc] init];
+            self.window.rootViewController = controller;
+            self.viewUserPattern = controller;
+        } else {
+            self.window.rootViewController = self.viewUserPattern;
+        }
+        self.switchPattern = SWITCHPATTERNUSER;
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
