@@ -12,6 +12,11 @@
 #import "TouristPatternHomeViewController.h"
 #import "UINavigationController+Ext.h"
 
+#import <SMS_SDK/SMS_SDK.h>
+
+#define appKey @"6ec614bbd5cf"
+#define appSecret @"3c146fc7fc48754b2583d2daa389d772"
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) UINavigationController *navigationTouristPattern;
@@ -33,6 +38,30 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //初始化应用，appKey和appSecret从后台申请得到
+    [SMS_SDK registerApp:appKey
+              withSecret:appSecret];
+    
+    [SMS_SDK getVerificationCodeBySMSWithPhone:@"13916241357"
+                                          zone:@"86"
+                                        result:^(SMS_SDKError *error)
+     {
+         if (!error)
+         {
+             
+         }
+         else
+         {
+             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil)
+                                                           message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
+                                                          delegate:self
+                                                 cancelButtonTitle:NSLocalizedString(@"sure", nil)
+                                                 otherButtonTitles:nil, nil];
+             [alert show];
+         }
+         
+     }];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.switchPattern = SWITCHPATTERNUSER;
     BYTabBarController *controller = [[BYTabBarController alloc] init];

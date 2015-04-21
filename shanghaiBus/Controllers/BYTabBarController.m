@@ -69,15 +69,14 @@
     BYTabBarItem *homeItem;
     BYTabBarItem *messageItem;
     BYTabBarItem *myItem;
-//    BYTabBarItem *sessionItem;
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
-        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x22b9f7), UITextAttributeTextColor, [UIFont boldSystemFontOfSize:13], NSFontAttributeName,nil] forState:UIControlStateSelected];
+        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x22b9f7), NSForegroundColorAttributeName, [UIFont boldSystemFontOfSize:13], NSFontAttributeName,nil] forState:UIControlStateSelected];
         
-        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x9999999), UITextAttributeTextColor, [UIFont systemFontOfSize:13], NSFontAttributeName, nil] forState:UIControlStateNormal];
+        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x9999999), NSForegroundColorAttributeName, [UIFont systemFontOfSize:13], NSFontAttributeName, nil] forState:UIControlStateNormal];
     } else {
-        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x22b9f7), UITextAttributeTextColor, nil] forState:UIControlStateSelected];
+        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x22b9f7), NSForegroundColorAttributeName, nil] forState:UIControlStateSelected];
         
-        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x9999999), UITextAttributeTextColor, nil] forState:UIControlStateNormal];
+        [[BYTabBarItem appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:BYColorFromHex(0x9999999), NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
     }
     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
         self.tabBar.tintColor = BYColor;
@@ -156,33 +155,32 @@
 #pragma mark - tabBarController delegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
-    if (tabBarController.selectedIndex == 0) {//我的
-        UIViewController *tabController = viewController;
-        
-        if ([viewController isKindOfClass:[UINavigationController class]]) {
-            tabController = [(UINavigationController *)viewController visibleViewController];
-        }
-//window
-        [self showMyInfo];
-        return NO;
-    }
-    self.currentIndex = tabBarController.selectedIndex;
-
+//    if (tabBarController.selectedIndex == 0) {//我的
+//        UIViewController *tabController = viewController;
+//        
+//        if ([viewController isKindOfClass:[UINavigationController class]]) {
+//            tabController = [(UINavigationController *)viewController visibleViewController];
+//        }
+////window
+//        [self showMyInfo];
+//        return NO;
+//    }
+//    self.currentIndex = tabBarController.selectedIndex;
+//    NSLog(@"%d",tabBarController.selectedIndex);
     return YES;
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
-    
-    if (tabBarController.selectedIndex == 2) {
 
-    }
     if (tabBarController.selectedIndex == 0) {
-
+        self.currentIndex = tabBarController.selectedIndex;
     } else if (tabBarController.selectedIndex == 1){
-
+        self.currentIndex = tabBarController.selectedIndex;
     } else if (tabBarController.selectedIndex == 2) {
-
+        self.selectedIndex = self.currentIndex;
+        [self showMyInfo];
+//        self.currentIndex = tabBarController.selectedIndex;
     }
 }
 

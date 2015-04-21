@@ -21,18 +21,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = BYColor;
-    self.view.viewX = SCREENWIDTH;
-    [UIView animateWithDuration:0.3 animations:^{
-        self.view.viewX = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(didDismissMyInfo)];
+    [self.navigationItem setLeftBarButtonItem:leftItem];
+    [self setTitle:@"我的消息"];
     [self initUI];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
+    self.view.viewX = SCREENWIDTH;
+//    [UIView animateWithDuration:0.3 animations:^{
+//        self.view.viewX = 0;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
 }
 
 - (void)initData {

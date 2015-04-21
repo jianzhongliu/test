@@ -54,13 +54,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/BYTabBarController.m"
-            timestampString = "451156592.954883"
+            filePath = "shanghaiBus/Controllers/MainHomePageViewController.m"
+            timestampString = "451246189.199418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "177"
-            endingLineNumber = "177"
-            landmarkName = "-tabBarController:didSelectViewController:"
+            startingLineNumber = "106"
+            endingLineNumber = "106"
+            landmarkName = "-testCtripdata"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -71,44 +71,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shanghaiBus/AppDelegate.m"
-            timestampString = "451154692.135694"
+            timestampString = "451326289.533247"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "47"
-            endingLineNumber = "47"
-            landmarkName = "-switchUserPattern"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/BYTabBarController.m"
-            timestampString = "451156592.954883"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-tabBarController:shouldSelectViewController:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/BYTabBarController.m"
-            timestampString = "451156592.954883"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "-showMyInfo"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -40,7 +40,7 @@
     [self.view setBackgroundColor:BYBackColor];
     [self initUI];
     [self requestData];
-
+//    [self testCtripdata];
     [self.navigationItem setLeftBarButtonItem:nil];
 //    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
 //        
@@ -88,7 +88,30 @@
     //无数据
     }
 }
+- (void)testCtripdata {
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+//http://m.ctrip.com/restapi/soa2/10397/GetNativeProductDetail?_fxpcqlniredt=09031119110012839181
+    NSString *url = @"http://m.ctrip.com/restapi/soa2/10397/GetNativeProductDetail";
+//    NSDictionary *dic = @{@"Language":@"0",@"Sex":@"0",@"CompanyLicense":@"0",@"GuideLicense":@"0",@"DriverLicense":@"0",@"SortType":@"0",@"DistrictId":@"2",@"ServiceType":@"1",@"PageIndex":@"1",@"PageSize":@"10",@"head":@{@"cid":@"09031119110012839181",@"ctok":@"351858059049938",@"cver":@"1.0",@"lang":@"01",@"sid":@"2328",@"syscode":@"09",@"auth":@""},@"contentType":@"json"};
+//    {"Language":0,"Sex":0,"CompanyLicense":0,"GuideLicense":0,"DriverLicense":0,"SortType":0,"DistrictId":"2","ServiceType":1,"PageIndex":1,"PageSize":10,"head":{"cid":"09031119110012839181","ctok":"351858059049938","cver":"1.0","lang":"01","sid":"2328","syscode":"09","auth":""},"contentType":"json"}
+    
+    NSDictionary *dic = @{@"_fxpcqlniredt":@"09031119110012839181",@"NativeProductId":@"1897",@"head":@{@"cid":@"09031119110012839181",@"ctok":@"351858059049938",@"cver":@"1.0",@"lang":@"01",@"sid":@"2328",@"syscode":@"09",@"auth":@""},@"contentType":@"json"};
+    [manager POST:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"OK====%@",responseObject);
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
 
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog( @"error ==== %@", error);
+    }];
+}
+
+//http://m.ctrip.com/restapi/soa2/10397/GetNativeProductDetail?_fxpcqlniredt=09031119110012839181
 - (void)requestData {
     [self showLoadingActivity:YES];
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];

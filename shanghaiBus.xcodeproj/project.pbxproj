@@ -147,6 +147,14 @@
 		24D9E4DC1AE16CF700C2E978 /* icon_scroll_indecator_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D9E4DA1AE16CF700C2E978 /* icon_scroll_indecator_gray@2x.png */; };
 		24D9E4DD1AE16CF700C2E978 /* icon_scroll_indecator@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D9E4DB1AE16CF700C2E978 /* icon_scroll_indecator@2x.png */; };
 		24D9E4DF1AE1821600C2E978 /* icon_share@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24D9E4DE1AE1821600C2E978 /* icon_share@2x.png */; };
+		24E854241AE6A5CD006628B0 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854231AE6A5CD006628B0 /* libz.dylib */; };
+		24E854261AE6ABFF006628B0 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854251AE6ABFF006628B0 /* libicucore.dylib */; };
+		24E854281AE6AC1F006628B0 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854271AE6AC1F006628B0 /* Security.framework */; };
+		24E8542A1AE6AFD9006628B0 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854291AE6AFD9006628B0 /* MessageUI.framework */; };
+		24E8542C1AE6AFE7006628B0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8542B1AE6AFE7006628B0 /* AddressBook.framework */; };
+		24E8542E1AE6AFF5006628B0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8542D1AE6AFF5006628B0 /* AddressBookUI.framework */; };
+		24E854301AE6B014006628B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8542F1AE6B014006628B0 /* CoreGraphics.framework */; };
+		24E854321AE6B043006628B0 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854311AE6B043006628B0 /* SMS_SDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -366,6 +374,14 @@
 		24D9E4DA1AE16CF700C2E978 /* icon_scroll_indecator_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_scroll_indecator_gray@2x.png"; sourceTree = "<group>"; };
 		24D9E4DB1AE16CF700C2E978 /* icon_scroll_indecator@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_scroll_indecator@2x.png"; sourceTree = "<group>"; };
 		24D9E4DE1AE1821600C2E978 /* icon_share@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_share@2x.png"; sourceTree = "<group>"; };
+		24E854231AE6A5CD006628B0 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		24E854251AE6ABFF006628B0 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		24E854271AE6AC1F006628B0 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		24E854291AE6AFD9006628B0 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		24E8542B1AE6AFE7006628B0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		24E8542D1AE6AFF5006628B0 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		24E8542F1AE6B014006628B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		24E854311AE6B043006628B0 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SMS_SDK.framework; path = ../SMS_SDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +389,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E854301AE6B014006628B0 /* CoreGraphics.framework in Frameworks */,
+				24E854321AE6B043006628B0 /* SMS_SDK.framework in Frameworks */,
+				24E854241AE6A5CD006628B0 /* libz.dylib in Frameworks */,
+				24E854261AE6ABFF006628B0 /* libicucore.dylib in Frameworks */,
+				24E8542E1AE6AFF5006628B0 /* AddressBookUI.framework in Frameworks */,
+				24E8542C1AE6AFE7006628B0 /* AddressBook.framework in Frameworks */,
+				24E8542A1AE6AFD9006628B0 /* MessageUI.framework in Frameworks */,
+				24E854281AE6AC1F006628B0 /* Security.framework in Frameworks */,
 				2409859C1ADAB80F009CC9F2 /* QuartzCore.framework in Frameworks */,
 				2409859A1ADAB804009CC9F2 /* Foundation.framework in Frameworks */,
 				240985981ADAB7F7009CC9F2 /* UIKit.framework in Frameworks */,
@@ -565,6 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				24B29D931ABD1B32007F84E5 /* shanghaiBus */,
+				24E854331AE6B094006628B0 /* Framework */,
 				24B29DAD1ABD1B32007F84E5 /* shanghaiBusTests */,
 				24B29D921ABD1B32007F84E5 /* Products */,
 			);
@@ -602,9 +627,6 @@
 		24B29D941ABD1B32007F84E5 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				2409859B1ADAB80F009CC9F2 /* QuartzCore.framework */,
-				240985991ADAB804009CC9F2 /* Foundation.framework */,
-				240985971ADAB7F7009CC9F2 /* UIKit.framework */,
 				24B29D951ABD1B32007F84E5 /* Info.plist */,
 				24B29D961ABD1B32007F84E5 /* main.m */,
 			);
@@ -842,6 +864,24 @@
 				24CEE8341ABEBA7100DBE500 /* WebImageView.m */,
 			);
 			path = IMGView;
+			sourceTree = "<group>";
+		};
+		24E854331AE6B094006628B0 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				2409859B1ADAB80F009CC9F2 /* QuartzCore.framework */,
+				240985991ADAB804009CC9F2 /* Foundation.framework */,
+				240985971ADAB7F7009CC9F2 /* UIKit.framework */,
+				24E854311AE6B043006628B0 /* SMS_SDK.framework */,
+				24E8542F1AE6B014006628B0 /* CoreGraphics.framework */,
+				24E8542D1AE6AFF5006628B0 /* AddressBookUI.framework */,
+				24E8542B1AE6AFE7006628B0 /* AddressBook.framework */,
+				24E854291AE6AFD9006628B0 /* MessageUI.framework */,
+				24E854271AE6AC1F006628B0 /* Security.framework */,
+				24E854251AE6ABFF006628B0 /* libicucore.dylib */,
+				24E854231AE6A5CD006628B0 /* libz.dylib */,
+			);
+			path = Framework;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1150,9 +1190,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = shanghaiBus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1165,9 +1214,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = shanghaiBus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
+				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
