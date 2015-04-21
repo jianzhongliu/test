@@ -17,6 +17,7 @@
 #import "TouristListViewController.h"
 #import "Sites.h"
 
+#import "UMSocial.h"
 
 @interface MainHomePageViewController () <UITableViewDataSource, UITableViewDelegate, HomePageSepratorCellDelegate, HomeHeaderViewDelegate>
 
@@ -40,15 +41,18 @@
     [self.view setBackgroundColor:BYBackColor];
     [self initUI];
     [self requestData];
-//    [self testCtripdata];
+    
+//抓取携程当地有导游数据
+//    [self testCtripdata];//
     [self.navigationItem setLeftBarButtonItem:nil];
-//    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
-//        
-//    }];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
+        
+    }];
 }
 
 #pragma mark - private Methods
@@ -88,6 +92,7 @@
     //无数据
     }
 }
+
 - (void)testCtripdata {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];

@@ -11,11 +11,16 @@
 #import "BYTabBarController.h"
 #import "TouristPatternHomeViewController.h"
 #import "UINavigationController+Ext.h"
-
+//掌淘科技
 #import <SMS_SDK/SMS_SDK.h>
-
-#define appKey @"6ec614bbd5cf"
-#define appSecret @"3c146fc7fc48754b2583d2daa389d772"
+#define ztappKey @"6ec614bbd5cf"
+#define ztappSecret @"3c146fc7fc48754b2583d2daa389d772"
+//umeng
+#define UmengAppkey @"5211818556240bc9ee01db2f"
+#import "UMSocial.h"
+#import "UMSocialSinaSSOHandler.h"
+#import "UMSocialQQHandler.h"
+//#import "UMSocialWechatHandler.h"
 
 @interface AppDelegate ()
 
@@ -38,10 +43,22 @@
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    //初始化应用，appKey和appSecret从后台申请得到
-    [SMS_SDK registerApp:appKey
-              withSecret:appSecret];
+    //使用友盟统计
+//    [MobClick startWithAppkey:UmengAppkey];
     
+    //设置友盟社会化组件appkey
+    [UMSocialData setAppKey:UmengAppkey];
+//    [UMSocialQQHandler setSupportWebView:YES];
+    //打开新浪微博的SSO开关
+    [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+    //    //设置分享到QQ空间的应用Id，和分享url 链接
+//    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+    //设置微信AppId，设置分享url，默认使用友盟的网址
+//    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
+    
+    //掌淘短信验证初始化应用，appKey和appSecret从后台申请得到
+    [SMS_SDK registerApp:ztappKey
+              withSecret:ztappSecret];
     [SMS_SDK getVerificationCodeBySMSWithPhone:@"13916241357"
                                           zone:@"86"
                                         result:^(SMS_SDKError *error)
@@ -98,6 +115,23 @@
     }
 }
 
+
+/**
+ 这里处理新浪微博SSO授权之后跳转回来，和微信分享完成之后跳转回来
+ */
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return  [UMSocialSnsService handleOpenURL:url wxApiDelegate:nil];
+}
+
+/**
+ 这里处理新浪微博SSO授权进入新浪微博客户端后进入后台，再返回原来应用
+ */
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    [UMSocialSnsService  applicationDidBecomeActive];
+}
+
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -110,10 +144,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {

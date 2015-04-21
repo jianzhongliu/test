@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Config.h"
+#import "UMSocial.h"
 
 @interface BaseLoginViewController : UIViewController
 

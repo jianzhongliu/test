@@ -9,7 +9,7 @@
 #import "UserLoginViewController.h"
 #import "PhoneLoginViewController.h"
 
-@interface UserLoginViewController ()
+@interface UserLoginViewController ()<UMSocialUIDelegate>
 
 @property (nonatomic, strong) UIButton *buttonWX;
 @property (nonatomic, strong) UIButton *buttonQQ;
@@ -97,7 +97,14 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    UMSocialSnsPlatform *snsPlatform = nil;
+    snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+    NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];//获取授权之后获取的用户数据
     
+    //     这里判断是否授权
+    if ([UMSocialAccountManager isOauthAndTokenNotExpired:snsPlatform.platformName]) {
+        //     这里获取到每个授权账户的昵称
+    }
 }
 
 - (void)initData {
@@ -132,15 +139,42 @@
 
 #pragma mark - private Methods
 - (void)loginWX {
-
+    [UMSocialControllerService defaultControllerService].socialUIDelegate = self;
+    NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:15];
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:platformName];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        
+    });
 }
 
 - (void)loginQQ {
-
+    NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:UMSocialSnsTypeMobileQQ];
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:platformName];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        
+    });
 }
 
 - (void)loginSina {
-
+    /**
+     UMSocialSnsPlatform *snsPlatform = nil;
+     snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:UMShareToQQ];
+     NSDictionary *snsAccountDic = [UMSocialAccountManager socialAccountDictionary];//获取授权之后获取的用户数据
+     
+     //这里判断是否授权
+     if ([UMSocialAccountManager isOauthAndTokenNotExpired:snsPlatform.platformName]) {
+     //这里获取到每个授权账户的昵称
+     }
+     */
+    NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:UMSocialSnsTypeSina];
+    UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:platformName];
+    snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
+        
+        
+    });
+    
 }
 
 - (void)loginMore:(UIButton *)sender {
@@ -170,6 +204,12 @@
     PhoneLoginViewController *controller = [[PhoneLoginViewController alloc] init];
     [self.navigationController pushViewController:controller animated:NO];
 //pushs
+}
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    
+    
 }
 
 @end
