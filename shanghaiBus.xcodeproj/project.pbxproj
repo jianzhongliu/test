@@ -154,7 +154,7 @@
 		24E8542C1AE6AFE7006628B0 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8542B1AE6AFE7006628B0 /* AddressBook.framework */; };
 		24E8542E1AE6AFF5006628B0 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8542D1AE6AFF5006628B0 /* AddressBookUI.framework */; };
 		24E854301AE6B014006628B0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E8542F1AE6B014006628B0 /* CoreGraphics.framework */; };
-		24E854321AE6B043006628B0 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854311AE6B043006628B0 /* SMS_SDK.framework */; };
+		24E854351AE6B740006628B0 /* SMS_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24E854341AE6B740006628B0 /* SMS_SDK.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -381,7 +381,7 @@
 		24E8542B1AE6AFE7006628B0 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
 		24E8542D1AE6AFF5006628B0 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
 		24E8542F1AE6B014006628B0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		24E854311AE6B043006628B0 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SMS_SDK.framework; path = ../SMS_SDK.framework; sourceTree = "<group>"; };
+		24E854341AE6B740006628B0 /* SMS_SDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMS_SDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -389,8 +389,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24E854351AE6B740006628B0 /* SMS_SDK.framework in Frameworks */,
 				24E854301AE6B014006628B0 /* CoreGraphics.framework in Frameworks */,
-				24E854321AE6B043006628B0 /* SMS_SDK.framework in Frameworks */,
 				24E854241AE6A5CD006628B0 /* libz.dylib in Frameworks */,
 				24E854261AE6ABFF006628B0 /* libicucore.dylib in Frameworks */,
 				24E8542E1AE6AFF5006628B0 /* AddressBookUI.framework in Frameworks */,
@@ -869,10 +869,10 @@
 		24E854331AE6B094006628B0 /* Framework */ = {
 			isa = PBXGroup;
 			children = (
+				24E854341AE6B740006628B0 /* SMS_SDK.framework */,
 				2409859B1ADAB80F009CC9F2 /* QuartzCore.framework */,
 				240985991ADAB804009CC9F2 /* Foundation.framework */,
 				240985971ADAB7F7009CC9F2 /* UIKit.framework */,
-				24E854311AE6B043006628B0 /* SMS_SDK.framework */,
 				24E8542F1AE6B014006628B0 /* CoreGraphics.framework */,
 				24E8542D1AE6AFF5006628B0 /* AddressBookUI.framework */,
 				24E8542B1AE6AFE7006628B0 /* AddressBook.framework */,
@@ -1194,6 +1194,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Framework",
 				);
 				INFOPLIST_FILE = shanghaiBus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1218,6 +1219,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Framework",
 				);
 				INFOPLIST_FILE = shanghaiBus/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
