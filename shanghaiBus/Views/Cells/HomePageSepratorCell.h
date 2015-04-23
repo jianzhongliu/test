@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Sites.h"
+#import "WebImage.h"
 
 @class HomePageSepratorCell;
 

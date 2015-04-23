@@ -24,7 +24,7 @@
     if (_imageMain == nil) {
         _imageMain = [[WebImageView alloc] init];
         _imageMain.userInteractionEnabled = YES;
-        _imageMain.backgroundColor = [UIColor greenColor];
+        _imageMain.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_imageMain];
     }
     return _imageMain;

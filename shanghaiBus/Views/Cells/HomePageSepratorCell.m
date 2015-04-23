@@ -28,7 +28,7 @@
     if (_imageLeft == nil) {
         _imageLeft = [[WebImageView alloc] init];
         _imageLeft.userInteractionEnabled = YES;
-        _imageLeft.backgroundColor = [UIColor greenColor];
+        _imageLeft.backgroundColor = [UIColor whiteColor];
         [self.contentView addSubview:_imageLeft];
     }
     return _imageLeft;
@@ -149,12 +149,14 @@
             break;
         case 2:{
             Sites *site = [arrayData objectAtIndex:0];
-            self.imageLeft.imageUrl = site.mainImage;
+//            self.imageLeft.imageUrl = site.mainImage;
+            [self.imageLeft sd_setImageWithURL:[NSURL URLWithString:site.mainImage] placeholderImage:[UIImage imageNamed:@"icon"]];
             self.labelName.text = site.cityname;
             self.labelNumber.text = [NSString stringWithFormat:@"%ld条服务", (long)site.touristnumber];
             
             Sites *siteR = [arrayData objectAtIndex:1];
-            self.imageRight.imageUrl = siteR.mainImage;
+//            self.imageRight.imageUrl = siteR.mainImage;
+            [self.imageRight sd_setImageWithURL:[NSURL URLWithString:siteR.mainImage] placeholderImage:[UIImage imageNamed:@"icon"]];
             self.labelNameR.text = siteR.cityname;
             self.labelNumberR.text = [NSString stringWithFormat:@"%ld条服务", (long)siteR.touristnumber];
             
