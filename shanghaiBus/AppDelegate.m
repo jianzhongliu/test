@@ -67,25 +67,7 @@ NSString * const WXAppSecret = @"953d4513dad2056edf13063d3f4638db";
     //掌淘短信验证初始化应用，appKey和appSecret从后台申请得到
     [SMS_SDK registerApp:ztappKey
               withSecret:ztappSecret];
-//    [SMS_SDK getVerificationCodeBySMSWithPhone:@"13916241356"
-//                                          zone:@"86"
-//                                        result:^(SMS_SDKError *error)
-//     {
-//         if (!error)
-//         {
-//             
-//         }
-//         else
-//         {
-//             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil)
-//                                                           message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
-//                                                          delegate:self
-//                                                 cancelButtonTitle:NSLocalizedString(@"sure", nil)
-//                                                 otherButtonTitles:nil, nil];
-//             [alert show];
-//         }
-//         
-//     }];
+
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.switchPattern = SWITCHPATTERNUSER;

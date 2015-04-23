@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, USERTYPE) {
 
 @interface UserCachBean : NSObject
 
-@property (nonatomic, strong) TouristObject *userInfo;
+@property (nonatomic, strong) TouristObject *touristInfo;
 @property (nonatomic, assign) USERTYPE userType;
 
 + (instancetype)share;

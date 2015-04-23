@@ -9,9 +9,14 @@
 #import "RegisterViewController.h"
 #import "SettingPasswordViewController.h"
 #import "WebImageView.h"
+#import <SMS_SDK/SMS_SDK.h>
+#import "TouristObject.h"
+#import "UserCachBean.h"
 
 @interface RegisterViewController ()
-
+{
+    NSInteger caculateTime;
+}
 //@property (nonatomic, strong) UIButton *buttonForgetPass;
 //@property (nonatomic, strong) UIButton *buttonRegister;
 
@@ -25,6 +30,8 @@
 @property (nonatomic, strong) UIButton *buttonCheckcode;
 
 @property (nonatomic, strong) UIButton *buttonNextStep;
+
+@property (nonatomic, strong) NSTimer *timer;
 
 @end
 
@@ -58,6 +65,7 @@
     if (_textName == nil) {
         _textName = [[UITextField alloc] init];
         _textName.clearsOnBeginEditing = YES;
+        _textName.keyboardType = UIKeyboardTypePhonePad;
         _textName.font = [UIFont systemFontOfSize:13];
         //        _textName.textColor = [UIColor whiteColor];
     }
@@ -68,6 +76,7 @@
     if (_textPass == nil) {
         _textPass = [[UITextField alloc] init];
         _textPass.clearsOnBeginEditing = YES;
+        _textPass.keyboardType = UIKeyboardTypeNumberPad;
         _textPass.secureTextEntry = YES;
     }
     return _textPass;
@@ -102,7 +111,7 @@
         _buttonNextStep = [UIButton buttonWithType:UIButtonTypeCustom];
         [_buttonNextStep setBackgroundImage:[UIImage imageNamed:@"icon_login_nomal"] forState:UIControlStateNormal];
         [_buttonNextStep addTarget:self action:@selector(didClickNext) forControlEvents:UIControlEventTouchUpInside];
-        [_buttonNextStep setTitle:@"下一步，设置密码" forState:UIControlStateNormal];
+        [_buttonNextStep setTitle:@"登陆" forState:UIControlStateNormal];
         _buttonNextStep.selected = NO;
     }
     return _buttonNextStep;
@@ -123,11 +132,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
 }
 
 - (void)initData {
-    
+    caculateTime = 60;
+
 }
 
 - (void)initUI {
@@ -156,19 +165,116 @@
     
     self.buttonNextStep.frame = CGRectMake(10, self.imageView.ctBottom + 20, SCREENWIDTH - 20, 44);
     [self.view addSubview:self.buttonNextStep];
+
 }
 
 - (void)goBackView {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)timeClock {
+    NSString *titleCode = @"";
+    if (caculateTime > 0) {
+        titleCode = [NSString stringWithFormat:@"%ldS", (long)caculateTime];
+        self.buttonCheckcode.enabled = NO;
+    } else {
+        titleCode = @"获取验证码";
+        self.buttonCheckcode.enabled = YES;
+    }
+    caculateTime --;
+    [self.buttonCheckcode setTitle:titleCode forState:UIControlStateNormal];
+}
+
 - (void)didClickCheckcode:(id) sender {
+    if (self.textName.text.length != 11) {
+        [self showInfo:@"电话号码格式不对"];
+        return;
+    }
     
+    if (self.timer == nil) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeClock) userInfo:nil repeats:YES];
+    }
+    
+    [SMS_SDK getVerificationCodeBySMSWithPhone:self.textName.text
+                                          zone:@"86"
+                                        result:^(SMS_SDKError *error)
+     {
+         if (!error)
+         {
+
+         }
+         else
+         {
+             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil)
+                                                           message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
+                                                          delegate:self
+                                                 cancelButtonTitle:NSLocalizedString(@"sure", nil)
+                                                 otherButtonTitles:nil, nil];
+             [alert show];
+         }
+     }];
 }
 
 - (void)didClickNext {
-    SettingPasswordViewController *controller = [[SettingPasswordViewController alloc] init];
-    [self.navigationController pushViewController:controller animated:YES];
+    [self.view endEditing:YES];
+    if (self.textPass.text.length != 4){
+        [self showInfo:@"验证码格式不正确"];
+        return;
+    }
+    [self showLoadingActivity:YES];
+    [SMS_SDK commitVerifyCode:self.textPass.text result:^(enum SMS_ResponseState state) {
+        if (state == SMS_ResponseStateSuccess) {
+            NSString *phoneNo = self.textName.text;
+            NSString *userName = [NSString stringWithFormat:@"%@*****%@", [phoneNo substringWithRange:NSMakeRange(0, 3)], [phoneNo substringWithRange:NSMakeRange(phoneNo.length - 3, 3)]];
+            NSDictionary *dic = @{@"usid":phoneNo,@"token":phoneNo,@"username":userName,@"icon":phoneNo};
+            [self requestThirdPartLoginWith:dic];
+        } else {
+            [self hideLoadWithAnimated:YES];
+            [self showInfo:@"验证码错误！"];
+            
+            //失败
+        }
+    }];
+    
+//    SettingPasswordViewController *controller = [[SettingPasswordViewController alloc] init];
+//    [self.navigationController pushViewController:controller animated:YES];
+}
+
+- (void)requestThirdPartLoginWith:(NSDictionary *) dicParam {
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *username = [dicParam objectForKey:@"username"];
+    username = [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, [dicParam objectForKey:@"usid"]];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@touristregister/registerUserWithThirdPart",HOST];
+    NSDictionary *dic = @{@"usid":[dicParam objectForKey:@"usid"] ,@"token":[dicParam objectForKey:@"token"],@"username":username, @"date":currentTime,@"icon":[dicParam objectForKey:@"icon"], @"sign":sign};
+
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            NSDictionary *userDic = [dic objectForKey:@"tourist"];
+            NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                      NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *plistPath = [rootPath stringByAppendingPathComponent:@"user.plist"];
+            [userDic writeToFile:plistPath atomically:YES];
+            
+            TouristObject *tourist = [[TouristObject alloc] init];
+            [tourist configTouristWithDic:userDic];
+            [UserCachBean share].touristInfo = tourist;
+            
+        }
+        [self hideLoadWithAnimated:YES];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+    }];
+    
 }
 
 @end

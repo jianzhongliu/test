@@ -71,11 +71,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shanghaiBus/Controllers/Login/UserLoginViewController.m"
-            timestampString = "451409669.097022"
+            timestampString = "451493246.76537"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
@@ -87,11 +87,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shanghaiBus/Controllers/Login/UserLoginViewController.m"
-            timestampString = "451413211.186383"
+            timestampString = "451496623.816702"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
             landmarkName = "-requestThirdPartLoginWith:"
             landmarkType = "5">
          </BreakpointContent>
@@ -102,13 +102,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/Login/UserLoginViewController.m"
-            timestampString = "451413284.257093"
+            filePath = "shanghaiBus/Controllers/Login/RegisterViewController.m"
+            timestampString = "451495787.787958"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
-            landmarkName = "-requestThirdPartLoginWith:"
+            startingLineNumber = "206"
+            endingLineNumber = "206"
+            landmarkName = "-didClickCheckcode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -8,6 +8,7 @@
 
 #import "UserLoginViewController.h"
 #import "PhoneLoginViewController.h"
+#import "RegisterViewController.h"
 
 @interface UserLoginViewController ()<UMSocialUIDelegate>
 
@@ -208,7 +209,7 @@
 }
 
 - (void)loginPhone {
-    PhoneLoginViewController *controller = [[PhoneLoginViewController alloc] init];
+    RegisterViewController *controller = [[RegisterViewController alloc] init];
     [self.navigationController pushViewController:controller animated:NO];
 //pushs
 }
@@ -233,11 +234,19 @@
     sign = [[Utils MD5:sign] uppercaseString];
     NSString *url = [NSString stringWithFormat:@"%@touristregister/registerUserWithThirdPart",HOST];
     NSDictionary *dic = @{@"usid":[dicParam objectForKey:@"usid"] ,@"token":[dicParam objectForKey:@"token"],@"username":username, @"date":currentTime,@"icon":[dicParam objectForKey:@"icon"], @"sign":sign};
-    
+
     [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)responseObject;
-            NSArray *dataArray = [dic objectForKey:@"dataArray"];
+            NSDictionary *userDic = [dic objectForKey:@"tourist"];
+            NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                                      NSUserDomainMask, YES) objectAtIndex:0];
+            NSString *plistPath = [rootPath stringByAppendingPathComponent:@"user.plist"];
+            [userDic writeToFile:plistPath atomically:YES];
+            
+            TouristObject *tourist = [[TouristObject alloc] init];
+            [tourist configTouristWithDic:userDic];
+            [UserCachBean share].touristInfo = tourist;
         }
         [self hideLoadWithAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

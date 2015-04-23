@@ -7,6 +7,7 @@
 //
 
 #import "BaseLoginViewController.h"
+#import "AFNetworking.h"
 
 @interface RegisterViewController : BaseLoginViewController
 
