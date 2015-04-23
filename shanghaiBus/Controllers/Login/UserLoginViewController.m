@@ -41,6 +41,7 @@
         [_buttonQQ setTitle:@"QQ登录" forState:UIControlStateNormal];
         [_buttonQQ addTarget:self action:@selector(loginQQ) forControlEvents:UIControlEventTouchUpInside];
         _buttonQQ.selected = NO;
+        _buttonQQ.hidden = YES;
     }
     return _buttonQQ;
 }
@@ -52,7 +53,7 @@
         [_buttonSina setTitle:@"新浪微博" forState:UIControlStateNormal];
         [_buttonSina addTarget:self action:@selector(loginSina) forControlEvents:UIControlEventTouchUpInside];
         _buttonSina.selected = NO;
-        _buttonSina.alpha = 0;
+//        _buttonSina.alpha = 0;
     }
     return _buttonSina;
 }
@@ -61,6 +62,7 @@
     if (_buttonMore == nil) {
         _buttonMore = [UIButton buttonWithType:UIButtonTypeCustom];
         [_buttonMore addTarget:self action:@selector(loginMore:) forControlEvents:UIControlEventTouchUpInside];
+        _buttonMore.hidden = YES;
         [_buttonMore setTitle:@"更多选项..." forState:UIControlStateNormal];
         [_buttonMore setTitle:@"更少选项..." forState:UIControlStateSelected];
         _buttonMore.font = [UIFont systemFontOfSize:13];
@@ -129,11 +131,11 @@
     self.buttonWX.frame = CGRectMake(10, 60, SCREENWIDTH - 20, 44);
     
     
-    self.buttonQQ.frame = CGRectMake(10, self.buttonWX.ctBottom + 10, SCREENWIDTH - 20, 44);
+    self.buttonSina.frame = CGRectMake(10, self.buttonWX.ctBottom + 10, SCREENWIDTH - 20, 44);
     
-    self.buttonMore.frame = CGRectMake((SCREENWIDTH - 80) /2, self.buttonQQ.ctBottom + 10, 80, 20);
+    self.buttonMore.frame = CGRectMake((SCREENWIDTH - 80) /2, self.buttonSina.ctBottom + 10, 80, 20);
     
-    self.buttonSina.frame = CGRectMake(10, self.buttonQQ.ctBottom + 10, SCREENWIDTH - 20, 44);
+    self.buttonQQ.frame = CGRectMake(10, self.buttonSina.ctBottom + 10, SCREENWIDTH - 20, 44);
     
     self.buttonPhone.frame = CGRectMake(10, self.buttonMore.ctBottom + 20, SCREENWIDTH - 20, 44);
 }
