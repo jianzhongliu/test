@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ctrip.inner.jipin</string>
+	<string>com.company.BY</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -18,6 +18,24 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLIconFile</key>
+			<string>icon</string>
+			<key>CFBundleURLName</key>
+			<string>com.ctrip.inner.jipin</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>idang</string>
+				<string>wx0781fda46ab7f7f1</string>
+				<string>qqpayticket99</string>
+				<string>QQ41C4280E</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>

@@ -143,8 +143,11 @@
     NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:15];
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:platformName];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
-        
+        NSDictionary *dicresult = [response.data objectForKey:@"wxsession"];
+        if (dicresult && dicresult.count > 0) {
+            NSDictionary *dic = @{@"usid":[dicresult objectForKey:@"usid"],@"token":[dicresult objectForKey:@"accessToken"],@"username":[dicresult objectForKey:@"username"],@"icon":@"www.weichat.com"};
+            [self requestThirdPartLoginWith:dic];
+        }
     });
 }
 
@@ -171,7 +174,11 @@
     NSString *platformName = [UMSocialSnsPlatformManager getSnsPlatformString:UMSocialSnsTypeSina];
     UMSocialSnsPlatform *snsPlatform = [UMSocialSnsPlatformManager getSocialPlatformWithName:platformName];
     snsPlatform.loginClickHandler(self,[UMSocialControllerService defaultControllerService],YES,^(UMSocialResponseEntity *response){
-        
+        NSDictionary *dicresult = [response.data objectForKey:@"sina"];
+        if (dicresult && dicresult.count > 0) {
+            NSDictionary *dic = @{@"usid":[dicresult objectForKey:@"usid"],@"token":[dicresult objectForKey:@"gender"],@"username":[dicresult objectForKey:@"username"],@"icon":[dicresult objectForKey:@"icon"]};
+            [self requestThirdPartLoginWith:dic];
+        }
         
     });
     
@@ -211,5 +218,32 @@
     
     
 }
+
+- (void)requestThirdPartLoginWith:(NSDictionary *) dicParam {
+    [self showLoadingActivity:YES];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *username = [dicParam objectForKey:@"username"];
+    username = [username stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, [dicParam objectForKey:@"usid"]];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@touristregister/registerUserWithThirdPart",HOST];
+    NSDictionary *dic = @{@"usid":[dicParam objectForKey:@"usid"] ,@"token":[dicParam objectForKey:@"token"],@"username":username, @"date":currentTime,@"icon":[dicParam objectForKey:@"icon"], @"sign":sign};
+    
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            NSArray *dataArray = [dic objectForKey:@"dataArray"];
+        }
+        [self hideLoadWithAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+    }];
+}
+
 
 @end

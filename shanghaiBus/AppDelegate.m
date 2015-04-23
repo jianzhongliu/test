@@ -16,10 +16,15 @@
 #define ztappKey @"6ec614bbd5cf"
 #define ztappSecret @"3c146fc7fc48754b2583d2daa389d772"
 //umeng
-#define UmengAppkey @"5211818556240bc9ee01db2f"
+#define UmengAppkey @"5537b25de0f55ae10b002b66"
+NSString * const WXAppId = @"wx0781fda46ab7f7f1";
+NSString * const WXAppSecret = @"953d4513dad2056edf13063d3f4638db";
+
 #import "UMSocial.h"
 #import "UMSocialSinaSSOHandler.h"
 #import "UMSocialQQHandler.h"
+#import "UMSocialWechatHandler.h"
+
 //#import "UMSocialWechatHandler.h"
 
 @interface AppDelegate ()
@@ -52,32 +57,35 @@
     //打开新浪微博的SSO开关
     [UMSocialSinaSSOHandler openNewSinaSSOWithRedirectURL:@"http://sns.whalecloud.com/sina2/callback"];
     //    //设置分享到QQ空间的应用Id，和分享url 链接
-//    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];
+//    [UMSocialQQHandler setQQWithAppId:@"100424468" appKey:@"c7394704798a158208a74ab60104f0ba" url:@"http://www.umeng.com/social"];    //设置支持没有客户端情况下使用SSO授权
+//    [UMSocialQQHandler setSupportWebView:YES];
+    
     //设置微信AppId，设置分享url，默认使用友盟的网址
-//    [UMSocialWechatHandler setWXAppId:@"wxd930ea5d5a258f4f" appSecret:@"db426a9829e4b49a0dcac7b4162da6b6" url:@"http://www.umeng.com/social"];
+    [UMSocialWechatHandler setWXAppId:WXAppId appSecret:WXAppSecret url:@"http://m.tieyou.com"];
+
     
     //掌淘短信验证初始化应用，appKey和appSecret从后台申请得到
     [SMS_SDK registerApp:ztappKey
               withSecret:ztappSecret];
-    [SMS_SDK getVerificationCodeBySMSWithPhone:@"13916241357"
-                                          zone:@"86"
-                                        result:^(SMS_SDKError *error)
-     {
-         if (!error)
-         {
-             
-         }
-         else
-         {
-             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil)
-                                                           message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
-                                                          delegate:self
-                                                 cancelButtonTitle:NSLocalizedString(@"sure", nil)
-                                                 otherButtonTitles:nil, nil];
-             [alert show];
-         }
-         
-     }];
+//    [SMS_SDK getVerificationCodeBySMSWithPhone:@"13916241356"
+//                                          zone:@"86"
+//                                        result:^(SMS_SDKError *error)
+//     {
+//         if (!error)
+//         {
+//             
+//         }
+//         else
+//         {
+//             UIAlertView* alert=[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"codesenderrtitle", nil)
+//                                                           message:[NSString stringWithFormat:@"状态码：%zi ,错误描述：%@",error.errorCode,error.errorDescription]
+//                                                          delegate:self
+//                                                 cancelButtonTitle:NSLocalizedString(@"sure", nil)
+//                                                 otherButtonTitles:nil, nil];
+//             [alert show];
+//         }
+//         
+//     }];
     
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.switchPattern = SWITCHPATTERNUSER;

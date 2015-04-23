@@ -9,6 +9,8 @@
 
 #import "BaseLoginViewController.h"
 #import "UserCachBean.h"
+#import "AFNetworking.h"
+#import "UIViewController+Loading.h"
 
 typedef NS_ENUM(NSInteger, LOGINSTATUS) {
     LOGINSTATUSSUCCESS = 1, //登陆成功

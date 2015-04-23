@@ -13,8 +13,8 @@
 
 #define shanghaiBus_Config_h
 
-#define HOST @"http://121.42.12.128/B-Y/REST/"
-//#define HOST @"http://localhost:8080/B-Y/REST/"
+//#define HOST @"http://121.42.12.128/B-Y/REST/"
+#define HOST @"http://localhost:8080/B-Y/REST/"
 //#define HOST @"http://192.168.1.102:8080/B-Y/"
 
 #define SCREENWIDTH [[UIScreen mainScreen] bounds].size.width
