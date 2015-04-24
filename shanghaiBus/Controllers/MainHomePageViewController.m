@@ -74,15 +74,27 @@
 - (void)businessEnter{
     [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
         TouristBaseInfoViewController *controller = [[TouristBaseInfoViewController alloc] init];
-        self.tabBarController.hidesBottomBarWhenPushed = YES;
+        self.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }];
 
 }
 
 - (void)initData {
-    
+    [self fetchLoginData];
     self.arraySiteLine = [NSMutableArray array];
+    
+}
+
+- (void)fetchLoginData {
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                              NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *plistPath = [rootPath stringByAppendingPathComponent:@"user.plist"];
+    
+    NSDictionary *dicUser = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    TouristObject *tourist = [[TouristObject alloc] init];
+    [tourist configTouristWithDic:dicUser];
+    [UserCachBean share].touristInfo = tourist;
     
 }
 

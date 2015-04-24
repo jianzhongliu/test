@@ -249,9 +249,13 @@
             TouristObject *tourist = [[TouristObject alloc] init];
             [tourist configTouristWithDic:userDic];
             [UserCachBean share].touristInfo = tourist;
+          self.loginBlock([UserCachBean share], LOGINSTATUSSUCCESS);
         }
+       
         [self hideLoadWithAnimated:YES];
+         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showInfo:@"登陆失败"];
         [self hideLoadWithAnimated:YES];
     }];
 }

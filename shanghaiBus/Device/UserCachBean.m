@@ -21,4 +21,12 @@
     return userCachBean;
 }
 
+- (BOOL)isLogin  {
+    if (self.touristInfo.identify.length > 0) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end

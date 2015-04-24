@@ -22,4 +22,7 @@ typedef NS_ENUM(NSInteger, USERTYPE) {
 
 + (instancetype)share;
 
+- (BOOL)isLogin;
+
+
 @end
