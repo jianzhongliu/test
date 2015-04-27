@@ -50,7 +50,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-
 }
 
 #pragma mark - private Methods
@@ -74,7 +73,7 @@
 - (void)businessEnter{
     [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
         TouristBaseInfoViewController *controller = [[TouristBaseInfoViewController alloc] init];
-        self.hidesBottomBarWhenPushed = YES;
+        controller.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:controller animated:YES];
     }];
 
@@ -83,7 +82,6 @@
 - (void)initData {
     [self fetchLoginData];
     self.arraySiteLine = [NSMutableArray array];
-    
 }
 
 - (void)fetchLoginData {

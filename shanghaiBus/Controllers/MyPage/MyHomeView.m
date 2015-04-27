@@ -9,6 +9,7 @@
 #import "MyHomeView.h"
 #import "EditeUserInfomationViewController.h"
 #import "AppDelegate.h"
+#import "WebImage.h"
 
 #define VIEWWIDTH 230
 
@@ -44,10 +45,14 @@
 - (UIButton *)buttonMessage {
     if (_buttonMessage == nil) {
         _buttonMessage = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonMessage setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonMessage setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonMessage setImage:[UIImage imageNamed:@"icon_user_message_enable"] forState:UIControlStateNormal];
+        [_buttonMessage setBackgroundColor:[UIColor whiteColor]];
+        [_buttonMessage setTitle:@"信息" forState:UIControlStateNormal];
         [_buttonMessage addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
-        _buttonMessage.selected = NO;
+        [_buttonMessage setTitleColor:BYColorAlphaMake(0, 0, 0, 0.5) forState:UIControlStateNormal];
+        _buttonMessage.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_buttonMessage setImageEdgeInsets:UIEdgeInsetsMake(-20, 20, 0, 0)];
+        [_buttonMessage setTitleEdgeInsets:UIEdgeInsetsMake(40, -20, 0, 10)];
         _buttonMessage.tag = 102;
         [self addSubview:_buttonMessage];
     }
@@ -58,11 +63,16 @@
 - (UIButton *)buttonFavorites {
     if (_buttonFavorites == nil) {
         _buttonFavorites = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonFavorites setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonFavorites setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonFavorites setImage:[UIImage imageNamed:@"icon_user_enter"] forState:UIControlStateNormal];
+        [_buttonFavorites setBackgroundColor:[UIColor whiteColor]];
+        [_buttonFavorites setTitle:@"商家入驻" forState:UIControlStateNormal];
+        [_buttonFavorites setTitleColor:BYColorAlphaMake(0, 0, 0, 0.5) forState:UIControlStateNormal];
         [_buttonFavorites addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
         _buttonFavorites.selected = NO;
         _buttonFavorites.tag = 103;
+        _buttonFavorites.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_buttonFavorites setImageEdgeInsets:UIEdgeInsetsMake(-20, 20, 0, 0)];
+        [_buttonFavorites setTitleEdgeInsets:UIEdgeInsetsMake(40, -20, 0, 10)];
         [self addSubview:_buttonFavorites];
     }
     return _buttonFavorites;
@@ -72,11 +82,16 @@
 - (UIButton *)buttonSetting {
     if (_buttonSetting == nil) {
         _buttonSetting = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonSetting setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonSetting setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonSetting setImage:[UIImage imageNamed:@"icon_user_setting"] forState:UIControlStateNormal];
+        [_buttonSetting setBackgroundColor:[UIColor whiteColor]];
+        [_buttonSetting setTitle:@"设置" forState:UIControlStateNormal];
+        [_buttonSetting setTitleColor:BYColorAlphaMake(0, 0, 0, 0.5) forState:UIControlStateNormal];
         [_buttonSetting addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
         _buttonSetting.selected = NO;
         _buttonSetting.tag = 104;
+        _buttonSetting.titleLabel.font = [UIFont systemFontOfSize:13];
+        [_buttonSetting setImageEdgeInsets:UIEdgeInsetsMake(-20, 20, 0, 0)];
+        [_buttonSetting setTitleEdgeInsets:UIEdgeInsetsMake(40, -20, 0, 10)];
         [self addSubview:_buttonSetting];
     }
     return _buttonSetting;
@@ -133,8 +148,8 @@
 }
 
 #pragma mark - lifeCycleMethods
-- (id)init {
-    if (self = [super init]) {
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
         [self initUI];
     }
     return self;
@@ -160,6 +175,25 @@
     [self.buttonSwitch setTitle:@"切换到商家模式" forState:UIControlStateNormal];
     [self.buttonSwitch setImageEdgeInsets:UIEdgeInsetsMake(0, self.buttonSwitch.viewWidth - 40, 0, 0)];
     
+    if ([[UserCachBean share] isLogin ] == YES) {
+        self.buttonMessage.enabled = YES;
+        [self.buttonSwitch setTitle:@"切换到商家模式" forState:UIControlStateNormal];
+    } else {
+        self.buttonMessage.enabled = NO;
+        [self.buttonSwitch setTitle:@"登录或注册账号" forState:UIControlStateNormal];
+    }
+    
+    if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
+        [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_upload"] forState:UIControlStateNormal];
+        [self.buttonFavorites setTitle:@"发布服务" forState:UIControlStateNormal];
+        
+    } else {
+        [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_enter"] forState:UIControlStateNormal];
+        [self.buttonFavorites setTitle:@"商家入驻" forState:UIControlStateNormal];
+    }
+    
+    [self.buttonIcon.imageView sd_setImageWithURL:[NSURL URLWithString:[[[UserCachBean share] touristInfo] icon]]];
+    
 }
 
 - (void)didStatusChange:(UIButton *) sender {
@@ -180,7 +214,12 @@
             break;
         case 103://收藏
         {
-            
+            if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
+               //发布信息
+            } else {
+                //入驻
+                [_delegate didClickActionWithActionType:ACTIONINDEXTOURISTENTER];
+            }
         }
             break;
         case 104://设置

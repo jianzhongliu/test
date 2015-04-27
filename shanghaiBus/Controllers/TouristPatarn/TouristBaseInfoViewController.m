@@ -48,7 +48,10 @@
     [super viewWillAppear:animated];
     
 }
-
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.hidesBottomBarWhenPushed = NO;
+}
 #pragma mark - action && private Methods
 - (void)didDismissMyInfo {
     [self.navigationController popViewControllerAnimated:YES];

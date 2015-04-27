@@ -12,6 +12,7 @@
 #import "SettingViewController.h"
 #import "MessageListViewController.h"
 #import "TouristBaseInfoViewController.h"
+#import "MyHomeViewController.h"
 
 #import "AppDelegate.h"
 #import "BYTabBarItem.h"
@@ -126,6 +127,7 @@
 - (void)showMyInfo {
     
     UIWindow *window = [[[UIApplication sharedApplication] windows] objectAtIndex:0];
+    self.control = nil;
     if (self.control == nil) {
         self.control = [[UIControl alloc] initWithFrame:window.bounds];
         self.control.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.3);
