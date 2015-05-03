@@ -20,14 +20,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_back"] style:UIBarButtonItemStylePlain target:self action:@selector(backBtnAction)];
+    self.view.backgroundColor = BYBackColor;
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_back"] style:UIBarButtonItemStylePlain target:self action:@selector(didLeftClick)];
     
     [self.navigationItem setLeftBarButtonItem:leftItem];
 //    self.navigationController.delegate = self;
 }
 
-- (void)backBtnAction {
-    [self.navigationController popViewControllerAnimated:YES];
+- (void)setRightButtonWithTitle:(NSString *) title  {
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(didRightClick)];
+    
+    [self.navigationItem setRightBarButtonItem:rightBar];
+}
+
+- (void)didRightClick {
+
+}
+
+- (void)didLeftClick {
+    if (self.navigationController.viewControllers.count > 1) {
+        [self.navigationController popViewControllerAnimated:YES];
+    } else {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -82,10 +97,7 @@
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
         [self presentViewController:nav animated:YES completion:nil];
     }
-    
-    
 
-    
 }
 
 @end

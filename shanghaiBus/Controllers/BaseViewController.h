@@ -18,6 +18,11 @@ typedef void (^busDataBlock) (AFHTTPRequestOperation *operation, BOOL status);
 
 @property (nonatomic, copy) busDataBlock busData;
 
+- (void)setRightButtonWithTitle:(NSString *) title;
+
+- (void)didRightClick;
+
+- (void)didLeftClick;
 
 - (void)requestBusData:(NSString *) url;
 

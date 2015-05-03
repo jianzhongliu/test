@@ -13,6 +13,8 @@
 #import "MessageListViewController.h"
 #import "TouristBaseInfoViewController.h"
 #import "MyHomeViewController.h"
+#import "TouristInfoViewController.h"
+#import "AuthenticatedInfoViewController.h"
 
 #import "AppDelegate.h"
 #import "BYTabBarItem.h"
@@ -191,7 +193,7 @@
     switch (index) {
         case ACTIONINDEXUSERINFO:
         {
-            EditeUserInfomationViewController *controller = [[EditeUserInfomationViewController alloc] init];
+            TouristInfoViewController *controller = [[TouristInfoViewController alloc] init];
             UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
             [self adjustNavigationUI:myNavController];
             [self presentViewController:myNavController animated:YES completion:nil];
@@ -221,7 +223,7 @@
             break;
         case ACTIONINDEXTOURISTENTER:
         {
-            TouristBaseInfoViewController *controller = [[TouristBaseInfoViewController alloc] init];
+            AuthenticatedInfoViewController *controller = [[AuthenticatedInfoViewController alloc] init];
             UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
             [self adjustNavigationUI:myNavController];
             [self presentViewController:myNavController animated:YES completion:nil];

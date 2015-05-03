@@ -13,12 +13,14 @@
 #import "TouristBaseInfoViewController.h"
 #import "UploadServiceViewController.h"
 #import "ServiceListViewController.h"
+#import "TouristInfoViewController.h"
 
 #import "WebImageView.h"
 #import "AppDelegate.h"
 
 @interface TouristPatternHomeViewController ()
 
+@property (nonatomic, strong) UIButton *controlIcon;
 @property (nonatomic, strong) WebImageView *imageIcon;
 @property (nonatomic, strong) UIButton *buttonMessage;
 @property (nonatomic, strong) UIButton *buttonSetting;
@@ -31,6 +33,23 @@
 
 @implementation TouristPatternHomeViewController
 #pragma mark - getter & setter
+
+- (UIButton *)controlIcon {
+    if (_controlIcon == nil) {
+        _controlIcon = [UIButton buttonWithType:UIButtonTypeCustom];
+//        [_controlIcon setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
+//        [_controlIcon setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_controlIcon addTarget:self action:@selector(didClickActionWithSender:) forControlEvents:UIControlEventTouchUpInside];
+        _controlIcon.tag = 101;
+        _controlIcon.backgroundColor = [UIColor clearColor];
+        _controlIcon.selected = NO;
+        [_controlIcon setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _controlIcon.titleLabel.font = [UIFont systemFontOfSize:13];
+        _controlIcon.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    }
+    return _controlIcon;
+    
+}
 - (WebImageView *)imageIcon {
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
@@ -40,6 +59,7 @@
     }
     return _imageIcon;
 }
+
 - (UIButton *)buttonMessage {
     if (_buttonMessage == nil) {
         _buttonMessage = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -176,11 +196,12 @@
     [scroll addSubview:self.buttonService];
     [scroll addSubview:self.buttonCotectUS];
     [scroll addSubview:self.buttonSwitch];
+    [scroll addSubview:self.controlIcon];
     
     self.imageIcon.frame = CGRectMake((SCREENWIDTH - 95)/2, 30, 95, 95);
     self.buttonMessage.frame = CGRectMake(0, self.imageIcon.ctBottom + 20, SCREENWIDTH / 2, 44);
     self.buttonSetting.frame = CGRectMake(SCREENWIDTH / 2, self.buttonMessage.ctTop, SCREENWIDTH / 2, 44);
-    
+    self.controlIcon.frame = self.imageIcon.frame;
 
     self.buttonUpload.frame = CGRectMake(10, self.buttonMessage.ctBottom + 30, SCREENWIDTH, 30);
     UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, self.buttonUpload.ctBottom, SCREENWIDTH, 1)];
@@ -221,6 +242,8 @@
         case 101:
         {
         //头像
+            TouristInfoViewController *controller = [[TouristInfoViewController alloc] init];
+            [self.navigationController pushViewController:controller animated:YES];
         }
             break;
             
