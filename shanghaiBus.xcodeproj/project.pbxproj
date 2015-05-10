@@ -20,6 +20,7 @@
 		24252A0F1AC1ABC400BB264A /* TouristServiceInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A0E1AC1ABC400BB264A /* TouristServiceInfoView.m */; };
 		24252A121AC1BB3500BB264A /* TouristServiceDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */; };
 		24350EBD1AC31A350066A9E8 /* TouristCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24350EBC1AC31A350066A9E8 /* TouristCommentView.m */; };
+		24477DAF1AF7BA400051F277 /* UploadInfoCommonInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24477DAE1AF7BA400051F277 /* UploadInfoCommonInputView.m */; };
 		244D0A761AF506E90000BED0 /* icon_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244D0A741AF506E90000BED0 /* icon_man@2x.png */; };
 		244D0A771AF506E90000BED0 /* icon_female@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244D0A751AF506E90000BED0 /* icon_female@2x.png */; };
 		244D0A7A1AF531F80000BED0 /* TouristInputInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 244D0A791AF531F80000BED0 /* TouristInputInfoViewController.m */; };
@@ -45,6 +46,7 @@
 		2450F2261AE8B5F30028A416 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2450F2141AE8B5F30028A416 /* UIImageView+HighlightedWebCache.m */; };
 		2450F2271AE8B5F30028A416 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 2450F2161AE8B5F30028A416 /* UIImageView+WebCache.m */; };
 		2450F2281AE8B5F30028A416 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2450F2181AE8B5F30028A416 /* UIView+WebCacheOperation.m */; };
+		24516C101AF7BBF200F962E9 /* ImageScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24516C0F1AF7BBF200F962E9 /* ImageScrollView.m */; };
 		2456D56B1AE1F9F600457A31 /* con_header_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2456D56A1AE1F9F600457A31 /* con_header_line@2x.png */; };
 		2456D56E1AE1FEFB00457A31 /* icon_close_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2456D56C1AE1FEFB00457A31 /* icon_close_back@2x.png */; };
 		2456D56F1AE1FEFB00457A31 /* icon_footer_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2456D56D1AE1FEFB00457A31 /* icon_footer_line@2x.png */; };
@@ -224,6 +226,8 @@
 		24252A111AC1BB3500BB264A /* TouristServiceDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristServiceDetailView.m; sourceTree = "<group>"; };
 		24350EBB1AC31A350066A9E8 /* TouristCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristCommentView.h; sourceTree = "<group>"; };
 		24350EBC1AC31A350066A9E8 /* TouristCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristCommentView.m; sourceTree = "<group>"; };
+		24477DAD1AF7BA400051F277 /* UploadInfoCommonInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadInfoCommonInputView.h; sourceTree = "<group>"; };
+		24477DAE1AF7BA400051F277 /* UploadInfoCommonInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadInfoCommonInputView.m; sourceTree = "<group>"; };
 		244D0A741AF506E90000BED0 /* icon_man@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_man@2x.png"; sourceTree = "<group>"; };
 		244D0A751AF506E90000BED0 /* icon_female@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_female@2x.png"; sourceTree = "<group>"; };
 		244D0A781AF531F80000BED0 /* TouristInputInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristInputInfoViewController.h; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 		2450F2171AE8B5F30028A416 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		2450F2181AE8B5F30028A416 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		2450F2291AE8B6020028A416 /* WebImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebImage.h; sourceTree = "<group>"; };
+		24516C0E1AF7BBF200F962E9 /* ImageScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageScrollView.h; sourceTree = "<group>"; };
+		24516C0F1AF7BBF200F962E9 /* ImageScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageScrollView.m; sourceTree = "<group>"; };
 		2456D56A1AE1F9F600457A31 /* con_header_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "con_header_line@2x.png"; sourceTree = "<group>"; };
 		2456D56C1AE1FEFB00457A31 /* icon_close_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_close_back@2x.png"; sourceTree = "<group>"; };
 		2456D56D1AE1FEFB00457A31 /* icon_footer_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_footer_line@2x.png"; sourceTree = "<group>"; };
@@ -307,8 +313,8 @@
 		245FBEFD1AE404CB00CCF36A /* icon_tourist_head@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_tourist_head@2x.png"; sourceTree = "<group>"; };
 		245FBEFF1AE4196B00CCF36A /* TouristBaseInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristBaseInfoViewController.h; sourceTree = "<group>"; };
 		245FBF001AE4196B00CCF36A /* TouristBaseInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristBaseInfoViewController.m; sourceTree = "<group>"; };
-		245FBF021AE41B2D00CCF36A /* UploadServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadServiceViewController.h; sourceTree = "<group>"; };
-		245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadServiceViewController.m; sourceTree = "<group>"; };
+		245FBF021AE41B2D00CCF36A /* UploadServiceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UploadServiceViewController.h; path = ../UploadServiceViewController.h; sourceTree = "<group>"; };
+		245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadServiceViewController.m; path = ../UploadServiceViewController.m; sourceTree = "<group>"; };
 		245FBF051AE41C7400CCF36A /* ServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListViewController.h; sourceTree = "<group>"; };
 		245FBF061AE41C7400CCF36A /* ServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListViewController.m; sourceTree = "<group>"; };
 		2462653E1AF32A1900CF526F /* TouristInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouristInfoViewController.h; path = shanghaiBus/Controllers/TouristPatarn/TouristInfoViewController.h; sourceTree = SOURCE_ROOT; };
@@ -666,14 +672,13 @@
 		245FBEF31AE3E55E00CCF36A /* TouristPatarn */ = {
 			isa = PBXGroup;
 			children = (
+				24A7FB4B1AF67B910080FE4D /* uploadService */,
 				244D0A7B1AF53BB00000BED0 /* Authenticated */,
 				246265411AF32A9E00CF526F /* TouristInfo */,
 				245FBEF41AE3E5D800CCF36A /* TouristPatternHomeViewController.h */,
 				245FBEF51AE3E5D800CCF36A /* TouristPatternHomeViewController.m */,
 				245FBEFF1AE4196B00CCF36A /* TouristBaseInfoViewController.h */,
 				245FBF001AE4196B00CCF36A /* TouristBaseInfoViewController.m */,
-				245FBF021AE41B2D00CCF36A /* UploadServiceViewController.h */,
-				245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */,
 				245FBF051AE41C7400CCF36A /* ServiceListViewController.h */,
 				245FBF061AE41C7400CCF36A /* ServiceListViewController.m */,
 			);
@@ -797,6 +802,19 @@
 				246539681AC6BB6F00C1908C /* icon@2x.png */,
 			);
 			path = icon;
+			sourceTree = "<group>";
+		};
+		24A7FB4B1AF67B910080FE4D /* uploadService */ = {
+			isa = PBXGroup;
+			children = (
+				245FBF021AE41B2D00CCF36A /* UploadServiceViewController.h */,
+				245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */,
+				24477DAD1AF7BA400051F277 /* UploadInfoCommonInputView.h */,
+				24477DAE1AF7BA400051F277 /* UploadInfoCommonInputView.m */,
+				24516C0E1AF7BBF200F962E9 /* ImageScrollView.h */,
+				24516C0F1AF7BBF200F962E9 /* ImageScrollView.m */,
+			);
+			path = uploadService;
 			sourceTree = "<group>";
 		};
 		24B29D881ABD1B32007F84E5 = {
@@ -1401,6 +1419,7 @@
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,
 				24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */,
 				246539A81AC700B500C1908C /* BaseLoginViewController.m in Sources */,
+				24477DAF1AF7BA400051F277 /* UploadInfoCommonInputView.m in Sources */,
 				24CBAA2B1ADC28BB007FD128 /* MBProgressHUD.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				245FBEE41AE3B11000CCF36A /* MyHomeView.m in Sources */,
@@ -1431,6 +1450,7 @@
 				2450F2251AE8B5F30028A416 /* UIImage+WebP.m in Sources */,
 				246539A51AC6BC1500C1908C /* UserCachBean.m in Sources */,
 				246265441AF32E4F00CF526F /* TouristInputCommonCell.m in Sources */,
+				24516C101AF7BBF200F962E9 /* ImageScrollView.m in Sources */,
 				24D2E4C61AC45FD600347FA6 /* TouristCommentListCell.m in Sources */,
 				2450F2201AE8B5F30028A416 /* SDWebImageManager.m in Sources */,
 				24B29DF11ABD1C6E007F84E5 /* UIAlertView+AFNetworking.m in Sources */,

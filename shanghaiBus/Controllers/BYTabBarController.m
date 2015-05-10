@@ -15,6 +15,7 @@
 #import "MyHomeViewController.h"
 #import "TouristInfoViewController.h"
 #import "AuthenticatedInfoViewController.h"
+#import "UploadServiceViewController.h"
 
 #import "AppDelegate.h"
 #import "BYTabBarItem.h"
@@ -223,11 +224,30 @@
             break;
         case ACTIONINDEXTOURISTENTER:
         {
-            AuthenticatedInfoViewController *controller = [[AuthenticatedInfoViewController alloc] init];
+//            if ([[[UserCachBean share] touristInfo] usertype] == 2) {
+//                AuthenticatedInfoViewController *controller = [[AuthenticatedInfoViewController alloc] init];
+//                UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+//                [self adjustNavigationUI:myNavController];
+//                [self presentViewController:myNavController animated:YES completion:nil];
+//                [self didDismissMyInfoCenter];
+//            } else {
+//                //当认证成功就可以直接发服务了
+//
+//                UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
+//                UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+//                [self adjustNavigationUI:myNavController];
+//                [self presentViewController:myNavController animated:YES completion:nil];
+//                [self didDismissMyInfoCenter];
+//            }
+
+            UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
             UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
             [self adjustNavigationUI:myNavController];
             [self presentViewController:myNavController animated:YES completion:nil];
             [self didDismissMyInfoCenter];
+            
+            
+
         }
             break;
         case ACTIONINDEXCONTECTUS:
