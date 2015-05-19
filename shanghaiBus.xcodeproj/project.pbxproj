@@ -106,6 +106,8 @@
 		246539AA1AC702BE00C1908C /* image_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246539A91AC702BE00C1908C /* image_back@2x.png */; };
 		246539AC1AC7162200C1908C /* icon_phone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246539AB1AC7162200C1908C /* icon_phone@2x.png */; };
 		246539AF1AC7191A00C1908C /* PhoneLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246539AE1AC7191A00C1908C /* PhoneLoginViewController.m */; };
+		246F366C1AFF0C450041F80B /* icon_inderector@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246F366B1AFF0C450041F80B /* icon_inderector@2x.png */; };
+		248A9EB71B0B959B00B908D2 /* MessageInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 248A9EB61B0B959B00B908D2 /* MessageInfoCell.m */; };
 		248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 248B5C911AC3294100E0B6A4 /* TouristContectView.m */; };
 		24A0C33C1ACC3D29003E9139 /* icon_name_pass@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */; };
 		24A7FB4A1AF669A60080FE4D /* icon_picture@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 24A7FB491AF669A60080FE4D /* icon_picture@2x.png */; };
@@ -354,6 +356,9 @@
 		246539AB1AC7162200C1908C /* icon_phone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_phone@2x.png"; sourceTree = "<group>"; };
 		246539AD1AC7191A00C1908C /* PhoneLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneLoginViewController.h; sourceTree = "<group>"; };
 		246539AE1AC7191A00C1908C /* PhoneLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneLoginViewController.m; sourceTree = "<group>"; };
+		246F366B1AFF0C450041F80B /* icon_inderector@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_inderector@2x.png"; sourceTree = "<group>"; };
+		248A9EB51B0B959B00B908D2 /* MessageInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInfoCell.h; sourceTree = "<group>"; };
+		248A9EB61B0B959B00B908D2 /* MessageInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInfoCell.m; sourceTree = "<group>"; };
 		248B5C901AC3294100E0B6A4 /* TouristContectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristContectView.h; sourceTree = "<group>"; };
 		248B5C911AC3294100E0B6A4 /* TouristContectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristContectView.m; sourceTree = "<group>"; };
 		24A0C33B1ACC3D29003E9139 /* icon_name_pass@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_name_pass@2x.png"; sourceTree = "<group>"; };
@@ -665,6 +670,8 @@
 			children = (
 				2456D5801AE2982800457A31 /* MyMessageViewController.h */,
 				2456D5811AE2982800457A31 /* MyMessageViewController.m */,
+				248A9EB51B0B959B00B908D2 /* MessageInfoCell.h */,
+				248A9EB61B0B959B00B908D2 /* MessageInfoCell.m */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -731,6 +738,7 @@
 		2465395E1AC6BB6F00C1908C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				246F366B1AFF0C450041F80B /* icon_inderector@2x.png */,
 				244D0A741AF506E90000BED0 /* icon_man@2x.png */,
 				244D0A751AF506E90000BED0 /* icon_female@2x.png */,
 				24DF4B9A1AEE8F8C000F9FB4 /* icon_user_upload@2x.png */,
@@ -1313,6 +1321,7 @@
 				2456D5751AE250CF00457A31 /* icon_search_indecator@2x.png in Resources */,
 				24CBAA251ADC0E68007FD128 /* citydict.plist in Resources */,
 				24D9E4C81AE13CAD00C2E978 /* icon_detail_up@2x.png in Resources */,
+				246F366C1AFF0C450041F80B /* icon_inderector@2x.png in Resources */,
 				2465399D1AC6BB6F00C1908C /* icon_regist_success@2x.png in Resources */,
 				2465399B1AC6BB6F00C1908C /* icon_ok@2x.png in Resources */,
 				2465399C1AC6BB6F00C1908C /* icon_regist@2x.png in Resources */,
@@ -1419,6 +1428,7 @@
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,
 				24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */,
 				246539A81AC700B500C1908C /* BaseLoginViewController.m in Sources */,
+				248A9EB71B0B959B00B908D2 /* MessageInfoCell.m in Sources */,
 				24477DAF1AF7BA400051F277 /* UploadInfoCommonInputView.m in Sources */,
 				24CBAA2B1ADC28BB007FD128 /* MBProgressHUD.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,

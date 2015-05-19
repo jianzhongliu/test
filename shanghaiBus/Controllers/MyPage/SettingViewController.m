@@ -58,7 +58,7 @@
     
     UIButton *buttonClear = [UIButton buttonWithType:UIButtonTypeCustom];
     buttonClear.frame = CGRectMake(10, labelMessage.ctBottom + 14, SCREENWIDTH - 20, 30);
-    [buttonClear setTitle:@"清楚缓存" forState:UIControlStateNormal];
+    [buttonClear setTitle:@"清除缓存" forState:UIControlStateNormal];
     [buttonClear setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [buttonClear addTarget:self action:@selector(didClearCache) forControlEvents:UIControlEventTouchUpInside];
     [buttonClear setBackgroundColor:[UIColor whiteColor]];

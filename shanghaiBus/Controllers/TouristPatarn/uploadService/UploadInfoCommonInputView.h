@@ -8,19 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, INPUTVIEWTYPE) {
-    INPUTVIEWTYPENAME = 1, //姓名
-    INPUTVIEWTYPEIDENTIFY = 2,//身份证
-    INPUTVIEWTYPEPHONE = 3,//电话号码
-    INPUTVIEWTYPECODE = 4//验证码
+typedef NS_ENUM(NSInteger, VIEWTYPE) {
+    VIEWTYPENAME = 1, //title
+    VIEWTYPEINPUT = 2,//
+    VIEWTYPEPRICE = 3,//price
 };
 
 @interface UploadInfoCommonInputView : UIView
 
 @property (nonatomic, strong) UITextField *textInput;
-@property (nonatomic) INPUTVIEWTYPE viewType;
+@property (nonatomic) VIEWTYPE viewType;
 
 
-- (void)configViewWithData:(id) data;
+- (void)configViewWithTitle:(NSString *) title;
 
 @end

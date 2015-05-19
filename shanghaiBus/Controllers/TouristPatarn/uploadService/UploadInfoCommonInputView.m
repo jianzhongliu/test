@@ -13,10 +13,72 @@
 
 @property (nonatomic, strong) UILabel *labelTitle;
 @property (nonatomic, strong) UIView *viewLine;
+@property (nonatomic, strong) UIImageView *imageInderector;
+@property (nonatomic, strong) UILabel *labelUnit;
 
 @end
 
 @implementation UploadInfoCommonInputView
+
+#pragma mark - lifeCycleMethods
+- (id)init {
+    if (self = [super init]) {
+        [self initUI];
+    }
+    return self;
+}
+
+- (void)initUI {
+    self.labelTitle.frame = CGRectMake(10, 10, 100, 25);
+    [self addSubview:self.labelTitle];
+    
+    self.textInput.frame = CGRectMake(110, 10, 180, 25);
+    [self addSubview:self.textInput];
+    
+    self.viewLine.frame = CGRectMake(0, 43, SCREENWIDTH, 1);
+    [self addSubview:self.viewLine];
+    
+    self.imageInderector.frame = CGRectMake(SCREENWIDTH - 22, 16, 7, 12);
+    [self addSubview:self.imageInderector];
+    
+    self.labelUnit.frame = CGRectMake(SCREENWIDTH - 100, 10, 90, 25);
+    [self addSubview:self.labelUnit];
+}
+
+- (void)configViewWithTitle:(NSString *) title{
+    self.viewLine.hidden = NO;
+    self.labelTitle.text = title;
+    self.textInput.enabled = NO;
+    self.textInput.hidden = YES;
+    self.imageInderector.hidden = NO;
+    
+    switch (self.viewType) {
+        case VIEWTYPENAME:
+        {
+            self.textInput.placeholder = @"(必填)";
+        }
+            break;
+        case VIEWTYPEINPUT:
+        {
+            
+        }
+            break;
+        case VIEWTYPEPRICE:
+        {
+            self.textInput.placeholder = @"(必填)";
+            self.labelUnit.hidden = NO;
+            self.textInput.hidden = NO;
+            self.imageInderector.hidden = YES;
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (CGFloat)fetchViewHeight {
+    return 0;
+}
 #pragma mark - getter && setter
 
 - (UILabel *)labelTitle {
@@ -48,64 +110,29 @@
     return _viewLine;
 }
 
-#pragma mark - lifeCycleMethods
-- (id)init {
-    if (self = [super init]) {
-        [self initUI];
+- (UIImageView *)imageInderector {
+    if (_imageInderector == nil) {
+        _imageInderector = [[UIImageView alloc] init];
+        _imageInderector.image = [UIImage imageNamed:@"icon_inderector"];
+        _imageInderector.clipsToBounds = YES;
+        _imageInderector.userInteractionEnabled = YES;
+        _imageInderector.hidden = YES;
     }
-    return self;
+    return _imageInderector;
 }
 
-- (void)initUI {
-    self.labelTitle.frame = CGRectMake(10, 10, 100, 25);
-    [self addSubview:self.labelTitle];
-    
-    self.textInput.frame = CGRectMake(110, 10, 180, 25);
-    [self addSubview:self.textInput];
-    
-    self.viewLine.frame = CGRectMake(0, 43, SCREENWIDTH, 1);
-    [self addSubview:self.viewLine];
-}
-
-- (void)configViewWithData:(id) data {
-    self.viewLine.hidden = YES;
-    
-    switch (self.viewType) {
-        case INPUTVIEWTYPENAME:
-        {
-            self.labelTitle.text = @"姓名";
-            self.textInput.placeholder = @"请输入真实姓名";
-        }
-            break;
-        case INPUTVIEWTYPEIDENTIFY:
-        {
-            self.labelTitle.text = @"身份证号";
-            self.textInput.placeholder = @"请输入身份证号码";
-            self.viewLine.hidden = NO;
-        }
-            break;
-        case INPUTVIEWTYPEPHONE:
-        {
-            self.labelTitle.text = @"手机号";
-            self.textInput.placeholder = @"请输入手机号";
-            self.viewLine.hidden = NO;
-        }
-            break;
-        case INPUTVIEWTYPECODE:
-        {
-            self.labelTitle.text = @"验证码";
-            self.textInput.placeholder = @"请输入验证码";
-            self.viewLine.hidden = NO;
-        }
-            break;
-        default:
-            break;
+- (UILabel *)labelUnit {
+    if (_labelUnit == nil) {
+        _labelUnit = [[UILabel alloc] init];
+        _labelUnit.numberOfLines = 0;
+        _labelUnit.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelUnit.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
+        _labelUnit.font = [UIFont systemFontOfSize:13];
+        _labelUnit.textAlignment = NSTextAlignmentRight;
+        _labelUnit.text = @"元/天";
+        _labelUnit.hidden = YES;
     }
-    
-}
-
-- (CGFloat)fetchViewHeight {
-    return 0;
+    return _labelUnit;
 }
 
 @end

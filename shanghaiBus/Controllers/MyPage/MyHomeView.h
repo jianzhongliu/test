@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, ACTIONINDEX) {
     ACTIONINDEXSETTING = 2,
     ACTIONINDEXCONTECTUS = 3,
     ACTIONINDEXSWITCH = 4,
-    ACTIONINDEXTOURISTENTER = 5
+    ACTIONINDEXTOURISTENTER = 5 //商家入驻、发布服务
 };
 
 @protocol MyHomeViewDelegate <NSObject>
@@ -29,4 +29,5 @@ typedef NS_ENUM(NSInteger, ACTIONINDEX) {
 
 @property (nonatomic, assign) id<MyHomeViewDelegate> delegate;
 
+- (void)reloadData;
 @end

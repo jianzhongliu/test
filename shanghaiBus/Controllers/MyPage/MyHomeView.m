@@ -26,6 +26,111 @@
 @end
 
 @implementation MyHomeView
+
+#pragma mark - lifeCycleMethods
+- (id)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        [self initUI];
+    }
+    return self;
+}
+
+- (void)initUI {
+    self.backgroundColor = BYBackColor;
+    self.buttonIcon.frame = CGRectMake((VIEWWIDTH - 44) / 2, 44, 44, 44);
+    self.buttonIcon.layer.cornerRadius = self.buttonIcon.viewWidth/ 2;
+    self.buttonIcon.clipsToBounds = YES;
+    
+    self.buttonMessage.frame = CGRectMake(0, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
+    self.buttonFavorites.frame = CGRectMake(VIEWWIDTH / 3, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
+    self.buttonSetting.frame = CGRectMake(VIEWWIDTH / 3 *2, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
+    
+    self.buttonTouristEnter.frame = CGRectMake(20, self.buttonSetting.ctBottom + 20, VIEWWIDTH - 40, 20);
+    [self.buttonTouristEnter setTitle:@"商家入驻" forState:UIControlStateNormal];
+    
+    self.buttonContecUs.frame = CGRectMake(20, self.buttonTouristEnter.ctBottom + 20, VIEWWIDTH - 40, 20);
+    [self.buttonContecUs setTitle:@"联系我们" forState:UIControlStateNormal];
+    
+    self.buttonSwitch.frame = CGRectMake(0, SCREENHEIGHT - 40, VIEWWIDTH, 30);
+    [self.buttonSwitch setTitle:@"切换到商家模式" forState:UIControlStateNormal];
+    [self.buttonSwitch setImageEdgeInsets:UIEdgeInsetsMake(0, self.buttonSwitch.viewWidth - 40, 0, 0)];
+    
+}
+
+- (void)reloadData {
+    if ([[UserCachBean share] isLogin ] == YES) {
+        self.buttonMessage.enabled = YES;
+        [self.buttonSwitch setTitle:@"切换到商家模式" forState:UIControlStateNormal];
+    } else {
+        self.buttonMessage.enabled = NO;
+        [self.buttonSwitch setTitle:@"登录或注册账号" forState:UIControlStateNormal];
+    }
+    
+    if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
+        [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_upload"] forState:UIControlStateNormal];
+        [self.buttonFavorites setTitle:@"发布服务" forState:UIControlStateNormal];
+        
+    } else {
+        [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_enter"] forState:UIControlStateNormal];
+        [self.buttonFavorites setTitle:@"商家入驻" forState:UIControlStateNormal];
+    }
+    
+    [self.buttonIcon.imageView sd_setImageWithURL:[NSURL URLWithString:[[[UserCachBean share] touristInfo] icon]]];
+}
+
+- (void)didStatusChange:(UIButton *) sender {
+    if (!(_delegate && [_delegate respondsToSelector:@selector(didClickActionWithActionType:)])) {
+        return;
+    }
+    
+    switch (sender.tag) {
+        case 101://用户资料
+        {
+            [_delegate didClickActionWithActionType:ACTIONINDEXUSERINFO];
+        }
+            break;
+        case 102://消息
+        {
+            
+        }
+            break;
+        case 103://收藏
+        {
+            if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
+               //发布信息
+            } else {
+                //入驻
+                [_delegate didClickActionWithActionType:ACTIONINDEXTOURISTENTER];
+            }
+        }
+            break;
+        case 104://设置
+        {
+            [_delegate didClickActionWithActionType:ACTIONINDEXSETTING];
+        }
+            break;
+        case 105://联系我们
+        {
+            [_delegate didClickActionWithActionType:ACTIONINDEXCONTECTUS];
+        }
+            break;
+        case 106://商家入驻
+        {
+            [_delegate didClickActionWithActionType:ACTIONINDEXTOURISTENTER];
+        }
+            break;
+        case 107://切换模式
+        {
+            [[AppDelegate share] switchPattern];
+            [_delegate didClickActionWithActionType:ACTIONINDEXSWITCH];
+            
+        }
+            break;
+        default:
+            break;
+    }
+
+}
 #pragma mark - getter && setter
 
 - (UIButton *)buttonIcon {
@@ -101,8 +206,8 @@
 - (UIButton *)buttonContecUs {
     if (_buttonContecUs == nil) {
         _buttonContecUs = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_buttonContecUs setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-//        [_buttonContecUs setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        //        [_buttonContecUs setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
+        //        [_buttonContecUs setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
         [_buttonContecUs addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
         _buttonContecUs.selected = NO;
         _buttonContecUs.titleLabel.font = [UIFont systemFontOfSize:13];
@@ -118,8 +223,8 @@
 - (UIButton *)buttonTouristEnter {
     if (_buttonTouristEnter == nil) {
         _buttonTouristEnter = [UIButton buttonWithType:UIButtonTypeCustom];
-//        [_buttonTouristEnter setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-//        [_buttonTouristEnter setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        //        [_buttonTouristEnter setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
+        //        [_buttonTouristEnter setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
         [_buttonTouristEnter addTarget:self action:@selector(didStatusChange:) forControlEvents:UIControlEventTouchUpInside];
         _buttonTouristEnter.selected = NO;
         [_buttonTouristEnter setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -145,109 +250,6 @@
         [self addSubview:_buttonSwitch];
     }
     return _buttonSwitch;
-}
-
-#pragma mark - lifeCycleMethods
-- (id)initWithFrame:(CGRect)frame {
-    if (self = [super initWithFrame:frame]) {
-        [self initUI];
-    }
-    return self;
-}
-
-- (void)initUI {
-    self.backgroundColor = BYBackColor;
-    self.buttonIcon.frame = CGRectMake((VIEWWIDTH - 44) / 2, 44, 44, 44);
-    self.buttonIcon.layer.cornerRadius = self.buttonIcon.viewWidth/ 2;
-    self.buttonIcon.clipsToBounds = YES;
-    
-    self.buttonMessage.frame = CGRectMake(0, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
-    self.buttonFavorites.frame = CGRectMake(VIEWWIDTH / 3, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
-    self.buttonSetting.frame = CGRectMake(VIEWWIDTH / 3 *2, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
-    
-    self.buttonTouristEnter.frame = CGRectMake(20, self.buttonSetting.ctBottom + 20, VIEWWIDTH - 40, 20);
-    [self.buttonTouristEnter setTitle:@"商家入驻" forState:UIControlStateNormal];
-    
-    self.buttonContecUs.frame = CGRectMake(20, self.buttonTouristEnter.ctBottom + 20, VIEWWIDTH - 40, 20);
-    [self.buttonContecUs setTitle:@"联系我们" forState:UIControlStateNormal];
-    
-    self.buttonSwitch.frame = CGRectMake(0, SCREENHEIGHT - 40, VIEWWIDTH, 30);
-    [self.buttonSwitch setTitle:@"切换到商家模式" forState:UIControlStateNormal];
-    [self.buttonSwitch setImageEdgeInsets:UIEdgeInsetsMake(0, self.buttonSwitch.viewWidth - 40, 0, 0)];
-    
-    if ([[UserCachBean share] isLogin ] == YES) {
-        self.buttonMessage.enabled = YES;
-        [self.buttonSwitch setTitle:@"切换到商家模式" forState:UIControlStateNormal];
-    } else {
-        self.buttonMessage.enabled = NO;
-        [self.buttonSwitch setTitle:@"登录或注册账号" forState:UIControlStateNormal];
-    }
-    
-    if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
-        [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_upload"] forState:UIControlStateNormal];
-        [self.buttonFavorites setTitle:@"发布服务" forState:UIControlStateNormal];
-        
-    } else {
-        [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_enter"] forState:UIControlStateNormal];
-        [self.buttonFavorites setTitle:@"商家入驻" forState:UIControlStateNormal];
-    }
-    
-    [self.buttonIcon.imageView sd_setImageWithURL:[NSURL URLWithString:[[[UserCachBean share] touristInfo] icon]]];
-    
-}
-
-- (void)didStatusChange:(UIButton *) sender {
-    if (!(_delegate && [_delegate respondsToSelector:@selector(didClickActionWithActionType:)])) {
-        return;
-    }
-    
-    switch (sender.tag) {
-        case 101://用户资料
-        {
-            [_delegate didClickActionWithActionType:ACTIONINDEXUSERINFO];
-        }
-            break;
-        case 102://消息
-        {
-            
-        }
-            break;
-        case 103://收藏
-        {
-            if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
-               //发布信息
-            } else {
-                //入驻
-                [_delegate didClickActionWithActionType:ACTIONINDEXTOURISTENTER];
-            }
-        }
-            break;
-        case 104://设置
-        {
-            [_delegate didClickActionWithActionType:ACTIONINDEXSETTING];
-        }
-            break;
-        case 105://联系我们
-        {
-            [_delegate didClickActionWithActionType:ACTIONINDEXCONTECTUS];
-        }
-            break;
-        case 106://商家入驻
-        {
-            [_delegate didClickActionWithActionType:ACTIONINDEXTOURISTENTER];
-        }
-            break;
-        case 107://切换模式
-        {
-            [[AppDelegate share] switchPattern];
-            [_delegate didClickActionWithActionType:ACTIONINDEXSWITCH];
-            
-        }
-            break;
-        default:
-            break;
-    }
-
 }
 
 @end

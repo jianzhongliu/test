@@ -105,6 +105,7 @@
     messageController.navigationController.navigationBar.translucent = NO;
     messageItem.highlightedImage = [UIImage imageNamed:@"icon_home_message_selected.png"];
     messageNavController.tabBarItem = messageItem;
+    messageNavController.navigationBar.translucent = NO;
     [self adjustNavigationUI:messageNavController];
     
     //我
@@ -138,6 +139,7 @@
         [window addSubview:self.control];
         
         self.viewMy.frame = CGRectMake(SCREENWIDTH, 0, 230, SCREENHEIGHT);
+        [self.viewMy reloadData];
         [self.control addSubview:self.viewMy];
     } else {
         self.control.alpha = 1;

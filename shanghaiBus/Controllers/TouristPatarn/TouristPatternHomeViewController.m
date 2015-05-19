@@ -63,11 +63,12 @@
 - (UIButton *)buttonMessage {
     if (_buttonMessage == nil) {
         _buttonMessage = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonMessage setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonMessage setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonMessage setImage:[UIImage imageNamed:@"icon_user_message_enable"] forState:UIControlStateNormal];
+        [_buttonMessage setImage:[UIImage imageNamed:@"icon_user_message_enable"] forState:UIControlStateSelected];
         [_buttonMessage addTarget:self action:@selector(didClickActionWithSender:) forControlEvents:UIControlEventTouchUpInside];
         _buttonMessage.tag = 102;
         _buttonMessage.selected = NO;
+        _buttonMessage.backgroundColor = [UIColor whiteColor];
         [_buttonMessage setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _buttonMessage.titleLabel.font = [UIFont systemFontOfSize:13];
         _buttonMessage.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -79,11 +80,12 @@
 - (UIButton *)buttonSetting {
     if (_buttonSetting == nil) {
         _buttonSetting = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_buttonSetting setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
-        [_buttonSetting setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
+        [_buttonSetting setImage:[UIImage imageNamed:@"icon_user_setting"] forState:UIControlStateNormal];
+        [_buttonSetting setImage:[UIImage imageNamed:@"icon_user_setting"] forState:UIControlStateSelected];
         [_buttonSetting addTarget:self action:@selector(didClickActionWithSender:) forControlEvents:UIControlEventTouchUpInside];
         _buttonSetting.selected = NO;
         _buttonSetting.tag = 103;
+        _buttonSetting.backgroundColor = [UIColor whiteColor];
         [_buttonSetting setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         _buttonSetting.titleLabel.font = [UIFont systemFontOfSize:13];
         _buttonSetting.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
@@ -114,7 +116,7 @@
         _buttonService = [UIButton buttonWithType:UIButtonTypeCustom];
 //        [_buttonService setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateNormal];
 //        [_buttonService setImage:[UIImage imageNamed:@"icon"] forState:UIControlStateSelected];
-        [_buttonService setTitle:@"我发布的服务信息（1条）" forState:UIControlStateNormal];
+        [_buttonService setTitle:@"我发布的服务信息" forState:UIControlStateNormal];
         [_buttonService addTarget:self action:@selector(didClickActionWithSender:) forControlEvents:UIControlEventTouchUpInside];
         _buttonService.selected = NO;
         _buttonService.tag = 105;
@@ -199,8 +201,8 @@
     [scroll addSubview:self.controlIcon];
     
     self.imageIcon.frame = CGRectMake((SCREENWIDTH - 95)/2, 30, 95, 95);
-    self.buttonMessage.frame = CGRectMake(0, self.imageIcon.ctBottom + 20, SCREENWIDTH / 2, 44);
-    self.buttonSetting.frame = CGRectMake(SCREENWIDTH / 2, self.buttonMessage.ctTop, SCREENWIDTH / 2, 44);
+    self.buttonMessage.frame = CGRectMake(0, self.imageIcon.ctBottom + 20, SCREENWIDTH / 2, 60);
+    self.buttonSetting.frame = CGRectMake(SCREENWIDTH / 2, self.buttonMessage.ctTop, SCREENWIDTH / 2, 60);
     self.controlIcon.frame = self.imageIcon.frame;
 
     self.buttonUpload.frame = CGRectMake(10, self.buttonMessage.ctBottom + 30, SCREENWIDTH, 30);
