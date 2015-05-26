@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+@protocol TouristInputInfoViewControllerDelegate <NSObject>
+
+- (void)didUploadInfoWith:(NSString *) content tag:(NSInteger) tag;
+
+@end
+
 @interface TouristInputInfoViewController : BaseViewController
+@property (nonatomic, strong) UITextView *textContent;
+@property (nonatomic, weak) id<TouristInputInfoViewControllerDelegate> delegate;
+@property (nonatomic, assign) NSInteger tag;
 
 @end

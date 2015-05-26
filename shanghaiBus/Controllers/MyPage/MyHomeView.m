@@ -41,14 +41,14 @@
     self.buttonIcon.layer.cornerRadius = self.buttonIcon.viewWidth/ 2;
     self.buttonIcon.clipsToBounds = YES;
     
-    self.buttonMessage.frame = CGRectMake(0, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
-    self.buttonFavorites.frame = CGRectMake(VIEWWIDTH / 3, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
-    self.buttonSetting.frame = CGRectMake(VIEWWIDTH / 3 *2, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
+//    self.buttonMessage.frame = CGRectMake(0, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 3, VIEWWIDTH / 3);
+    self.buttonFavorites.frame = CGRectMake(0, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 2, VIEWWIDTH / 3);
+    self.buttonSetting.frame = CGRectMake(VIEWWIDTH / 2, self.buttonIcon.ctBottom + 30, VIEWWIDTH / 2, VIEWWIDTH / 3);
     
-    self.buttonTouristEnter.frame = CGRectMake(20, self.buttonSetting.ctBottom + 20, VIEWWIDTH - 40, 20);
-    [self.buttonTouristEnter setTitle:@"商家入驻" forState:UIControlStateNormal];
+//    self.buttonTouristEnter.frame = CGRectMake(20, self.buttonSetting.ctBottom + 20, VIEWWIDTH - 40, 20);
+//    [self.buttonTouristEnter setTitle:@"商家入驻" forState:UIControlStateNormal];
     
-    self.buttonContecUs.frame = CGRectMake(20, self.buttonTouristEnter.ctBottom + 20, VIEWWIDTH - 40, 20);
+    self.buttonContecUs.frame = CGRectMake(20, self.buttonFavorites.ctBottom + 20, VIEWWIDTH - 40, 20);
     [self.buttonContecUs setTitle:@"联系我们" forState:UIControlStateNormal];
     
     self.buttonSwitch.frame = CGRectMake(0, SCREENHEIGHT - 40, VIEWWIDTH, 30);
@@ -66,7 +66,7 @@
         [self.buttonSwitch setTitle:@"登录或注册账号" forState:UIControlStateNormal];
     }
     
-    if ([[UserCachBean share] touristInfo].usertype == 2) {//表示该用户是导游
+    if ([[UserCachBean share] touristInfo].usertype == 3) {//表示该用户是导游
         [self.buttonFavorites setImage:[UIImage imageNamed:@"icon_user_upload"] forState:UIControlStateNormal];
         [self.buttonFavorites setTitle:@"发布服务" forState:UIControlStateNormal];
         
@@ -159,7 +159,7 @@
         [_buttonMessage setImageEdgeInsets:UIEdgeInsetsMake(-20, 20, 0, 0)];
         [_buttonMessage setTitleEdgeInsets:UIEdgeInsetsMake(40, -20, 0, 10)];
         _buttonMessage.tag = 102;
-        [self addSubview:_buttonMessage];
+//        [self addSubview:_buttonMessage];
     }
     return _buttonMessage;
     
@@ -176,7 +176,7 @@
         _buttonFavorites.selected = NO;
         _buttonFavorites.tag = 103;
         _buttonFavorites.titleLabel.font = [UIFont systemFontOfSize:13];
-        [_buttonFavorites setImageEdgeInsets:UIEdgeInsetsMake(-20, 20, 0, 0)];
+        [_buttonFavorites setImageEdgeInsets:UIEdgeInsetsMake(-20, 40, 0, 0)];
         [_buttonFavorites setTitleEdgeInsets:UIEdgeInsetsMake(40, -20, 0, 10)];
         [self addSubview:_buttonFavorites];
     }
@@ -231,7 +231,7 @@
         _buttonTouristEnter.titleLabel.font = [UIFont systemFontOfSize:14];
         _buttonTouristEnter.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
         _buttonTouristEnter.tag = 106;
-        [self addSubview:_buttonTouristEnter];
+//        [self addSubview:_buttonTouristEnter];
     }
     return _buttonTouristEnter;
 }

@@ -12,18 +12,18 @@
 
 #import "ImageScrollView.h"
 
-@interface UploadServiceViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface UploadServiceViewController () <UITableViewDataSource, UITableViewDelegate, TouristInputInfoViewControllerDelegate>
 @property (nonatomic, strong) UITableView *tableList;
 
 @property (nonatomic, strong) ImageScrollView *imageList;
 
-@property (nonatomic, strong) UploadInfoCommonInputView *viewTitle;
-@property (nonatomic, strong) UploadInfoCommonInputView *viewPrice;
-@property (nonatomic, strong) UploadInfoCommonInputView *viewArea;
-@property (nonatomic, strong) UploadInfoCommonInputView *viewLanguage;
-@property (nonatomic, strong) UploadInfoCommonInputView *viewPriceDetail;
-@property (nonatomic, strong) UploadInfoCommonInputView *viewPreBook;
-@property (nonatomic, strong) UploadInfoCommonInputView *viewService;
+@property (nonatomic, strong) UploadInfoCommonInputView *viewTitle;//标题
+@property (nonatomic, strong) UploadInfoCommonInputView *viewPrice;//价格
+@property (nonatomic, strong) UploadInfoCommonInputView *viewArea;//服务区域
+@property (nonatomic, strong) UploadInfoCommonInputView *viewLanguage;//服务语言
+@property (nonatomic, strong) UploadInfoCommonInputView *viewPriceDetail;//价格详情
+@property (nonatomic, strong) UploadInfoCommonInputView *viewPreBook;//预订须知
+@property (nonatomic, strong) UploadInfoCommonInputView *viewService;//服务描述
 
 @end
 
@@ -52,7 +52,7 @@
 }
 
 - (void)initData {
-    
+    self.service = [[ServiceObject alloc] init];
 }
 
 - (void)initUI {
@@ -72,10 +72,47 @@
 }
 
 - (void)didSaveInfo {
-    
-    [self didDismissMyInfo];
+    [self requestData];
 }
 
+#pragma mark - reqeust
+- (void)requestData {
+    [self showLoadingActivity:YES];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *title = [self.viewTitle.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *price = [self.viewPrice.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *area = [self.viewArea.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *language = [self.viewLanguage.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *priceDetail = [self.viewPriceDetail.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *preBook = [self.viewPreBook.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *service = [self.viewService.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *imageurl = @"http://www.baidu.com";
+    
+    NSString *url = [NSString stringWithFormat:@"%@service/insertServiceObject",HOST];
+    if (self.service.identify.length > 0) {
+        //需要更新数据，而不是添加服务
+        url = [NSString stringWithFormat:@"%@service/updateServiceWithObject",HOST];
+        currentTime = self.service.identify;
+    }
+    
+    NSDictionary *dic = @{@"identify":currentTime,@"touristid":[[[UserCachBean share] touristInfo] identify], @"otherinfoid":title, @"price":price, @"servicearea":area, @"language":language, @"pricedetail":priceDetail, @"prebook":preBook, @"servicedetail":service, @"images":imageurl, @"adddate":currentTime};
+    
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self hideLoadWithAnimated:YES];
+        [self performSelector:@selector(didDismissMyInfo) withObject:nil afterDelay:2];        
+        
+        [self showInfo:@"提交成功!"];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+        [self showInfo:@"提交失败，请重试!"];
+    }];
+
+}
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -138,12 +175,14 @@
                 case 0:
                 {
                     [self.viewTitle configViewWithTitle:@"标    题"];
+                    self.viewTitle.textInput.text = self.service.otherinfoid;
                     [cell addSubview:self.viewTitle];
                 }
                     break;
                 case 1:
                 {
                     [self.viewPrice configViewWithTitle:@"价     格"];
+                    self.viewPrice.textInput.text = self.service.price;
                     [cell addSubview:self.viewPrice];
                 }
                     break;
@@ -158,12 +197,14 @@
                 case 0:
                 {
                     [self.viewArea configViewWithTitle:@"导游区域"];
+                    self.viewArea.textInput.text = self.service.servicearea;
                     [cell addSubview:self.viewArea];
                 }
                     break;
                 case 1:
                 {
                     [self.viewLanguage configViewWithTitle:@"擅长语言"];
+                    self.viewLanguage.textInput.text = self.service.language;
                     [cell addSubview:self.viewLanguage];
                 }
                     break;
@@ -178,18 +219,21 @@
                 case 0:
                 {
                     [self.viewPriceDetail configViewWithTitle:@"价格说明"];
+                    self.viewPriceDetail.textInput.text = self.service.pricedetail;
                     [cell addSubview:self.viewPriceDetail];
                 }
                     break;
                 case 1:
                 {
                     [self.viewPreBook configViewWithTitle:@"预订须知"];
+                    self.viewPreBook.textInput.text = self.service.preBook;
                     [cell addSubview:self.viewPreBook];
                 }
                     break;
                 case 2:
                 {
                     [self.viewService configViewWithTitle:@"服务描述"];
+                    self.viewService.textInput.text = self.service.servicedetail;
                     [cell addSubview:self.viewService];
                 }
                     break;
@@ -214,7 +258,9 @@
                 {
                     TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
                     [controller setTitle:@"标题"];
-                    
+                    controller.textContent.text = self.viewTitle.textInput.text;
+                    controller.delegate = self;
+                    controller.tag = 1;
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self.viewTitle configViewWithTitle:@"标    题"];
 //                    [cell addSubview:self.viewTitle];
@@ -222,9 +268,15 @@
                     break;
                 case 1:
                 {
-                    [self.viewPrice.textInput becomeFirstResponder];
-//                    [self.viewPrice configViewWithTitle:@"价     格"];
-//                    [cell addSubview:self.viewPrice];
+                    TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
+                    [controller setTitle:@"价格"];
+                    controller.textContent.text = self.viewPrice.textInput.text;
+                    controller.delegate = self;
+                    controller.tag = 7;
+                    [self.navigationController pushViewController:controller animated:YES];
+                    
+//                    [self.viewPrice.textInput becomeFirstResponder];
+
                 }
                     break;
                 default:
@@ -238,8 +290,10 @@
                 case 0:
                 {
                     TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
+                    controller.textContent.text = self.viewArea.textInput.text;
                     [controller setTitle:@"导游区域"];
-                    
+                    controller.delegate = self;
+                    controller.tag = 2;
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self.viewArea configViewWithTitle:@"导游区域"];
 //                    [cell addSubview:self.viewArea];
@@ -248,8 +302,10 @@
                 case 1:
                 {
                     TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
+                    controller.textContent.text = self.viewLanguage.textInput.text;
                     [controller setTitle:@"擅长语言"];
-                    
+                    controller.delegate = self;
+                    controller.tag = 3;
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self.viewLanguage configViewWithTitle:@"擅长语言"];
 //                    [cell addSubview:self.viewLanguage];
@@ -266,8 +322,10 @@
                 case 0:
                 {
                     TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
+                    controller.textContent.text = self.viewPriceDetail.textInput.text;
                     [controller setTitle:@"价格说明"];
-                    
+                    controller.delegate = self;
+                    controller.tag = 4;
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self.viewPriceDetail configViewWithTitle:@"价格说明"];
 //                    [cell addSubview:self.viewPriceDetail];
@@ -276,8 +334,10 @@
                 case 1:
                 {
                     TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
+                    controller.textContent.text = self.viewPreBook.textInput.text;
                     [controller setTitle:@"预订须知"];
-                    
+                    controller.delegate = self;
+                    controller.tag = 5;
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self.viewPreBook configViewWithTitle:@"预订须知"];
 //                    [cell addSubview:self.viewPreBook];
@@ -286,8 +346,10 @@
                 case 2:
                 {
                     TouristInputInfoViewController *controller = [[TouristInputInfoViewController alloc] init];
+                    controller.textContent.text = self.viewService.textInput.text;
                     [controller setTitle:@"服务描述"];
-                    
+                    controller.delegate = self;
+                    controller.tag = 6;
                     [self.navigationController pushViewController:controller animated:YES];
 //                    [self.viewService configViewWithTitle:@"服务描述"];
 //                    [cell addSubview:self.viewService];
@@ -301,6 +363,50 @@
         default:
             break;
     }
+}
+
+#pragma mark - TouristInputViewControllerDelegate
+- (void)didUploadInfoWith:(NSString *)content tag:(NSInteger)tag {
+    switch (tag) {
+        case 1:
+        {
+            self.viewTitle.textInput.text = content;
+        }
+            break;
+        case 2:
+        {
+            self.viewArea.textInput.text = content;
+        }
+            break;
+        case 3:
+        {
+            self.viewLanguage.textInput.text = content;
+        }
+            break;
+        case 4:
+        {
+            self.viewPriceDetail.textInput.text = content;
+        }
+            break;
+        case 5:
+        {
+            self.viewPreBook.textInput.text = content;
+        }
+            break;
+        case 6:
+        {
+            self.viewService.textInput.text = content;
+        }
+            break;
+        case 7:
+        {
+            self.viewPrice.textInput.text = content;
+        }
+            break;
+        default:
+            break;
+    }
+
 }
 
 #pragma mark - getter && setter
@@ -335,7 +441,7 @@
 - (UploadInfoCommonInputView *)viewPrice {
     if (_viewPrice == nil) {
         _viewPrice = [[UploadInfoCommonInputView alloc] init];
-        _viewPrice.viewType = VIEWTYPEPRICE;
+        _viewPrice.viewType = VIEWTYPENAME;
     }
     return _viewPrice;
 }

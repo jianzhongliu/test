@@ -7,7 +7,10 @@
 //
 
 #import "BaseViewController.h"
+#import "ServiceObject.h"
 
 @interface UploadServiceViewController : BaseViewController
+
+@property (nonatomic, strong) ServiceObject *service;
 
 @end

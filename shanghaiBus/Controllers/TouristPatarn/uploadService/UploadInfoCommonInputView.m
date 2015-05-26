@@ -49,7 +49,7 @@
     self.viewLine.hidden = NO;
     self.labelTitle.text = title;
     self.textInput.enabled = NO;
-    self.textInput.hidden = YES;
+//    self.textInput.hidden = YES;
     self.imageInderector.hidden = NO;
     
     switch (self.viewType) {

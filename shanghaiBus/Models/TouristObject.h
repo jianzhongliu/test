@@ -30,7 +30,7 @@
 @property (nonatomic, copy)	NSString *tag;
 @property (nonatomic, copy)	NSString *images;
 @property (nonatomic, assign)	float star;
-@property (nonatomic, assign)	NSInteger usertype;
+@property (nonatomic, assign)	NSInteger usertype;//用户类型：1，普通用户，2认证中的导游，3认证通过的导游 默认是1
 @property (nonatomic, assign)	float userlat;
 @property (nonatomic, assign)	float userlng;
 @property (nonatomic, copy)	NSString *otherinfoid;
@@ -38,6 +38,7 @@
 @property (nonatomic, assign) NSInteger registerdate;
 @property (nonatomic, assign) NSInteger commentnumber;
 @property (nonatomic, assign) NSInteger messagenumber;
+@property (nonatomic, strong) NSString *status;
 
 - (void)configTouristWithDic:(NSDictionary *) dic;
 

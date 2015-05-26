@@ -130,6 +130,7 @@
         _buttonLeft.backgroundColor = BYColor;
         [_buttonLeft setTitle:@"对话消息" forState:UIControlStateNormal];
         [_buttonLeft setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_buttonLeft setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         _buttonLeft.titleLabel.font = [UIFont systemFontOfSize:13];
         _buttonLeft.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }
@@ -145,6 +146,7 @@
         _buttonRight.backgroundColor = BYColor;
         [_buttonRight setTitle:@"系统消息" forState:UIControlStateNormal];
         [_buttonRight setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_buttonRight setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         _buttonRight.titleLabel.font = [UIFont systemFontOfSize:13];
         _buttonRight.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
     }

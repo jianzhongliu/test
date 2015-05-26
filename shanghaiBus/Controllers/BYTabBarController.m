@@ -159,6 +159,95 @@
     }];
 }
 
+- (void)doLoginWithBlock:(loginResultBlock) resultBlock {
+    if ([[UserCachBean share] isLogin] == YES) {
+        resultBlock([UserCachBean share], LOGINSTATUSSUCCESS);
+    } else {
+        UserLoginViewController *controller = [[UserLoginViewController alloc] init];
+        controller.loginBlock = resultBlock;
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+    
+}
+
+- (void)switchControllersWithActionType:(ACTIONINDEX) index {
+    
+    switch (index) {
+        case ACTIONINDEXUSERINFO:
+        {
+            TouristInfoViewController *controller = [[TouristInfoViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+//            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXSWITCH:
+        {
+            [[AppDelegate share] switchUserPattern];
+            self.control.alpha = 0;
+            self.control = nil;
+            //            MessageListViewController *controller = [[MessageListViewController alloc] init];
+            //            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            //            [self adjustNavigationUI:myNavController];
+            //            [self presentViewController:myNavController animated:YES completion:nil];
+            //            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXSETTING:
+        {
+            SettingViewController *controller = [[SettingViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+//            [self didDismissMyInfoCenter];
+        }
+            break;
+        case ACTIONINDEXTOURISTENTER:
+        {
+            if ([[[UserCachBean share] touristInfo] usertype] != 3) {
+                AuthenticatedInfoViewController *controller = [[AuthenticatedInfoViewController alloc] init];
+                UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+                [self adjustNavigationUI:myNavController];
+                [self presentViewController:myNavController animated:YES completion:nil];
+                [self didDismissMyInfoCenter];
+            } else {
+                //当认证成功就可以直接发服务了
+                
+                UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
+                UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+                [self adjustNavigationUI:myNavController];
+                [self presentViewController:myNavController animated:YES completion:nil];
+                [self didDismissMyInfoCenter];
+            }
+            
+//            UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
+//            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+//            [self adjustNavigationUI:myNavController];
+//            [self presentViewController:myNavController animated:YES completion:nil];
+//            [self didDismissMyInfoCenter];
+            
+            
+            
+        }
+            break;
+        case ACTIONINDEXCONTECTUS:
+        {
+            ContectUSViewController *controller = [[ContectUSViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self adjustNavigationUI:myNavController];
+            [self presentViewController:myNavController animated:YES completion:nil];
+//            [self didDismissMyInfoCenter];
+        }
+            break;
+        default:
+            break;
+    }
+    
+    
+}
+
 #pragma mark - tabBarController delegate
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController
 {
@@ -193,77 +282,9 @@
 
 #pragma  mark - MyHomeViewDelegate 
 - (void)didClickActionWithActionType:(ACTIONINDEX)index {
-    switch (index) {
-        case ACTIONINDEXUSERINFO:
-        {
-            TouristInfoViewController *controller = [[TouristInfoViewController alloc] init];
-            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [self adjustNavigationUI:myNavController];
-            [self presentViewController:myNavController animated:YES completion:nil];
-            [self didDismissMyInfoCenter];
-        }
-            break;
-        case ACTIONINDEXSWITCH:
-        {
-            [[AppDelegate share] switchUserPattern];
-            self.control.alpha = 0;
-            self.control = nil;
-//            MessageListViewController *controller = [[MessageListViewController alloc] init];
-//            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-//            [self adjustNavigationUI:myNavController];
-//            [self presentViewController:myNavController animated:YES completion:nil];
-//            [self didDismissMyInfoCenter];
-        }
-            break;
-        case ACTIONINDEXSETTING:
-        {
-            SettingViewController *controller = [[SettingViewController alloc] init];
-            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [self adjustNavigationUI:myNavController];
-            [self presentViewController:myNavController animated:YES completion:nil];
-            [self didDismissMyInfoCenter];
-        }
-            break;
-        case ACTIONINDEXTOURISTENTER:
-        {
-//            if ([[[UserCachBean share] touristInfo] usertype] == 2) {
-//                AuthenticatedInfoViewController *controller = [[AuthenticatedInfoViewController alloc] init];
-//                UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-//                [self adjustNavigationUI:myNavController];
-//                [self presentViewController:myNavController animated:YES completion:nil];
-//                [self didDismissMyInfoCenter];
-//            } else {
-//                //当认证成功就可以直接发服务了
-//
-//                UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
-//                UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-//                [self adjustNavigationUI:myNavController];
-//                [self presentViewController:myNavController animated:YES completion:nil];
-//                [self didDismissMyInfoCenter];
-//            }
-
-            UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
-            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [self adjustNavigationUI:myNavController];
-            [self presentViewController:myNavController animated:YES completion:nil];
-            [self didDismissMyInfoCenter];
-            
-            
-
-        }
-            break;
-        case ACTIONINDEXCONTECTUS:
-        {
-            ContectUSViewController *controller = [[ContectUSViewController alloc] init];
-            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
-            [self adjustNavigationUI:myNavController];
-            [self presentViewController:myNavController animated:YES completion:nil];
-            [self didDismissMyInfoCenter];
-        }
-            break;
-        default:
-            break;
-    }
-
+    [self didDismissMyInfoCenter];
+    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
+        [self switchControllersWithActionType:index];
+    }];
 }
 @end

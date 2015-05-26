@@ -10,6 +10,8 @@
 #import "TouristDetailViewController.h"
 #import "SearchObjectViewController.h"
 #import "TouristBaseInfoViewController.h"
+#import "AuthenticatedInfoViewController.h"
+#import "UploadServiceViewController.h"
 
 #import "HomeHeaderView.h"
 #import "HomePageSepratorCell.h"
@@ -72,10 +74,21 @@
 
 - (void)businessEnter{
     [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
-        TouristBaseInfoViewController *controller = [[TouristBaseInfoViewController alloc] init];
-        controller.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:controller animated:YES];
+        if ([[[UserCachBean share] touristInfo] usertype] != 3) {
+            AuthenticatedInfoViewController *controller = [[AuthenticatedInfoViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self presentViewController:myNavController animated:YES completion:nil];
+        } else {
+            //当认证成功就可以直接发服务了
+            
+            UploadServiceViewController *controller = [[UploadServiceViewController alloc] init];
+            UINavigationController *myNavController = [[UINavigationController alloc] initWithRootViewController:controller];
+            [self presentViewController:myNavController animated:YES completion:nil];
+        }
     }];
+    
+    
+
 
 }
 

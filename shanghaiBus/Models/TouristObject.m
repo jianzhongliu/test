@@ -41,6 +41,7 @@
         self.registerdate = [[dic objectForKey:@"registerdate"] integerValue];
         self.commentnumber = [[dic objectForKey:@"commentnumber"] integerValue];
         self.messagenumber = [[dic objectForKey:@"messagenumber"] integerValue];
+        self.status = [dic objectForKey:@"status"];
     }
 }
 

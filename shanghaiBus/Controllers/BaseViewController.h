@@ -28,4 +28,5 @@ typedef void (^busDataBlock) (AFHTTPRequestOperation *operation, BOOL status);
 
 - (void)doLoginWithBlock:(loginResultBlock) resultBlock;
 
+- (void)didDismissMyInfo;
 @end

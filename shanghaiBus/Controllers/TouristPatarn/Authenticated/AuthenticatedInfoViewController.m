@@ -29,6 +29,9 @@
 @property (nonatomic, strong) UIView *viewLine;
 @property (nonatomic, strong) UIButton *buttonAddPicture;
 
+@property (nonatomic, strong) NSString *phoneAccess;//认证通过的电话
+@property (nonatomic, strong) NSString *imageUrl;
+
 @end
 
 @implementation AuthenticatedInfoViewController
@@ -109,6 +112,18 @@
 }
 
 - (void)didRightClick {
+    if (self.viewName.textInput.text.length == 0) {
+        [self showInfo:@"请输入用户名"];
+        return;
+    }
+    if (self.viewIdentify.textInput.text.length == 0) {
+        [self showInfo:@"请输入身份证号码"];
+        return;
+    }
+    if (self.viewPhone.textInput.text.length == 0) {
+        [self showInfo:@"请输入手机号码"];
+        return;
+    }
     
     [self checkCode];
 }
@@ -133,7 +148,7 @@
      {
          if (!error)
          {
-             
+             self.phoneAccess = self.viewPhone.textInput.text;
          }
          else
          {
@@ -171,6 +186,7 @@
     [self showLoadingActivity:YES];
     [SMS_SDK commitVerifyCode:self.viewCode.textInput.text result:^(enum SMS_ResponseState state) {
         if (state == SMS_ResponseStateSuccess) {
+            [self requestData];
 //            NSString *phoneNo = self.textName.text;
 //            NSString *userName = [NSString stringWithFormat:@"%@*****%@", [phoneNo substringWithRange:NSMakeRange(0, 3)], [phoneNo substringWithRange:NSMakeRange(phoneNo.length - 3, 3)]];
 //            NSDictionary *dic = @{@"usid":phoneNo,@"token":phoneNo,@"username":userName,@"icon":phoneNo};
@@ -184,6 +200,35 @@
     }];
 
 }
+
+#pragma mark - networking
+- (void)requestData {
+    [self showLoadingActivity:YES];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *username = [self.viewName.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *userID = self.viewIdentify.textInput.text;
+    NSString *identify = [[[UserCachBean share] touristInfo] identify];
+    self.imageUrl = @"http://www.baidu.com";
+#warning TODO 图片上传
+    NSString *otherInfo = [NSString stringWithFormat:@"%@|%@", userID, self.imageUrl];
+    NSString *url = [NSString stringWithFormat:@"%@tourist/updateTouristAuthentication",HOST];
+    
+    NSDictionary *dic = @{@"identify":identify, @"name":username, @"phone":self.phoneAccess, @"otherinfoid":otherInfo};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {[self hideLoadWithAnimated:YES];
+        [self showInfo:@"提交成功!"];
+        [self performSelector:@selector(didDismissMyInfo) withObject:nil afterDelay:2];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+    }];
+    
+}
+
 #pragma mark - //////////////////////////////////////////////////////////
 #pragma mark - //////////////////////////////////////////////////////////
 #pragma mark - getter && setter

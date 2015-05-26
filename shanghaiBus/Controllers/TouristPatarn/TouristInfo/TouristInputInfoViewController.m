@@ -11,7 +11,7 @@
 
 @interface TouristInputInfoViewController ()
 
-@property (nonatomic, strong) UITextView *textContent;
+
 
 @end
 
@@ -60,7 +60,9 @@
 }
 
 - (void)didRightClick {
-    
+    if ([_delegate respondsToSelector:@selector(didUploadInfoWith:tag:)]) {
+        [_delegate didUploadInfoWith:self.textContent.text tag:self.tag];
+    }
     [self.navigationController popViewControllerAnimated:YES];
     
 }

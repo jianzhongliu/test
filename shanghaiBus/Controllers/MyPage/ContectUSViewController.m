@@ -127,6 +127,29 @@
     
 }
 
+#pragma mark - networking
+- (void)requestData {
+    [self showLoadingActivity:YES];
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *content = [self.textContent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    
+    NSString *url = [NSString stringWithFormat:@"%@touristCommon/addContectUs",HOST];
+    NSDictionary *dic = @{@"identify":currentTime, @"content":content, @"phone":self.textPhone.text, @"email":self.textEmail.text, @"adddate":currentTime};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {[self hideLoadWithAnimated:YES];
+        [self showInfo:@"提交成功!"];
+        [self performSelector:@selector(didDismissMyInfo) withObject:nil afterDelay:2];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+    }];
+    
+}
+
 #pragma mark - action && private Methods
 - (void)didDismissMyInfo {
     [self.navigationController popViewControllerAnimated:YES];
@@ -134,8 +157,8 @@
 }
 
 - (void)didSaveInfo {
-    
-    [self didDismissMyInfo];
+    [self requestData];
+//    [self didDismissMyInfo];
 }
 
 
