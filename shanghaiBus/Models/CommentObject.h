@@ -10,7 +10,7 @@
 
 @interface CommentObject : NSObject
 
-@property (nonatomic, assign) NSInteger identity;
+@property (nonatomic, copy) NSString *identity;
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *touristId;
 @property (nonatomic, assign) NSInteger score;

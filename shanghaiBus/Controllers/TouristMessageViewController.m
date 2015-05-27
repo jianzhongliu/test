@@ -8,7 +8,6 @@
 
 #import "TouristMessageViewController.h"
 #import "TouristAddCommentViewController.h"
-
 @interface TouristMessageViewController ()<UITextFieldDelegate, UITextViewDelegate>
 
 @property (nonatomic, strong) UITextView *textCotent;
@@ -83,7 +82,7 @@
     button.frame = CGRectMake(SCREENWIDTH - 60, 50, 50, 40);
     [button addTarget:self action:@selector(didclickSubmit) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"提交" forState:UIControlStateNormal];
-    button.font = [UIFont systemFontOfSize:15];
+    button.titleLabel.font = [UIFont systemFontOfSize:15];
     [self.view addSubview:button];
     
     self.textCotent.frame = CGRectMake(10, button.ctBottom + 20, SCREENWIDTH - 20, 120);
@@ -127,6 +126,13 @@
     //    [buttonCancel setTitle:@"写点评" forState:UIControlStateNormal];
     [viewFooter addSubview:buttonCancel];
 
+    //当前状态是恢复留言时，就把电话号码屏蔽
+    if (self.message != nil) {
+        self.textPhone.hidden = YES;
+        self.labelPlaceHolder.hidden = YES;
+        labelTagPhone.hidden = YES;
+    }
+    
 }
 
 #pragma mark - UITextViewDelegate && UITextFieldViewDelegate
@@ -160,18 +166,62 @@
     }
     
     [self showLoadingActivity:YES];
+    if (self.tourist != nil) {
+        [self uploadMessage];
+    } else {
+        [self uploadReplayMessage];
+    }
+    
+}
+
+- (void)uploadMessage {
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *currentTime = [Utils getCurrentTime];
-    NSString *userid = self.tourist.identify;
+    NSString *userid = [[[UserCachBean share] touristInfo] identify];
     NSString *content = [self.textCotent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
     sign = [[Utils MD5:sign] uppercaseString];
     NSString *url = [NSString stringWithFormat:@"%@tourist/addMessage",HOST];
     NSDictionary *dic = @{@"identify":currentTime,@"commentdate":currentTime,@"userid":userid,@"touristid":self.tourist.identify,@"content":content,@"phonenumber":self.textPhone.text ,@"sign":sign};
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            if ([[dic objectForKey:@"status"] integerValue] == 1) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            
+        }
+        [self hideLoadWithAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+        [self showInfo:operation.responseString ];
+    }];
+}
+
+- (void)uploadReplayMessage {
+    
+    if (self.message == nil) {
+        [self showInfo:@"原message传入为空！"];
+        return;
+    }
+    
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *userid = [[[UserCachBean share] touristInfo] identify];
+    NSString *content = [self.textCotent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@tourist/replyMessage",HOST];
+    NSDictionary *dic = @{@"identify":self.message.identity, @"replydate":currentTime,@"userid":self.message.userId,@"touristid":self.message.userId,@"replycontent":content,@"sign":sign};
+
     [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)responseObject;

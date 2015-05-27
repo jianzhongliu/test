@@ -139,6 +139,11 @@
     //    [buttonCancel setTitle:@"写点评" forState:UIControlStateNormal];
     [viewFooter addSubview:buttonCancel];
     
+    //回复评论，不能能打分
+    if (self.commentReply != nil) {
+        labelScore.hidden = YES;
+        self.starRateView.hidden = YES;
+    }
 }
 
 - (void)requestDate {
@@ -189,6 +194,34 @@
 
 }
 
+- (void)replyComment {
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *userid = [[[UserCachBean share] touristInfo] identify];
+    NSString *content = [self.textCotent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    sign = [[Utils MD5:sign] uppercaseString];
+    NSString *url = [NSString stringWithFormat:@"%@tourist/replyComment",HOST];
+    
+    NSDictionary *dic = @{@"identify":self.commentReply.identity,@"replydate":currentTime,@"userid":self.commentReply.userId,@"touristid":self.commentReply.touristId, @"replycontent":content,@"sign":sign};
+
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSDictionary class]]) {
+            NSDictionary *dic = (NSDictionary *)responseObject;
+            if ([[dic objectForKey:@"status"] integerValue] == 1) {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+        }
+        [self hideLoadWithAnimated:YES];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+    }];
+}
+
 #pragma mark - UITextViewDelegate && UITextFieldViewDelegate
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     self.labelPlaceHolder.hidden = YES;
@@ -200,7 +233,11 @@
 
 #pragma mark - private Methods
 - (void)didclickSubmit {
-    [self requestDate];
+    if (self.commentReply == nil) {
+        [self requestDate];
+    } else {
+        [self replyComment];
+    }
 }
 
 - (void)didTapView {

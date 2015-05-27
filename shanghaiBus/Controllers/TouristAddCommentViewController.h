@@ -8,9 +8,12 @@
 
 #import "BaseViewController.h"
 #import "TouristObject.h"
+#import "CommentObject.h"
 
 @interface TouristAddCommentViewController : BaseViewController
 
 @property (nonatomic, strong) TouristObject *tourist;
+@property (nonatomic, strong) CommentObject *commentReply;
+
 
 @end

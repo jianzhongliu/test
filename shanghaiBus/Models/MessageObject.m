@@ -13,7 +13,7 @@
 - (void)configCommentWithDic:(NSDictionary *)dic {
     
     if (dic && dic.count > 0) {
-        self.identity = [[dic objectForKey:@"identity"] integerValue];
+        self.identity = [dic objectForKey:@"identify"];
         self.userId = [dic objectForKey:@"userid"];
         self.touristId = [dic objectForKey:@"touristid"];
         self.phonenumber = [[dic objectForKey:@"phonenumber"] integerValue];

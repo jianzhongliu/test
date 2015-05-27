@@ -114,7 +114,6 @@
 }
 
 - (void)configCellWithComment:(CommentObject *) comment {
-    NSLog(@"=====%ld", (long)comment.identity);
     self.labelComment.text = comment.content;
     self.labelComment.viewWidth = SCREENWIDTH - 20;
     [self.labelComment sizeThatFits:CGSizeMake(SCREENWIDTH - 20, SCREENHEIGHT)];
@@ -160,7 +159,6 @@
 
 - (void)configCellWithMessage:(MessageObject *) celldata {
     MessageObject *message = (MessageObject *)celldata;
-    
     self.labelComment.text = message.content;
     self.labelComment.viewWidth = SCREENWIDTH - 20;
     [self.labelComment sizeThatFits:CGSizeMake(SCREENWIDTH - 20, SCREENHEIGHT)];

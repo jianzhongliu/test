@@ -94,6 +94,7 @@
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)responseObject;
             if ([[dic objectForKey:@"commentArray"] isKindOfClass:[NSDictionary class]]) {
+                [self.arrayCommon removeAllObjects];
                 CommentObject *comment = [[CommentObject alloc] init];
                 [comment configCommentWithDic:[dic objectForKey:@"commentArray"]];
                 [self.arrayCommon addObject:comment];
@@ -110,6 +111,7 @@
                 }
             }
             if ([[dic objectForKey:@"messageArray"] isKindOfClass:[NSDictionary class]]) {
+                [self.arrayMessage removeAllObjects];
                 MessageObject *message = [[MessageObject alloc] init];
                 [message configCommentWithDic:[dic objectForKey:@"messageArray"]];
                 [self.arrayMessage addObject:message];
@@ -218,13 +220,15 @@
         MessageObject *message = [self.arrayMessage objectAtIndex:indexPath.row];
         if (message.replycontent.length == 0 ) {
             TouristMessageViewController *controller = [[TouristMessageViewController alloc] init];
-            [self.navigationController pushViewController:controller animated:YES];
+            controller.message = [self.arrayMessage objectAtIndex:indexPath.row];
+            [self presentViewController:controller animated:YES completion:nil];
         }
     } else {
         CommentObject *comment = [self.arrayCommon objectAtIndex:indexPath.row];
         if (comment.replycontent.length == 0 ) {
             TouristAddCommentViewController *controller = [[TouristAddCommentViewController alloc] init];
-            [self.navigationController pushViewController:controller animated:YES];
+            controller.commentReply = [self.arrayCommon objectAtIndex:indexPath.row];
+            [self presentViewController:controller animated:YES completion:nil];
         }
     }
 

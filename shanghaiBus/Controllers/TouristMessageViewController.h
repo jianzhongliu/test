@@ -8,9 +8,11 @@
 
 #import "BaseViewController.h"
 #import "TouristObject.h"
+#import "MessageObject.h"
 
 @interface TouristMessageViewController : BaseViewController
 
 @property (nonatomic, strong) TouristObject *tourist;
+@property (nonatomic, strong) MessageObject *message;//留言
 
 @end
