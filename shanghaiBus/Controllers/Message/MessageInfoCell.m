@@ -1,87 +1,85 @@
 //
-//  MessageInfoCell.m
+//  TouristCommentListCell.m
 //  shanghaiBus
 //
-//  Created by liujianzhong on 15/5/20.
+//  Created by liujianzhong on 15/3/26.
 //  Copyright (c) 2015年 liujianzhong. All rights reserved.
 //
 
 #import "MessageInfoCell.h"
-#import "WebImageView.h"
-#import "UIView+CTExtensions.h"
 #import "Config.h"
+#import "WebImageView.h"
+#import "CWStarRateView.h"
+#import "TouristReplyView.h"
 
 @interface MessageInfoCell ()
 
+@property (nonatomic, strong) UILabel *labelComment;
 @property (nonatomic, strong) WebImageView *imageIcon;
-@property (nonatomic, strong) UILabel *labelNuckName;
-@property (nonatomic, strong) UILabel *labelContent;
-@property (nonatomic, strong) UILabel *labelTime;
-@property (nonatomic, strong) WebImageView *imageGender;
+@property (nonatomic, strong) UILabel *labelName;
+@property (nonatomic, strong) UILabel *labelDate;
+@property (nonatomic, strong) CWStarRateView *starRateView;
+@property (nonatomic, strong) UIView *viewLine;
+
+@property (nonatomic, strong) TouristReplyView *viewReply;
+@property (nonatomic, assign) BOOL isHaseReply;
 
 @end
 
 @implementation MessageInfoCell
-
 #pragma mark - getter&&setter
+- (UILabel *)labelComment {
+    if (_labelComment == nil) {
+        _labelComment = [[UILabel alloc] init];
+        _labelComment.numberOfLines = 0;
+        _labelComment.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelComment.textColor = [UIColor blackColor];
+        _labelComment.font = [UIFont systemFontOfSize:14];
+        
+    }
+    return _labelComment;
+}
+
 - (WebImageView *)imageIcon {
     if (_imageIcon == nil) {
         _imageIcon = [[WebImageView alloc] init];
-        _imageIcon.image = [UIImage imageNamed:@"icon_default_header"];
-        [self.contentView addSubview:_imageIcon];
+        _imageIcon.image = [UIImage imageNamed:@"icon"];
+        _imageIcon.clipsToBounds = YES;
     }
     return _imageIcon;
 }
 
-- (WebImageView *)imageGender {
-    if (_imageGender == nil) {
-        _imageGender = [[WebImageView alloc] init];
-        _imageGender.image = [UIImage imageNamed:@"icon_gender_man"];
-        [self.contentView addSubview:_imageGender];
+- (UILabel *)labelName {
+    if (_labelName == nil) {
+        _labelName = [[UILabel alloc] init];
+        _labelName.numberOfLines = 0;
+        _labelName.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelName.textColor = BYColorAlphaMake(0, 0, 0, 0.5);
+        _labelName.font = [UIFont systemFontOfSize:14];
     }
-    return _imageGender;
+    return _labelName;
 }
 
-- (UILabel *)labelContent {
-    if (_labelContent == nil) {
-        _labelContent = [[UILabel alloc] init];
-        _labelContent.text = @"";
-        _labelContent.font = [UIFont boldSystemFontOfSize:16];
-        _labelContent.backgroundColor = [UIColor whiteColor];
-        _labelContent.textColor = BYColorAlphaMake(0, 0, 0, 1);
-        _labelContent.textAlignment = NSTextAlignmentLeft;
-        [self.contentView addSubview:_labelContent];
+- (UILabel *)labelDate {
+    if (_labelDate == nil) {
+        _labelDate = [[UILabel alloc] init];
+        _labelDate.numberOfLines = 0;
+        _labelDate.lineBreakMode = NSLineBreakByCharWrapping;
+        _labelDate.textColor = BYColorFromHex(0x999999);
+        _labelDate.font = [UIFont systemFontOfSize:13];
     }
-    return _labelContent;
+    return _labelDate;
 }
 
-- (UILabel *)labelNuckName {
-    if (_labelNuckName == nil) {
-        _labelNuckName = [[UILabel alloc] init];
-        _labelNuckName.text = @"";
-        _labelNuckName.font = [UIFont systemFontOfSize:14];
-        _labelNuckName.backgroundColor = [UIColor whiteColor];
-        _labelNuckName.textColor = BYColorAlphaMake(0, 0, 0, 0.4);
-        _labelNuckName.textAlignment = NSTextAlignmentLeft;
-        [self.contentView addSubview:_labelNuckName];
+- (TouristReplyView *)viewReply {
+    if (_viewReply == nil) {
+        _viewReply = [[TouristReplyView alloc] init];
+        _viewReply.labelToursit.textColor = BYColorAlphaMake(0, 0, 0, 0.7);
     }
-    return _labelNuckName;
+    return _viewReply;
 }
 
-- (UILabel *)labelTime {
-    if (_labelTime == nil) {
-        _labelTime = [[UILabel alloc] init];
-        _labelTime.text = @"";
-        _labelTime.font = [UIFont systemFontOfSize:20];
-        _labelTime.backgroundColor = [UIColor whiteColor];
-        _labelTime.textColor = BYColorFromHex(0x797979);
-        _labelTime.textAlignment = NSTextAlignmentRight;
-        [self.contentView addSubview:_labelTime];
-    }
-    return _labelTime;
-}
-
-#pragma mark - lifeycle
+#pragma mark - lifecycleMethod
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         [self initUI];
@@ -89,54 +87,138 @@
     return self;
 }
 
-- (void)initUI {
-    self.imageIcon.frame = CGRectMake(15, 15, 35, 35);
-    self.imageIcon.layer.cornerRadius = self.imageIcon.ctWidth / 2;
-    [self.imageIcon clipsToBounds];
-    
-    self.labelNuckName.frame = CGRectMake(self.imageIcon.ctRight + 10, 10, SCREENWIDTH - 110, 20);
-    self.labelContent.frame = CGRectMake(self.labelNuckName.ctLeft, self.labelNuckName.ctBottom + 10, 180, 20);
+- (id)init {
+    if (self = [super init]) {
+        [self initUI];
+    }
+    return self;
+}
 
-    self.labelTime .frame = CGRectMake(SCREENWIDTH - 110, self.labelContent.ctBottom + 5, 100, 20);
-    UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(0, 100 - 1, SCREENHEIGHT, 1)];
-    viewLine.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.1);
-    [self.contentView addSubview:viewLine];
+- (void)initUI {
+    self.isHaseReply = NO;
+    self.contentView.clipsToBounds = YES;
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.contentView.backgroundColor = [UIColor whiteColor];
+    
+    [self.contentView addSubview:self.labelComment];
+    [self.contentView addSubview:self.imageIcon];
+    [self.contentView addSubview:self.labelName];
+    [self.contentView addSubview:self.labelDate];
+    [self.contentView addSubview:self.viewReply];
+    
+    self.labelComment.frame = CGRectMake(10, 30, SCREENWIDTH - 20, 40);
+    self.imageIcon.frame = CGRectMake(10, self.labelComment.ctBottom + 10, 30, 30);
+    self.labelName.frame = CGRectMake(self.imageIcon.ctRight + 10, self.imageIcon.ctTop + 5, 160, 20);
+    self.labelDate.frame = CGRectMake(self.imageIcon.ctRight + 10, self.labelName.ctBottom + 10, 160, 20);
+    self.viewReply.frame = CGRectMake(0, self.labelDate.ctBottom + 5, SCREENWIDTH, 60);
     
 }
 
-//- (void)resetCellDataWith:(TouristObject *) tourist {
-//    self.imageIcon.imageUrl = tourist.icon;
-//    self.labelSignature.text = tourist.signature;
-//    self.labelNuckName.text = tourist.nuckname;
-//    self.labelPrice.text = [NSString stringWithFormat:@"%@", tourist.price];
-//    [self.labelPrice highLightNumberTextforColor:BYColorFromHex(0xff5555)];
-//    self.labelNuckName.viewWidth = 180;
-//    [self.labelNuckName sizeToFit];
-//    self.imageGender.frame = CGRectMake(self.labelNuckName.ctRight, self.labelNuckName.ctTop, 20, 20);
-//    
-//    NSMutableArray *arrayTag = [NSMutableArray array];
-//    [arrayTag addObject:@"实名"];
-//    
-//    NSArray *arrayOriginTag = [tourist.tag componentsSeparatedByString:@"|"];
-//    [arrayTag addObjectsFromArray:arrayOriginTag];
-//    CGFloat pointX = self.imageIcon.ctRight + 10;
-//    
-//    for (int i = 0; i < arrayTag.count; i ++) {
-//        UILabel *labelTag = [[UILabel alloc] initWithFrame:CGRectMake(pointX, self.labelNuckName.ctBottom + 15, 50, 20)];
-//        labelTag.text = @"驾照 ";
-//        labelTag.layer.cornerRadius = 1;
-//        labelTag.font = [UIFont systemFontOfSize:12];
-//        labelTag.textAlignment = NSTextAlignmentCenter;
-//        labelTag.textColor = BYColor;
-//        labelTag.layer.borderColor = BYColor.CGColor;
-//        labelTag.layer.borderWidth = 0.5;
-//        [labelTag sizeToFit];
-//        labelTag.viewHeight = 20;
-//        [self.contentView addSubview:labelTag];
-//        
-//        pointX = pointX + labelTag.viewWidth + 8;
-//    }
-//    
-//}
+- (void)configCellWithComment:(CommentObject *) comment {
+    self.labelComment.text = comment.content;
+    self.labelComment.viewWidth = SCREENWIDTH - 20;
+    [self.labelComment sizeThatFits:CGSizeMake(SCREENWIDTH - 20, SCREENHEIGHT)];
+    [self.labelComment sizeToFit];
+    
+    self.imageIcon.ctTop = self.labelComment.ctBottom + 15;
+    
+    self.imageIcon.layer.cornerRadius = 15;
+    self.imageIcon.clipsToBounds = YES;
+    
+    self.labelName.ctTop = self.imageIcon.ctTop;
+    self.labelDate.ctTop = self.labelName.ctBottom ;
+    
+    self.labelName.text = comment.userId;
+    self.labelDate.text = [NSString stringWithFormat:@"%ld", (long)comment.commentdate];
+    
+    
+    if (self.starRateView == nil) {
+        self.starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(SCREENWIDTH - 70, self.labelName.ctBottom , 60, 13) numberOfStars:5];
+        //        self.starRateView.scorePercent = 1;
+        self.starRateView.allowIncompleteStar = NO;
+        self.starRateView.hasAnimation = NO;
+        self.starRateView.enable = NO;
+        [self addSubview:self.starRateView];
+    }
+    self.starRateView.scorePercent = comment.score / 5;
+    self.starRateView.ctTop = self.labelName.ctBottom + 3;
+    
+    if (comment.replycontent.length > 0) {
+        self.isHaseReply = YES;
+        self.viewReply.ctTop = self.labelDate.ctBottom+ 5;
+        [self.viewReply configViewWithData:comment];
+        self.viewReply.viewHeight = [self.viewReply fetchViewHeightWithData:comment];
+        [self.contentView addSubview:self.viewReply];
+    } else {
+        self.isHaseReply = NO;
+        [self.viewReply removeFromSuperview];
+    }
+    
+    [self drawLine];
+    
+}
+
+- (void)configCellWithMessage:(MessageObject *) celldata {
+    MessageObject *message = (MessageObject *)celldata;
+    self.labelComment.text = message.content;
+    self.labelComment.viewWidth = SCREENWIDTH - 20;
+    [self.labelComment sizeThatFits:CGSizeMake(SCREENWIDTH - 20, SCREENHEIGHT)];
+    [self.labelComment sizeToFit];
+    
+    self.imageIcon.layer.cornerRadius = 15;
+    self.imageIcon.clipsToBounds = YES;
+    
+    self.labelName.text = message.userId;
+    self.labelDate.text = [NSString stringWithFormat:@"%ld", (long)message.commentdate];
+    if (message.replycontent.length > 0) {
+        self.isHaseReply = YES;
+        self.viewReply.ctTop = self.labelDate.ctBottom+ 5;
+        [self.viewReply configViewWithData:message];
+        self.viewReply.viewHeight = [self.viewReply fetchViewHeightWithData:message];
+        [self.contentView addSubview:self.viewReply];
+    } else {
+        self.isHaseReply = NO;
+        [self.viewReply removeFromSuperview];
+    }
+    [self drawLine];
+}
+
+- (void)drawLine {
+    if (self.viewLine == nil) {
+        self.viewLine = [[UIView alloc] initWithFrame:CGRectMake(10, self.labelDate.ctBottom + 14, SCREENWIDTH - 20, 1)];
+        [self.contentView addSubview:self.viewLine];
+    }
+    
+    
+    if (self.isHaseReply == YES) {
+        self.viewLine.ctTop = self.viewReply.ctBottom + 14;
+    } else {
+        self.viewLine.ctTop = self.labelDate.ctBottom + 14;
+    }
+    self.viewLine.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.1);
+    
+}
+
+- (CGFloat)fetchCellHightWithData:(id) cellData {
+    
+    CGFloat height = 0;
+    if ([cellData isKindOfClass:[CommentObject class]]) {
+        CommentObject *common = (CommentObject *)cellData;
+        NSLog(@"2=====%ld", (long)common.identity);
+        [self configCellWithComment:(CommentObject *)cellData];
+    }
+    if ([cellData isKindOfClass:[MessageObject class]]) {
+        
+        [self configCellWithMessage:(MessageObject *)cellData];
+    }
+    
+    if (self.isHaseReply == YES) {
+        height = self.viewReply.ctBottom + 15;
+    } else {
+        height = self.labelDate.ctBottom + 15;
+    }
+    
+    return height;
+}
 
 @end

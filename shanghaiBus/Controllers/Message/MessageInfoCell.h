@@ -1,17 +1,21 @@
 //
-//  MessageInfoCell.h
+//  TouristCommentListCell.h
 //  shanghaiBus
 //
-//  Created by liujianzhong on 15/5/20.
+//  Created by liujianzhong on 15/3/26.
 //  Copyright (c) 2015年 liujianzhong. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "CommentObject.h"
+#import "MessageObject.h"
 
 @interface MessageInfoCell : UITableViewCell
 
-//@property (nonatomic, strong) TouristObject *cellData;
+- (void)configCellWithComment:(CommentObject * ) celldata;
 
-//- (void)resetCellDataWith:(TouristObject *) tourist;
+- (void)configCellWithMessage:(MessageObject *) celldata;
+
+- (CGFloat)fetchCellHightWithData:(id) cellData ;
 
 @end

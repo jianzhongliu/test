@@ -7,6 +7,8 @@
 //
 
 #import "ImageScrollView.h"
+#import "WebImage.h"
+
 #import "Config.h"
 
 @interface ImageScrollView ()
@@ -22,7 +24,7 @@
     if (_scroll == nil) {
         _scroll = [[UIScrollView alloc] init];
         //        _scrollViewBG.delegate = self;
-        _scroll.backgroundColor = [UIColor whiteColor];
+        _scroll.backgroundColor = BYBackColor;
         _scroll.pagingEnabled = NO;
         _scroll.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     }
@@ -46,17 +48,24 @@
     self.imageBlock = clickBlock;
     CGFloat offset = 0;
     NSMutableArray *arrayImage = [NSMutableArray arrayWithArray:data];
-    [arrayImage addObject:[UIImage imageNamed:@"icon"]];
+    [arrayImage addObject:[UIImage imageNamed:@"icon_add_image"]];
     
     for (int i = 0; i < arrayImage.count; i ++) {
-        UIImage *imageData = [arrayImage objectAtIndex:i];
-        
+
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10 + offset, 10, 60, 60)];
-        imageView.image = imageData;
         imageView.userInteractionEnabled = YES;
         [self.scroll addSubview:imageView];
-        offset += 80;
         
+        if ([[arrayImage objectAtIndex:i] isKindOfClass:[NSString class]]) {
+            NSString *imageUrl = [arrayImage objectAtIndex:i];
+            [imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:[UIImage imageNamed:@"icon"]];
+        } else {
+            UIImage *imageData = [arrayImage objectAtIndex:i];
+            imageView.image = imageData;
+        }
+        
+        offset += 80;
+
         if (i == arrayImage.count - 1) {
             UITapGestureRecognizer *tapIMG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickAddIMG)];
             [imageView addGestureRecognizer:tapIMG];

@@ -7,7 +7,7 @@
 //
 
 #import "MyMessageViewController.h"
-#import "TouristCommentListCell.h"
+#import "MessageInfoCell.h"
 #import "TouristAddCommentViewController.h"
 #import "TouristMessageViewController.h"
 #import "Config.h"
@@ -38,10 +38,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = BYColorFromHex(0x4c4c4c);
-    self.tableMessage.backgroundColor = BYColorFromHex(0x4c4c4c);
+    self.view.backgroundColor = BYBackColor;
+    self.tableMessage.backgroundColor = BYBackColor;
     [self initUI];
-    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"icon_back"] style:UIBarButtonItemStylePlain target:self action:@selector(didDismissMyInfo)];
+    UIBarButtonItem *leftItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(didDismissMyInfo)];
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"一键全读" style:UIBarButtonItemStylePlain target:self action:@selector(didSaveInfo)];
@@ -66,7 +66,7 @@
     [self.view addSubview:self.buttonLeft];
     [self.view addSubview:self.buttonRight];
     
-    self.tableMessage.frame = CGRectMake(0, 50 , SCREENWIDTH, self.view.viewHeight - 114);
+    self.tableMessage.frame = CGRectMake(0, 50 , SCREENWIDTH, self.view.viewHeight - 158);
     [self.view addSubview:self.tableMessage];
 }
 
@@ -184,7 +184,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    TouristCommentListCell *cell = [[TouristCommentListCell alloc] init];
+    MessageInfoCell *cell = [[MessageInfoCell alloc] init];
     CGFloat cellHeight = 0;
     if (self.isShowMessage == YES) {
         [cell configCellWithMessage:[self.arrayMessage objectAtIndex:indexPath.row]];
@@ -201,9 +201,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identify = @"identify";
-    TouristCommentListCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
+    MessageInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:identify];
     if (cell == nil) {
-        cell = [[TouristCommentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
+        cell = [[MessageInfoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
     if (self.isShowMessage == YES) {
         [cell configCellWithMessage:[self.arrayMessage objectAtIndex:indexPath.row]];

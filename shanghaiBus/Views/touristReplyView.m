@@ -15,7 +15,7 @@
 
 @property (nonatomic, strong) UIImageView *imagePointer;
 @property (nonatomic, strong) UIImageView *imageBack;
-@property (nonatomic, strong) UILabel *labelToursit;
+
 @property (nonatomic, strong) UILabel *labelTime;
 @property (nonatomic, strong) UILabel *labelContent;
 
@@ -48,7 +48,6 @@
         self.labelContent.viewWidth = SCREENWIDTH - 40;
         self.labelContent.text = comment.replycontent;
         [self.labelContent sizeToFit];
-        self.labelToursit.text = @"商家回复:";
     
         self.imageBack.viewHeight = self.labelContent.ctBottom + 5;
         
@@ -60,7 +59,7 @@
         self.labelContent.viewWidth = SCREENWIDTH - 40;
         self.labelContent.text = message.replycontent;
         [self.labelContent sizeToFit];
-        
+        self.labelToursit.text = @"商家回复:";
         self.imageBack.viewHeight = self.labelContent.ctBottom + 5;
     }
 }

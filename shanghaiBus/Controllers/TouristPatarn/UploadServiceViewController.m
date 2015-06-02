@@ -66,7 +66,8 @@
     
     self.imageList.frame = CGRectMake(0, 0, SCREENWIDTH, 80);
     self.tableList.tableHeaderView = self.imageList;
-    [self.imageList configViewWithData:nil clickBlock:^(NSInteger index) {
+    NSArray *arrayImage = [self.service.images componentsSeparatedByString:@"|"];
+    [self.imageList configViewWithData:arrayImage clickBlock:^(NSInteger index) {
         [self takePictureOrLibrary];
     }];
     
@@ -84,11 +85,7 @@
 }
 
 - (void)didSaveInfo {
-    if (self.arrayImage.count > 0) {
-        [self uploadImage];
-    } else{
-        [self requestData];
-    }
+    [self uploadImage];
 }
 
 - (void)takePictureOrLibrary {
@@ -98,7 +95,7 @@
 
 #pragma mark - reqeust
 - (void)requestData {
-    [self showLoadingActivity:YES];
+
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -138,7 +135,40 @@
 }
 
 - (void)uploadImage {
+    if (self.arrayImage.count == 0 && self.service == nil) {
+        [self showInfo:@"请上传图片！"];
+        return;
+    }
+    if (self.viewTitle.textInput.text.length == 0) {
+        [self showInfo:@"亲，标题不能为空哦!"];
+        return;
+    }
+    if (self.viewPrice.textInput.text.length == 0) {
+        [self showInfo:@"亲，价格不能为空哦!"];
+        return;
+    }
+    if (self.viewArea.textInput.text.length == 0) {
+        [self showInfo:@"亲，服务区域不能为空哦!"];
+        return;
+    }
+    if (self.viewLanguage.textInput.text.length == 0) {
+        [self showInfo:@"亲，语言不能为空哦!"];
+        return;
+    }
+    if (self.viewPriceDetail.textInput.text.length == 0) {
+        [self showInfo:@"亲，价格描述不能为空哦!"];
+        return;
+    }
+    if (self.viewPreBook.textInput.text.length == 0) {
+        [self showInfo:@"亲，预定须知不能为空哦!"];
+        return;
+    }
+    if (self.viewService.textInput.text.length == 0) {
+        [self showInfo:@"亲，服务描述不能为空哦!"];
+        return;
+    }
     
+    [self showLoadingActivity:YES];
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:API_PhotoUpload parameters:@{@"file":@""} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         for (int i = 0; i<self.arrayImage.count; i++) {
             UIImage *uploadImage = self.arrayImage[i];
@@ -165,8 +195,8 @@
             [self requestData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self showInfo:@"图片上传失败"];
         [self hideLoadWithAnimated:YES];
+        [self showInfo:@"图片上传失败"];
     }];
     [opration start];
 }
@@ -480,7 +510,7 @@
         {
             BK_ELCAlbumPickerController *albumPicker = [[BK_ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
             BK_ELCImagePickerController *elcPicker = [[BK_ELCImagePickerController alloc] initWithRootViewController:albumPicker];
-            elcPicker.maximumImagesCount = 5 - self.arrayImage.count ; //(maxCount - self.roomImageArray.count);
+            elcPicker.maximumImagesCount = 5;
             elcPicker.imagePickerDelegate = self;
             [self presentViewController:elcPicker animated:YES completion:nil];
         }
@@ -493,11 +523,16 @@
     if ([info count] == 0) {
         return;
     }
-    int tempNum = 1;
+    int tempNum = 0;
     for (NSDictionary *dict in info) {
         
         UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
-        [self.arrayImage addObject:image];
+        if (self.arrayImage.count > tempNum) {
+            [self.arrayImage replaceObjectAtIndex:tempNum withObject:image];
+        } else {
+            [self.arrayImage addObject:image];
+        }
+        tempNum ++;
     }
     [self.imageList configViewWithData:self.arrayImage clickBlock:^(NSInteger index) {
         [self takePictureOrLibrary];
@@ -510,10 +545,13 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    NSMutableArray *arrayImage = [NSMutableArray array];
     UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
-    [arrayImage addObject:image];
-    [self.imageList configViewWithData:arrayImage clickBlock:^(NSInteger index) {
+    if (self.arrayImage.count > 0) {
+        [self.arrayImage replaceObjectAtIndex:0 withObject:image];
+    } else {
+        [self.arrayImage addObject:image];
+    }
+    [self.imageList configViewWithData:self.arrayImage clickBlock:^(NSInteger index) {
         [self takePictureOrLibrary];
     }];
     [self dismissViewControllerAnimated:YES completion:nil];
