@@ -7,11 +7,15 @@
 //
 
 #import "AuthenticatedInfoViewController.h"
+#import "BK_ELCAlbumPickerController.h"
+#import "BK_ELCImagePickerController.h"
 #import "CommonInputView.h"
 #import "WebImageView.h"
+#import "FilePathManager.h"
+
 #import <SMS_SDK/SMS_SDK.h>
 
-@interface AuthenticatedInfoViewController ()
+@interface AuthenticatedInfoViewController ()<UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate,ELCImagePickerControllerDelegate>
 {
     long caculateTime;
 }
@@ -129,7 +133,7 @@
 }
 
 - (void)didAddPicture {
-
+    [self takePictureOrLibrary];
 }
 
 - (void)didClickCheckcode:(id) sender {
@@ -176,29 +180,9 @@
     
 }
 
-//验证手机验证码
-- (void)checkCode {
-    [self.view endEditing:YES];
-    if (self.viewCode.textInput.text.length != 4){
-        [self showInfo:@"验证码格式不正确"];
-        return;
-    }
-    [self showLoadingActivity:YES];
-    [SMS_SDK commitVerifyCode:self.viewCode.textInput.text result:^(enum SMS_ResponseState state) {
-        if (state == SMS_ResponseStateSuccess) {
-            [self requestData];
-//            NSString *phoneNo = self.textName.text;
-//            NSString *userName = [NSString stringWithFormat:@"%@*****%@", [phoneNo substringWithRange:NSMakeRange(0, 3)], [phoneNo substringWithRange:NSMakeRange(phoneNo.length - 3, 3)]];
-//            NSDictionary *dic = @{@"usid":phoneNo,@"token":phoneNo,@"username":userName,@"icon":phoneNo};
-//            [self requestThirdPartLoginWith:dic];
-        } else {
-            [self hideLoadWithAnimated:YES];
-            [self showInfo:@"验证码错误！"];
-            
-            //失败
-        }
-    }];
-
+- (void)takePictureOrLibrary {
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+    [action showInView:self.view];
 }
 
 #pragma mark - networking
@@ -213,8 +197,7 @@
     NSString *username = [self.viewName.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *userID = self.viewIdentify.textInput.text;
     NSString *identify = [[[UserCachBean share] touristInfo] identify];
-    self.imageUrl = @"http://www.baidu.com";
-#warning TODO 图片上传
+
     NSString *otherInfo = [NSString stringWithFormat:@"%@|%@", userID, self.imageUrl];
     NSString *url = [NSString stringWithFormat:@"%@tourist/updateTouristAuthentication",HOST];
     
@@ -226,8 +209,120 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideLoadWithAnimated:YES];
     }];
+}
+
+- (void)uploadImage {
+    if (self.imageViewPicture.image == nil) {
+        [self showInfo:@"请上传证件照!"];
+        return;
+    }
+    NSString *imagePath =  [FilePathManager saveImageFile:self.imageViewPicture.image toFolder:@"gange"];
+    NSString *uploadpath = [NSString stringWithFormat:@"%@/%@",[FilePathManager getDocumentPath:@""],imagePath];
+    
+    NSMutableArray *arrayImage = [NSMutableArray array];
+    [arrayImage addObject:self.imageViewPicture.image];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:API_PhotoUpload parameters:@{@"file":uploadpath} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (int i = 0; i<arrayImage.count; i++) {
+            UIImage *uploadImage = arrayImage[i];
+            [formData appendPartWithFileData:UIImagePNGRepresentation(uploadImage) name:@"file" fileName:@"test.jpg" mimeType:@"image/jpg"];
+        }
+    } error:nil];
+    
+    AFHTTPRequestOperation *opration = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    opration.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    opration.responseSerializer = [AFJSONResponseSerializer serializer];
+    [opration setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            NSDictionary *image = result[@"image"];
+            NSString *imageUrl_ = [NSString stringWithFormat:@"http://pic%@.ajkimg.com/m/%@/%@x%@.jpg",image[@"host"],image[@"id"],image[@"width"],image[@"height"]];
+            NSLog(@"%@",imageUrl_);
+            self.imageUrl = imageUrl_;
+            [self requestData];
+        } else {
+            [self requestData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showInfo:@"图片上传失败"];
+        [self hideLoadWithAnimated:YES];
+    }];
+    [opration start];
+}
+
+//验证手机验证码
+- (void)checkCode {
+    [self.view endEditing:YES];
+    if (self.viewCode.textInput.text.length != 4){
+        [self showInfo:@"验证码格式不正确"];
+        return;
+    }
+    [self showLoadingActivity:YES];
+    [SMS_SDK commitVerifyCode:self.viewCode.textInput.text result:^(enum SMS_ResponseState state) {
+        if (state == SMS_ResponseStateSuccess) {
+            [self uploadImage];
+            //            NSString *phoneNo = self.textName.text;
+            //            NSString *userName = [NSString stringWithFormat:@"%@*****%@", [phoneNo substringWithRange:NSMakeRange(0, 3)], [phoneNo substringWithRange:NSMakeRange(phoneNo.length - 3, 3)]];
+            //            NSDictionary *dic = @{@"usid":phoneNo,@"token":phoneNo,@"username":userName,@"icon":phoneNo};
+            //            [self requestThirdPartLoginWith:dic];
+        } else {
+            [self hideLoadWithAnimated:YES];
+            [self showInfo:@"验证码错误！"];
+            
+            //失败
+        }
+    }];
     
 }
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypeCamera; //拍照
+            ipc.delegate = self;
+            [self presentViewController:ipc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            BK_ELCAlbumPickerController *albumPicker = [[BK_ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
+            BK_ELCImagePickerController *elcPicker = [[BK_ELCImagePickerController alloc] initWithRootViewController:albumPicker];
+            elcPicker.maximumImagesCount = 1 ; //(maxCount - self.roomImageArray.count);
+            elcPicker.imagePickerDelegate = self;
+            [self presentViewController:elcPicker animated:YES completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)elcImagePickerController:(BK_ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    if ([info count] == 0) {
+        return;
+    }
+    for (NSDictionary *dict in info) {
+        
+        UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
+        self.imageViewPicture.image = image;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerControllerDidCancel:(BK_ELCImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    self.imageViewPicture.image = image;
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 #pragma mark - //////////////////////////////////////////////////////////
 #pragma mark - //////////////////////////////////////////////////////////

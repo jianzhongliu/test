@@ -8,10 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^clickAddImageBlock) (NSInteger index);
+
 @interface ImageScrollView : UIView
 
+@property (nonatomic, strong) clickAddImageBlock imageBlock;
 
-- (void)configViewWithData:(NSArray *) data;
+- (void)configViewWithData:(NSArray *) data clickBlock:(clickAddImageBlock ) clickBlock;
 
 
 @end

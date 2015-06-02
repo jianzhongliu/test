@@ -40,28 +40,42 @@
 - (void)initUI {
     self.scroll.frame = CGRectMake(0, 0, SCREENWIDTH, 80);
     [self addSubview:self.scroll];
-    
-    
 }
 
-- (void)configViewWithData:(NSArray *) data {
+- (void)configViewWithData:(NSArray *) data clickBlock:(clickAddImageBlock ) clickBlock{
+    self.imageBlock = clickBlock;
     CGFloat offset = 0;
+    NSMutableArray *arrayImage = [NSMutableArray arrayWithArray:data];
+    [arrayImage addObject:[UIImage imageNamed:@"icon"]];
     
-    for (UIImage *image in data) {
+    for (int i = 0; i < arrayImage.count; i ++) {
+        UIImage *imageData = [arrayImage objectAtIndex:i];
+        
         UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10 + offset, 10, 60, 60)];
-        imageView.image = image;
+        imageView.image = imageData;
         imageView.userInteractionEnabled = YES;
         [self.scroll addSubview:imageView];
-        if (data.count == 1) {
-            imageView.frame = CGRectMake(10 + offset, 10, 60, 60);
+        offset += 80;
+        
+        if (i == arrayImage.count - 1) {
+            UITapGestureRecognizer *tapIMG = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickAddIMG)];
+            [imageView addGestureRecognizer:tapIMG];
         }
     }
     
-    
+    CGFloat width = SCREENWIDTH;
+    if (arrayImage.count * 80 > width) {
+        width = arrayImage.count * 80;
+    }
+    self.scroll.contentSize = CGSizeMake(width, 80);
+}
+
+- (void)didClickAddIMG {
+    self.imageBlock(0);
 }
 
 - (CGFloat)fetchViewHeight {
-    return 0;
+    return 80;
 }
 
 @end

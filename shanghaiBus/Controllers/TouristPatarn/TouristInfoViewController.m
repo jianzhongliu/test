@@ -9,8 +9,11 @@
 #import "TouristInfoViewController.h"
 #import "TouristInputCommonCell.h"
 #import "TouristInputInfoViewController.h"
+#import "BK_ELCAlbumPickerController.h"
+#import "BK_ELCImagePickerController.h"
+#import "FilePathManager.h"
 
-@interface TouristInfoViewController ()<UITableViewDataSource ,UITableViewDelegate, UITextFieldDelegate, TouristInputCommonCellDelegate,TouristInputInfoViewControllerDelegate>
+@interface TouristInfoViewController ()<UITableViewDataSource ,UITableViewDelegate, UITextFieldDelegate, TouristInputCommonCellDelegate,TouristInputInfoViewControllerDelegate, UIActionSheetDelegate, UINavigationBarDelegate,UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableInfo;
 @property (nonatomic, strong) TouristInputCommonCell *cellPhone;
@@ -21,6 +24,8 @@
 @property (nonatomic, strong) NSString *gender;
 @property (nonatomic, strong) NSString *servicearea;
 @property (nonatomic, strong) NSString *language;
+
+@property (nonatomic,strong) UIImage *imageIcon;
 
 @end
 
@@ -88,13 +93,22 @@
 }
 
 - (void)didRightClick {
-    [self requestData];
-    
+    [self showLoadingActivity:YES];
+    if (self.imageIcon == nil) {
+        [self requestData];
+    } else {
+        [self uploadImage];
+    }
 }
+
+- (void)takePictureOrLibrary {
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+    [action showInView:self.view];
+}
+
 #pragma mark - networking
 - (void)requestData {
-    
-    [self showLoadingActivity:YES];
+
     AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -109,7 +123,8 @@
     NSString *url = [NSString stringWithFormat:@"%@tourist/updateTouristBaseInfo",HOST];
 
     NSDictionary *dic = @{@"identify":identify, @"icon":self.icon, @"phone":self.phone, @"gender":self.gender, @"nuckname":self.nuckName, @"servicearea":self.servicearea, @"language":self.language};
-    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {[self hideLoadWithAnimated:YES];
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self hideLoadWithAnimated:YES];
         [self showInfo:@"修改成功!"];
         [UserCachBean fetchTouristInfo];
         [self performSelector:@selector(didDismissMyInfo) withObject:nil afterDelay:2];
@@ -117,6 +132,41 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideLoadWithAnimated:YES];
     }];
+}
+
+- (void)uploadImage {
+    NSString *imagePath =  [FilePathManager saveImageFile:self.imageIcon toFolder:@"gange"];
+    NSString *uploadpath = [NSString stringWithFormat:@"%@/%@",[FilePathManager getDocumentPath:@""],imagePath];
+    
+    NSMutableArray *arrayImage = [NSMutableArray array];
+    [arrayImage addObject:self.imageIcon];
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:API_PhotoUpload parameters:@{@"file":uploadpath} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (int i = 0; i<arrayImage.count; i++) {
+            UIImage *uploadImage = arrayImage[i];
+            [formData appendPartWithFileData:UIImagePNGRepresentation(uploadImage) name:@"file" fileName:@"test.jpg" mimeType:@"image/jpg"];
+        }
+    } error:nil];
+    
+    AFHTTPRequestOperation *opration = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    opration.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    opration.responseSerializer = [AFJSONResponseSerializer serializer];
+    [opration setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            NSDictionary *image = result[@"image"];
+            NSString *imageUrl_ = [NSString stringWithFormat:@"http://pic%@.ajkimg.com/m/%@/%@x%@.jpg",image[@"host"],image[@"id"],image[@"width"],image[@"height"]];
+            NSLog(@"%@",imageUrl_);
+            self.icon = imageUrl_;
+            [self requestData];
+        } else {
+            [self requestData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showInfo:@"图片上传失败"];
+        [self hideLoadWithAnimated:YES];
+    }];
+    [opration start];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -178,7 +228,13 @@
                     cellIcon = [[TouristInputCommonCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"TouristInputCommonCell"];
                 }
                 cellIcon.cellType = CELLTYPEICON;
-                [cellIcon configCellWithData:nil];
+                NSDictionary *dic ;
+                if (self.imageIcon != nil) {
+                    dic = @{@"icon":self.imageIcon};
+                } else {
+                    dic= nil;
+                }
+                [cellIcon configCellWithData:dic];
                 cellIcon.contentView.backgroundColor = [UIColor whiteColor];
                 return cellIcon;
             } else {
@@ -199,7 +255,10 @@
             }
             cellHeader.delegate = self;
             cellHeader.cellType = CELLTYPEGENDER;
-            [cellHeader configCellWithData:nil];
+            if (self.gender.length == 0) {
+                self.gender = [NSString stringWithFormat:@"%ld", (long)[[[UserCachBean share] touristInfo] gender]];
+            }
+            [cellHeader configCellWithData:@{@"gender":self.gender}];
             cellHeader.contentView.backgroundColor = [UIColor whiteColor];
             return cellHeader;
         }
@@ -271,6 +330,7 @@
         {
             if (indexPath.row == 0) {
                 //头像
+                [self takePictureOrLibrary];
             }
         }
             break;
@@ -372,6 +432,57 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.tableInfo.viewY = -100;
     } completion:nil];
+}
+
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypeCamera; //拍照
+            ipc.delegate = self;
+            [self presentViewController:ipc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            BK_ELCAlbumPickerController *albumPicker = [[BK_ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
+            BK_ELCImagePickerController *elcPicker = [[BK_ELCImagePickerController alloc] initWithRootViewController:albumPicker];
+            elcPicker.maximumImagesCount = 1 ; //(maxCount - self.roomImageArray.count);
+            elcPicker.imagePickerDelegate = self;
+            [self presentViewController:elcPicker animated:YES completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)elcImagePickerController:(BK_ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    if ([info count] == 0) {
+        return;
+    }
+    int tempNum = 1;
+    for (NSDictionary *dict in info) {
+        
+        UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
+        self.imageIcon = image;
+    }
+    [self.tableInfo reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerControllerDidCancel:(BK_ELCImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    self.imageIcon = image;
+    [self.tableInfo reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

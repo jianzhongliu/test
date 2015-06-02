@@ -12,6 +12,7 @@
 #import "TouristBaseInfoViewController.h"
 #import "AuthenticatedInfoViewController.h"
 #import "UploadServiceViewController.h"
+#import "ACWebViewController.h"
 
 #import "HomeHeaderView.h"
 #import "HomePageSepratorCell.h"
@@ -25,6 +26,7 @@
 
 @property (nonatomic, strong) UITableView *table;
 @property (nonatomic, strong) NSMutableArray *arraySiteLine;
+@property (nonatomic, strong) NSMutableArray *arrayAD;//ad
 @property (nonatomic, strong) HomeHeaderView *viewHeader;
 
 @end
@@ -86,15 +88,12 @@
             [self presentViewController:myNavController animated:YES completion:nil];
         }
     }];
-    
-    
-
-
 }
 
 - (void)initData {
     [self fetchLoginData];
     self.arraySiteLine = [NSMutableArray array];
+    self.arrayAD = [NSMutableArray array];
 }
 
 - (void)fetchLoginData {
@@ -167,16 +166,25 @@
                 }
                 [self reloadData];
             }
+            //广告
+            if ([[dic objectForKey:@"arrayBanners"] isKindOfClass:[NSArray class]]) {
+                [self.arrayAD addObjectsFromArray:[dic objectForKey:@"arrayBanners"]];
+            } else if ([[dic objectForKey:@"arrayBanners"] count] > 0 ){
+                [self.arrayAD addObject:[dic objectForKey:@"arrayBanners"]];
+            }
+            NSMutableDictionary *dicParam = [NSMutableDictionary dictionary];
+            [dicParam setValue:self.arrayAD forKey:@"img"];
+            [self.viewHeader resetDataToView:dicParam];
+            [self.table reloadData];
         }
         [self hideLoadWithAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideLoadWithAnimated:YES];
     }];
-    
-    NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/1f178a82b9014a90b8a9c50aa9773912b21beef6.jpg"];
-    NSMutableDictionary *dicParam = [NSMutableDictionary dictionary];
-    [dicParam setValue:arrayImg forKey:@"img"];
-    [self.viewHeader resetDataToView:dicParam];
+//    
+//    NSArray *arrayImg = @[@"http://hiphotos.baidu.com/lvpics/pic/item/83025aafa40f4bfbc7471de3034f78f0f63618f5.jpg",@"http://hiphotos.baidu.com/lvpics/pic/item/1f178a82b9014a90b8a9c50aa9773912b21beef6.jpg"];
+//    NSMutableDictionary *dicParam = [NSMutableDictionary dictionary];
+//    [dicParam setValue:arrayImg forKey:@"img"];
 
 }
 
@@ -281,9 +289,12 @@
 
 }
 
-- (void)didClickHeaderImageBannerAtIndex:(NSInteger )index withUrl:(NSString *) url {
-    TouristListViewController *controller = [[TouristListViewController alloc] init];
+- (void)didClickHeaderImageBannerAtIndex:(NSInteger )index withUrl:(NSDictionary *) dic {
+    ACWebViewController *controller = [[ACWebViewController alloc] init];
+    controller.initialURL = [NSURL URLWithString:[dic objectForKey:@"detailUrl"]];
+    [controller setTitle:[dic objectForKey:@"title"]];
     controller.hidesBottomBarWhenPushed = YES;
+    controller.hideToolbar = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
 
@@ -292,5 +303,5 @@
     controller.hidesBottomBarWhenPushed = YES;
     [self.navigationController pushViewController:controller animated:YES];
 }
-
+//ACWebViewController
 @end

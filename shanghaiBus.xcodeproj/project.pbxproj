@@ -79,6 +79,16 @@
 		245FBF011AE4196B00CCF36A /* TouristBaseInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBF001AE4196B00CCF36A /* TouristBaseInfoViewController.m */; };
 		245FBF041AE41B2D00CCF36A /* UploadServiceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */; };
 		245FBF071AE41C7400CCF36A /* ServiceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBF061AE41C7400CCF36A /* ServiceListViewController.m */; };
+		246187E01B19856400A2618B /* JXBAdPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187DF1B19856400A2618B /* JXBAdPageView.m */; };
+		246187E31B1AB70100A2618B /* ACWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187E21B1AB70100A2618B /* ACWebViewController.m */; };
+		246187F31B1AC20100A2618B /* BK_ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187E61B1AC20100A2618B /* BK_ELCAlbumPickerController.m */; };
+		246187F41B1AC20100A2618B /* BK_ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187E81B1AC20100A2618B /* BK_ELCAsset.m */; };
+		246187F51B1AC20100A2618B /* BK_ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187EA1B1AC20100A2618B /* BK_ELCAssetCell.m */; };
+		246187F61B1AC20100A2618B /* BK_ELCAssetTablePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187EC1B1AC20100A2618B /* BK_ELCAssetTablePicker.m */; };
+		246187F71B1AC20100A2618B /* BK_ELCImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187EE1B1AC20100A2618B /* BK_ELCImagePickerController.m */; };
+		246187F81B1AC20100A2618B /* IMGLibraryREADME in Resources */ = {isa = PBXBuildFile; fileRef = 246187F11B1AC20100A2618B /* IMGLibraryREADME */; };
+		246187F91B1AC20100A2618B /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 246187F21B1AC20100A2618B /* Overlay@2x.png */; };
+		246187FC1B1AC8C400A2618B /* FilePathManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 246187FB1B1AC8C400A2618B /* FilePathManager.m */; };
 		246265401AF32A1900CF526F /* TouristInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2462653F1AF32A1900CF526F /* TouristInfoViewController.m */; };
 		246265441AF32E4F00CF526F /* TouristInputCommonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 246265431AF32E4F00CF526F /* TouristInputCommonCell.m */; };
 		2465395C1AC6B7F700C1908C /* UserLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2465395B1AC6B7F700C1908C /* UserLoginViewController.m */; };
@@ -330,6 +340,26 @@
 		245FBF031AE41B2D00CCF36A /* UploadServiceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UploadServiceViewController.m; path = ../UploadServiceViewController.m; sourceTree = "<group>"; };
 		245FBF051AE41C7400CCF36A /* ServiceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceListViewController.h; sourceTree = "<group>"; };
 		245FBF061AE41C7400CCF36A /* ServiceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceListViewController.m; sourceTree = "<group>"; };
+		246187DE1B19856400A2618B /* JXBAdPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXBAdPageView.h; sourceTree = "<group>"; };
+		246187DF1B19856400A2618B /* JXBAdPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXBAdPageView.m; sourceTree = "<group>"; };
+		246187E11B1AB70100A2618B /* ACWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACWebViewController.h; sourceTree = "<group>"; };
+		246187E21B1AB70100A2618B /* ACWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACWebViewController.m; sourceTree = "<group>"; };
+		246187E51B1AC20100A2618B /* BK_ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BK_ELCAlbumPickerController.h; sourceTree = "<group>"; };
+		246187E61B1AC20100A2618B /* BK_ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BK_ELCAlbumPickerController.m; sourceTree = "<group>"; };
+		246187E71B1AC20100A2618B /* BK_ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BK_ELCAsset.h; sourceTree = "<group>"; };
+		246187E81B1AC20100A2618B /* BK_ELCAsset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BK_ELCAsset.m; sourceTree = "<group>"; };
+		246187E91B1AC20100A2618B /* BK_ELCAssetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BK_ELCAssetCell.h; sourceTree = "<group>"; };
+		246187EA1B1AC20100A2618B /* BK_ELCAssetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BK_ELCAssetCell.m; sourceTree = "<group>"; };
+		246187EB1B1AC20100A2618B /* BK_ELCAssetTablePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BK_ELCAssetTablePicker.h; sourceTree = "<group>"; };
+		246187EC1B1AC20100A2618B /* BK_ELCAssetTablePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BK_ELCAssetTablePicker.m; sourceTree = "<group>"; };
+		246187ED1B1AC20100A2618B /* BK_ELCImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BK_ELCImagePickerController.h; sourceTree = "<group>"; };
+		246187EE1B1AC20100A2618B /* BK_ELCImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BK_ELCImagePickerController.m; sourceTree = "<group>"; };
+		246187EF1B1AC20100A2618B /* ELCAssetPickerFilterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetPickerFilterDelegate.h; sourceTree = "<group>"; };
+		246187F01B1AC20100A2618B /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		246187F11B1AC20100A2618B /* IMGLibraryREADME */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = IMGLibraryREADME; sourceTree = "<group>"; };
+		246187F21B1AC20100A2618B /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
+		246187FA1B1AC8C400A2618B /* FilePathManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilePathManager.h; sourceTree = "<group>"; };
+		246187FB1B1AC8C400A2618B /* FilePathManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilePathManager.m; sourceTree = "<group>"; };
 		2462653E1AF32A1900CF526F /* TouristInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TouristInfoViewController.h; path = shanghaiBus/Controllers/TouristPatarn/TouristInfoViewController.h; sourceTree = SOURCE_ROOT; };
 		2462653F1AF32A1900CF526F /* TouristInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TouristInfoViewController.m; path = shanghaiBus/Controllers/TouristPatarn/TouristInfoViewController.m; sourceTree = SOURCE_ROOT; };
 		246265421AF32E4F00CF526F /* TouristInputCommonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristInputCommonCell.h; sourceTree = "<group>"; };
@@ -705,6 +735,27 @@
 				245FBF061AE41C7400CCF36A /* ServiceListViewController.m */,
 			);
 			path = TouristPatarn;
+			sourceTree = "<group>";
+		};
+		246187E41B1AC20100A2618B /* IMGLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				246187E51B1AC20100A2618B /* BK_ELCAlbumPickerController.h */,
+				246187E61B1AC20100A2618B /* BK_ELCAlbumPickerController.m */,
+				246187E71B1AC20100A2618B /* BK_ELCAsset.h */,
+				246187E81B1AC20100A2618B /* BK_ELCAsset.m */,
+				246187E91B1AC20100A2618B /* BK_ELCAssetCell.h */,
+				246187EA1B1AC20100A2618B /* BK_ELCAssetCell.m */,
+				246187EB1B1AC20100A2618B /* BK_ELCAssetTablePicker.h */,
+				246187EC1B1AC20100A2618B /* BK_ELCAssetTablePicker.m */,
+				246187ED1B1AC20100A2618B /* BK_ELCImagePickerController.h */,
+				246187EE1B1AC20100A2618B /* BK_ELCImagePickerController.m */,
+				246187EF1B1AC20100A2618B /* ELCAssetPickerFilterDelegate.h */,
+				246187F01B1AC20100A2618B /* ELCAssetSelectionDelegate.h */,
+				246187F11B1AC20100A2618B /* IMGLibraryREADME */,
+				246187F21B1AC20100A2618B /* Overlay@2x.png */,
+			);
+			path = IMGLibrary;
 			sourceTree = "<group>";
 		};
 		246265411AF32A9E00CF526F /* TouristInfo */ = {
@@ -1095,6 +1146,9 @@
 		24CEE7741ABEA3E600DBE500 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				246187FA1B1AC8C400A2618B /* FilePathManager.h */,
+				246187FB1B1AC8C400A2618B /* FilePathManager.m */,
+				246187E41B1AC20100A2618B /* IMGLibrary */,
 				245FBEFA1AE3E6C500CCF36A /* UINavigationController+Ext.h */,
 				245FBEFB1AE3E6C500CCF36A /* UINavigationController+Ext.m */,
 				24CBAA2C1ADC2942007FD128 /* UIViewController+Loading.h */,
@@ -1115,6 +1169,10 @@
 		24CEE7F31ABEB76E00DBE500 /* ViewHelper */ = {
 			isa = PBXGroup;
 			children = (
+				246187E11B1AB70100A2618B /* ACWebViewController.h */,
+				246187E21B1AB70100A2618B /* ACWebViewController.m */,
+				246187DE1B19856400A2618B /* JXBAdPageView.h */,
+				246187DF1B19856400A2618B /* JXBAdPageView.m */,
 				2450F1F71AE8B5F30028A416 /* SDWebImage */,
 				24D9E4CF1AE1452800C2E978 /* CWStarRateView.h */,
 				24D9E4D01AE1452800C2E978 /* CWStarRateView.m */,
@@ -1363,6 +1421,7 @@
 				24B29DA21ABD1B32007F84E5 /* Images.xcassets in Resources */,
 				24DF4B961AEE8E0A000F9FB4 /* icon_user_enter@2x.png in Resources */,
 				24E854971AE6BA80006628B0 /* UMSocialLocalizable.strings in Resources */,
+				246187F81B1AC20100A2618B /* IMGLibraryREADME in Resources */,
 				24E8549C1AE6BA80006628B0 /* UMSCommentInputControlleriPad.xib in Resources */,
 				24D9E4D71AE1671C00C2E978 /* icon_phone_button@2x.png in Resources */,
 				24E8549B1AE6BA80006628B0 /* UMSCommentInputController.xib in Resources */,
@@ -1404,6 +1463,7 @@
 				24D9E4D31AE1457300C2E978 /* icon_star_hilight@2x.png in Resources */,
 				2456D58E1AE2A16400457A31 /* icon_home_me_selected@2x.png in Resources */,
 				24D9E4CE1AE1405000C2E978 /* orderNumber@2x.png in Resources */,
+				246187F91B1AC20100A2618B /* Overlay@2x.png in Resources */,
 				246539931AC6BB6F00C1908C /* icon_back@2x.png in Resources */,
 				24D9E4C71AE13CAD00C2E978 /* icon_detail_down@2x.png in Resources */,
 				2456D56B1AE1F9F600457A31 /* con_header_line@2x.png in Resources */,
@@ -1435,10 +1495,12 @@
 				2450F21F1AE8B5F30028A416 /* SDWebImageDownloaderOperation.m in Sources */,
 				2414A3131ACC4B1E00E05E80 /* RegisterViewController.m in Sources */,
 				24B0BA571ADFF3820073BED0 /* TouristHeaderView.m in Sources */,
+				246187F31B1AC20100A2618B /* BK_ELCAlbumPickerController.m in Sources */,
 				24B29DEA1ABD1C6E007F84E5 /* AFURLSessionManager.m in Sources */,
 				248B5C921AC3294100E0B6A4 /* TouristContectView.m in Sources */,
 				24DF4B9E1AEE9AA9000F9FB4 /* MyHomeViewController.m in Sources */,
 				24574A591B10D8CA00F1A1C5 /* ServiceObject.m in Sources */,
+				246187E01B19856400A2618B /* JXBAdPageView.m in Sources */,
 				24B29DF41ABD1C6E007F84E5 /* UIProgressView+AFNetworking.m in Sources */,
 				24CEE8621ABEF4C200DBE500 /* TouristListCell.m in Sources */,
 				24CEE8381ABEBF8300DBE500 /* HomePageSepratorCell.m in Sources */,
@@ -1453,11 +1515,13 @@
 				240985A21ADAC739009CC9F2 /* MessageObject.m in Sources */,
 				24B29D9A1ABD1B32007F84E5 /* AppDelegate.m in Sources */,
 				24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */,
+				246187F41B1AC20100A2618B /* BK_ELCAsset.m in Sources */,
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,
 				24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */,
 				246539A81AC700B500C1908C /* BaseLoginViewController.m in Sources */,
 				248A9EB71B0B959B00B908D2 /* MessageInfoCell.m in Sources */,
 				24477DAF1AF7BA400051F277 /* UploadInfoCommonInputView.m in Sources */,
+				246187F61B1AC20100A2618B /* BK_ELCAssetTablePicker.m in Sources */,
 				24CBAA2B1ADC28BB007FD128 /* MBProgressHUD.m in Sources */,
 				24B29DF01ABD1C6E007F84E5 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				245FBEE41AE3B11000CCF36A /* MyHomeView.m in Sources */,
@@ -1489,16 +1553,19 @@
 				246539A51AC6BC1500C1908C /* UserCachBean.m in Sources */,
 				246265441AF32E4F00CF526F /* TouristInputCommonCell.m in Sources */,
 				24516C101AF7BBF200F962E9 /* ImageScrollView.m in Sources */,
+				246187E31B1AB70100A2618B /* ACWebViewController.m in Sources */,
 				24D2E4C61AC45FD600347FA6 /* TouristCommentListCell.m in Sources */,
 				2450F2201AE8B5F30028A416 /* SDWebImageManager.m in Sources */,
 				24B29DF11ABD1C6E007F84E5 /* UIAlertView+AFNetworking.m in Sources */,
 				24CEE83B1ABEC89700DBE500 /* Sites.m in Sources */,
 				24CD06001AC5C1CD000E851F /* SearchObjectViewController.m in Sources */,
+				246187F51B1AC20100A2618B /* BK_ELCAssetCell.m in Sources */,
 				246539AF1AC7191A00C1908C /* PhoneLoginViewController.m in Sources */,
 				24D2E4C91AC4682E00347FA6 /* TouristCommentListViewController.m in Sources */,
 				2450F2241AE8B5F30028A416 /* UIImage+MultiFormat.m in Sources */,
 				2450F21A1AE8B5F30028A416 /* NSData+ImageContentType.m in Sources */,
 				24B29DE81ABD1C6E007F84E5 /* AFURLConnectionOperation.m in Sources */,
+				246187F71B1AC20100A2618B /* BK_ELCImagePickerController.m in Sources */,
 				24B29DEF1ABD1C6E007F84E5 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				244F1DBB1B0CDCC500FF87C8 /* TouristServiceListCell.m in Sources */,
 				2450F2271AE8B5F30028A416 /* UIImageView+WebCache.m in Sources */,
@@ -1513,6 +1580,7 @@
 				245FBF011AE4196B00CCF36A /* TouristBaseInfoViewController.m in Sources */,
 				2465395C1AC6B7F700C1908C /* UserLoginViewController.m in Sources */,
 				24CEE76B1ABE9D8000DBE500 /* BaseViewController.m in Sources */,
+				246187FC1B1AC8C400A2618B /* FilePathManager.m in Sources */,
 				2414A3161ACC4BFF00E05E80 /* SettingPasswordViewController.m in Sources */,
 				246265401AF32A1900CF526F /* TouristInfoViewController.m in Sources */,
 				24D9E4D11AE1452800C2E978 /* CWStarRateView.m in Sources */,

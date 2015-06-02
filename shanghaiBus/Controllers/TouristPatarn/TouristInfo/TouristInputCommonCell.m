@@ -169,8 +169,12 @@
         case CELLTYPEICON:
         {
             self.labelTitle.text = @"上传头像";
-            NSString *icon = [[[UserCachBean share] touristInfo] icon];
-            [self.imageIcon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"icon_tourist_head"]];
+            if ([celldata objectForKey:@"icon"] == nil) {
+                NSString *icon = [[[UserCachBean share] touristInfo] icon];
+                [self.imageIcon sd_setImageWithURL:[NSURL URLWithString:icon] placeholderImage:[UIImage imageNamed:@"icon_tourist_head"]];
+            } else {
+                self.imageIcon.image = [celldata objectForKey:@"icon"];
+            }
             self.imageIcon.hidden = NO;
         }
             break;
@@ -178,6 +182,15 @@
         {
             
             self.labelTitle.text = @"性别";
+            NSInteger gender = [[[UserCachBean share] touristInfo] gender];
+            if ([[celldata objectForKey:@"gender"] length] > 0) {
+                gender = [[celldata objectForKey:@"gender"] integerValue];
+            }
+            if (gender == 0) {
+                self.buttonGender.selected = NO;
+            } else {
+                self.buttonGender.selected = YES;
+            }
             self.buttonGender.hidden = NO;
             
         }

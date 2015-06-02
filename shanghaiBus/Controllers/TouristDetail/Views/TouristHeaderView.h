@@ -14,5 +14,5 @@
 
 - (void)configViewWithData:(TouristObject *) tourist;
 
-
+- (CGFloat)fetchViewHeight;
 @end

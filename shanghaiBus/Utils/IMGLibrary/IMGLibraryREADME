@@ -1,0 +1,108 @@
+
+
+一：创建视图：
+
+（1）相册多选：
+
+    BK_ELCAlbumPickerController *albumPicker = [[BK_ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
+    BK_ELCImagePickerController *elcPicker = [[BK_ELCImagePickerController alloc] initWithRootViewController:albumPicker];
+    elcPicker.maximumImagesCount = 5; //(maxCount - self.roomImageArray.count);
+    elcPicker.imagePickerDelegate = self;
+    [self presentViewController:elcPicker animated:YES completion:nil];
+
+  （2）拍照   ---需要加入AVFoundation库
+
+      if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"7.0")) {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusRestricted || authStatus == AVAuthorizationStatusDenied)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"您没有开启移动经纪人的相机权限,请前往设置-隐私-相机中设置" delegate:self cancelButtonTitle:nil otherButtonTitles:@"知道了", nil];
+            [alert show];
+            return;
+        }
+    }
+    UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+    ipc.sourceType = UIImagePickerControllerSourceTypeCamera; //拍照
+    ipc.delegate = self;
+    [self presentViewController:ipc animated:YES completion:nil];
+    
+
+
+二：设置回调
+
+    - (void)elcImagePickerController:(BK_ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    
+    if ([info count] == 0) {
+        return;
+    }
+    NSString *uid =[[AXChatMessageCenter defaultMessageCenter] fetchCurrentPerson].uid;
+    int tempNum = 1;
+    for (NSDictionary *dict in info) {
+        
+        UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
+        CGSize size = image.size;
+
+        NSString *name = [NSString stringWithFormat:@"_%d-%dx%d", tempNum ++, (int)size.width, (int)size.width];
+        NSString *path = [AXPhotoManager saveImageFile:image toFolder:AXPhotoFolderName whitChatId:uid andIMGName:name];
+//        NSString *url = [AXPhotoManager getLibrary:path];
+//        NSLog(@"==========url=======%@",url);
+        AXMappedMessage *mappedMessage = [[AXMappedMessage alloc] init];
+        mappedMessage.accountType = @"1";
+        //        mappedMessage.content = self.messageInputView.textView.text;
+//        mappedMessage.content = @"[图片]";
+        mappedMessage.to = [self checkFriendUid];
+        mappedMessage.from = uid;
+        mappedMessage.isRead = YES;
+        mappedMessage.isRemoved = NO;
+        mappedMessage.messageType = [NSNumber numberWithInteger:AXMessageTypePic];
+        mappedMessage.imgPath = path;
+        mappedMessage.isImgDownloaded = YES;
+        if (self.friendPerson && self.friendPerson.userType == AXPersonTypePublic) {
+            [[AXChatMessageCenter defaultMessageCenter] sendImageToPublic:mappedMessage willSendMessage:self.finishSendMessageBlock];
+        } else {
+            [[AXChatMessageCenter defaultMessageCenter] sendImage:mappedMessage withCompeletionBlock:self.finishSendMessageBlock];
+        }
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+
+- (void)elcImagePickerControllerDidCancel:(BK_ELCImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    UIImage *newSizeImage = nil;
+    NSString *uid =[[AXChatMessageCenter defaultMessageCenter] fetchCurrentPerson].uid;
+    
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+   newSizeImage = [image resizedImageWithContentMode:UIViewContentModeScaleAspectFit bounds:CGSizeMake(1280, 1280) interpolationQuality:kCGInterpolationHigh];
+    
+    CGSize size = newSizeImage.size;
+    NSString *name = [NSString stringWithFormat:@"%dx%d",(int)size.width,(int)size.width];
+    NSString *path = [AXPhotoManager saveImageFile:newSizeImage toFolder:AXPhotoFolderName whitChatId:uid andIMGName:name];
+//    NSString *url = [AXPhotoManager getLibrary:path];
+    
+    AXMappedMessage *mappedMessage = [[AXMappedMessage alloc] init];
+    mappedMessage.accountType = @"2";
+    //        mappedMessage.content = self.messageInputView.textView.text;
+    mappedMessage.to = [self checkFriendUid];
+    mappedMessage.from = uid;
+    mappedMessage.isRead = YES;
+    mappedMessage.isRemoved = NO;
+    mappedMessage.messageType = @(AXMessageTypePic);
+    mappedMessage.imgPath = path;
+    mappedMessage.isImgDownloaded = YES;
+    if (self.friendPerson && self.friendPerson.userType == AXPersonTypePublic) {
+        [[AXChatMessageCenter defaultMessageCenter] sendImageToPublic:mappedMessage willSendMessage:self.finishSendMessageBlock];
+    } else {
+        [[AXChatMessageCenter defaultMessageCenter] sendImage:mappedMessage withCompeletionBlock:self.finishSendMessageBlock];
+    }
+    
+    //        UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
+    //        NSDictionary *imageData = @{@"messageType":@"image",@"content":image,@"messageSource":@"incoming"};
+    //        [self.cellData addObject:imageData];
+    //        [self reloadMytableView];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}

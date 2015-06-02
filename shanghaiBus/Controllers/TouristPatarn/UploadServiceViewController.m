@@ -9,13 +9,17 @@
 #import "UploadServiceViewController.h"
 #import "UploadInfoCommonInputView.h"
 #import "TouristInputInfoViewController.h"
-
+#import "BK_ELCImagePickerController.h"
+#import "BK_ELCAlbumPickerController.h"
 #import "ImageScrollView.h"
+#import "FilePathManager.h"
 
-@interface UploadServiceViewController () <UITableViewDataSource, UITableViewDelegate, TouristInputInfoViewControllerDelegate>
+@interface UploadServiceViewController () <UITableViewDataSource, UITableViewDelegate, TouristInputInfoViewControllerDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, ELCImagePickerControllerDelegate>
 @property (nonatomic, strong) UITableView *tableList;
 
 @property (nonatomic, strong) ImageScrollView *imageList;
+@property (nonatomic, strong) NSMutableArray *arrayImage;
+@property (nonatomic, strong) NSString *imageUrlString;//所有url用|分割开
 
 @property (nonatomic, strong) UploadInfoCommonInputView *viewTitle;//标题
 @property (nonatomic, strong) UploadInfoCommonInputView *viewPrice;//价格
@@ -48,16 +52,24 @@
     [self.navigationItem setRightBarButtonItem:rightItem];
     
     [self setTitle:@"发布服务信息"];
-    
+
 }
 
 - (void)initData {
     self.service = [[ServiceObject alloc] init];
+    self.arrayImage = [NSMutableArray array];
 }
 
 - (void)initUI {
     self.tableList.frame = self.view.bounds;
     [self.view addSubview:self.tableList];
+    
+    self.imageList.frame = CGRectMake(0, 0, SCREENWIDTH, 80);
+    self.tableList.tableHeaderView = self.imageList;
+    [self.imageList configViewWithData:nil clickBlock:^(NSInteger index) {
+        [self takePictureOrLibrary];
+    }];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -72,7 +84,16 @@
 }
 
 - (void)didSaveInfo {
-    [self requestData];
+    if (self.arrayImage.count > 0) {
+        [self uploadImage];
+    } else{
+        [self requestData];
+    }
+}
+
+- (void)takePictureOrLibrary {
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+    [action showInView:self.view];
 }
 
 #pragma mark - reqeust
@@ -92,7 +113,9 @@
     NSString *preBook = [self.viewPreBook.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *service = [self.viewService.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *imageurl = @"http://www.baidu.com";
-    
+    if (self.imageUrlString.length > 0) {
+        imageurl = self.imageUrlString;
+    }
     NSString *url = [NSString stringWithFormat:@"%@service/insertServiceObject",HOST];
     if (self.service.identify.length > 0) {
         //需要更新数据，而不是添加服务
@@ -112,6 +135,40 @@
         [self showInfo:@"提交失败，请重试!"];
     }];
 
+}
+
+- (void)uploadImage {
+    
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:API_PhotoUpload parameters:@{@"file":@""} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        for (int i = 0; i<self.arrayImage.count; i++) {
+            UIImage *uploadImage = self.arrayImage[i];
+            [formData appendPartWithFileData:UIImagePNGRepresentation(uploadImage) name:@"file" fileName:[NSString stringWithFormat:@"%d_image",i] mimeType:@"image/jpg"];
+        }
+    } error:nil];
+    
+    AFHTTPRequestOperation *opration = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+    opration.responseSerializer.acceptableContentTypes = [NSSet setWithObject:@"application/json"];
+    opration.responseSerializer = [AFJSONResponseSerializer serializer];
+    [opration setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        if ([[result objectForKey:@"status"] isEqualToString:@"ok"]) {
+            NSDictionary *image = result[@"image"];
+            NSString *imageUrl_ = [NSString stringWithFormat:@"http://pic%@.ajkimg.com/m/%@/%@x%@.jpg",image[@"host"],image[@"id"],image[@"width"],image[@"height"]];
+            NSLog(@"%@",imageUrl_);
+            if (self.imageUrlString.length > 0) {
+                self.imageUrlString = imageUrl_;
+            } else {
+                self.imageUrlString = [NSString stringWithFormat:@"%@|%@", self.imageUrlString, imageUrl_];
+            }
+            [self requestData];
+        } else {
+            [self requestData];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self showInfo:@"图片上传失败"];
+        [self hideLoadWithAnimated:YES];
+    }];
+    [opration start];
 }
 
 #pragma mark - UITableViewDelegate && UITableViewDataSource
@@ -407,6 +464,59 @@
             break;
     }
 
+}
+#pragma mark - UIActionSheetDelegate
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    switch (buttonIndex) {
+        case 0:
+        {
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypeCamera; //拍照
+            ipc.delegate = self;
+            [self presentViewController:ipc animated:YES completion:nil];
+        }
+            break;
+        case 1:
+        {
+            BK_ELCAlbumPickerController *albumPicker = [[BK_ELCAlbumPickerController alloc] initWithStyle:UITableViewStylePlain];
+            BK_ELCImagePickerController *elcPicker = [[BK_ELCImagePickerController alloc] initWithRootViewController:albumPicker];
+            elcPicker.maximumImagesCount = 5 - self.arrayImage.count ; //(maxCount - self.roomImageArray.count);
+            elcPicker.imagePickerDelegate = self;
+            [self presentViewController:elcPicker animated:YES completion:nil];
+        }
+            break;
+        default:
+            break;
+    }
+}
+- (void)elcImagePickerController:(BK_ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    if ([info count] == 0) {
+        return;
+    }
+    int tempNum = 1;
+    for (NSDictionary *dict in info) {
+        
+        UIImage *image = [dict objectForKey:UIImagePickerControllerOriginalImage];
+        [self.arrayImage addObject:image];
+    }
+    [self.imageList configViewWithData:self.arrayImage clickBlock:^(NSInteger index) {
+        [self takePictureOrLibrary];
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)elcImagePickerControllerDidCancel:(BK_ELCImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    NSMutableArray *arrayImage = [NSMutableArray array];
+    UIImage *image = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [arrayImage addObject:image];
+    [self.imageList configViewWithData:arrayImage clickBlock:^(NSInteger index) {
+        [self takePictureOrLibrary];
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - getter && setter

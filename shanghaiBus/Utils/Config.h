@@ -17,6 +17,8 @@
 #define HOST @"http://localhost:8080/B-Y/REST/"
 //#define HOST @"http://192.168.1.102:8080/B-Y/REST/"
 
+#define API_PhotoUpload @"http://upd1.ajkimg.com/upload"
+
 #define SCREENWIDTH [[UIScreen mainScreen] bounds].size.width
 #define SCREENHEIGHT [[UIScreen mainScreen] bounds].size.height
 
