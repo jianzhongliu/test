@@ -81,4 +81,13 @@
     }
 }
 
+- (void)clearLoginData {
+    self.touristInfo = nil;
+    NSDictionary *userDic = @{};
+    NSString *rootPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory,
+                                                              NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *plistPath = [rootPath stringByAppendingPathComponent:@"user.plist"];
+    [userDic writeToFile:plistPath atomically:YES];
+}
+
 @end

@@ -12,7 +12,6 @@
 typedef NS_ENUM(NSInteger, USERTYPE) {
         USERTYPENOMAL = 1,
         USERTYPEBUSSENESS = 2
-
 };
 
 @interface UserCachBean : NSObject
@@ -26,5 +25,6 @@ typedef NS_ENUM(NSInteger, USERTYPE) {
 
 - (BOOL)isLogin;
 
+- (void)clearLoginData;
 
 @end

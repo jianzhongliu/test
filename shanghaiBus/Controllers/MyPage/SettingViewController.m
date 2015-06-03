@@ -99,7 +99,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
-        [UserCachBean share].touristInfo = nil;
+        [[UserCachBean share] clearLoginData];
         UIButton *but = (UIButton *)[self.view viewWithTag:101];
         but.hidden = YES;
     }
