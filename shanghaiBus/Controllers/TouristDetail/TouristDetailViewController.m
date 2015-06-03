@@ -86,7 +86,7 @@
     UIView *viewAction = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
 //    [viewAction addSubview:buttonMessage];
     
-    [viewAction addSubview:buttonShare];
+//    [viewAction addSubview:buttonShare];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:viewAction];
     

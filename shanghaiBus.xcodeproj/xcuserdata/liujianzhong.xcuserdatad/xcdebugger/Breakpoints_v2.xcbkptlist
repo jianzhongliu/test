@@ -58,12 +58,12 @@
                   moduleName = "shanghaiBus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liujianzhong/Documents/shanghaiBus/shanghaiBus/Controllers/TouristMessageViewController.m"
-                  timestampString = "455035777.044957"
+                  timestampString = "455041600.79223"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "225"
                   endingLineNumber = "225"
-                  offsetFromSymbolStart = "1734">
+                  offsetFromSymbolStart = "1600">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -73,12 +73,12 @@
                   moduleName = "shanghaiBus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liujianzhong/Documents/shanghaiBus/shanghaiBus/Controllers/TouristMessageViewController.m"
-                  timestampString = "455035777.045195"
+                  timestampString = "455041600.792814"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "225"
                   endingLineNumber = "225"
-                  offsetFromSymbolStart = "83">
+                  offsetFromSymbolStart = "80">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -112,22 +112,6 @@
             startingLineNumber = "210"
             endingLineNumber = "210"
             landmarkName = "-replyComment"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/BYTabBarController.m"
-            timestampString = "454951197.366254"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "209"
-            endingLineNumber = "209"
-            landmarkName = "-switchControllersWithActionType:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -45,7 +45,7 @@
     [self.navigationItem setLeftBarButtonItem:leftItem];
     
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithTitle:@"一键全读" style:UIBarButtonItemStylePlain target:self action:@selector(didSaveInfo)];
-    [self.navigationItem setRightBarButtonItem:rightItem];
+//    [self.navigationItem setRightBarButtonItem:rightItem];
     
     [self setTitle:@"消息"];
     
@@ -72,7 +72,9 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self requestData];
+    if ([[UserCachBean share] isLogin]) {
+        [self requestData];
+    }
 }
 
 #pragma mark - requestData
