@@ -273,8 +273,8 @@
 }
 
 - (void)didClickCommentDetail {
-    if (_delegate && [_delegate respondsToSelector:@selector(didTouristServiceDetailClick:)]) {
-        [_delegate didTouristServiceDetailClick:self.cellData];
+    if (_delegate && [_delegate respondsToSelector:@selector(didTouristServiceDetailClick: withView:)]) {
+        [_delegate didTouristServiceDetailClick:self.cellData withView:self];
     }
 }
 

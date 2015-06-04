@@ -10,6 +10,7 @@
 #import "TouristListViewController.h"
 #import "TouristCommentListViewController.h"
 #import "TouristMessageViewController.h"
+#import "TouristMessageListViewController.h"
 
 #import "WebImageView.h"
 #import "TouristServiceInfoView.h"
@@ -92,6 +93,10 @@
     
 //    self.navigationItem.rightBarButtonItems = @[rightShare,rightMessage];
     [self initUI];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self requestData];
 }
 
@@ -242,24 +247,40 @@
     [self reDrawScrollView];
 }
 
-- (void)didTouristServiceDetailClick:(TouristObject *) tourist {
+- (void)didTouristServiceDetailClick:(TouristObject *) tourist withView:(TouristCommentView *)view{
 //取评论详情列表
-    TouristCommentListViewController *controller = [[TouristCommentListViewController alloc] init];
-    controller.arrayComment = self.arrayComment;
-    controller.tourist = self.tourist;
-    [self presentViewController:controller animated:NO completion:^{
-        
+    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
+        if (view.tag == ViewCommentTag) {
+            TouristCommentListViewController *controller = [[TouristCommentListViewController alloc] init];
+            controller.tourist = self.tourist;
+            controller.arrayComment = self.arrayComment;
+            [self presentViewController:controller animated:NO completion:^{
+                
+            }];
+        } else if(view.tag == ViewMessageTag){
+            TouristMessageListViewController *controller = [[TouristMessageListViewController alloc] init];
+            controller.tourist = self.tourist;
+            controller.arrayMessage = self.arrayMessage;
+            [self presentViewController:controller animated:NO completion:^{
+                
+            }];
+        } else {
+            
+        }
     }];
 }
 
 - (void)didClickMessage {
-    TouristMessageViewController *controller = [[TouristMessageViewController alloc] init];
-    controller.tourist = self.tourist;
-    [self presentViewController:controller animated:NO completion:nil];
+    [self doLoginWithBlock:^(UserCachBean *userInfo, LOGINSTATUS status) {
+        TouristMessageViewController *controller = [[TouristMessageViewController alloc] init];
+        controller.tourist = self.tourist;
+        [self presentViewController:controller animated:NO completion:nil];
+    }];
 }
 
 - (void)didClickPhone {
-    NSURL *url = [NSURL URLWithString:@"telprompt://13916241357"];//这个方法可能会被拒
+    NSString *stringPhone = [NSString stringWithFormat:@"telprompt://%@", self.tourist.phone];
+    NSURL *url = [NSURL URLWithString:stringPhone];
     [[UIApplication sharedApplication] openURL:url];
 }
 
@@ -358,6 +379,7 @@
         _viewComment.delegate = self;
         _viewComment.viewtype = VIEWTYPECOMMENT;
         _viewComment.clipsToBounds = YES;
+        _viewComment.tag = ViewCommentTag;
     }
     return _viewComment;
 }
@@ -367,6 +389,7 @@
         _viewMessage = [[TouristCommentView alloc] init];
         _viewMessage.backgroundColor = [UIColor whiteColor];
         _viewMessage.delegate = self;
+        _viewMessage.tag = ViewMessageTag;
         _viewMessage.viewtype = VIEWTYPEMESSAGE;
         _viewMessage.clipsToBounds = YES;
     }

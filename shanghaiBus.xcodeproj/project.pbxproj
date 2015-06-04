@@ -32,6 +32,7 @@
 		242BB24A1B20AD8000E9BA1F /* icon_144.png in Resources */ = {isa = PBXBuildFile; fileRef = 242BB23D1B20AD8000E9BA1F /* icon_144.png */; };
 		242BB24B1B20AD8000E9BA1F /* icon_152.png in Resources */ = {isa = PBXBuildFile; fileRef = 242BB23E1B20AD8000E9BA1F /* icon_152.png */; };
 		242BB24D1B20AE4E00E9BA1F /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 242BB24C1B20AE4E00E9BA1F /* icon.png */; };
+		242BB2501B20B47400E9BA1F /* TouristMessageListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 242BB24F1B20B47400E9BA1F /* TouristMessageListViewController.m */; };
 		24350EBD1AC31A350066A9E8 /* TouristCommentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24350EBC1AC31A350066A9E8 /* TouristCommentView.m */; };
 		24477DAF1AF7BA400051F277 /* UploadInfoCommonInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 24477DAE1AF7BA400051F277 /* UploadInfoCommonInputView.m */; };
 		244D0A761AF506E90000BED0 /* icon_man@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 244D0A741AF506E90000BED0 /* icon_man@2x.png */; };
@@ -268,6 +269,8 @@
 		242BB23D1B20AD8000E9BA1F /* icon_144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_144.png; sourceTree = "<group>"; };
 		242BB23E1B20AD8000E9BA1F /* icon_152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_152.png; sourceTree = "<group>"; };
 		242BB24C1B20AE4E00E9BA1F /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		242BB24E1B20B47400E9BA1F /* TouristMessageListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristMessageListViewController.h; sourceTree = "<group>"; };
+		242BB24F1B20B47400E9BA1F /* TouristMessageListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristMessageListViewController.m; sourceTree = "<group>"; };
 		24350EBB1AC31A350066A9E8 /* TouristCommentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouristCommentView.h; sourceTree = "<group>"; };
 		24350EBC1AC31A350066A9E8 /* TouristCommentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TouristCommentView.m; sourceTree = "<group>"; };
 		24477DAD1AF7BA400051F277 /* UploadInfoCommonInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadInfoCommonInputView.h; sourceTree = "<group>"; };
@@ -1151,6 +1154,8 @@
 				24CEE76A1ABE9D8000DBE500 /* MainHomePageViewController.m */,
 				24CEE7651ABE9D8000DBE500 /* TouristListViewController.h */,
 				24CEE7661ABE9D8000DBE500 /* TouristListViewController.m */,
+				242BB24E1B20B47400E9BA1F /* TouristMessageListViewController.h */,
+				242BB24F1B20B47400E9BA1F /* TouristMessageListViewController.m */,
 				24D2E4C71AC4682E00347FA6 /* TouristCommentListViewController.h */,
 				24D2E4C81AC4682E00347FA6 /* TouristCommentListViewController.m */,
 				24CD05F21AC5AEB9000E851F /* TouristMessageViewController.h */,
@@ -1569,6 +1574,7 @@
 				24CEE76C1ABE9D8000DBE500 /* TouristListViewController.m in Sources */,
 				246187F41B1AC20100A2618B /* BK_ELCAsset.m in Sources */,
 				24B29DF21ABD1C6E007F84E5 /* UIButton+AFNetworking.m in Sources */,
+				242BB2501B20B47400E9BA1F /* TouristMessageListViewController.m in Sources */,
 				24CD05F41AC5AEB9000E851F /* TouristMessageViewController.m in Sources */,
 				246539A81AC700B500C1908C /* BaseLoginViewController.m in Sources */,
 				248A9EB71B0B959B00B908D2 /* MessageInfoCell.m in Sources */,

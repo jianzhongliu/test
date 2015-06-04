@@ -9,44 +9,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/Login/UserLoginViewController.m"
-            timestampString = "454260034.177373"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
-            landmarkName = "-requestThirdPartLoginWith:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "shanghaiBus/Controllers/TouristMessageViewController.m"
-            timestampString = "454436183.827529"
+            timestampString = "455128951.491166"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
-            landmarkName = "-uploadMessage"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "shanghaiBus/Controllers/TouristMessageViewController.m"
-            timestampString = "454436183.827529"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "234"
+            endingLineNumber = "234"
             landmarkName = "-uploadReplayMessage"
             landmarkType = "5">
             <Locations>
@@ -58,11 +26,11 @@
                   moduleName = "shanghaiBus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liujianzhong/Documents/shanghaiBus/shanghaiBus/Controllers/TouristMessageViewController.m"
-                  timestampString = "455126998.34879"
+                  timestampString = "455129791.569263"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "225"
-                  endingLineNumber = "225"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
                   offsetFromSymbolStart = "1812">
                </Location>
                <Location
@@ -73,11 +41,11 @@
                   moduleName = "shanghaiBus"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/liujianzhong/Documents/shanghaiBus/shanghaiBus/Controllers/TouristMessageViewController.m"
-                  timestampString = "455126998.348938"
+                  timestampString = "455129791.569473"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "225"
-                  endingLineNumber = "225"
+                  startingLineNumber = "234"
+                  endingLineNumber = "234"
                   offsetFromSymbolStart = "72">
                </Location>
             </Locations>
@@ -90,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "shanghaiBus/Controllers/TouristMessageViewController.m"
-            timestampString = "454436183.827529"
+            timestampString = "455128951.491166"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "-uploadReplayMessage"
             landmarkType = "5">
          </BreakpointContent>
@@ -112,6 +80,38 @@
             startingLineNumber = "210"
             endingLineNumber = "210"
             landmarkName = "-replyComment"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shanghaiBus/Controllers/TouristMessageViewController.m"
+            timestampString = "455129288.408185"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-uploadMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "shanghaiBus/Controllers/TouristDetail/TouristDetailViewController.m"
+            timestampString = "455129786.198659"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
+            landmarkName = "-requestData"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

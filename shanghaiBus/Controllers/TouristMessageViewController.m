@@ -184,6 +184,15 @@
     NSString *userid = [[[UserCachBean share] touristInfo] identify];
     NSString *content = [self.textCotent.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, userid];
+    NSString *phone = self.textPhone.text;
+    if (phone.length == 0) {
+        phone = @"";
+    }
+    if (content.length == 0) {
+        [self showInfo:@"留言不能为空"];
+        return;
+    }
+    
     sign = [[Utils MD5:sign] uppercaseString];
     NSString *url = [NSString stringWithFormat:@"%@tourist/addMessage",HOST];
     NSDictionary *dic = @{@"identify":currentTime,@"commentdate":currentTime,@"userid":userid,@"touristid":self.tourist.identify,@"content":content,@"phonenumber":self.textPhone.text ,@"sign":sign};
@@ -193,9 +202,9 @@
             if ([[dic objectForKey:@"status"] integerValue] == 1) {
                 [self dismissViewControllerAnimated:YES completion:nil];
             }
-            
         }
         [self hideLoadWithAnimated:YES];
+        [self showInfo:@"提交成功！"];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideLoadWithAnimated:YES];
         [self showInfo:operation.responseString ];

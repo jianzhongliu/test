@@ -20,7 +20,7 @@ typedef NS_ENUM(NSInteger, VIEWTYPE) {
 @protocol TouristCommentViewDelegate <NSObject>
 
 - (void)didTouristServiceCommentInfoDisplayChanged:(TouristCommentView*) detailView status:(BOOL) status;
-- (void)didTouristServiceDetailClick:(CommentObject *) tourist;
+- (void)didTouristServiceDetailClick:(CommentObject *) tourist withView:(TouristCommentView *) view;
 
 @end
 
