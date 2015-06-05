@@ -58,6 +58,7 @@
 - (void)initData {
     self.service = [[ServiceObject alloc] init];
     self.arrayImage = [NSMutableArray array];
+    self.imageUrlString = @"";
 }
 
 - (void)initUI {
@@ -85,56 +86,6 @@
 }
 
 - (void)didSaveInfo {
-    [self uploadImage];
-}
-
-- (void)takePictureOrLibrary {
-    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
-    [action showInView:self.view];
-}
-
-#pragma mark - reqeust
-- (void)requestData {
-
-    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
-    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
-    manager.securityPolicy.allowInvalidCertificates = YES;
-    NSString *currentTime = [Utils getCurrentTime];
-    NSString *title = [self.viewTitle.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *price = [self.viewPrice.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *area = [self.viewArea.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *language = [self.viewLanguage.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *priceDetail = [self.viewPriceDetail.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *preBook = [self.viewPreBook.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *service = [self.viewService.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    NSString *imageurl = @"http://www.baidu.com";
-    if (self.imageUrlString.length > 0) {
-        imageurl = self.imageUrlString;
-    }
-    NSString *url = [NSString stringWithFormat:@"%@service/insertServiceObject",HOST];
-    if (self.service.identify.length > 0) {
-        //需要更新数据，而不是添加服务
-        url = [NSString stringWithFormat:@"%@service/updateServiceWithObject",HOST];
-        currentTime = self.service.identify;
-    }
-    
-    NSDictionary *dic = @{@"identify":currentTime,@"touristid":[[[UserCachBean share] touristInfo] identify], @"otherinfoid":title, @"price":price, @"servicearea":area, @"language":language, @"pricedetail":priceDetail, @"prebook":preBook, @"servicedetail":service, @"images":imageurl, @"adddate":currentTime};
-    
-    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self hideLoadWithAnimated:YES];
-        [self performSelector:@selector(didDismissMyInfo) withObject:nil afterDelay:2];        
-        
-        [self showInfo:@"提交成功!"];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self hideLoadWithAnimated:YES];
-        [self showInfo:@"提交失败，请重试!"];
-    }];
-
-}
-
-- (void)uploadImage {
     if (self.arrayImage.count == 0 && self.service == nil) {
         [self showInfo:@"请上传图片！"];
         return;
@@ -167,13 +118,70 @@
         [self showInfo:@"亲，服务描述不能为空哦!"];
         return;
     }
-    
-    [self showLoadingActivity:YES];
-    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:API_PhotoUpload parameters:@{@"file":@""} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    if (self.arrayImage.count == 0) {
+        self.imageUrlString = self.service.images;
+        [self requestData];
+    } else {
+        self.imageUrlString = @"";//先清空，不然若服务请求失败会无限加长
         for (int i = 0; i<self.arrayImage.count; i++) {
             UIImage *uploadImage = self.arrayImage[i];
-            [formData appendPartWithFileData:UIImagePNGRepresentation(uploadImage) name:@"file" fileName:[NSString stringWithFormat:@"%d_image",i] mimeType:@"image/jpg"];
+            [self uploadImageWithImage:uploadImage];
         }
+    }
+
+}
+
+- (void)takePictureOrLibrary {
+    UIActionSheet *action = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"相册", nil];
+    [action showInView:self.view];
+}
+
+#pragma mark - reqeust
+- (void)requestData {
+
+    AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+    [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.securityPolicy.allowInvalidCertificates = YES;
+    NSString *currentTime = [Utils getCurrentTime];
+    NSString *title = [self.viewTitle.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *price = [self.viewPrice.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *area = [self.viewArea.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *language = [self.viewLanguage.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *priceDetail = [self.viewPriceDetail.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *preBook = [self.viewPreBook.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *service = [self.viewService.textInput.text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *imageurl = @"";
+    if (self.imageUrlString.length > 0) {
+        imageurl = self.imageUrlString;
+    }
+    NSString *url = [NSString stringWithFormat:@"%@service/insertServiceObject",HOST];
+    if (self.service.identify.length > 0) {
+        //需要更新数据，而不是添加服务
+        url = [NSString stringWithFormat:@"%@service/updateServiceWithObject",HOST];
+        currentTime = self.service.identify;
+    }
+    
+    NSDictionary *dic = @{@"identify":currentTime,@"touristid":[[[UserCachBean share] touristInfo] identify], @"otherinfoid":title, @"price":price, @"servicearea":area, @"language":language, @"pricedetail":priceDetail, @"prebook":preBook, @"servicedetail":service, @"images":imageurl, @"adddate":currentTime};
+    
+    [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self hideLoadWithAnimated:YES];
+        [self performSelector:@selector(didDismissMyInfo) withObject:nil afterDelay:2];        
+        
+        [self showInfo:@"提交成功!"];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self hideLoadWithAnimated:YES];
+        [self showInfo:@"提交失败，请重试!"];
+    }];
+
+}
+
+- (void)uploadImageWithImage:(UIImage *) uploadImage {
+
+    [self showLoadingActivity:YES];
+    NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:API_PhotoUpload parameters:@{@"file":@""} constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:UIImagePNGRepresentation(uploadImage) name:@"file" fileName:[NSString stringWithFormat:@"image"] mimeType:@"image/jpg"];
     } error:nil];
     
     AFHTTPRequestOperation *opration = [[AFHTTPRequestOperation alloc]initWithRequest:request];
@@ -185,15 +193,18 @@
             NSDictionary *image = result[@"image"];
             NSString *imageUrl_ = [NSString stringWithFormat:@"http://pic%@.ajkimg.com/m/%@/%@x%@.jpg",image[@"host"],image[@"id"],image[@"width"],image[@"height"]];
             NSLog(@"%@",imageUrl_);
-            if (self.imageUrlString.length > 0) {
+            if (self.imageUrlString.length == 0) {
                 self.imageUrlString = imageUrl_;
             } else {
                 self.imageUrlString = [NSString stringWithFormat:@"%@|%@", self.imageUrlString, imageUrl_];
             }
-            [self requestData];
+            if ([[self.imageUrlString componentsSeparatedByString:@"|"] count] == self.arrayImage.count) {
+                [self requestData];
+            }
         } else {
             [self requestData];
         }
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideLoadWithAnimated:YES];
         [self showInfo:@"图片上传失败"];
