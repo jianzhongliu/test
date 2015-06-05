@@ -13,8 +13,8 @@
 
 #define shanghaiBus_Config_h
 
-#define HOST @"http://115.28.58.185/B-Y/REST/"
-//#define HOST @"http://localhost:8080/B-Y/REST/"
+//#define HOST @"http://115.28.58.185/B-Y/REST/"
+#define HOST @"http://localhost:8080/B-Y/REST/"
 //#define HOST @"http://192.168.1.102:8080/B-Y/REST/"
 
 #define API_PhotoUpload @"http://upd1.ajkimg.com/upload"

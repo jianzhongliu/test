@@ -75,7 +75,7 @@
     NSString *site = [self.siteName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, site];
     sign = [[Utils MD5:sign] uppercaseString];
-    NSString *url = [NSString stringWithFormat:@"%@scenary/searchScenaryByCityId",HOST];
+    NSString *url = [NSString stringWithFormat:@"%@service/getServiceByCityName",HOST];
     NSDictionary *dic = @{@"date":currentTime,@"cityname":site,@"sign":sign};
     [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
