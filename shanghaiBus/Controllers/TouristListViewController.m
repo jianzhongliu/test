@@ -80,17 +80,24 @@
     [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)responseObject;
-            NSArray *dataArray = [dic objectForKey:@"touristArray"];
-            if (dataArray.count > 0) {
-                [self.arrayTourist removeAllObjects];
-                for (NSDictionary *dic in dataArray) {
-                    TouristObject *site = [[TouristObject alloc] init];
-                    [site configTouristWithDic:dic];
-                    [self.arrayTourist addObject:site];
+            if ([[dic objectForKey:@"touristArray"] isKindOfClass:[NSArray class]]) {
+                NSArray *dataArray = [dic objectForKey:@"touristArray"];
+                if (dataArray.count > 0) {
+                    [self.arrayTourist removeAllObjects];
+                    for (NSDictionary *dic in dataArray) {
+                        TouristObject *site = [[TouristObject alloc] init];
+                        [site configTouristWithDic:dic];
+                        [self.arrayTourist addObject:site];
+                    }
+                    [self reloadData];
                 }
-                [self reloadData];
+            } else if([[dic objectForKey:@"touristArray"] isKindOfClass:[NSDictionary class]]){
+                TouristObject *site = [[TouristObject alloc] init];
+                [site configTouristWithDic:[dic objectForKey:@"touristArray"]];
+                [self.arrayTourist addObject:site];
             }
         }
+        [self.table reloadData];
         [self hideLoadWithAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self hideLoadWithAnimated:YES];
