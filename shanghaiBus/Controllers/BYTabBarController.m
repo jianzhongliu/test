@@ -139,11 +139,11 @@
         [window addSubview:self.control];
         
         self.viewMy.frame = CGRectMake(SCREENWIDTH, 0, 230, SCREENHEIGHT);
-        [self.viewMy reloadData];
         [self.control addSubview:self.viewMy];
     } else {
         self.control.alpha = 1;
     }
+    [self.viewMy reloadData];
     [UIView animateWithDuration:0.2 animations:^{
         self.viewMy.viewX = SCREENWIDTH - 230;
     } completion:^(BOOL finished) {
