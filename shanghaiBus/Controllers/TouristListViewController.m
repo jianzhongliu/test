@@ -72,6 +72,8 @@
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.securityPolicy.allowInvalidCertificates = YES;
     NSString *currentTime = [Utils getCurrentTime];
+    self.siteName = [self.siteName stringByReplacingOccurrencesOfString:@"市" withString:@""];
+    
     NSString *site = [self.siteName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     NSString *sign = [NSString stringWithFormat:@"%@%@", currentTime, site];
     sign = [[Utils MD5:sign] uppercaseString];
