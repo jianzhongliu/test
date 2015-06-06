@@ -81,6 +81,7 @@
 		2456D5911AE2A16400457A31 /* icon_home_message@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2456D58B1AE2A16400457A31 /* icon_home_message@2x.png */; };
 		2456D5941AE2A79700457A31 /* BYTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 2456D5931AE2A79700457A31 /* BYTabBarItem.m */; };
 		24574A591B10D8CA00F1A1C5 /* ServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 24574A581B10D8CA00F1A1C5 /* ServiceObject.m */; };
+		245A1DD61B235803004A5AE3 /* icon_114.png in Resources */ = {isa = PBXBuildFile; fileRef = 245A1DD51B235803004A5AE3 /* icon_114.png */; };
 		245FBEE41AE3B11000CCF36A /* MyHomeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEE31AE3B11000CCF36A /* MyHomeView.m */; };
 		245FBEE61AE3BE3500CCF36A /* icon_switch@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 245FBEE51AE3BE3500CCF36A /* icon_switch@2x.png */; };
 		245FBEE91AE3C66700CCF36A /* EditeUserInfomationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 245FBEE81AE3C66700CCF36A /* EditeUserInfomationViewController.m */; };
@@ -347,6 +348,7 @@
 		2456D5931AE2A79700457A31 /* BYTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BYTabBarItem.m; sourceTree = "<group>"; };
 		24574A571B10D8CA00F1A1C5 /* ServiceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServiceObject.h; sourceTree = "<group>"; };
 		24574A581B10D8CA00F1A1C5 /* ServiceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServiceObject.m; sourceTree = "<group>"; };
+		245A1DD51B235803004A5AE3 /* icon_114.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon_114.png; sourceTree = "<group>"; };
 		245FBEE21AE3B11000CCF36A /* MyHomeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHomeView.h; sourceTree = "<group>"; };
 		245FBEE31AE3B11000CCF36A /* MyHomeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHomeView.m; sourceTree = "<group>"; };
 		245FBEE51AE3BE3500CCF36A /* icon_switch@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_switch@2x.png"; sourceTree = "<group>"; };
@@ -917,6 +919,7 @@
 				242BB23E1B20AD8000E9BA1F /* icon_152.png */,
 				246539641AC6BB6F00C1908C /* Default.png */,
 				242BB24C1B20AE4E00E9BA1F /* icon.png */,
+				245A1DD51B235803004A5AE3 /* icon_114.png */,
 				246539651AC6BB6F00C1908C /* Default@2x.png */,
 				246539681AC6BB6F00C1908C /* icon@2x.png */,
 			);
@@ -1449,6 +1452,7 @@
 				24E854AF1AE6BA81006628B0 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				2456D5751AE250CF00457A31 /* icon_search_indecator@2x.png in Resources */,
 				24CBAA251ADC0E68007FD128 /* citydict.plist in Resources */,
+				245A1DD61B235803004A5AE3 /* icon_114.png in Resources */,
 				242BB24B1B20AD8000E9BA1F /* icon_152.png in Resources */,
 				24D9E4C81AE13CAD00C2E978 /* icon_detail_up@2x.png in Resources */,
 				246F366C1AFF0C450041F80B /* icon_inderector@2x.png in Resources */,
