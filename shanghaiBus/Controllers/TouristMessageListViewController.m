@@ -146,7 +146,7 @@
     if (cell == nil) {
         cell = [[TouristCommentListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identify];
     }
-    [cell configCellWithComment:[self.arrayMessage objectAtIndex:indexPath.row]];
+    [cell configCellWithMessage:[self.arrayMessage objectAtIndex:indexPath.row]];
     return cell;
 }
 

@@ -62,6 +62,7 @@
 }
 
 - (void)initUI {
+    self.navigationController.navigationBar.translucent = NO;
     self.tableList.frame = self.view.bounds;
     [self.view addSubview:self.tableList];
     

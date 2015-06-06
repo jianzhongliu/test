@@ -140,12 +140,15 @@
         _viewImageScroll.iDisplayTime = 3;
         _viewImageScroll.bWebImage = YES;
         _viewImageScroll.clipsToBounds = YES;
-        [self.viewImageScroll startAdsWithBlock:arrayImage block:^(NSInteger clickIndex) {
-            //当前图片点击事件过滤，不做处理
-        }];
+
         [self.scrollDetail addSubview:self.viewImageScroll];
     }
 
+    if (arrayImage.count > 0) {
+        [self.viewImageScroll startAdsWithBlock:arrayImage block:^(NSInteger clickIndex) {
+            //当前图片点击事件过滤，不做处理
+        }];
+    }
     [self.viewServicePrice configViewWithTitle:@"价格说明" detail:self.tourist.pricedetail];//价格说明
     [self.viewServiceOrder configViewWithTitle:@"预定须知" detail:self.tourist.servicedetail];//预定须知
     [self.viewServiceDetail configViewWithTitle:@"服务描述" detail:self.tourist.servicedetail];//服务描述
@@ -192,24 +195,41 @@
     [manager GET:url parameters:dic success:^(AFHTTPRequestOperation *operation, id responseObject) {
         if ([responseObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *dic = (NSDictionary *)responseObject;
-            NSArray *commentArray = [dic objectForKey:@"commentArray"];
-            if (commentArray.count > 0) {
-                [self.arraySiteLine removeAllObjects];
-                for (NSDictionary *dic in commentArray) {
-                    CommentObject *comment = [[CommentObject alloc] init];
-                    [comment configCommentWithDic:dic];
-                    [self.arrayComment addObject:comment];
+            
+            if ([[dic objectForKey:@"commentArray"] isKindOfClass:[NSArray class]]) {
+                NSArray *commentArray = [dic objectForKey:@"commentArray"];
+                if (commentArray.count > 0) {
+                    [self.arrayComment removeAllObjects];
+                    for (NSDictionary *dic in commentArray) {
+                        CommentObject *comment = [[CommentObject alloc] init];
+                        [comment configCommentWithDic:dic];
+                        [self.arrayComment addObject:comment];
+                    }
                 }
+            } else if([[dic objectForKey:@"commentArray"] isKindOfClass:[NSDictionary class]]) {
+                [self.arrayComment removeAllObjects];
+                CommentObject *comment = [[CommentObject alloc] init];
+                [comment configCommentWithDic:[dic objectForKey:@"commentArray"]];
+                [self.arrayComment addObject:comment];
             }
-            NSArray *messageArray = [dic objectForKey:@"messageArray"];
-            if (messageArray.count > 0) {
-                [self.arraySiteLine removeAllObjects];
-                for (NSDictionary *dic in messageArray) {
-                    MessageObject *message = [[MessageObject alloc] init];
-                    [message configCommentWithDic:dic];
-                    [self.arrayMessage addObject:message];
+            
+            if ([[dic objectForKey:@"messageArray"] isKindOfClass:[NSArray class]]) {
+                NSArray *messageArray = [dic objectForKey:@"messageArray"];
+                if (messageArray.count > 0) {
+                    [self.arrayMessage removeAllObjects];
+                    for (NSDictionary *dic in messageArray) {
+                        MessageObject *comment = [[MessageObject alloc] init];
+                        [comment configCommentWithDic:dic];
+                        [self.arrayMessage addObject:comment];
+                    }
                 }
+            } else if([[dic objectForKey:@"messageArray"] isKindOfClass:[NSDictionary class]]) {
+                [self.arrayMessage removeAllObjects];
+                MessageObject *message = [[MessageObject alloc] init];
+                [message configCommentWithDic:[dic objectForKey:@"messageArray"]];
+                [self.arrayMessage addObject:message];
             }
+
             [self reloadData];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -254,14 +274,18 @@
             TouristCommentListViewController *controller = [[TouristCommentListViewController alloc] init];
             controller.tourist = self.tourist;
             controller.arrayComment = self.arrayComment;
-            [self presentViewController:controller animated:NO completion:^{
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+            controller.navigationController.navigationBarHidden = YES;
+            [self presentViewController:nav animated:NO completion:^{
                 
             }];
         } else if(view.tag == ViewMessageTag){
             TouristMessageListViewController *controller = [[TouristMessageListViewController alloc] init];
             controller.tourist = self.tourist;
             controller.arrayMessage = self.arrayMessage;
-            [self presentViewController:controller animated:NO completion:^{
+            UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:controller];
+            controller.navigationController.navigationBarHidden = YES;
+            [self presentViewController:nav animated:NO completion:^{
                 
             }];
         } else {

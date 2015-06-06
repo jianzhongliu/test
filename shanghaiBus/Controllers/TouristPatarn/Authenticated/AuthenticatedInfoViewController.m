@@ -141,9 +141,10 @@
         [self showInfo:@"电话号码格式不对"];
         return;
     }
-    
+    caculateTime = 60;
     if (self.timer == nil) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeClock) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.1 target:self selector:@selector(timeClock) userInfo:nil repeats:YES];
+        [self.timer fire];
     }
     
     [SMS_SDK getVerificationCodeBySMSWithPhone:self.viewPhone.textInput.text
@@ -171,13 +172,13 @@
     if (caculateTime > 0) {
         titleCode = [NSString stringWithFormat:@"%ldS", caculateTime];
         self.buttonCheckcode.enabled = NO;
+        [_buttonCheckcode setTitle:titleCode forState:UIControlStateDisabled];
     } else {
         titleCode = @"获取验证码";
         self.buttonCheckcode.enabled = YES;
+        [_buttonCheckcode setTitle:titleCode forState:UIControlStateNormal];
     }
     caculateTime --;
-    [_buttonCheckcode setTitle:titleCode forState:UIControlStateNormal];
-    
 }
 
 - (void)takePictureOrLibrary {

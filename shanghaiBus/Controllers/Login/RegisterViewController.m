@@ -177,12 +177,13 @@
     if (caculateTime > 0) {
         titleCode = [NSString stringWithFormat:@"%ldS", (long)caculateTime];
         self.buttonCheckcode.enabled = NO;
+        [self.buttonCheckcode setTitle:titleCode forState:UIControlStateDisabled];
     } else {
         titleCode = @"获取验证码";
         self.buttonCheckcode.enabled = YES;
+        [self.buttonCheckcode setTitle:titleCode forState:UIControlStateNormal];
     }
     caculateTime --;
-    [self.buttonCheckcode setTitle:titleCode forState:UIControlStateNormal];
 }
 
 - (void)didClickCheckcode:(id) sender {
@@ -192,9 +193,10 @@
     }
     
     if (self.timer == nil) {
-        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(timeClock) userInfo:nil repeats:YES];
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:1.1 target:self selector:@selector(timeClock) userInfo:nil repeats:YES];
+        [self.timer fire];
     }
-    
+    caculateTime = 60;
     [SMS_SDK getVerificationCodeBySMSWithPhone:self.textName.text
                                           zone:@"86"
                                         result:^(SMS_SDKError *error)
@@ -267,7 +269,9 @@
             TouristObject *tourist = [[TouristObject alloc] init];
             [tourist configTouristWithDic:userDic];
             [UserCachBean share].touristInfo = tourist;
-            self.loginBlock([UserCachBean share], LOGINSTATUSSUCCESS);
+            if (self.loginBlock != nil) {
+                self.loginBlock([UserCachBean share], LOGINSTATUSSUCCESS);
+            }
         }
         [self hideLoadWithAnimated:YES];
         [self dismissViewControllerAnimated:YES completion:nil];

@@ -140,7 +140,7 @@
         self.starRateView.enable = NO;
         [self addSubview:self.starRateView];
     }
-    self.starRateView.scorePercent = comment.score / 5;
+    self.starRateView.scorePercent = comment.score / 5.0;
     self.starRateView.ctTop = self.labelName.ctBottom + 3;
     
     if (comment.replycontent.length > 0) {

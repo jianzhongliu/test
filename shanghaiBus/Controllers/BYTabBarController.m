@@ -137,13 +137,12 @@
         self.control.backgroundColor = BYColorAlphaMake(0, 0, 0, 0.3);
         [self.control addTarget:self action:@selector(didDismissMyInfoCenter) forControlEvents:UIControlEventTouchDown];
         [window addSubview:self.control];
-        
+        [self.viewMy reloadData];
         self.viewMy.frame = CGRectMake(SCREENWIDTH, 0, 230, SCREENHEIGHT);
         [self.control addSubview:self.viewMy];
     } else {
         self.control.alpha = 1;
     }
-    [self.viewMy reloadData];
     [UIView animateWithDuration:0.2 animations:^{
         self.viewMy.viewX = SCREENWIDTH - 230;
     } completion:^(BOOL finished) {

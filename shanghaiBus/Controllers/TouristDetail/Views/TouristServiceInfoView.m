@@ -105,11 +105,10 @@
     [self.labelTitle sizeToFit];
     
     self.starRateView = [[CWStarRateView alloc] initWithFrame:CGRectMake(10, self.labelTitle.ctBottom + 5, 100, 20) numberOfStars:5];
-    self.starRateView.scorePercent = 1;
     self.starRateView.allowIncompleteStar = NO;
     self.starRateView.hasAnimation = NO;
     self.starRateView.enable = NO;
-    self.starRateView.scorePercent = tourist.star / 5;
+    self.starRateView.scorePercent = tourist.star / 5.0;
     [self addSubview:self.starRateView];
     
     UIView *viewLine = [[UIView alloc] initWithFrame:CGRectMake(10, self.starRateView.ctBottom + 15, SCREENWIDTH - 20, 1)];

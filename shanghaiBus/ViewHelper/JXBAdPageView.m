@@ -117,6 +117,7 @@
     NSString* nextImage = [_arrImage objectAtIndex:next];
     if(_bWebImage)
     {
+#warning TODO 这里有问题啊，会挂，找原因
         if(_delegate && [_delegate respondsToSelector:@selector(setWebImage:imgUrl:withIndex:)])
         {
             [_delegate setWebImage:_imgPrev imgUrl:prevImage withIndex:prev];

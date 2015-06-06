@@ -183,7 +183,7 @@
             self.starRateView.enable = NO;
             self.starRateView.allowIncompleteStar = NO;
             self.starRateView.hasAnimation = YES;
-            self.starRateView.scorePercent = comment.score / 5;
+            self.starRateView.scorePercent = comment.score / 5.0;
             if (comment != nil) {
                 [self addSubview:self.starRateView];
             }
