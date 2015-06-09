@@ -24,6 +24,7 @@
         self.icon = [dic objectForKey:@"icon"];
         self.email = [dic objectForKey:@"email"];
         self.phone = [dic objectForKey:@"phone"];
+        self.preBook = [dic objectForKey:@"preBook"];
         self.signature = [dic objectForKey:@"signature"];
         self.servicearea = [dic objectForKey:@"servicearea"];
         self.language = [dic objectForKey:@"language"];

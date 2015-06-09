@@ -150,7 +150,7 @@
         }];
     }
     [self.viewServicePrice configViewWithTitle:@"价格说明" detail:self.tourist.pricedetail];//价格说明
-    [self.viewServiceOrder configViewWithTitle:@"预定须知" detail:self.tourist.servicedetail];//预定须知
+    [self.viewServiceOrder configViewWithTitle:@"预定须知" detail:self.tourist.preBook];//预定须知
     [self.viewServiceDetail configViewWithTitle:@"服务描述" detail:self.tourist.servicedetail];//服务描述
     
     self.viewServiceInfo.frame = CGRectMake(0, self.viewImageScroll.ctBottom, SCREENWIDTH, [self.viewServiceInfo fetchViewHight]);
