@@ -47,7 +47,7 @@
     [self requestData];
     
 //抓取携程当地有导游数据
-//    [self testCtripdata];//
+    [self testCtripdata];//
     [self.navigationItem setLeftBarButtonItem:nil];
 
 }

@@ -1408,7 +1408,7 @@
 				TargetAttributes = {
 					24B29D901ABD1B32007F84E5 = {
 						CreatedOnToolsVersion = 6.1.1;
-						DevelopmentTeam = 96F55VG8S9;
+						DevelopmentTeam = 4DW89V8URU;
 					};
 				};
 			};
@@ -1757,7 +1757,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: liu jianzhong (4DW89V8URU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
@@ -1780,7 +1780,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bc66d72-f779-4025-8c10-1e63290979ee";
+				PROVISIONING_PROFILE = "aafcc987-d8e7-4e93-890b-484fa282364c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1790,7 +1790,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: liu jianzhong (4DW89V8URU)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/shanghaiBus/MessageCode",
@@ -1813,7 +1813,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3bc66d72-f779-4025-8c10-1e63290979ee";
+				PROVISIONING_PROFILE = "aafcc987-d8e7-4e93-890b-484fa282364c";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
