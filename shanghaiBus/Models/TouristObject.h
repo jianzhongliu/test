@@ -21,6 +21,7 @@
 @property (nonatomic, copy)	NSString *icon;
 @property (nonatomic, copy)	NSString *email;
 @property (nonatomic, copy)	NSString *phone;
+@property (nonatomic, copy) NSString *preBook;
 @property (nonatomic, copy)	NSString *signature;
 @property (nonatomic, copy)	NSString *servicearea;
 @property (nonatomic, copy)	NSString *language;
