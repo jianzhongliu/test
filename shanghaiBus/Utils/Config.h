@@ -13,7 +13,7 @@
 
 #define shanghaiBus_Config_h
 
-#define HOST @"http://115.28.58.185/B-Y/REST/"
+#define HOST @"http://182.92.158.7/B-Y/REST/"
 //#define HOST @"http://localhost:8080/B-Y/REST/"
 //#define HOST @"http://192.168.1.102:8080/B-Y/REST/"
 

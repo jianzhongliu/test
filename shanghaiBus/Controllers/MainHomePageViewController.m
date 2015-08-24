@@ -61,7 +61,7 @@
     [self setTitle:@"首页"];
     UIBarButtonItem *rightItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@""] style:UIBarButtonItemStylePlain target:self action:@selector(businessEnter)];
     rightItem.title = @"商家入驻";
-    [self.navigationItem setRightBarButtonItem:rightItem];
+//    [self.navigationItem setRightBarButtonItem:rightItem];
     
     self.table = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
     self.table.delegate = self;
